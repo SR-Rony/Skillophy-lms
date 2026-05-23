@@ -1,0 +1,241 @@
+"use client";
+
+import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  ChevronDown,
+  Globe,
+  Menu,
+  Search,
+  ShoppingCart,
+  X,
+} from "lucide-react";
+import { ROUTES } from "@/constants";
+import { siteConfig } from "@/config";
+import { cn } from "@/utils";
+import { CourseMegaMenu } from "./course-mega-menu";
+
+export function Navbar() {
+  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+
+  const closeMegaMenu = useCallback(() => setIsMegaMenuOpen(false), []);
+
+  const toggleMegaMenu = () => {
+    setIsMegaMenuOpen((prev) => !prev);
+    setIsMobileMenuOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setIsMegaMenuOpen(false);
+      }
+    };
+
+    if (isMegaMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [isMegaMenuOpen]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
+  return (
+    <nav
+      ref={navRef}
+      className="relative sticky top-0 z-50 border-b border-gray-200 bg-white shadow-sm"
+      aria-label="Main navigation"
+    >
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="flex h-16 items-center justify-between gap-4">
+          <Link href={ROUTES.home} className="flex shrink-0 items-center gap-2">
+            <span className="rounded bg-red-500 px-2 py-1 text-lg font-bold text-white">
+              S
+            </span>
+            <span className="hidden font-bold tracking-wide text-gray-900 sm:inline">
+              {siteConfig.name.toUpperCase()}
+            </span>
+          </Link>
+
+          <div className="hidden flex-1 items-center gap-6 md:flex md:ml-6">
+            <div className="relative">
+              <button
+                type="button"
+                onClick={toggleMegaMenu}
+                aria-expanded={isMegaMenuOpen}
+                aria-controls="course-mega-menu"
+                className="flex items-center gap-1 font-medium text-gray-700 transition-colors hover:text-gray-900"
+              >
+                All Courses
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 transition-transform",
+                    isMegaMenuOpen && "rotate-180"
+                  )}
+                />
+              </button>
+            </div>
+
+            <label className="hidden max-w-sm flex-1 items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 lg:flex">
+              <Search size={18} className="shrink-0 text-gray-400" aria-hidden />
+              <input
+                type="search"
+                placeholder="Search courses..."
+                className="w-full bg-transparent text-sm text-gray-700 outline-none placeholder:text-gray-400"
+                aria-label="Search courses"
+              />
+            </label>
+          </div>
+
+          <div className="hidden items-center gap-3 md:flex lg:gap-4">
+            <button
+              type="button"
+              className="flex items-center gap-1 text-sm text-gray-700 transition-colors hover:text-gray-900"
+              aria-label="Change language"
+            >
+              <Globe size={18} aria-hidden />
+              <span>EN</span>
+              <ChevronDown className="h-4 w-4" aria-hidden />
+            </button>
+
+            <Link
+              href={ROUTES.student.wishlist}
+              className="relative text-gray-700 transition-colors hover:text-gray-900"
+              aria-label="Cart, 2 items"
+            >
+              <ShoppingCart size={20} />
+              <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
+                2
+              </span>
+            </Link>
+
+            <Link
+              href={ROUTES.pricing}
+              className="text-sm font-medium text-gray-700 transition-colors hover:text-gray-900"
+            >
+              Business
+            </Link>
+
+            <Link
+              href={ROUTES.auth.register}
+              className="text-sm font-medium text-gray-700 transition-colors hover:text-gray-900"
+            >
+              Join as Teacher
+            </Link>
+
+            <Link
+              href={ROUTES.auth.register}
+              className="rounded bg-gray-900 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800"
+            >
+              Get Started
+            </Link>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              setIsMobileMenuOpen((prev) => !prev);
+              setIsMegaMenuOpen(false);
+            }}
+            className="text-gray-700 hover:text-gray-900 md:hidden"
+            aria-expanded={isMobileMenuOpen}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      <CourseMegaMenu isOpen={isMegaMenuOpen} onClose={closeMegaMenu} />
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden border-t border-gray-200 bg-white md:hidden"
+          >
+            <div className="space-y-4 px-4 py-4">
+              <label className="flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2">
+                <Search size={18} className="text-gray-400" aria-hidden />
+                <input
+                  type="search"
+                  placeholder="Search courses..."
+                  className="w-full bg-transparent text-sm text-gray-700 outline-none"
+                  aria-label="Search courses"
+                />
+              </label>
+
+              <button
+                type="button"
+                onClick={toggleMegaMenu}
+                className="flex w-full items-center justify-between py-2 text-left font-medium text-gray-700 hover:text-gray-900"
+              >
+                All Courses
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 transition-transform",
+                    isMegaMenuOpen && "rotate-180"
+                  )}
+                />
+              </button>
+
+              <div className="space-y-2 border-t border-gray-200 py-2">
+                <Link
+                  href={ROUTES.pricing}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block py-2 text-sm text-gray-700 hover:text-gray-900"
+                >
+                  Business
+                </Link>
+                <Link
+                  href={ROUTES.auth.register}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block py-2 text-sm text-gray-700 hover:text-gray-900"
+                >
+                  Join as Teacher
+                </Link>
+              </div>
+
+              <div className="space-y-2 border-t border-gray-200 pt-2">
+                <button
+                  type="button"
+                  className="flex w-full items-center gap-2 py-2 text-sm text-gray-700"
+                >
+                  <Globe size={18} />
+                  EN
+                </button>
+                <Link
+                  href={ROUTES.student.wishlist}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 py-2 text-sm text-gray-700 hover:text-gray-900"
+                >
+                  <ShoppingCart size={18} />
+                  Cart (2)
+                </Link>
+                <Link
+                  href={ROUTES.auth.register}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block w-full rounded bg-gray-900 px-4 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-gray-800"
+                >
+                  Get Started
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
+}
