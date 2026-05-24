@@ -1,7 +1,6 @@
 "use client";
 
 import { Bell, Menu } from "lucide-react";
-import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useAuthStore, useUIStore } from "@/store";
@@ -31,7 +30,6 @@ export function DashboardHeader({ title }: DashboardHeaderProps) {
         <Button variant="ghost" size="icon" aria-label="Notifications">
           <Bell className="h-4 w-4" />
         </Button>
-        <ThemeToggle />
         <Avatar className="h-8 w-8">
           {user?.avatar && <AvatarImage src={user.avatar} alt={user.name} />}
           <AvatarFallback>{user ? getInitials(user.name) : "?"}</AvatarFallback>

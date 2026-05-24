@@ -2,7 +2,19 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PanelLeftClose, PanelLeft } from "lucide-react";
+import {
+  BarChart3,
+  BookOpen,
+  CreditCard,
+  GraduationCap,
+  LayoutDashboard,
+  MessageSquare,
+  PanelLeft,
+  PanelLeftClose,
+  Settings,
+  Users,
+  Video,
+} from "lucide-react";
 import type { NavItem } from "@/types";
 import { Logo } from "@/components/shared/logo";
 import { Button } from "@/components/ui/button";
@@ -14,6 +26,18 @@ interface DashboardSidebarProps {
   items: NavItem[];
   roleLabel: string;
 }
+
+const navIcons = {
+  analytics: BarChart3,
+  book: BookOpen,
+  card: CreditCard,
+  dashboard: LayoutDashboard,
+  graduation: GraduationCap,
+  messages: MessageSquare,
+  settings: Settings,
+  users: Users,
+  video: Video,
+};
 
 export function DashboardSidebar({ items, roleLabel }: DashboardSidebarProps) {
   const pathname = usePathname();
@@ -44,7 +68,7 @@ export function DashboardSidebar({ items, roleLabel }: DashboardSidebarProps) {
       <ScrollArea className="flex-1 px-2 py-4">
         <nav className="flex flex-col gap-1">
           {items.map((item) => {
-            const Icon = item.icon;
+            const Icon = item.iconName ? navIcons[item.iconName] : undefined;
             const isActive =
               pathname === item.href ||
               (item.href !== "/" && pathname.startsWith(item.href + "/")) ||

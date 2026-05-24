@@ -1,15 +1,4 @@
 import type { NavItem } from "@/types/navigation.types";
-import {
-  BarChart3,
-  BookOpen,
-  CreditCard,
-  GraduationCap,
-  LayoutDashboard,
-  MessageSquare,
-  Settings,
-  Users,
-  Video,
-} from "lucide-react";
 
 /** Public marketing site navigation */
 export const publicNav: NavItem[] = [
@@ -21,35 +10,35 @@ export const publicNav: NavItem[] = [
 
 /** Student dashboard sidebar */
 export const studentNav: NavItem[] = [
-  { title: "Overview", href: "/student", icon: LayoutDashboard },
-  { title: "My Courses", href: "/student/courses", icon: BookOpen },
-  { title: "Live Classes", href: "/student/live", icon: Video },
-  { title: "Assignments", href: "/student/assignments", icon: GraduationCap },
-  { title: "Certificates", href: "/student/certificates", icon: GraduationCap },
-  { title: "Wishlist", href: "/student/wishlist", icon: BookOpen },
-  { title: "Messages", href: "/student/chat", icon: MessageSquare },
-  { title: "Payments", href: "/student/payments", icon: CreditCard },
-  { title: "Settings", href: "/student/settings", icon: Settings },
+  { title: "Overview", href: "/student", iconName: "dashboard" },
+  { title: "My Courses", href: "/student/courses", iconName: "book" },
+  { title: "Live Classes", href: "/student/live", iconName: "video" },
+  { title: "Assignments", href: "/student/assignments", iconName: "graduation" },
+  { title: "Certificates", href: "/student/certificates", iconName: "graduation" },
+  { title: "Wishlist", href: "/student/wishlist", iconName: "book" },
+  { title: "Messages", href: "/student/chat", iconName: "messages" },
+  { title: "Payments", href: "/student/payments", iconName: "card" },
+  { title: "Settings", href: "/student/settings", iconName: "settings" },
 ];
 
 /** Teacher dashboard sidebar */
 export const teacherNav: NavItem[] = [
-  { title: "Overview", href: "/teacher", icon: LayoutDashboard },
-  { title: "Courses", href: "/teacher/courses", icon: BookOpen },
-  { title: "Live Classes", href: "/teacher/live", icon: Video },
-  { title: "Students", href: "/teacher/students", icon: Users },
-  { title: "Analytics", href: "/teacher/analytics", icon: BarChart3 },
-  { title: "Messages", href: "/teacher/chat", icon: MessageSquare },
-  { title: "Settings", href: "/teacher/settings", icon: Settings },
+  { title: "Overview", href: "/teacher", iconName: "dashboard" },
+  { title: "Courses", href: "/teacher/courses", iconName: "book" },
+  { title: "Live Classes", href: "/teacher/live", iconName: "video" },
+  { title: "Students", href: "/teacher/students", iconName: "users" },
+  { title: "Analytics", href: "/teacher/analytics", iconName: "analytics" },
+  { title: "Messages", href: "/teacher/chat", iconName: "messages" },
+  { title: "Settings", href: "/teacher/settings", iconName: "settings" },
 ];
 
 /** Admin dashboard sidebar */
 export const adminNav: NavItem[] = [
-  { title: "Overview", href: "/admin", icon: LayoutDashboard },
-  { title: "Users", href: "/admin/users", icon: Users },
-  { title: "Courses", href: "/admin/courses", icon: BookOpen },
-  { title: "Payments", href: "/admin/payments", icon: CreditCard },
-  { title: "Analytics", href: "/admin/analytics", icon: BarChart3 },
-  { title: "Support", href: "/admin/support", icon: MessageSquare },
-  { title: "Settings", href: "/admin/settings", icon: Settings },
+  { title: "Overview", href: "/admin", iconName: "dashboard" },
+  { title: "Users", href: "/admin/users", iconName: "users" },
+  { title: "Courses", href: "/admin/courses", iconName: "book" },
+  { title: "Payments", href: "/admin/payments", iconName: "card" },
+  { title: "Analytics", href: "/admin/analytics", iconName: "analytics" },
+  { title: "Support", href: "/admin/support", iconName: "messages" },
+  { title: "Settings", href: "/admin/settings", iconName: "settings" },
 ];

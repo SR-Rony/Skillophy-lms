@@ -1,9 +1,18 @@
-import type { LucideIcon } from "lucide-react";
+export type NavIconName =
+  | "analytics"
+  | "book"
+  | "card"
+  | "dashboard"
+  | "graduation"
+  | "messages"
+  | "settings"
+  | "users"
+  | "video";
 
 export interface NavItem {
   title: string;
   href: string;
-  icon?: LucideIcon;
+  iconName?: NavIconName;
   badge?: string | number;
   disabled?: boolean;
   external?: boolean;
