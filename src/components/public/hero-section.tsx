@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import { Container } from "@/components/shared";
 import { ROUTES } from "@/constants";
 import { cn } from "@/utils";
 import { HeroVisual } from "./hero-visual";
@@ -67,7 +68,7 @@ export function HeroSection({ className }: HeroSectionProps) {
         </svg>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+      <Container className="relative z-10">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[45%_55%] lg:gap-8">
 
           {/* Left Column: Text & CTA */}
@@ -125,7 +126,7 @@ export function HeroSection({ className }: HeroSectionProps) {
             <HeroVisual />
           </motion.div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

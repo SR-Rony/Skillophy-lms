@@ -17,6 +17,7 @@ import {
   megaMenuCategories,
   megaMenuCoursesByCategory,
 } from "@/data/mock/mega-menu-courses.mock";
+import { Container } from "@/components/shared";
 import { ROUTES } from "@/constants";
 import { CourseCategoryItem } from "./course-category-item";
 import { MegaMenuCourseCard } from "./mega-menu-course-card";
@@ -79,7 +80,7 @@ export function CourseMegaMenu({ isOpen, onClose }: CourseMegaMenuProps) {
             transition={{ duration: 0.2 }}
             className="absolute top-full right-0 left-0 z-50 border-t border-gray-200 bg-white shadow-lg"
           >
-            <div className="mx-auto max-w-7xl px-4 py-6 md:py-8">
+            <Container className="py-6 md:py-8">
               <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
                 <aside className="lg:col-span-3">
                   <div className="space-y-1">
@@ -131,7 +132,7 @@ export function CourseMegaMenu({ isOpen, onClose }: CourseMegaMenuProps) {
                   </div>
                 </div>
               </div>
-            </div>
+            </Container>
           </motion.div>
         </>
       )}

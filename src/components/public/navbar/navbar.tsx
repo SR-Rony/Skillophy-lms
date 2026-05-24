@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { ROUTES } from "@/constants";
 import { siteConfig } from "@/config";
+import { Container } from "@/components/shared";
 import { cn } from "@/utils";
 import { CourseMegaMenu } from "./course-mega-menu";
 
@@ -55,7 +56,7 @@ export function Navbar() {
       className="relative sticky top-0 z-50 border-b border-gray-200 bg-white shadow-sm"
       aria-label="Main navigation"
     >
-      <div className="mx-auto max-w-7xl px-4">
+      <Container>
         <div className="flex h-16 items-center justify-between gap-4">
           <Link href={ROUTES.home} className="flex shrink-0 items-center gap-2">
             <span className="rounded bg-red-500 px-2 py-1 text-lg font-bold text-white">
@@ -153,7 +154,7 @@ export function Navbar() {
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-      </div>
+      </Container>
 
       <CourseMegaMenu isOpen={isMegaMenuOpen} onClose={closeMegaMenu} />
 

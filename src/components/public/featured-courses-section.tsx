@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Heart, Star, Target } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { Container } from "@/components/shared";
 import { cn } from "@/utils";
 
 interface FeaturedCourse {
@@ -225,9 +226,9 @@ export function FeaturedCoursesSection() {
   }, [coursesPerPage]);
 
   return (
-    <section className="bg-[#fff4f2] px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-[92px]">
-      <motion.div
-        className="mx-auto max-w-[1020px]"
+    <section className="bg-[#fff4f2] py-16 sm:py-20 lg:py-[92px]">
+      <Container
+        as={motion.div}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
@@ -287,7 +288,7 @@ export function FeaturedCoursesSection() {
             />
           ))}
         </motion.div>
-      </motion.div>
+      </Container>
     </section>
   );
 }

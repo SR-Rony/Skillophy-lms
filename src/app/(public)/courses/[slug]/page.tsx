@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Container } from "@/components/shared";
 import { courseService } from "@/services";
 import { CourseDetail } from "@/features/courses/components/course-detail";
 
@@ -13,8 +14,8 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
   if (!course) notFound();
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <Container className="py-12">
       <CourseDetail course={course} />
-    </div>
+    </Container>
   );
 }
