@@ -179,7 +179,7 @@ export function PublicFooter() {
       <Link
         href="/support"
         aria-label="Chat with support"
-        className="absolute bottom-[58px] right-5 hidden h-11 w-11 items-center justify-center rounded-xl bg-[#ff4444] text-white shadow-[0_12px_28px_rgba(255,68,68,0.35)] transition hover:-translate-y-1 hover:bg-[#ff3030] md:flex xl:right-8"
+        className="fixed bottom-6 right-5 z-50 flex h-11 w-11 items-center justify-center rounded-xl bg-[#ff4444] text-white shadow-[0_12px_28px_rgba(255,68,68,0.35)] transition hover:-translate-y-1 hover:bg-[#ff3030] sm:bottom-8 sm:right-8"
       >
         <MessageCircle className="h-6 w-6 fill-white/20" />
       </Link>
