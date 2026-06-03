@@ -5,6 +5,8 @@ import { CourseHighlightSection } from "@/components/public/course-highlight-sec
 import { FreeCoursesSection } from "@/components/public/free-courses-section";
 import { AllCoursesSection } from "@/components/public/all-courses-section";
 import { QuizSection } from "@/components/public/quiz-section";
+import { StatisticsSection } from "@/components/public/statistics-section";
+import { AcademicProgramSection } from "@/components/public/academic-program-section";
 
 export default function HomePage() {
   return (
@@ -16,6 +18,8 @@ export default function HomePage() {
       <FreeCoursesSection />
       <AllCoursesSection />
       <QuizSection />
+      <StatisticsSection />
+      <AcademicProgramSection />
     </>
   );
 }
