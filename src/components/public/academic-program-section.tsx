@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Container } from "@/components/shared";
 import { Button } from "@/components/ui/button";
+import { SectionTitle } from "@/components/public/section-title";
 import { cn } from "@/utils";
 
 interface AcademicProgram {
@@ -162,20 +163,13 @@ export function AcademicProgramSection() {
         transition={{ staggerChildren: 0.12 }}
       >
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <motion.div variants={fadeUpVariants} className="max-w-[760px]">
-            <div className="mb-3 flex items-center gap-3">
-              <span className="text-[12px] font-extrabold uppercase tracking-[0.18em] text-[#8a2525]">
-                Live Courses
-              </span>
-              <span className="h-px w-16 bg-[#a5655c]" />
-            </div>
-            <h2 className="text-[34px] font-black leading-[1.12] tracking-[-0.045em] text-[#24201f] sm:text-[42px] lg:text-[46px]">
-              Academic Program
-            </h2>
-            <p className="mt-4 max-w-[680px] text-sm font-medium leading-6 text-[#5f5553]">
-              Online courses using cutting-edge technology and instructional strategies. We prioritise accessibility and inclusivity.
-            </p>
-          </motion.div>
+          <SectionTitle
+            align="left"
+            className="max-w-[760px]"
+            label="Live Courses"
+            title="Academic Program"
+            description="Online courses using cutting-edge technology and instructional strategies. We prioritise accessibility and inclusivity."
+          />
 
           <motion.div variants={fadeUpVariants} className="flex gap-3 lg:pb-2">
             <Button

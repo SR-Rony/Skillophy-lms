@@ -5,6 +5,7 @@ import { Check, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useState } from "react";
 import { Container } from "@/components/shared";
 import { Button } from "@/components/ui/button";
+import { SectionTitle } from "@/components/public/section-title";
 import { cn } from "@/utils";
 
 const questions = [
@@ -79,19 +80,16 @@ export function QuizSection() {
           </div>
 
           <div className="relative z-10 grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-            <motion.div variants={fadeUpVariants} className="max-w-[420px]">
-              <div className="mb-3 text-[12px] font-extrabold uppercase tracking-[0.18em] text-[#ff4747]">
-                Today&apos;s Quiz
-              </div>
-              <h2 className="text-[34px] font-black leading-[1.12] tracking-[-0.045em] text-white sm:text-[44px] lg:text-[48px]">
-                Learn New Things
-              </h2>
-              <p className="mt-5 max-w-[360px] text-sm font-medium leading-7 text-white/58">
-                The essence of continuously nurturing one&apos;s passion for education. It
-                implies a commitment to keeping the flame of excitement and dedication burning
-                bright amidst the challenges and demands of teaching.
-              </p>
-            </motion.div>
+            <SectionTitle
+              align="left"
+              theme="dark"
+              labelLines="none"
+              className="max-w-[420px]"
+              descriptionClassName="max-w-[360px]"
+              label="Today's Quiz"
+              title="Learn New Things"
+              description="The essence of continuously nurturing one's passion for education. It implies a commitment to keeping the flame of excitement and dedication burning bright amidst the challenges and demands of teaching."
+            />
 
             <motion.div
               variants={fadeUpVariants}

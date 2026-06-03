@@ -7,6 +7,7 @@ import { AllCoursesSection } from "@/components/public/all-courses-section";
 import { QuizSection } from "@/components/public/quiz-section";
 import { StatisticsSection } from "@/components/public/statistics-section";
 import { AcademicProgramSection } from "@/components/public/academic-program-section";
+import { TestimonialSection } from "@/components/public/testimonial-section";
 
 export default function HomePage() {
   return (
@@ -20,6 +21,7 @@ export default function HomePage() {
       <QuizSection />
       <StatisticsSection />
       <AcademicProgramSection />
+      <TestimonialSection />
     </>
   );
 }

@@ -15,6 +15,7 @@ import { useMemo, useState } from "react";
 import { Container } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { PublicCourseCard, type PublicCourse } from "@/components/public/public-course-card";
+import { SectionTitle } from "@/components/public/section-title";
 import { cn } from "@/utils";
 
 type CategoryId = "free" | "job" | "popular" | "skill" | "vocational" | "academic";
@@ -615,21 +616,12 @@ export function AllCoursesSection() {
         viewport={{ once: true, amount: 0.18 }}
         transition={{ staggerChildren: 0.12 }}
       >
-        <motion.div variants={fadeUpVariants} className="mx-auto max-w-[780px] text-center">
-          <div className="mb-3 flex items-center justify-center gap-3">
-            <span className="h-px w-16 bg-[#efb0aa]" />
-            <span className="text-[12px] font-extrabold uppercase tracking-[0.18em] text-[#a94d47]">
-              All Courses
-            </span>
-            <span className="h-px w-16 bg-[#efb0aa]" />
-          </div>
-          <h2 className="text-[32px] font-black leading-[1.12] tracking-[-0.04em] text-[#24201f] sm:text-[42px] lg:text-[46px]">
-            Expand Knowledge, Master New Skills and Enjoy the Journey
-          </h2>
-          <p className="mx-auto mt-5 max-w-[680px] text-sm font-medium leading-6 text-[#5f5553]">
-            Online courses using cutting-edge technology and instructional strategies. We prioritise accessibility and inclusivity.
-          </p>
-        </motion.div>
+        <SectionTitle
+          className="max-w-[780px]"
+          label="All Courses"
+          title="Expand Knowledge, Master New Skills and Enjoy the Journey"
+          description="Online courses using cutting-edge technology and instructional strategies. We prioritise accessibility and inclusivity."
+        />
 
         <motion.div
           variants={fadeUpVariants}

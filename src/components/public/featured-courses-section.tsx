@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import { CourseSlider } from "@/components/public/course-slider";
 import type { PublicCourse } from "@/components/public/public-course-card";
+import { SectionTitle } from "@/components/public/section-title";
 
 const featuredCourses: PublicCourse[] = [
   {
@@ -78,15 +79,6 @@ const featuredCourses: PublicCourse[] = [
   },
 ];
 
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, ease: "easeOut" as const },
-  },
-};
-
 export function FeaturedCoursesSection() {
   return (
     <section className="bg-[#fff4f2] py-16 sm:py-20 lg:py-[92px]">
@@ -97,21 +89,11 @@ export function FeaturedCoursesSection() {
         viewport={{ once: true, amount: 0.2 }}
         transition={{ staggerChildren: 0.12 }}
       >
-        <motion.div variants={fadeUpVariants} className="mx-auto max-w-[760px] text-center">
-          <div className="mb-3 flex items-center justify-center gap-3">
-            <span className="h-px w-16 bg-[#efb0aa]" />
-            <span className="text-[12px] font-extrabold uppercase tracking-[0.18em] text-[#a94d47]">
-              Featured Courses
-            </span>
-            <span className="h-px w-16 bg-[#efb0aa]" />
-          </div>
-          <h2 className="text-[32px] font-black leading-[1.12] tracking-[-0.04em] text-[#24201f] sm:text-[42px] lg:text-[46px]">
-            Enroll Now to Make Lifestyle More Clean Beautiful and Organised
-          </h2>
-          <p className="mx-auto mt-5 max-w-[680px] text-sm font-medium leading-6 text-[#5f5553]">
-            Online courses using cutting-edge technology and instructional strategies. We prioritise accessibility and inclusivity.
-          </p>
-        </motion.div>
+        <SectionTitle
+          label="Featured Courses"
+          title="Enroll Now to Make Lifestyle More Clean Beautiful and Organised"
+          description="Online courses using cutting-edge technology and instructional strategies. We prioritise accessibility and inclusivity."
+        />
 
         <CourseSlider
           className="mt-12 sm:mt-14"
