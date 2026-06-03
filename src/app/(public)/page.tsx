@@ -4,6 +4,7 @@ import { WhySkillophySection } from "@/components/public/why-skillophy-section";
 import { CourseHighlightSection } from "@/components/public/course-highlight-section";
 import { FreeCoursesSection } from "@/components/public/free-courses-section";
 import { AllCoursesSection } from "@/components/public/all-courses-section";
+import { QuizSection } from "@/components/public/quiz-section";
 
 export default function HomePage() {
   return (
@@ -14,6 +15,7 @@ export default function HomePage() {
       <CourseHighlightSection />
       <FreeCoursesSection />
       <AllCoursesSection />
+      <QuizSection />
     </>
   );
 }
