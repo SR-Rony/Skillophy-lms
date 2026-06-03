@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { Container } from "@/components/shared";
+import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants";
 import { cn } from "@/utils";
 import { HeroVisual } from "./hero-visual";
@@ -107,12 +108,13 @@ export function HeroSection({ className }: HeroSectionProps) {
 
             {/* Button */}
             <motion.div variants={itemVariants}>
-              <Link
-                href={ROUTES.courses}
-                className="inline-flex items-center justify-center rounded-full bg-[#F05555] px-10 py-4 text-sm font-extrabold text-white shadow-xl shadow-red-500/20 transition-all hover:bg-red-600 hover:shadow-red-500/30"
+              <Button
+                asChild
+                variant="publicCta"
+                size="publicCta"
               >
-                See All Courses
-              </Link>
+                <Link href={ROUTES.courses}>See All Courses</Link>
+              </Button>
             </motion.div>
           </motion.div>
 

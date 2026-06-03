@@ -14,12 +14,21 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        publicCta:
+          "rounded-[12px] bg-[#ff4747] text-[13px] font-black text-white shadow-[0_14px_28px_rgba(255,71,71,0.24)] transition hover:-translate-y-0.5 hover:bg-[#ef3033]",
+        publicIcon:
+          "rounded-full bg-[#ff4747] text-white shadow-[0_14px_26px_rgba(255,71,71,0.26)] transition hover:-translate-y-0.5 hover:bg-[#ef3033]",
+        wishlist:
+          "rounded-full bg-transparent p-1 text-[#3c3332] transition hover:bg-[#fff1ef] hover:text-[#f05555] [&_svg]:size-6",
       },
       size: {
         default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
         icon: "h-9 w-9",
+        publicCta: "min-h-[52px] min-w-[150px] px-7",
+        publicIcon: "h-11 w-11",
+        wishlist: "h-8 w-8",
       },
     },
     defaultVariants: {

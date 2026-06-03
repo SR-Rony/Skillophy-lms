@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Award, Star } from "lucide-react";
 import { Container } from "@/components/shared";
+import { Button } from "@/components/ui/button";
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 28 },
@@ -32,7 +33,7 @@ const stats = [
   {
     value: "1300",
     label: "Enrolled Student",
-    className: "bg-[#e9fffa] text-[#00a992] lg:absolute lg:left-0 lg:top-[90px]",
+    className: "bg-[#e9fffa] text-[#00a992] lg:absolute lg:left-7 lg:top-[70px]",
   },
   {
     value: "4.9",
@@ -43,7 +44,7 @@ const stats = [
   {
     value: "45",
     label: "Total Lessons",
-    className: "bg-[#fff0ff] text-[#cf31e8] lg:absolute lg:left-0 lg:bottom-0",
+    className: "bg-[#fff0ff] text-[#cf31e8] lg:absolute lg:left-7 lg:bottom-0",
   },
 ];
 
@@ -89,12 +90,16 @@ export function CourseHighlightSection() {
               />
             </div>
 
-            <Link
-              href="/courses/foundations-user-experience-ux-design"
-              className="mt-8 inline-flex min-h-[52px] min-w-[176px] items-center justify-center rounded-[12px] bg-[#ff3d3f] px-7 text-[13px] font-black text-white shadow-[0_14px_28px_rgba(255,61,63,0.24)] transition hover:-translate-y-0.5 hover:bg-[#ef3033] lg:mt-[34px]"
+            <Button
+              asChild
+              variant="publicCta"
+              size="publicCta"
+              className="mt-8 lg:mt-[34px]"
             >
-              Enroll this Course
-            </Link>
+              <Link href="/courses/foundations-user-experience-ux-design">
+                Enroll this Course
+              </Link>
+            </Button>
           </motion.div>
 
           <motion.div variants={fadeUpVariants} className="max-w-[510px] lg:self-start lg:pt-1">
