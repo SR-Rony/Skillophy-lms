@@ -74,7 +74,10 @@ export function Navbar() {
                 onClick={toggleMegaMenu}
                 aria-expanded={isMegaMenuOpen}
                 aria-controls="course-mega-menu"
-                className="flex items-center gap-1 font-medium text-gray-700 transition-colors hover:text-gray-900"
+                className={cn(
+                  "flex items-center gap-1 font-medium transition-colors cursor-pointer hover:text-[#ff4747]",
+                  isMegaMenuOpen ? "text-[#ff4747]" : "text-gray-700"
+                )}
               >
                 All Courses
                 <ChevronDown
@@ -181,7 +184,10 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={toggleMegaMenu}
-                className="flex w-full items-center justify-between py-2 text-left font-medium text-gray-700 hover:text-gray-900"
+                className={cn(
+                  "flex w-full items-center justify-between py-2 text-left font-medium transition-colors hover:text-[#ff4747]",
+                  isMegaMenuOpen ? "text-[#ff4747]" : "text-gray-700"
+                )}
               >
                 All Courses
                 <ChevronDown
