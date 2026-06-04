@@ -8,6 +8,9 @@ import { QuizSection } from "@/components/public/quiz-section";
 import { StatisticsSection } from "@/components/public/statistics-section";
 import { AcademicProgramSection } from "@/components/public/academic-program-section";
 import { TestimonialSection } from "@/components/public/testimonial-section";
+import { ModelTestSection } from "@/components/public/model-test-section";
+import { WorkshopSection } from "@/components/public/workshop-section";
+import { TeacherCtaSection } from "@/components/public/teacher-cta-section";
 
 export default function HomePage() {
   return (
@@ -22,6 +25,9 @@ export default function HomePage() {
       <StatisticsSection />
       <AcademicProgramSection />
       <TestimonialSection />
+      <ModelTestSection />
+      <WorkshopSection />
+      <TeacherCtaSection />
     </>
   );
 }
