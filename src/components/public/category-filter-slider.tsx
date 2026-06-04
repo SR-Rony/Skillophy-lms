@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronRight, type LucideIcon } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
@@ -47,7 +48,8 @@ export interface CategoryFilterItem {
 interface CategoryFilterSliderProps {
   categories: CategoryFilterItem[];
   activeCategoryId: string;
-  onCategoryChange: (categoryId: string) => void;
+  onCategoryChange?: (categoryId: string) => void;
+  getCategoryHref?: (categoryId: string) => string;
   countLabel?: string;
   theme?: "light" | "dark";
   className?: string;
@@ -58,6 +60,7 @@ export function CategoryFilterSlider({
   categories,
   activeCategoryId,
   onCategoryChange,
+  getCategoryHref,
   countLabel = "courses",
   theme = "light",
   className,
@@ -95,24 +98,20 @@ export function CategoryFilterSlider({
             {visibleCategories.map(
               ({ id, label, itemCount, filterLabel, icon: Icon, hasNotification }) => {
                 const isActive = id === activeCategoryId;
-
-                return (
-                  <button
-                    key={id}
-                    type="button"
-                    onClick={() => onCategoryChange(id)}
-                    className={cn(
-                      "relative flex min-h-[58px] items-center rounded-[10px] border px-4 py-3 text-left shadow-[0_12px_28px_rgba(55,41,38,0.05)] transition duration-300",
-                      Icon && "gap-3",
-                      isDark
-                        ? isActive
-                          ? "border-[#ff4747]/40 bg-white text-[#1f1514]"
-                          : "border-white/10 bg-white text-[#302927] hover:-translate-y-0.5 hover:border-[#ff4747]/30"
-                        : isActive
-                          ? "border-[#f1b8b4] bg-[#fff4f2] text-[#8a2525]"
-                          : "border-[#eee5e2] bg-white text-[#302927] hover:-translate-y-0.5 hover:border-[#f1b8b4]"
-                    )}
-                  >
+                const href = getCategoryHref?.(id);
+                const tabClassName = cn(
+                  "relative flex min-h-[58px] items-center rounded-[10px] border px-4 py-3 text-left shadow-[0_12px_28px_rgba(55,41,38,0.05)] transition duration-300",
+                  Icon && "gap-3",
+                  isDark
+                    ? isActive
+                      ? "border-[#ff4747]/40 bg-white text-[#1f1514]"
+                      : "border-white/10 bg-white text-[#302927] hover:-translate-y-0.5 hover:border-[#ff4747]/30"
+                    : isActive
+                      ? "border-[#f1b8b4] bg-[#fff4f2] text-[#8a2525]"
+                      : "border-[#eee5e2] bg-white text-[#302927] hover:-translate-y-0.5 hover:border-[#f1b8b4]"
+                );
+                const tabContent = (
+                  <>
                     {hasNotification && (
                       <span className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-[#ff4747]" />
                     )}
@@ -125,6 +124,25 @@ export function CategoryFilterSlider({
                         {itemCount} {countLabel}
                       </span>
                     </span>
+                  </>
+                );
+
+                if (href) {
+                  return (
+                    <Link key={id} href={href} className={tabClassName}>
+                      {tabContent}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <button
+                    key={id}
+                    type="button"
+                    onClick={() => onCategoryChange?.(id)}
+                    className={tabClassName}
+                  >
+                    {tabContent}
                   </button>
                 );
               }

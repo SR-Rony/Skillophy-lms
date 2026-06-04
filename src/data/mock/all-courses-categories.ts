@@ -661,3 +661,39 @@ export const TOTAL_COURSES_COUNT = coursesPageSections.reduce(
   (total, section) => total + section.courses.length,
   0
 );
+
+const allCategoriesLookup: AllCoursesCategory[] = [
+  ...allCoursesCategories,
+  ...coursesPageExtraSections,
+];
+
+export function getCategoryById(categoryId: string): AllCoursesCategory | undefined {
+  return allCategoriesLookup.find((category) => category.id === categoryId);
+}
+
+export function getAllCategoryIds(): CategoryId[] {
+  return allCategoriesLookup.map((category) => category.id);
+}
+
+/** Repeat courses so category listing pages can paginate (12 per page). */
+export function getExpandedCategoryCourses(
+  category: AllCoursesCategory,
+  minCount = 24
+): PublicCourse[] {
+  if (category.courses.length === 0) {
+    return [];
+  }
+
+  const expanded: PublicCourse[] = [];
+
+  while (expanded.length < minCount) {
+    const source = category.courses[expanded.length % category.courses.length];
+    expanded.push({
+      ...source,
+      id: `${source.id}-expanded-${expanded.length}`,
+      slug: expanded.length < category.courses.length ? source.slug : `${source.slug}-${expanded.length}`,
+    });
+  }
+
+  return expanded;
+}

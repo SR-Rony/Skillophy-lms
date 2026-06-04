@@ -99,7 +99,9 @@ export function CourseMegaMenu({ isOpen, onClose }: CourseMegaMenuProps) {
                             courseCount={category.courseCount}
                             icon={Icon}
                             isActive={activeCategory === category.id}
-                            onClick={setActiveCategory}
+                            href={ROUTES.courseCategory(category.id)}
+                            onPreview={setActiveCategory}
+                            onNavigate={onClose}
                           />
                         );
                       })}
@@ -128,11 +130,13 @@ export function CourseMegaMenu({ isOpen, onClose }: CourseMegaMenuProps) {
 
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-white via-white/92 to-transparent pb-2 pt-12">
                     <Link
-                      href={ROUTES.courses}
+                      href={ROUTES.courseCategory(activeCategory)}
                       onClick={onClose}
                       className="pointer-events-auto inline-flex items-center gap-1 text-[12px] font-black text-[#25201f] underline-offset-4 transition hover:text-[#ff4747] hover:underline"
                     >
-                      See All Courses
+                      See All in{" "}
+                      {megaMenuCategories.find((c) => c.id === activeCategory)?.label ??
+                        "Category"}
                       <ChevronRight className="h-3.5 w-3.5" />
                     </Link>
                   </div>

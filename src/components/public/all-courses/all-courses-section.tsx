@@ -8,6 +8,7 @@ import { AllCoursesCategoryFilter } from "./all-courses-category-filter";
 import { Button } from "@/components/ui/button";
 import { PublicCourseCard } from "@/components/public/public-course-card";
 import { SectionTitle } from "@/components/public/section-title";
+import { ROUTES } from "@/constants";
 import {
   homepageAllCoursesCategories,
   type CategoryId,
@@ -54,6 +55,7 @@ export function AllCoursesSection() {
             categories={homepageAllCoursesCategories}
             activeCategoryId={activeCategoryId}
             onCategoryChange={setActiveCategoryId}
+            linkToCategoryPages
           />
         </motion.div>
 
@@ -81,7 +83,9 @@ export function AllCoursesSection() {
           className="mt-12 flex justify-center"
         >
           <Button asChild variant="publicCta" size="publicCta">
-            <Link href="/courses">See All Courses</Link>
+            <Link href={ROUTES.courseCategory(activeCategoryId)}>
+              See All {activeCategory.filterLabel ?? activeCategory.label}
+            </Link>
           </Button>
         </motion.div>
       </Container>

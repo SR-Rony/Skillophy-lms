@@ -4,6 +4,7 @@
 export const ROUTES = {
   home: "/",
   courses: "/courses",
+  courseCategory: (categoryId: string) => `/courses/category/${categoryId}`,
   pricing: "/pricing",
   blog: "/blog",
   about: "/about",

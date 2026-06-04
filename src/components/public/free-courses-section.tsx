@@ -1,10 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import { CourseSlider } from "@/components/public/course-slider";
 import type { PublicCourse } from "@/components/public/public-course-card";
 import { SectionTitle } from "@/components/public/section-title";
+import { Button } from "@/components/ui/button";
+import { ROUTES } from "@/constants";
 
 const freeCourses: PublicCourse[] = [
   {
@@ -122,6 +125,12 @@ export function FreeCoursesSection() {
           variant="free"
           ariaLabelPrefix="free courses"
         />
+
+        <motion.div className="mt-12 flex justify-center">
+          <Button asChild variant="publicCta" size="publicCta">
+            <Link href={ROUTES.courseCategory("free")}>See All Free Courses</Link>
+          </Button>
+        </motion.div>
       </Container>
     </section>
   );
