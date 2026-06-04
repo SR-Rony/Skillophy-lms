@@ -18,9 +18,8 @@ const TOUCH_SWIPE_THRESHOLD = 48;
 
 const DEFAULT_ITEMS_PER_PAGE = {
   lg: 3,
-  md: 3,
   sm: 2,
-  default: 2,
+  default: 1,
 } as const;
 
 const fadeUpVariants = {
@@ -47,7 +46,7 @@ function useItemsPerPage(config: ItemsPerPageConfig = DEFAULT_ITEMS_PER_PAGE) {
   useEffect(() => {
     const mediaQueries = [
       { query: "(min-width: 1024px)", value: config.lg ?? DEFAULT_ITEMS_PER_PAGE.lg },
-      { query: "(min-width: 768px)", value: config.md ?? DEFAULT_ITEMS_PER_PAGE.md },
+      { query: "(min-width: 768px)", value: config.md ?? config.sm ?? DEFAULT_ITEMS_PER_PAGE.sm },
       { query: "(min-width: 640px)", value: config.sm ?? DEFAULT_ITEMS_PER_PAGE.sm },
     ];
 

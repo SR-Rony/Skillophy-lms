@@ -38,7 +38,6 @@ export function AllCoursesCategoryRow({ category, sectionId }: AllCoursesCategor
         showPagination={false}
         autoPlayInterval={5500}
         enableTouch
-        itemsPerPage={{ default: 2, sm: 2, md: 3, lg: 3 }}
       />
     </section>
   );

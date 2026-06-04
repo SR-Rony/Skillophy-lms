@@ -3,12 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronRight } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Container } from "@/components/shared";
+import { CategoryFilterSlider } from "@/components/public/category-filter-slider";
 import { Button } from "@/components/ui/button";
 import { SectionTitle, sectionTitleFadeUpVariants } from "@/components/public/section-title";
-import { cn } from "@/utils";
 
 interface Book {
   id: string;
@@ -231,7 +230,11 @@ const categories: BookCategory[] = [
   },
 ];
 
-const VISIBLE_CATEGORY_COUNT = 6;
+const bookFilterCategories = categories.map((category) => ({
+  id: category.id,
+  label: category.label,
+  itemCount: category.books.length,
+}));
 
 const bookGridVariants = {
   hidden: { opacity: 0, y: 18 },
@@ -283,22 +286,11 @@ function BookCard({ book }: { book: Book }) {
 
 export function BooksSection() {
   const [activeCategoryId, setActiveCategoryId] = useState("creative-soft-skills");
-  const [categorySlideIndex, setCategorySlideIndex] = useState(0);
 
-  const activeCategoryIndex = categories.findIndex(({ id }) => id === activeCategoryId);
-  const activeCategory = categories[activeCategoryIndex] ?? categories[0];
-  const visibleCategories = useMemo(
-    () =>
-      Array.from({ length: VISIBLE_CATEGORY_COUNT }, (_, index) => {
-        const categoryIndex = (categorySlideIndex + index) % categories.length;
-        return categories[categoryIndex];
-      }),
-    [categorySlideIndex]
+  const activeCategory = useMemo(
+    () => categories.find(({ id }) => id === activeCategoryId) ?? categories[0],
+    [activeCategoryId]
   );
-
-  const nextCategory = () => {
-    setCategorySlideIndex((currentIndex) => (currentIndex + 1) % categories.length);
-  };
 
   return (
     <section className="bg-[#f7f7f6] py-16 sm:py-20 lg:py-[92px]">
@@ -316,60 +308,14 @@ export function BooksSection() {
           description="Our book will enlighten your knowledge and equip you with modern skills for effective learning."
         />
 
-        <motion.div
-          variants={sectionTitleFadeUpVariants}
-          className="mt-10 flex items-center gap-3"
-        >
-          <div className="flex-1 overflow-hidden pb-2">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={categorySlideIndex}
-                initial={{ opacity: 0, x: 36 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -36 }}
-                transition={{ duration: 0.42, ease: "easeOut" }}
-                className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6"
-              >
-                {visibleCategories.map(({ id, label, books }) => {
-                  const isActive = id === activeCategoryId;
-
-                  return (
-                    <button
-                      key={id}
-                      type="button"
-                      onClick={() => setActiveCategoryId(id)}
-                      className={cn(
-                        "flex min-h-[58px] items-center rounded-[10px] border bg-white px-4 py-3 text-left shadow-[0_12px_28px_rgba(55,41,38,0.05)] transition duration-300",
-                        isActive
-                          ? "border-[#f1b8b4] bg-[#fff4f2] text-[#8a2525]"
-                          : "border-[#eee5e2] text-[#302927] hover:-translate-y-0.5 hover:border-[#f1b8b4]"
-                      )}
-                    >
-                      <span>
-                        <span className="block text-[13px] font-extrabold leading-none">
-                          {label}
-                        </span>
-                        <span className="mt-1 block text-[11px] font-semibold text-[#6f6562]">
-                          {books.length} books
-                        </span>
-                      </span>
-                    </button>
-                  );
-                })}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <Button
-            type="button"
-            variant="publicIcon"
-            size="publicIcon"
-            aria-label="Show next book category"
-            onClick={nextCategory}
-            className="hidden shrink-0 sm:flex"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </Button>
+        <motion.div className="mt-10">
+          <CategoryFilterSlider
+            categories={bookFilterCategories}
+            activeCategoryId={activeCategoryId}
+            onCategoryChange={setActiveCategoryId}
+            countLabel="books"
+            nextButtonAriaLabel="Show next book category"
+          />
         </motion.div>
 
         <AnimatePresence mode="wait">
