@@ -55,7 +55,6 @@ export function AllCoursesSection() {
             categories={homepageAllCoursesCategories}
             activeCategoryId={activeCategoryId}
             onCategoryChange={setActiveCategoryId}
-            linkToCategoryPages
           />
         </motion.div>
 
