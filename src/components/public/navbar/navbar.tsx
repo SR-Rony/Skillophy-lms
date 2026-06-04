@@ -2,20 +2,20 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import {
   ChevronDown,
   Globe,
   Menu,
   Search,
   ShoppingCart,
-  X,
 } from "lucide-react";
 import { ROUTES } from "@/constants";
 import { siteConfig } from "@/config";
 import { Container } from "@/components/shared";
 import { cn } from "@/utils";
 import { CourseMegaMenu } from "./course-mega-menu";
+import { MobileNavbarDrawer } from "./mobile-navbar-drawer";
 
 export function Navbar() {
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
@@ -154,7 +154,7 @@ export function Navbar() {
             aria-expanded={isMobileMenuOpen}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <Menu size={24} />
           </button>
         </div>
       </Container>
@@ -163,84 +163,9 @@ export function Navbar() {
 
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden border-t border-gray-200 bg-white md:hidden"
-          >
-            <div className="space-y-4 px-4 py-4">
-              <label className="flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2">
-                <Search size={18} className="text-gray-400" aria-hidden />
-                <input
-                  type="search"
-                  placeholder="Search courses..."
-                  className="w-full bg-transparent text-sm text-gray-700 outline-none"
-                  aria-label="Search courses"
-                />
-              </label>
-
-              <button
-                type="button"
-                onClick={toggleMegaMenu}
-                className={cn(
-                  "flex w-full items-center justify-between py-2 text-left font-medium transition-colors hover:text-[#ff4747]",
-                  isMegaMenuOpen ? "text-[#ff4747]" : "text-gray-700"
-                )}
-              >
-                All Courses
-                <ChevronDown
-                  className={cn(
-                    "h-4 w-4 transition-transform",
-                    isMegaMenuOpen && "rotate-180"
-                  )}
-                />
-              </button>
-
-              <div className="space-y-2 border-t border-gray-200 py-2">
-                <Link
-                  href={ROUTES.pricing}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block py-2 text-sm text-gray-700 hover:text-gray-900"
-                >
-                  Business
-                </Link>
-                <Link
-                  href={ROUTES.auth.register}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block py-2 text-sm text-gray-700 hover:text-gray-900"
-                >
-                  Join as Teacher
-                </Link>
-              </div>
-
-              <div className="space-y-2 border-t border-gray-200 pt-2">
-                <button
-                  type="button"
-                  className="flex w-full items-center gap-2 py-2 text-sm text-gray-700"
-                >
-                  <Globe size={18} />
-                  EN
-                </button>
-                <Link
-                  href={ROUTES.student.wishlist}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-2 py-2 text-sm text-gray-700 hover:text-gray-900"
-                >
-                  <ShoppingCart size={18} />
-                  Cart (2)
-                </Link>
-                <Link
-                  href={ROUTES.auth.register}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block w-full rounded bg-gray-900 px-4 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-gray-800"
-                >
-                  Get Started
-                </Link>
-              </div>
-            </div>
-          </motion.div>
+          <MobileNavbarDrawer
+            onClose={() => setIsMobileMenuOpen(false)}
+          />
         )}
       </AnimatePresence>
     </nav>
