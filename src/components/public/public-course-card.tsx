@@ -36,12 +36,15 @@ function formatTaka(amount: number) {
   return `৳${amount}`;
 }
 
+export type PublicCourseCardBadge = "live" | "workshop-live";
+
 interface PublicCourseCardProps {
   course: PublicCourse;
   variant: PublicCourseCardVariant;
+  badge?: PublicCourseCardBadge;
 }
 
-export function PublicCourseCard({ course, variant }: PublicCourseCardProps) {
+export function PublicCourseCard({ course, variant, badge }: PublicCourseCardProps) {
   const LessonsIcon = variant === "free" ? Clock : Target;
 
   return (
@@ -58,6 +61,16 @@ export function PublicCourseCard({ course, variant }: PublicCourseCardProps) {
             className="object-cover transition duration-500 hover:scale-105"
             sizes="(max-width: 640px) 92vw, (max-width: 1024px) 44vw, 336px"
           />
+          {badge === "live" && (
+            <span className="absolute left-3 top-3 rounded-[6px] bg-[#ff4747] px-2.5 py-1 text-[11px] font-black uppercase tracking-wide text-white">
+              Live
+            </span>
+          )}
+          {badge === "workshop-live" && (
+            <span className="absolute bottom-3 left-3 rounded-[6px] bg-[#ffca18] px-2.5 py-1 text-[11px] font-black uppercase tracking-wide text-[#2b2220]">
+              Live
+            </span>
+          )}
         </div>
 
         <div className="px-4 pb-4 pt-3 sm:px-5 sm:pb-5">

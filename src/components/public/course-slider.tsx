@@ -6,6 +6,7 @@ import { cn } from "@/utils";
 import {
   PublicCourseCard,
   type PublicCourse,
+  type PublicCourseCardBadge,
   type PublicCourseCardVariant,
 } from "./public-course-card";
 
@@ -13,11 +14,13 @@ const DEFAULT_SLIDE_DOT_COUNT = 3;
 const DEFAULT_AUTO_PLAY_MS = 5000;
 const TRANSITION_MS = 500;
 const GAP_PX = 24;
+const TOUCH_SWIPE_THRESHOLD = 48;
 
 const DEFAULT_ITEMS_PER_PAGE = {
   lg: 3,
+  md: 3,
   sm: 2,
-  default: 1,
+  default: 2,
 } as const;
 
 const fadeUpVariants = {
@@ -29,18 +32,22 @@ const fadeUpVariants = {
   },
 };
 
-interface ItemsPerPageConfig {
+export interface ItemsPerPageConfig {
   lg?: number;
+  md?: number;
   sm?: number;
   default?: number;
 }
 
 function useItemsPerPage(config: ItemsPerPageConfig = DEFAULT_ITEMS_PER_PAGE) {
-  const [itemsPerPage, setItemsPerPage] = useState(config.default ?? DEFAULT_ITEMS_PER_PAGE.default);
+  const [itemsPerPage, setItemsPerPage] = useState(
+    config.default ?? DEFAULT_ITEMS_PER_PAGE.default
+  );
 
   useEffect(() => {
     const mediaQueries = [
       { query: "(min-width: 1024px)", value: config.lg ?? DEFAULT_ITEMS_PER_PAGE.lg },
+      { query: "(min-width: 768px)", value: config.md ?? DEFAULT_ITEMS_PER_PAGE.md },
       { query: "(min-width: 640px)", value: config.sm ?? DEFAULT_ITEMS_PER_PAGE.sm },
     ];
 
@@ -53,7 +60,7 @@ function useItemsPerPage(config: ItemsPerPageConfig = DEFAULT_ITEMS_PER_PAGE) {
     window.addEventListener("resize", updateItemsPerPage);
 
     return () => window.removeEventListener("resize", updateItemsPerPage);
-  }, [config.default, config.lg, config.sm]);
+  }, [config.default, config.lg, config.md, config.sm]);
 
   return itemsPerPage;
 }
@@ -67,6 +74,8 @@ export interface ItemsSliderProps<T> {
   ariaLabelPrefix: string;
   className?: string;
   itemsPerPage?: ItemsPerPageConfig;
+  showPagination?: boolean;
+  enableTouch?: boolean;
 }
 
 export function ItemsSlider<T>({
@@ -78,13 +87,18 @@ export function ItemsSlider<T>({
   ariaLabelPrefix,
   className,
   itemsPerPage: itemsPerPageConfig,
+  showPagination = true,
+  enableTouch = true,
 }: ItemsSliderProps<T>) {
   const itemsPerPage = useItemsPerPage(itemsPerPageConfig);
   const containerRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef(0);
+  const touchDeltaX = useRef(0);
   const [cardWidth, setCardWidth] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [enableTransition, setEnableTransition] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
 
   const loopItems = useMemo(() => {
     if (items.length === 0) {
@@ -104,6 +118,10 @@ export function ItemsSlider<T>({
       }
 
       const containerWidth = containerRef.current.offsetWidth;
+      if (containerWidth <= 0) {
+        return;
+      }
+
       const nextCardWidth =
         (containerWidth - GAP_PX * (itemsPerPage - 1)) / itemsPerPage;
 
@@ -111,9 +129,23 @@ export function ItemsSlider<T>({
     };
 
     updateCardWidth();
+    const frame = requestAnimationFrame(updateCardWidth);
+
+    const container = containerRef.current;
+    let resizeObserver: ResizeObserver | null = null;
+
+    if (container && typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(updateCardWidth);
+      resizeObserver.observe(container);
+    }
+
     window.addEventListener("resize", updateCardWidth);
 
-    return () => window.removeEventListener("resize", updateCardWidth);
+    return () => {
+      cancelAnimationFrame(frame);
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", updateCardWidth);
+    };
   }, [itemsPerPage]);
 
   useEffect(() => {
@@ -126,7 +158,17 @@ export function ItemsSlider<T>({
       return;
     }
 
+    setEnableTransition(true);
     setActiveIndex((index) => index + 1);
+  }, [canScroll]);
+
+  const goToPrevSlide = useCallback(() => {
+    if (!canScroll) {
+      return;
+    }
+
+    setEnableTransition(true);
+    setActiveIndex((index) => (index > 0 ? index - 1 : index));
   }, [canScroll]);
 
   useEffect(() => {
@@ -147,14 +189,14 @@ export function ItemsSlider<T>({
   }, [activeIndex, canScroll, items.length]);
 
   useEffect(() => {
-    if (isPaused || !canScroll) {
+    if (isPaused || !canScroll || isDragging) {
       return;
     }
 
     const timer = window.setInterval(goToNextSlide, autoPlayInterval);
 
     return () => window.clearInterval(timer);
-  }, [autoPlayInterval, canScroll, goToNextSlide, isPaused]);
+  }, [autoPlayInterval, canScroll, goToNextSlide, isDragging, isPaused]);
 
   const activeDot =
     items.length > 0
@@ -172,6 +214,41 @@ export function ItemsSlider<T>({
     setActiveIndex(Math.min(nextIndex, items.length));
   };
 
+  const handleTouchStart = (clientX: number) => {
+    if (!enableTouch || !canScroll) {
+      return;
+    }
+
+    touchStartX.current = clientX;
+    touchDeltaX.current = 0;
+    setIsDragging(true);
+    setIsPaused(true);
+  };
+
+  const handleTouchMove = (clientX: number) => {
+    if (!isDragging) {
+      return;
+    }
+
+    touchDeltaX.current = clientX - touchStartX.current;
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging) {
+      return;
+    }
+
+    if (touchDeltaX.current <= -TOUCH_SWIPE_THRESHOLD) {
+      goToNextSlide();
+    } else if (touchDeltaX.current >= TOUCH_SWIPE_THRESHOLD) {
+      goToPrevSlide();
+    }
+
+    touchDeltaX.current = 0;
+    setIsDragging(false);
+    setIsPaused(false);
+  };
+
   return (
     <div
       className={className}
@@ -180,7 +257,17 @@ export function ItemsSlider<T>({
       onFocusCapture={() => setIsPaused(true)}
       onBlurCapture={() => setIsPaused(false)}
     >
-      <div ref={containerRef} className="overflow-hidden">
+      <div
+        ref={containerRef}
+        className={cn(
+          "overflow-hidden",
+          enableTouch && canScroll && "touch-pan-y"
+        )}
+        onTouchStart={(event) => handleTouchStart(event.touches[0]?.clientX ?? 0)}
+        onTouchMove={(event) => handleTouchMove(event.touches[0]?.clientX ?? 0)}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
+      >
         <div
           className={cn(
             "flex gap-6",
@@ -203,7 +290,7 @@ export function ItemsSlider<T>({
         </div>
       </div>
 
-      {canScroll && (
+      {canScroll && showPagination && (
         <motion.div variants={fadeUpVariants} className="mt-10 flex justify-center gap-2">
           {Array.from({ length: slideDotCount }).map((_, index) => (
             <button
@@ -227,32 +314,42 @@ export function ItemsSlider<T>({
 interface CourseSliderProps {
   courses: PublicCourse[];
   variant: PublicCourseCardVariant;
+  cardBadge?: PublicCourseCardBadge;
   slideDotCount?: number;
   autoPlayInterval?: number;
   ariaLabelPrefix: string;
   className?: string;
   itemsPerPage?: ItemsPerPageConfig;
+  showPagination?: boolean;
+  enableTouch?: boolean;
 }
 
 export function CourseSlider({
   courses,
   variant,
+  cardBadge,
   slideDotCount,
   autoPlayInterval,
   ariaLabelPrefix,
   className,
   itemsPerPage,
+  showPagination,
+  enableTouch,
 }: CourseSliderProps) {
   return (
     <ItemsSlider
       items={courses}
       getItemKey={(course) => course.id}
-      renderItem={(course) => <PublicCourseCard course={course} variant={variant} />}
+      renderItem={(course) => (
+        <PublicCourseCard course={course} variant={variant} badge={cardBadge} />
+      )}
       slideDotCount={slideDotCount}
       autoPlayInterval={autoPlayInterval}
       ariaLabelPrefix={ariaLabelPrefix}
       className={className}
       itemsPerPage={itemsPerPage}
+      showPagination={showPagination}
+      enableTouch={enableTouch}
     />
   );
 }

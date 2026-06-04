@@ -1,58 +1,50 @@
-"use client";
-
-import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
 import {
   BookOpen,
   BriefcaseBusiness,
-  ChevronRight,
+  Clapperboard,
   Gem,
+  Layers3,
+  Palette,
   PlayCircle,
   Sparkles,
   Wrench,
+  type LucideIcon,
 } from "lucide-react";
-import { useMemo, useState } from "react";
-import { Container } from "@/components/shared";
-import { Button } from "@/components/ui/button";
-import { PublicCourseCard, type PublicCourse } from "@/components/public/public-course-card";
-import { SectionTitle } from "@/components/public/section-title";
-import { cn } from "@/utils";
+import type { PublicCourse, PublicCourseCardVariant } from "@/components/public/public-course-card";
 
-type CategoryId = "free" | "job" | "popular" | "skill" | "vocational" | "academic";
+export type CategoryId =
+  | "free"
+  | "job"
+  | "popular"
+  | "skill"
+  | "vocational"
+  | "academic"
+  | "model-test"
+  | "bundle"
+  | "creative"
+  | "workshop";
 
-interface CourseCategory {
+export interface AllCoursesCategory {
   id: CategoryId;
   label: string;
-  icon: typeof PlayCircle;
+  icon: LucideIcon;
   courses: PublicCourse[];
+  variant: PublicCourseCardVariant;
+  showInFilter?: boolean;
+  filterLabel?: string;
+  cardBadge?: "live" | "workshop-live";
+  hasNotification?: boolean;
 }
 
-const VISIBLE_CATEGORY_COUNT = 5;
+export const VISIBLE_CATEGORY_COUNT = 5;
 
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, ease: "easeOut" as const },
-  },
-};
-
-const courseGridVariants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: "easeOut" as const, staggerChildren: 0.08 },
-  },
-  exit: { opacity: 0, y: -12, transition: { duration: 0.2 } },
-};
-
-const categories: CourseCategory[] = [
+export const allCoursesCategories: AllCoursesCategory[] = [
   {
     id: "free",
     label: "Free Courses",
     icon: PlayCircle,
+    variant: "free",
+    showInFilter: true,
     courses: [
       {
         id: "free-facebook-marketing",
@@ -132,6 +124,8 @@ const categories: CourseCategory[] = [
     id: "job",
     label: "Job Courses",
     icon: BriefcaseBusiness,
+    variant: "paid",
+    showInFilter: true,
     courses: [
       {
         id: "job-interview-preparation",
@@ -223,6 +217,8 @@ const categories: CourseCategory[] = [
     id: "popular",
     label: "Popular",
     icon: Sparkles,
+    variant: "paid",
+    showInFilter: true,
     courses: [
       {
         id: "popular-facebook-marketing",
@@ -314,6 +310,9 @@ const categories: CourseCategory[] = [
     id: "skill",
     label: "Skill Development & IT",
     icon: Gem,
+    variant: "paid",
+    showInFilter: true,
+    filterLabel: "Skill Development",
     courses: [
       {
         id: "skill-advanced-javascript",
@@ -405,6 +404,9 @@ const categories: CourseCategory[] = [
     id: "vocational",
     label: "Vocational Courses",
     icon: Wrench,
+    variant: "paid",
+    showInFilter: true,
+    filterLabel: "Pre-recorded",
     courses: [
       {
         id: "vocational-electrical-work",
@@ -496,6 +498,10 @@ const categories: CourseCategory[] = [
     id: "academic",
     label: "Academic",
     icon: BookOpen,
+    variant: "paid",
+    showInFilter: true,
+    hasNotification: true,
+    cardBadge: "live",
     courses: [
       {
         id: "academic-math",
@@ -585,122 +591,73 @@ const categories: CourseCategory[] = [
   },
 ];
 
-export function AllCoursesSection() {
-  const [activeCategoryId, setActiveCategoryId] = useState<CategoryId>("popular");
-  const [categorySlideIndex, setCategorySlideIndex] = useState(0);
-
-  const activeCategoryIndex = categories.findIndex(({ id }) => id === activeCategoryId);
-  const activeCategory = categories[activeCategoryIndex] ?? categories[0];
-  const visibleCategories = useMemo(
-    () =>
-      Array.from({ length: VISIBLE_CATEGORY_COUNT }, (_, index) => {
-        const categoryIndex = (categorySlideIndex + index) % categories.length;
-        return categories[categoryIndex];
-      }),
-    [categorySlideIndex]
-  );
-
-  const nextCategory = () => {
-    setCategorySlideIndex((currentIndex) => {
-      const nextIndex = (currentIndex + 1) % categories.length;
-      return nextIndex;
-    });
-  };
-
-  return (
-    <section className="bg-[#f7f7f6] py-16 sm:py-20 lg:py-[92px]">
-      <Container
-        as={motion.div}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.18 }}
-        transition={{ staggerChildren: 0.12 }}
-      >
-        <SectionTitle
-          className="max-w-[780px]"
-          label="All Courses"
-          title="Expand Knowledge, Master New Skills and Enjoy the Journey"
-          description="Online courses using cutting-edge technology and instructional strategies. We prioritise accessibility and inclusivity."
-        />
-
-        <motion.div
-          variants={fadeUpVariants}
-          className="mt-10 flex items-center gap-3"
-        >
-          <div className="flex-1 overflow-hidden pb-2">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={categorySlideIndex}
-                initial={{ opacity: 0, x: 36 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -36 }}
-                transition={{ duration: 0.42, ease: "easeOut" }}
-                className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5"
-              >
-                {visibleCategories.map(({ id, label, icon: Icon, courses }) => {
-                  const isActive = id === activeCategoryId;
-
-                  return (
-                    <button
-                      key={id}
-                      type="button"
-                      onClick={() => setActiveCategoryId(id)}
-                      className={cn(
-                        "flex min-h-[58px] items-center gap-3 rounded-[10px] border bg-white px-4 py-3 text-left shadow-[0_12px_28px_rgba(55,41,38,0.05)] transition duration-300",
-                        isActive
-                          ? "border-[#f1b8b4] bg-[#fff4f2] text-[#8a2525]"
-                          : "border-[#eee5e2] text-[#302927] hover:-translate-y-0.5 hover:border-[#f1b8b4]"
-                      )}
-                    >
-                      <Icon className="h-5 w-5 shrink-0 stroke-[1.7]" />
-                      <span>
-                        <span className="block text-[13px] font-extrabold leading-none">
-                          {label}
-                        </span>
-                        <span className="mt-1 block text-[11px] font-semibold text-[#6f6562]">
-                          {courses.length} courses
-                        </span>
-                      </span>
-                    </button>
-                  );
-                })}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <Button
-            type="button"
-            variant="publicIcon"
-            size="publicIcon"
-            aria-label="Show next course category"
-            onClick={nextCategory}
-            className="hidden shrink-0 sm:flex"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </Button>
-        </motion.div>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCategory.id}
-            variants={courseGridVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {activeCategory.courses.map((course) => (
-              <PublicCourseCard key={course.id} course={course} variant="paid" />
-            ))}
-          </motion.div>
-        </AnimatePresence>
-
-        <motion.div variants={fadeUpVariants} className="mt-12 flex justify-center">
-          <Button asChild variant="publicCta" size="publicCta">
-            <Link href="/courses">See All Courses</Link>
-          </Button>
-        </motion.div>
-      </Container>
-    </section>
-  );
+function cloneCourses(courses: PublicCourse[], prefix: string): PublicCourse[] {
+  return courses.map((course) => ({
+    ...course,
+    id: `${prefix}-${course.id}`,
+    slug: `${prefix}-${course.slug}`,
+  }));
 }
+
+const popularCourses =
+  allCoursesCategories.find((category) => category.id === "popular")?.courses ?? [];
+const jobCourses =
+  allCoursesCategories.find((category) => category.id === "job")?.courses ?? [];
+const freeCourses =
+  allCoursesCategories.find((category) => category.id === "free")?.courses ?? [];
+
+export const coursesPageExtraSections: AllCoursesCategory[] = [
+  {
+    id: "model-test",
+    label: "Model Test",
+    icon: Clapperboard,
+    variant: "paid",
+    courses: cloneCourses(popularCourses.slice(0, 6), "model"),
+  },
+  {
+    id: "bundle",
+    label: "Bundle Course",
+    icon: Layers3,
+    variant: "paid",
+    courses: cloneCourses(jobCourses.slice(0, 6), "bundle"),
+  },
+  {
+    id: "creative",
+    label: "Creative & Lifestyle",
+    icon: Palette,
+    variant: "paid",
+    courses: cloneCourses(freeCourses.slice(0, 6), "creative"),
+  },
+  {
+    id: "workshop",
+    label: "Upcoming LIVE Workshop",
+    icon: PlayCircle,
+    variant: "paid",
+    cardBadge: "workshop-live",
+    courses: cloneCourses(popularCourses.slice(0, 6), "workshop"),
+  },
+];
+
+export const coursesPageSections: AllCoursesCategory[] = [
+  allCoursesCategories.find((category) => category.id === "free")!,
+  coursesPageExtraSections[0],
+  allCoursesCategories.find((category) => category.id === "job")!,
+  allCoursesCategories.find((category) => category.id === "popular")!,
+  allCoursesCategories.find((category) => category.id === "skill")!,
+  allCoursesCategories.find((category) => category.id === "vocational")!,
+  coursesPageExtraSections[1],
+  allCoursesCategories.find((category) => category.id === "academic")!,
+  coursesPageExtraSections[2],
+  coursesPageExtraSections[3],
+];
+
+export const homepageAllCoursesCategories = allCoursesCategories;
+
+export const coursesPageFilterCategories = allCoursesCategories.filter(
+  (category) => category.showInFilter
+);
+
+export const TOTAL_COURSES_COUNT = coursesPageSections.reduce(
+  (total, section) => total + section.courses.length,
+  0
+);

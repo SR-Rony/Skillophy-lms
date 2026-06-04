@@ -3,7 +3,7 @@ import { FeaturedCoursesSection } from "@/components/public/featured-courses-sec
 import { WhySkillophySection } from "@/components/public/why-skillophy-section";
 import { CourseHighlightSection } from "@/components/public/course-highlight-section";
 import { FreeCoursesSection } from "@/components/public/free-courses-section";
-import { AllCoursesSection } from "@/components/public/all-courses-section";
+import { AllCoursesSection } from "@/components/public/all-courses";
 import { QuizSection } from "@/components/public/quiz-section";
 import { StatisticsSection } from "@/components/public/statistics-section";
 import { AcademicProgramSection } from "@/components/public/academic-program-section";

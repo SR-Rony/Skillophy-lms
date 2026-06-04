@@ -1,18 +1,7 @@
-import { Container } from "@/components/shared";
-import { PageHeader } from "@/components/shared/page-header";
-import { CourseCatalog } from "@/features/courses/components/course-catalog";
+import { AllCoursesPageContent } from "@/components/public/all-courses";
 
-export const metadata = { title: "Courses" };
+export const metadata = { title: "All Courses" };
 
 export default function CoursesPage() {
-  return (
-    <Container className="py-12">
-      <PageHeader
-        title="All courses"
-        description="Explore our catalog of professional courses."
-        className="mb-10"
-      />
-      <CourseCatalog />
-    </Container>
-  );
+  return <AllCoursesPageContent />;
 }
