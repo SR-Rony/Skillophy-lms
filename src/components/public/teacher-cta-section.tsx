@@ -75,8 +75,7 @@ export function TeacherCtaSection() {
                 </>
               }
               description="The essence of continuously nurturing one's passion for education. It implies a commitment to keeping the flame of excitement and dedication burning bright amidst the challenges and demands of teaching. This succinct phrase serves as a reminder to educators to actively cultivate their passion, find joy in their work, and remain inspired to make a positive impact on their students' lives."
-              headingClassName="lg:text-[42px]"
-              descriptionClassName="max-w-[545px] text-[13px] leading-[1.72] text-white/76"
+              descriptionClassName="max-w-[545px] text-base leading-[1.5] text-white/76"
             />
 
             <div className="mt-9">

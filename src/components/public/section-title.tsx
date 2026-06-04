@@ -13,6 +13,18 @@ export const sectionTitleFadeUpVariants = {
   },
 };
 
+/** Section label — Outfit 400, 16px, 130% line-height, 6% letter-spacing */
+export const sectionLabelClassName =
+  "font-normal text-base uppercase leading-[1.3] tracking-[0.06em]";
+
+/** Section heading — Outfit 700, 48px, 110% line-height */
+export const sectionHeadingClassName =
+  "text-[48px] font-bold leading-[1.1] tracking-normal text-[#24201f]";
+
+/** Hero heading — Outfit 800, 62px, 120% line-height, 2% letter-spacing */
+export const heroHeadingClassName =
+  "text-[40px] font-extrabold leading-[1.2] tracking-[0.02em] text-[#24201f] sm:text-[52px] lg:text-[62px]";
+
 interface SectionTitleProps {
   label: string;
   title: ReactNode;
@@ -46,7 +58,7 @@ export function SectionTitle({
       ? "bg-[#a5655c]"
       : "bg-[#efb0aa]";
 
-  const labelClassName = isDark
+  const labelColorClassName = isDark
     ? "text-[#ff4747]"
     : lines === "trailing"
       ? "text-[#8a2525]"
@@ -62,18 +74,13 @@ export function SectionTitle({
     >
       <div
         className={cn(
-          "mb-3 flex items-center gap-3",
+          "mb-4 flex items-center gap-3",
           isCenter && lines === "both" && "justify-center",
-          lines === "none" && "mb-3"
+          lines === "none" && "mb-4"
         )}
       >
         {lines === "both" && <span className={cn("h-px w-16", lineClassName)} />}
-        <span
-          className={cn(
-            "text-[12px] font-extrabold uppercase tracking-[0.18em]",
-            labelClassName
-          )}
-        >
+        <span className={cn(sectionLabelClassName, labelColorClassName)}>
           {label}
         </span>
         {lines !== "none" && <span className={cn("h-px w-16", lineClassName)} />}
@@ -81,11 +88,9 @@ export function SectionTitle({
 
       <h2
         className={cn(
-          "font-black leading-[1.12] text-[#24201f] sm:text-[42px] lg:text-[46px]",
-          isCenter
-            ? "text-[32px] tracking-[-0.04em]"
-            : "text-[34px] tracking-[-0.045em]",
-          isDark && "text-white sm:text-[44px] lg:text-[48px]",
+          sectionHeadingClassName,
+          isCenter ? "text-center" : "text-left",
+          isDark && "text-white",
           headingClassName
         )}
       >
@@ -95,9 +100,9 @@ export function SectionTitle({
       {description && (
         <p
           className={cn(
-            "text-sm font-medium leading-6",
-            isCenter ? "mx-auto mt-5 max-w-[680px]" : "mt-4 max-w-[680px]",
-            isDark ? "leading-7 text-white/58" : "text-[#5f5553]",
+            "text-base font-normal leading-[1.5] tracking-normal",
+            isCenter ? "mx-auto mt-5 max-w-[680px] text-center" : "mt-4 max-w-[680px] text-left",
+            isDark ? "text-white/58" : "text-[#5f5553]",
             descriptionClassName
           )}
         >

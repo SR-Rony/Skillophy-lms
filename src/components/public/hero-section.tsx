@@ -6,6 +6,7 @@ import { Sparkles } from "lucide-react";
 import { Container } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants";
+import { heroHeadingClassName, sectionLabelClassName } from "@/components/public/section-title";
 import { cn } from "@/utils";
 import { HeroVisual } from "./hero-visual";
 
@@ -80,18 +81,18 @@ export function HeroSection({ className }: HeroSectionProps) {
             animate="visible"
           >
             {/* Tagline / Badge */}
-            <motion.div variants={itemVariants} className="flex items-center gap-3 mb-6">
-              <Sparkles className="h-4 w-4 text-[#F05555] fill-[#F05555]" />
-              <span className="text-xs font-black tracking-[0.22em] text-[#F05555]">
-                BEST LEARNING PLATFORM
+            <motion.div variants={itemVariants} className="mb-6 flex items-center gap-3">
+              <Sparkles className="h-4 w-4 shrink-0 fill-[#F05555] text-[#F05555]" />
+              <span className={cn(sectionLabelClassName, "text-[#F05555]")}>
+                Best Learning Platform
               </span>
-              <div className="h-[1.5px] bg-[#F05555]/20 flex-grow max-w-[100px]" />
+              <div className="h-[1.5px] max-w-[100px] flex-grow bg-[#F05555]/20" />
             </motion.div>
 
-            {/* Heading */}
+            {/* Heading — hero typography (Outfit 800 / 62px) */}
             <motion.h1
               variants={itemVariants}
-              className="mb-6 text-4xl leading-[1.12] font-black tracking-tight text-gray-900 sm:text-5xl lg:text-[3.5rem]"
+              className={cn(heroHeadingClassName, "mb-6 text-left")}
             >
               Explore Endless <br />
               Education <br />
