@@ -8,6 +8,15 @@ import { Button } from "@/components/ui/button";
 import { SectionTitle, sectionTitleFadeUpVariants } from "@/components/public/section-title";
 import { ROUTES } from "@/constants";
 
+const imageSlideInVariants = {
+  hidden: { opacity: 0, x: -90 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.85, ease: "easeOut" as const },
+  },
+};
+
 export function TeacherCtaSection() {
   return (
     <section className="relative overflow-hidden bg-[#120202] py-16 sm:py-20 lg:py-[92px]">
@@ -40,7 +49,7 @@ export function TeacherCtaSection() {
       >
         <div className="grid items-center gap-12 lg:grid-cols-[0.94fr_1.06fr] lg:gap-16">
           <motion.div
-            variants={sectionTitleFadeUpVariants}
+            variants={imageSlideInVariants}
             className="relative mx-auto h-[470px] w-full max-w-[430px] lg:mx-0 lg:ml-2 lg:h-[540px]"
           >
             <div className="absolute inset-x-2 bottom-0 h-[72%] rounded-[48px] bg-[#ffca18] sm:rounded-[58px]" />

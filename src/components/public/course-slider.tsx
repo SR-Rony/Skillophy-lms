@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/utils";
 import {
   PublicCourseCard,
@@ -14,6 +14,12 @@ const DEFAULT_AUTO_PLAY_MS = 5000;
 const TRANSITION_MS = 500;
 const GAP_PX = 24;
 
+const DEFAULT_ITEMS_PER_PAGE = {
+  lg: 3,
+  sm: 2,
+  default: 1,
+} as const;
+
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 24 },
   visible: {
@@ -23,62 +29,72 @@ const fadeUpVariants = {
   },
 };
 
-function useItemsPerPage() {
-  const [itemsPerPage, setItemsPerPage] = useState(1);
+interface ItemsPerPageConfig {
+  lg?: number;
+  sm?: number;
+  default?: number;
+}
+
+function useItemsPerPage(config: ItemsPerPageConfig = DEFAULT_ITEMS_PER_PAGE) {
+  const [itemsPerPage, setItemsPerPage] = useState(config.default ?? DEFAULT_ITEMS_PER_PAGE.default);
 
   useEffect(() => {
     const mediaQueries = [
-      { query: "(min-width: 1024px)", value: 3 },
-      { query: "(min-width: 640px)", value: 2 },
+      { query: "(min-width: 1024px)", value: config.lg ?? DEFAULT_ITEMS_PER_PAGE.lg },
+      { query: "(min-width: 640px)", value: config.sm ?? DEFAULT_ITEMS_PER_PAGE.sm },
     ];
 
     const updateItemsPerPage = () => {
       const matchedQuery = mediaQueries.find(({ query }) => window.matchMedia(query).matches);
-      setItemsPerPage(matchedQuery?.value ?? 1);
+      setItemsPerPage(matchedQuery?.value ?? (config.default ?? DEFAULT_ITEMS_PER_PAGE.default));
     };
 
     updateItemsPerPage();
     window.addEventListener("resize", updateItemsPerPage);
 
     return () => window.removeEventListener("resize", updateItemsPerPage);
-  }, []);
+  }, [config.default, config.lg, config.sm]);
 
   return itemsPerPage;
 }
 
-interface CourseSliderProps {
-  courses: PublicCourse[];
-  variant: PublicCourseCardVariant;
+export interface ItemsSliderProps<T> {
+  items: T[];
+  renderItem: (item: T) => ReactNode;
+  getItemKey: (item: T) => string;
   slideDotCount?: number;
   autoPlayInterval?: number;
   ariaLabelPrefix: string;
   className?: string;
+  itemsPerPage?: ItemsPerPageConfig;
 }
 
-export function CourseSlider({
-  courses,
-  variant,
+export function ItemsSlider<T>({
+  items,
+  renderItem,
+  getItemKey,
   slideDotCount = DEFAULT_SLIDE_DOT_COUNT,
   autoPlayInterval = DEFAULT_AUTO_PLAY_MS,
   ariaLabelPrefix,
   className,
-}: CourseSliderProps) {
-  const itemsPerPage = useItemsPerPage();
+  itemsPerPage: itemsPerPageConfig,
+}: ItemsSliderProps<T>) {
+  const itemsPerPage = useItemsPerPage(itemsPerPageConfig);
   const containerRef = useRef<HTMLDivElement>(null);
   const [cardWidth, setCardWidth] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [enableTransition, setEnableTransition] = useState(true);
 
-  const loopCourses = useMemo(() => {
-    if (courses.length === 0) {
+  const loopItems = useMemo(() => {
+    if (items.length === 0) {
       return [];
     }
 
-    return [...courses, ...courses.slice(0, itemsPerPage)];
-  }, [courses, itemsPerPage]);
+    return [...items, ...items.slice(0, itemsPerPage)];
+  }, [items, itemsPerPage]);
 
-  const canScroll = courses.length > itemsPerPage;
+  const canScroll = items.length > itemsPerPage;
   const stepWidth = cardWidth + GAP_PX;
 
   useEffect(() => {
@@ -103,7 +119,7 @@ export function CourseSlider({
   useEffect(() => {
     setActiveIndex(0);
     setEnableTransition(true);
-  }, [itemsPerPage, courses]);
+  }, [itemsPerPage, items]);
 
   const goToNextSlide = useCallback(() => {
     if (!canScroll) {
@@ -114,7 +130,7 @@ export function CourseSlider({
   }, [canScroll]);
 
   useEffect(() => {
-    if (!canScroll || activeIndex !== courses.length) {
+    if (!canScroll || activeIndex !== items.length) {
       return;
     }
 
@@ -128,7 +144,7 @@ export function CourseSlider({
     }, TRANSITION_MS);
 
     return () => window.clearTimeout(timeout);
-  }, [activeIndex, canScroll, courses.length]);
+  }, [activeIndex, canScroll, items.length]);
 
   useEffect(() => {
     if (isPaused || !canScroll) {
@@ -141,8 +157,8 @@ export function CourseSlider({
   }, [autoPlayInterval, canScroll, goToNextSlide, isPaused]);
 
   const activeDot =
-    courses.length > 0
-      ? Math.floor(((activeIndex % courses.length) / courses.length) * slideDotCount) %
+    items.length > 0
+      ? Math.floor(((activeIndex % items.length) / items.length) * slideDotCount) %
         slideDotCount
       : 0;
 
@@ -151,9 +167,9 @@ export function CourseSlider({
       return;
     }
 
-    const nextIndex = Math.round((dotIndex / slideDotCount) * courses.length);
+    const nextIndex = Math.round((dotIndex / slideDotCount) * items.length);
     setEnableTransition(true);
-    setActiveIndex(Math.min(nextIndex, courses.length));
+    setActiveIndex(Math.min(nextIndex, items.length));
   };
 
   return (
@@ -175,13 +191,13 @@ export function CourseSlider({
               cardWidth > 0 ? `translateX(-${activeIndex * stepWidth}px)` : undefined,
           }}
         >
-          {loopCourses.map((course, index) => (
+          {loopItems.map((item, index) => (
             <div
-              key={`${course.id}-${index}`}
+              key={`${getItemKey(item)}-${index}`}
               className="shrink-0"
               style={{ width: cardWidth > 0 ? cardWidth : `${100 / itemsPerPage}%` }}
             >
-              <PublicCourseCard course={course} variant={variant} />
+              {renderItem(item)}
             </div>
           ))}
         </div>
@@ -205,5 +221,38 @@ export function CourseSlider({
         </motion.div>
       )}
     </div>
+  );
+}
+
+interface CourseSliderProps {
+  courses: PublicCourse[];
+  variant: PublicCourseCardVariant;
+  slideDotCount?: number;
+  autoPlayInterval?: number;
+  ariaLabelPrefix: string;
+  className?: string;
+  itemsPerPage?: ItemsPerPageConfig;
+}
+
+export function CourseSlider({
+  courses,
+  variant,
+  slideDotCount,
+  autoPlayInterval,
+  ariaLabelPrefix,
+  className,
+  itemsPerPage,
+}: CourseSliderProps) {
+  return (
+    <ItemsSlider
+      items={courses}
+      getItemKey={(course) => course.id}
+      renderItem={(course) => <PublicCourseCard course={course} variant={variant} />}
+      slideDotCount={slideDotCount}
+      autoPlayInterval={autoPlayInterval}
+      ariaLabelPrefix={ariaLabelPrefix}
+      className={className}
+      itemsPerPage={itemsPerPage}
+    />
   );
 }

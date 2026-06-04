@@ -11,6 +11,9 @@ import { TestimonialSection } from "@/components/public/testimonial-section";
 import { ModelTestSection } from "@/components/public/model-test-section";
 import { WorkshopSection } from "@/components/public/workshop-section";
 import { TeacherCtaSection } from "@/components/public/teacher-cta-section";
+import { BooksSection } from "@/components/public/books-section";
+import { BusinessCtaSection } from "@/components/public/business-cta-section";
+import { TopMentorsSection } from "@/components/public/top-mentors-section";
 
 export default function HomePage() {
   return (
@@ -28,6 +31,9 @@ export default function HomePage() {
       <ModelTestSection />
       <WorkshopSection />
       <TeacherCtaSection />
+      <BooksSection />
+      <BusinessCtaSection />
+      <TopMentorsSection />
     </>
   );
 }
