@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Container } from "@/components/shared";
+import { Container, Logo } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
 import { ROUTES } from "@/constants";
@@ -40,13 +40,8 @@ export function BusinessCtaSection() {
       >
         <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <motion.div variants={sectionTitleFadeUpVariants} className="max-w-[430px]">
-            <div className="mb-5 flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-[6px] bg-[#ff4747] text-[15px] font-black text-white">
-                S
-              </span>
-              <span className="text-[18px] font-black uppercase tracking-[-0.04em] text-[#24201f]">
-                Skillophy
-              </span>
+            <div className="mb-5 flex flex-wrap items-center gap-2 sm:gap-3">
+              <Logo imageClassName="h-8 sm:h-9" />
               <span className="text-[16px] font-semibold text-[#a94d47]">business</span>
             </div>
 

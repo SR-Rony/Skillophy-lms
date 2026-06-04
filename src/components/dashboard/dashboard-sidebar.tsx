@@ -51,7 +51,7 @@ export function DashboardSidebar({ items, roleLabel }: DashboardSidebarProps) {
       )}
     >
       <div className="flex h-16 items-center justify-between border-b border-sidebar-border px-4">
-        {!sidebarCollapsed && <Logo showText={false} />}
+        {!sidebarCollapsed && <Logo />}
         <Button variant="ghost" size="icon" onClick={toggleSidebar} className="shrink-0">
           {sidebarCollapsed ? (
             <PanelLeft className="h-4 w-4" />

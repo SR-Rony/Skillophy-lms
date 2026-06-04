@@ -14,6 +14,7 @@ import { TeacherCtaSection } from "@/components/public/teacher-cta-section";
 import { BooksSection } from "@/components/public/books-section";
 import { BusinessCtaSection } from "@/components/public/business-cta-section";
 import { TopMentorsSection } from "@/components/public/top-mentors-section";
+import { TryCoursesSection } from "@/components/public/try-courses-section";
 
 export default function HomePage() {
   return (
@@ -34,6 +35,7 @@ export default function HomePage() {
       <BooksSection />
       <BusinessCtaSection />
       <TopMentorsSection />
+      <TryCoursesSection />
     </>
   );
 }

@@ -11,8 +11,7 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import { ROUTES } from "@/constants";
-import { siteConfig } from "@/config";
-import { Container } from "@/components/shared";
+import { Container, Logo } from "@/components/shared";
 import { cn } from "@/utils";
 import { CourseMegaMenu } from "./course-mega-menu";
 import { MobileNavbarDrawer } from "./mobile-navbar-drawer";
@@ -58,14 +57,7 @@ export function Navbar() {
     >
       <Container>
         <div className="flex h-16 items-center justify-between gap-4">
-          <Link href={ROUTES.home} className="flex shrink-0 items-center gap-2">
-            <span className="rounded bg-red-500 px-2 py-1 text-lg font-bold text-white">
-              S
-            </span>
-            <span className="hidden font-bold tracking-wide text-gray-900 sm:inline">
-              {siteConfig.name.toUpperCase()}
-            </span>
-          </Link>
+          <Logo priority className="min-w-0" imageClassName="h-8 sm:h-9" />
 
           <div className="hidden flex-1 items-center gap-6 md:flex md:ml-6">
             <div className="relative">

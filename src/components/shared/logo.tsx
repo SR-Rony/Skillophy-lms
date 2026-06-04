@@ -1,18 +1,27 @@
+import Image from "next/image";
 import Link from "next/link";
-import { GraduationCap } from "lucide-react";
 import { siteConfig } from "@/config";
 import { cn } from "@/utils";
 
+export const LOGO_SRC = "/images/skillophy-logo.png";
+
 interface LogoProps {
   className?: string;
-  showText?: boolean;
+  imageClassName?: string;
+  priority?: boolean;
 }
 
-export function Logo({ className, showText = true }: LogoProps) {
+export function Logo({ className, imageClassName, priority = false }: LogoProps) {
   return (
-    <Link href="/" className={cn("flex items-center gap-2 font-semibold", className)}>
-      <GraduationCap className="h-7 w-7 text-primary" />
-      {showText && <span className="text-lg tracking-tight">{siteConfig.name}</span>}
+    <Link href="/" className={cn("inline-flex shrink-0 items-center", className)}>
+      <Image
+        src={LOGO_SRC}
+        alt={siteConfig.name}
+        width={180}
+        height={44}
+        priority={priority}
+        className={cn("h-8 w-auto object-contain sm:h-9", imageClassName)}
+      />
     </Link>
   );
 }

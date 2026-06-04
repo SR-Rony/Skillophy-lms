@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -15,6 +16,9 @@ import {
   Send,
 } from "lucide-react";
 import { Container } from "@/components/shared";
+import { cn } from "@/utils";
+
+const FOOTER_LOGO_SRC = "/images/footer.png";
 
 const footerColumns = [
   {
@@ -86,56 +90,92 @@ const staggerVariants = {
 
 export function PublicFooter() {
   return (
-    <footer className="relative overflow-hidden bg-[#230201] text-white">
+    <footer className="relative overflow-hidden bg-[#140808] text-white">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#1f0c0b_0%,#160707_48%,#100505_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_12%_0%,rgba(255,71,71,0.18),transparent_42%),radial-gradient(ellipse_at_88%_100%,rgba(255,172,33,0.1),transparent_38%)]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#ff4747]/45 to-transparent" />
+        <svg
+          className="absolute -right-[12%] top-[8%] h-[420px] w-[620px] text-white/[0.04]"
+          viewBox="0 0 620 420"
+          fill="none"
+          aria-hidden="true"
+        >
+          {Array.from({ length: 16 }).map((_, index) => (
+            <path
+              key={index}
+              d={`M${18 + index * 10} ${300 - index * 8} C ${140 + index * 8} ${110 - index * 2}, ${320 + index * 4} ${104 + index * 5}, ${590 - index * 6} ${286 - index * 3}`}
+              stroke="currentColor"
+              strokeWidth="1"
+            />
+          ))}
+        </svg>
+        <div
+          className="absolute inset-0 opacity-[0.35]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+      </div>
+
       <Container
         as={motion.div}
-        className="flex flex-col gap-10 py-14 lg:flex-row lg:items-start lg:justify-between lg:gap-12 lg:py-[64px]"
+        className="relative z-10 flex flex-col gap-12 py-16 sm:py-[72px] lg:flex-row lg:items-start lg:justify-between lg:gap-14"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={staggerVariants}
       >
-        <motion.div variants={footerVariants}>
-          <Link href="/" className="inline-flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-[5px] bg-white text-[#230201]">
-              <BookOpenCheck className="h-4 w-4" />
-            </span>
-            <span className="text-[22px] font-black uppercase tracking-[-0.04em]">Skillophy</span>
+        <motion.div variants={footerVariants} className="max-w-[300px]">
+          <Link href="/" className="inline-flex">
+            <Image
+              src={FOOTER_LOGO_SRC}
+              alt="Skillophy"
+              width={190}
+              height={48}
+              className="h-9 w-auto object-contain sm:h-10"
+            />
           </Link>
 
-          <p className="mt-6 max-w-[245px] text-[13px] font-medium leading-6 text-white/78">
-            The essence of continuously nurturing one&apos;s passion for education. It implies a commitment to keeping the flame of excitement
+          <p className="mt-6 text-[13px] font-medium leading-[1.75] text-white/72">
+            The essence of continuously nurturing one&apos;s passion for education. We help
+            learners and teams grow with expert-led courses and practical learning paths.
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-2.5">
-            {socialLinks.map(({ icon: Icon, label, href }, index) => (
+          <div className="mt-7 flex flex-wrap gap-2.5">
+            {socialLinks.map(({ icon: Icon, label, href }) => (
               <Link
                 key={label}
                 href={href}
                 aria-label={label}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/25 text-white/90 transition hover:border-[#ff4444] hover:bg-[#ff4444]"
+                className="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/10 bg-white/[0.05] text-white/88 transition hover:-translate-y-0.5 hover:border-[#ff4747]/50 hover:bg-[#ff4747] hover:text-white hover:shadow-[0_8px_20px_rgba(255,71,71,0.28)]"
                 target="_blank"
                 rel="noreferrer"
               >
-                <Icon className="h-3.5 w-3.5" />
-                {index === 0 && <span className="sr-only">Facebook</span>}
+                <Icon className="h-4 w-4" />
               </Link>
             ))}
           </div>
         </motion.div>
 
         <motion.div
-          className="grid gap-8 sm:grid-cols-3 sm:gap-10 lg:gap-14 lg:pt-1"
+          className="grid flex-1 gap-10 sm:grid-cols-3 sm:gap-8 lg:max-w-[620px] lg:gap-12 lg:pt-2"
           variants={staggerVariants}
         >
           {footerColumns.map((column) => (
             <motion.nav key={column.title} variants={footerVariants} aria-label={column.title}>
+              <h3 className="text-[14px] font-bold tracking-wide text-white">
+                {column.title}
+              </h3>
+              <span className="mt-2 mb-4 block h-[2px] w-8 rounded-full bg-[#ff4747]" />
               <ul className="space-y-2.5">
                 {column.links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-[13px] font-medium leading-5 text-white/86 transition hover:text-[#ff4444]"
+                      className="text-[13px] font-medium leading-5 text-white/72 transition hover:translate-x-0.5 hover:text-[#ff8a8a]"
                     >
                       {link.label}
                     </Link>
@@ -146,19 +186,25 @@ export function PublicFooter() {
           ))}
         </motion.div>
 
-        <motion.div variants={footerVariants} className="lg:pt-1">
-          <h3 className="text-[15px] font-bold text-white">Contact Us</h3>
-          <ul className="mt-5 space-y-3.5">
+        <motion.div
+          variants={footerVariants}
+          className="rounded-[16px] border border-white/[0.08] bg-white/[0.04] p-6 backdrop-blur-sm lg:max-w-[260px] lg:pt-2"
+        >
+          <h3 className="text-[14px] font-bold tracking-wide text-white">Contact Us</h3>
+          <span className="mt-2 mb-5 block h-[2px] w-8 rounded-full bg-[#ff4747]" />
+          <ul className="space-y-4">
             {contactItems.map(({ icon: Icon, label, href }) => (
               <li key={label}>
                 <Link
                   href={href}
-                  className="flex items-center gap-3 text-[13px] font-medium text-white/86 transition hover:text-[#ff4444]"
+                  className="group flex items-start gap-3 text-[13px] font-medium text-white/78 transition hover:text-white"
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel={href.startsWith("http") ? "noreferrer" : undefined}
                 >
-                  <Icon className="h-4 w-4 shrink-0" />
-                  <span>{label}</span>
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] border border-white/10 bg-[#ff4747]/15 text-[#ff8a8a] transition group-hover:border-[#ff4747]/40 group-hover:bg-[#ff4747]/25">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <span className="pt-1 leading-5">{label}</span>
                 </Link>
               </li>
             ))}
@@ -167,21 +213,40 @@ export function PublicFooter() {
       </Container>
 
       <motion.div
-        className="border-t border-white/12 px-4 py-5 text-center text-[13px] font-medium text-white/82"
+        className="relative z-10 border-t border-white/[0.08] bg-black/25 backdrop-blur-sm"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        © 2024 Skillophy All rights reserved.
+        <Container className="flex flex-col items-center justify-between gap-3 py-5 text-center sm:flex-row sm:text-left">
+          <p className="text-[13px] font-medium text-white/65">
+            © {new Date().getFullYear()} Skillophy. All rights reserved.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-end">
+            {["Privacy Policy", "Terms of Service", "Cookies"].map((item) => (
+              <Link
+                key={item}
+                href="/support"
+                className="text-[12px] font-medium text-white/55 transition hover:text-[#ff8a8a]"
+              >
+                {item}
+              </Link>
+            ))}
+          </div>
+        </Container>
       </motion.div>
 
       <Link
         href="/support"
         aria-label="Chat with support"
-        className="fixed bottom-6 right-5 z-50 flex h-11 w-11 items-center justify-center rounded-xl bg-[#ff4444] text-white shadow-[0_12px_28px_rgba(255,68,68,0.35)] transition hover:-translate-y-1 hover:bg-[#ff3030] sm:bottom-8 sm:right-8"
+        className={cn(
+          "fixed bottom-6 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-[14px]",
+          "bg-[#ff4747] text-white shadow-[0_14px_32px_rgba(255,71,71,0.38)]",
+          "transition hover:-translate-y-1 hover:bg-[#ef3033] sm:bottom-8 sm:right-8"
+        )}
       >
-        <MessageCircle className="h-6 w-6 fill-white/20" />
+        <MessageCircle className="h-6 w-6 fill-white/15" />
       </Link>
     </footer>
   );
