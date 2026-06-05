@@ -2,8 +2,8 @@
 
 import { useCourses } from "@/hooks";
 import { CourseCard } from "@/components/public/course-card";
+import { CourseCardSkeleton } from "@/components/public/public-course-card";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export function StudentOverview() {
   const { data: courses, isLoading } = useCourses();
@@ -15,9 +15,9 @@ export function StudentOverview() {
       </CardHeader>
       <CardContent>
         {isLoading ? (
-          <Skeleton className="h-48 w-full" />
+          <CourseCardSkeleton />
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid justify-items-center gap-6 sm:grid-cols-2">
             {courses?.slice(0, 2).map((course) => (
               <CourseCard key={course.id} course={course} />
             ))}

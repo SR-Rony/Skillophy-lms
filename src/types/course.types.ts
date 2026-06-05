@@ -11,6 +11,7 @@ export interface Course {
   level: CourseLevel;
   status: CourseStatus;
   price: number;
+  originalPrice?: number;
   rating: number;
   studentsCount: number;
   lessonsCount: number;

@@ -65,7 +65,7 @@ export function AllCoursesSection() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            className="mt-8 grid justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             {activeCategory.courses.map((course) => (
               <PublicCourseCard

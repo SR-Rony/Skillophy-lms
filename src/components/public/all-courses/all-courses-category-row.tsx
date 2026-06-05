@@ -17,18 +17,18 @@ export function AllCoursesCategoryRow({ category, sectionId }: AllCoursesCategor
         <div className="flex flex-wrap items-center gap-3">
           <Link
             href={ROUTES.courseCategory(category.id)}
-            className="text-[22px] font-black tracking-[-0.03em] text-white transition hover:text-[#ff8a8a] sm:text-[24px]"
+            className="text-[22px] font-black tracking-[-0.03em] text-[#1a1a1a] transition hover:text-[#ff4747] sm:text-[24px]"
           >
             {category.label}
           </Link>
-          <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[12px] font-bold text-white/88">
+          <span className="rounded-full border border-[#eee5e2] bg-white px-3 py-1 text-[12px] font-bold text-[#6b7280]">
             {category.courses.length} items
           </span>
         </div>
 
         <Link
           href={ROUTES.courseCategory(category.id)}
-          className="text-[14px] font-bold text-[#ff4747] transition hover:text-[#ff8a8a]"
+          className="text-[14px] font-bold text-[#ff4747] transition hover:text-[#ef3033]"
         >
           See All
         </Link>

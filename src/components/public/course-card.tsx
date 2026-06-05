@@ -20,6 +20,7 @@ export function CourseCard({ course }: CourseCardProps) {
     lessons: course.lessonsCount,
     rating: course.rating,
     price: course.price,
+    originalPrice: course.originalPrice,
   };
 
   return <PublicCourseCard course={publicCourse} variant={course.price > 0 ? "paid" : "free"} />;

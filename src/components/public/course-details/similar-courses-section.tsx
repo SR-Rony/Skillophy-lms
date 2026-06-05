@@ -33,7 +33,7 @@ export function SimilarCoursesSection({
           Similar Courses for You
         </h2>
 
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+        <div className="mt-8 grid justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {visibleCourses.map((course) => (
             <PublicCourseCard key={course.id} course={course} variant={variant} />
           ))}
