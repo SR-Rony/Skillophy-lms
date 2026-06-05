@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { SectionTitle, sectionTitleFadeUpVariants } from "@/components/public/section-title";
+import { TeacherPortrait } from "@/components/public/teacher-portrait";
 import { ROUTES } from "@/constants";
 
 const imageSlideInVariants = {
@@ -50,17 +50,9 @@ export function TeacherCtaSection() {
         <div className="grid items-center gap-12 lg:grid-cols-[0.94fr_1.06fr] lg:gap-16">
           <motion.div
             variants={imageSlideInVariants}
-            className="relative mx-auto h-[470px] w-full max-w-[430px] lg:mx-0 lg:ml-2 lg:h-[540px]"
+            className="lg:mx-0 lg:ml-2"
           >
-            <div className="absolute inset-x-2 bottom-0 h-[72%] rounded-[48px] bg-[#ffca18] sm:rounded-[58px]" />
-            <Image
-              src="/images/teacher-cta.png"
-              alt="Teacher holding course material"
-              fill
-              priority={false}
-              className="object-contain object-bottom"
-              sizes="(max-width: 1024px) 86vw, 430px"
-            />
+            <TeacherPortrait className="h-[470px] lg:h-[540px]" />
           </motion.div>
 
           <motion.div variants={sectionTitleFadeUpVariants} className="max-w-[570px] lg:pt-4">

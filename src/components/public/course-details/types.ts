@@ -24,12 +24,16 @@ export interface CourseDetailsTeacher {
   name: string;
   role: string;
   bio: string;
-  avatar: string;
+  /** Defaults to `/images/teacher-cta.png` */
+  image: string;
 }
+
+export type CourseDetailsLessonType = "video" | "reading" | "quiz";
 
 export interface CourseDetailsCurriculumLesson {
   title: string;
-  preview: boolean;
+  type: CourseDetailsLessonType;
+  preview?: boolean;
 }
 
 export interface CourseDetailsCurriculumModule {
@@ -72,9 +76,21 @@ export interface CourseDetailsFaq {
   defaultOpen?: boolean;
 }
 
+export type CourseDetailsJobStatColor = "green" | "orange" | "blue";
+
 export interface CourseDetailsJobStat {
   label: string;
   value: string;
+  color: CourseDetailsJobStatColor;
+}
+
+export interface CourseDetailsJobOpeningRate {
+  title: string;
+  description: string;
+  stats: CourseDetailsJobStat[];
+  /** Chart values as percentages (0–80) */
+  chartPoints: number[];
+  chartYears: string[];
 }
 
 export interface CourseDetailsSidebarInclude {
@@ -109,9 +125,7 @@ export interface CourseDetailsPageData {
   overview: CourseDetailsOverview;
   learnItems: string[];
   skills: string[];
-  jobStats: CourseDetailsJobStat[];
-  jobChartPoints: number[];
-  jobChartLabels: string[];
+  jobOpeningRate: CourseDetailsJobOpeningRate;
   teacher: CourseDetailsTeacher;
   curriculum: CourseDetailsCurriculumModule[];
   bookPromo: CourseDetailsBookPromo;

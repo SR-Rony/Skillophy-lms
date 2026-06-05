@@ -47,9 +47,15 @@ function deepMergePageData(
     tabs: patch.tabs ?? base.tabs,
     learnItems: patch.learnItems ?? base.learnItems,
     skills: patch.skills ?? base.skills,
-    jobStats: patch.jobStats ?? base.jobStats,
-    jobChartPoints: patch.jobChartPoints ?? base.jobChartPoints,
-    jobChartLabels: patch.jobChartLabels ?? base.jobChartLabels,
+    jobOpeningRate: patch.jobOpeningRate
+      ? {
+          ...base.jobOpeningRate,
+          ...patch.jobOpeningRate,
+          stats: patch.jobOpeningRate.stats ?? base.jobOpeningRate.stats,
+          chartPoints: patch.jobOpeningRate.chartPoints ?? base.jobOpeningRate.chartPoints,
+          chartYears: patch.jobOpeningRate.chartYears ?? base.jobOpeningRate.chartYears,
+        }
+      : base.jobOpeningRate,
     curriculum: patch.curriculum ?? base.curriculum,
     requirements: patch.requirements ?? base.requirements,
     benefits: patch.benefits ?? base.benefits,

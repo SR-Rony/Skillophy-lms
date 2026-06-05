@@ -27,6 +27,9 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/shared";
 import { Button } from "@/components/ui/button";
+import { JobOpeningRateSection } from "@/components/public/course-details/job-opening-rate-section";
+import { CurriculumSection } from "@/components/public/course-details/curriculum-section";
+import { TeacherSection } from "@/components/public/course-details/teacher-section";
 import type { CourseDetailsPageData } from "@/components/public/course-details/types";
 import { cn } from "@/utils";
 
@@ -75,9 +78,6 @@ interface CourseDetailsMainProps {
 export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
   const [activeTab, setActiveTab] = useState(data.tabs[0]?.id ?? "course-overview");
   const [overviewExpanded, setOverviewExpanded] = useState(false);
-  const [openModules, setOpenModules] = useState(
-    data.curriculum.filter((m) => m.defaultOpen).map((m) => m.id)
-  );
   const [openFaqs, setOpenFaqs] = useState(
     data.faqs.filter((f) => f.defaultOpen).map((f) => f.id)
   );
@@ -88,29 +88,11 @@ export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
     document.getElementById(tabId)?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
-  const toggleModule = (id: string) => {
-    setOpenModules((current) =>
-      current.includes(id) ? current.filter((item) => item !== id) : [...current, id]
-    );
-  };
-
   const toggleFaq = (id: string) => {
     setOpenFaqs((current) =>
       current.includes(id) ? current.filter((item) => item !== id) : [...current, id]
     );
   };
-
-  const chartMax = Math.max(...data.jobChartPoints);
-  const chartWidth = 320;
-  const chartHeight = 120;
-  const chartStep = chartWidth / (data.jobChartPoints.length - 1);
-  const chartPolyline = data.jobChartPoints
-    .map((value, index) => {
-      const x = index * chartStep;
-      const y = chartHeight - (value / chartMax) * (chartHeight - 12);
-      return `${x},${y}`;
-    })
-    .join(" ");
 
   const visibleReviews = data.testimonials.slice(reviewIndex, reviewIndex + 2);
 
@@ -196,103 +178,11 @@ export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
                 </div>
               </section>
 
-              {/* Job opening */}
-              <section className="scroll-mt-28">
-                <SectionHeading dark>Job Opening Rate</SectionHeading>
-                <div className="mt-5 rounded-[16px] border border-[#ece6e3] bg-white p-5 sm:p-6">
-                  <div className="grid gap-6 lg:grid-cols-[1fr_320px] lg:items-center">
-                    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-                      {data.jobStats.map((stat) => (
-                        <div key={stat.label}>
-                          <p className="text-[22px] font-bold text-[#1a1a1a] sm:text-[24px]">
-                            {stat.value}
-                          </p>
-                          <p className="mt-1 text-[13px] font-medium text-[#6f6562]">
-                            {stat.label}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="rounded-[12px] border border-[#e8f5e9] bg-[#f6fdf7] p-4">
-                      <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} className="h-[120px] w-full" aria-hidden>
-                        <polyline
-                          fill="none"
-                          stroke="#22c55e"
-                          strokeWidth="3"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          points={chartPolyline}
-                        />
-                      </svg>
-                      <div className="mt-2 flex justify-between text-[11px] font-medium text-[#6f6562]">
-                        {data.jobChartLabels.map((label) => (
-                          <span key={label}>{label}</span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
+              <JobOpeningRateSection data={data.jobOpeningRate} />
 
-              {/* Teacher */}
-              <section id="teacher" className="scroll-mt-28">
-                <SectionHeading dark>Teacher</SectionHeading>
-                <div className="relative mt-5 overflow-hidden rounded-[16px] border border-[#ece6e3] bg-white p-5 sm:p-6">
-                  <Quote className="absolute right-5 top-5 h-10 w-10 text-[#f5ebe8]" aria-hidden />
-                  <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-                    <div className="relative h-[88px] w-[88px] shrink-0 overflow-hidden rounded-[14px] border border-[#ece6e3]">
-                      <Image src={data.teacher.avatar} alt={data.teacher.name} fill className="object-cover" sizes="88px" />
-                    </div>
-                    <div className="min-w-0 pr-8">
-                      <h3 className="text-[18px] font-bold text-[#1a1a1a]">{data.teacher.name}</h3>
-                      <p className="mt-1 text-[14px] font-semibold text-[#ff4747]">{data.teacher.role}</p>
-                      <p className="mt-3 text-[14px] leading-[1.65] text-[#4a4a4a]">{data.teacher.bio}</p>
-                    </div>
-                  </div>
-                </div>
-              </section>
+              <TeacherSection teacher={data.teacher} />
 
-              {/* Curriculum */}
-              <section id="curriculum" className="scroll-mt-28">
-                <SectionHeading dark>Course Curriculum</SectionHeading>
-                <div className="mt-5 space-y-3">
-                  {data.curriculum.map((module) => {
-                    const isOpen = openModules.includes(module.id);
-                    return (
-                      <div key={module.id} className="overflow-hidden rounded-[14px] border border-[#ece6e3] bg-white">
-                        <button
-                          type="button"
-                          onClick={() => toggleModule(module.id)}
-                          className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left sm:px-5"
-                        >
-                          <div>
-                            <p className="text-[15px] font-bold text-[#1a1a1a] sm:text-[16px]">{module.title}</p>
-                            <p className="mt-1 text-[13px] font-medium text-[#6f6562]">{module.duration}</p>
-                          </div>
-                          <ChevronDown className={cn("h-5 w-5 shrink-0 transition", isOpen && "rotate-180")} aria-hidden />
-                        </button>
-                        {isOpen && (
-                          <ul className="border-t border-[#f0ebe8] px-4 py-3 sm:px-5">
-                            {module.lessons.map((lesson) => (
-                              <li
-                                key={lesson.title}
-                                className="flex items-center justify-between gap-3 py-2.5 text-[14px] text-[#4a4a4a]"
-                              >
-                                <span>{lesson.title}</span>
-                                {lesson.preview && (
-                                  <button type="button" className="shrink-0 text-[13px] font-bold text-[#ff4747] hover:underline">
-                                    Preview
-                                  </button>
-                                )}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
+              <CurriculumSection modules={data.curriculum} />
 
               {/* Book */}
               <div className="flex items-center gap-4 rounded-[14px] border border-[#ece6e3] bg-[#faf9f8] p-4 sm:gap-5 sm:p-5">
