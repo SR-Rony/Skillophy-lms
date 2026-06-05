@@ -1,21 +1,27 @@
 import { notFound } from "next/navigation";
-import { Container } from "@/components/shared";
-import { courseService } from "@/services";
-import { CourseDetail } from "@/features/courses/components/course-detail";
+import { CourseDetailsPage, getCourseDetailsPageData } from "@/components/public/course-details";
 
 interface CoursePageProps {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateMetadata({ params }: CoursePageProps) {
+  const { slug } = await params;
+  const data = await getCourseDetailsPageData(slug);
+
+  return {
+    title: data.hero.title,
+  };
+}
+
 export default async function CourseDetailPage({ params }: CoursePageProps) {
   const { slug } = await params;
-  const course = await courseService.getBySlug(slug);
 
-  if (!course) notFound();
+  if (!slug.trim()) {
+    notFound();
+  }
 
-  return (
-    <Container className="py-12">
-      <CourseDetail course={course} />
-    </Container>
-  );
+  const data = await getCourseDetailsPageData(slug);
+
+  return <CourseDetailsPage data={data} />;
 }
