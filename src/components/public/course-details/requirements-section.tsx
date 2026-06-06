@@ -134,7 +134,9 @@ export function RequirementsSection({ requirements }: RequirementsSectionProps) 
               />
 
               <div className="relative z-[1]">
-                <Icon className="h-12 w-12" style={{ color: theme.iconColor }} />
+                <span style={{ color: theme.iconColor }}>
+                  <Icon className="h-12 w-12" />
+                </span>
                 <p className="mt-6 max-w-[220px] text-[18px] font-bold leading-[1.35] tracking-[-0.01em] text-[#111827]">
                   {item.title}
                 </p>
