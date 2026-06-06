@@ -51,7 +51,7 @@ export interface CourseDetailsBookPromo {
 }
 
 export interface CourseDetailsRequirement {
-  icon: "globe" | "laptop" | "message";
+  icon: "internet" | "device" | "mindset";
   title: string;
 }
 
@@ -110,11 +110,14 @@ export interface CourseDetailsCertificate {
   image: string;
 }
 
+export type CourseDetailsBusinessLogo = "box" | "eventbrite" | "nasdaq" | "netapp" | "samsung";
+
 export interface CourseDetailsBusinessPromo {
   title: string;
+  description: string;
   ctaLabel: string;
   ctaHref: string;
-  logos: string[];
+  logos: CourseDetailsBusinessLogo[];
 }
 
 /** Full page payload — backend should return this shape */

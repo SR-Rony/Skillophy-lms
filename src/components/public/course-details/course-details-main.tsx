@@ -13,11 +13,8 @@ import {
   ChevronRight,
   Clock,
   FileText,
-  Globe,
   Headphones,
   Infinity,
-  Laptop,
-  MessageCircle,
   Play,
   PlayCircle,
   Quote,
@@ -30,6 +27,8 @@ import { Button } from "@/components/ui/button";
 import { JobOpeningRateSection } from "@/components/public/course-details/job-opening-rate-section";
 import { CurriculumSection } from "@/components/public/course-details/curriculum-section";
 import { TeacherSection } from "@/components/public/course-details/teacher-section";
+import { RequirementsSection } from "@/components/public/course-details/requirements-section";
+import { BusinessPromoSection } from "@/components/public/course-details/business-promo-section";
 import type { CourseDetailsPageData } from "@/components/public/course-details/types";
 import { cn } from "@/utils";
 
@@ -55,7 +54,6 @@ function SectionHeading({
   );
 }
 
-const requirementIcons = { globe: Globe, laptop: Laptop, message: MessageCircle };
 const benefitIcons = {
   lifetime: Infinity,
   certificate: Award,
@@ -202,42 +200,9 @@ export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
                 </button>
               </div>
 
-              {/* Requirements */}
-              <section id="requirements" className="scroll-mt-28">
-                <SectionHeading dark>Requirements</SectionHeading>
-                <div className="mt-5 grid gap-4 sm:grid-cols-3">
-                  {data.requirements.map((card) => {
-                    const Icon = requirementIcons[card.icon];
-                    return (
-                      <div key={card.title} className="rounded-[14px] border border-[#ece6e3] bg-white px-4 py-5 text-center">
-                        <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-[#fff4f2] text-[#ff4747]">
-                          <Icon className="h-5 w-5" aria-hidden />
-                        </div>
-                        <p className="mt-3 text-[14px] font-semibold leading-snug text-[#3c3332]">{card.title}</p>
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
+              <RequirementsSection requirements={data.requirements} />
 
-              {/* Business */}
-              <div className="rounded-[16px] border border-[#ece6e3] bg-[#faf9f8] p-5 sm:p-6">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="max-w-xl text-[16px] font-bold leading-snug text-[#1a1a1a] sm:text-[18px]">
-                    {data.businessPromo.title}
-                  </p>
-                  <Button asChild variant="publicCta" size="publicCta" className="shrink-0">
-                    <Link href={data.businessPromo.ctaHref}>{data.businessPromo.ctaLabel}</Link>
-                  </Button>
-                </div>
-                <div className="mt-6 flex flex-wrap items-center gap-6 sm:gap-8">
-                  {data.businessPromo.logos.map((logo) => (
-                    <span key={logo} className="text-[15px] font-black tracking-wide text-[#b8b0ad]">
-                      {logo}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <BusinessPromoSection data={data.businessPromo} />
 
               {/* Benefits */}
               <section>

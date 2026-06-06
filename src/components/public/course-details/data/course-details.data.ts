@@ -183,15 +183,17 @@ Through hands-on projects and guided feedback, you will practice the same workfl
       "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=200&h=280&auto=format&fit=crop",
   },
   requirements: [
-    { icon: "globe", title: "Basic Internet Connection" },
-    { icon: "laptop", title: "Laptop, Desktop, Mobile Device" },
-    { icon: "message", title: "Basic English Understanding" },
+    { icon: "internet", title: "Good Internet Connection" },
+    { icon: "device", title: "Laptop, Desktop, Mobile device" },
+    { icon: "mindset", title: "Resolute Mental Perseverance" },
   ],
   businessPromo: {
     title: "Some top companies buy this course for their employees",
-    ctaLabel: "Get For Business",
+    description:
+      "This course was selected for our collection of top-rated courses trusted by businesses worldwide.",
+    ctaLabel: "Try Skillophy Business",
     ctaHref: "/pricing",
-    logos: ["Box", "Eventbrite", "Pinterest", "Instacart", "Samsung"],
+    logos: ["box", "eventbrite", "nasdaq", "netapp", "samsung"],
   },
   benefits: [
     { icon: "lifetime", title: "Life Time Access" },
