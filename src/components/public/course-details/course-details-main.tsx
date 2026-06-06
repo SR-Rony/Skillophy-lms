@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useCallback, useState } from "react";
 import {
   ArrowRight,
-  Award,
   BadgeCheck,
   BookOpen,
   ChevronDown,
@@ -13,14 +12,11 @@ import {
   ChevronRight,
   Clock,
   FileText,
-  Headphones,
-  Infinity,
   Play,
   PlayCircle,
   Quote,
   Smartphone,
   Star,
-  Users,
 } from "lucide-react";
 import { Container } from "@/components/shared";
 import { Button } from "@/components/ui/button";
@@ -29,6 +25,8 @@ import { CurriculumSection } from "@/components/public/course-details/curriculum
 import { TeacherSection } from "@/components/public/course-details/teacher-section";
 import { RequirementsSection } from "@/components/public/course-details/requirements-section";
 import { BusinessPromoSection } from "@/components/public/course-details/business-promo-section";
+import { BenefitsSection } from "@/components/public/course-details/benefits-section";
+import { CertificateSection } from "@/components/public/course-details/certificate-section";
 import type { CourseDetailsPageData } from "@/components/public/course-details/types";
 import { cn } from "@/utils";
 
@@ -54,14 +52,6 @@ function SectionHeading({
   );
 }
 
-const benefitIcons = {
-  lifetime: Infinity,
-  certificate: Award,
-  files: FileText,
-  support: Headphones,
-  mobile: Smartphone,
-  community: Users,
-};
 const sidebarIcons = {
   lessons: BookOpen,
   video: PlayCircle,
@@ -204,44 +194,9 @@ export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
 
               <BusinessPromoSection data={data.businessPromo} />
 
-              {/* Benefits */}
-              <section>
-                <SectionHeading dark>What You&apos;ll Get</SectionHeading>
-                <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {data.benefits.map((item) => {
-                    const Icon = benefitIcons[item.icon];
-                    return (
-                      <div key={item.title} className="flex items-center gap-3 rounded-[14px] border border-[#ece6e3] bg-white px-4 py-4">
-                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#fff4f2] text-[#ff4747]">
-                          <Icon className="h-5 w-5" aria-hidden />
-                        </span>
-                        <span className="text-[14px] font-semibold text-[#3c3332]">{item.title}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
+              <BenefitsSection benefits={data.benefits} />
 
-              {/* Certificate */}
-              <section>
-                <SectionHeading>Course Certificate</SectionHeading>
-                <div className="mt-5 grid gap-6 lg:grid-cols-2 lg:items-center">
-                  <div>
-                    <p className="text-[15px] leading-[1.7] text-[#4a4a4a]">{data.certificate.description}</p>
-                    <ul className="mt-5 space-y-3">
-                      {data.certificate.benefits.map((benefit) => (
-                        <li key={benefit} className="flex items-start gap-2.5 text-[14px] text-[#4a4a4a]">
-                          <span className="mt-1 text-[#22c55e]">✓</span>
-                          {benefit}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] border border-[#ece6e3] bg-[#faf9f8]">
-                    <Image src={data.certificate.image} alt="Certificate preview" fill className="object-cover" sizes="400px" />
-                  </div>
-                </div>
-              </section>
+              <CertificateSection data={data.certificate} />
 
               {/* Reviews */}
               <section id="reviews" className="scroll-mt-28">

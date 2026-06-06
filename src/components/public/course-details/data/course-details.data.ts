@@ -196,23 +196,48 @@ Through hands-on projects and guided feedback, you will practice the same workfl
     logos: ["box", "eventbrite", "nasdaq", "netapp", "samsung"],
   },
   benefits: [
-    { icon: "lifetime", title: "Life Time Access" },
-    { icon: "certificate", title: "Certificate of completion" },
-    { icon: "files", title: "Exercise Files" },
-    { icon: "support", title: "Instructor Support" },
-    { icon: "mobile", title: "Mobile & TV Access" },
-    { icon: "community", title: "Community Access" },
+    {
+      icon: "lifetime",
+      title: "Life Time Access",
+      description: "You will get life time access typically refers to a purchasing",
+    },
+    {
+      icon: "moneyBack",
+      title: "Money Back Guarantee",
+      description: "You will get life time access typically refers to a purchasing",
+    },
+    {
+      icon: "downloadable",
+      title: "Downloadable Resources",
+      description: "You will get life time access typically refers to a purchasing",
+    },
+    {
+      icon: "certificate",
+      title: "Shareable Certificate",
+      description: "You will get life time access typically refers to a purchasing",
+    },
+    {
+      icon: "devices",
+      title: "Access on All Devices",
+      description: "You will get life time access typically refers to a purchasing",
+    },
+    {
+      icon: "subtitle",
+      title: "English Subtitle",
+      description: "You will get life time access typically refers to a purchasing",
+    },
   ],
   certificate: {
-    description:
-      "Earn a professional certificate when you complete this course. Showcase your skills to employers and clients with a verified credential.",
-    benefits: [
-      "Shareable certificate for LinkedIn and resume",
-      "Recognized by hiring partners in our network",
-      "Proof of completed projects and assessments",
+    descriptionLines: [
+      "Our certificate will add a different dimension to",
+      "your career in the job market",
     ],
-    image:
-      "https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=800&auto=format&fit=crop",
+    benefits: [
+      "Add this certificate to your CV",
+      "Share directly on your LinkedIn profile",
+      "Share on facebook with one click",
+    ],
+    image: "/images/certificate.png",
   },
   testimonials: [
     {

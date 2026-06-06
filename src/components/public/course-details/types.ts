@@ -56,8 +56,9 @@ export interface CourseDetailsRequirement {
 }
 
 export interface CourseDetailsBenefitItem {
-  icon: "lifetime" | "certificate" | "files" | "support" | "mobile" | "community";
+  icon: "lifetime" | "moneyBack" | "downloadable" | "certificate" | "devices" | "subtitle";
   title: string;
+  description: string;
 }
 
 export interface CourseDetailsTestimonial {
@@ -105,7 +106,7 @@ export interface CourseDetailsSidebar {
 }
 
 export interface CourseDetailsCertificate {
-  description: string;
+  descriptionLines: [string, string];
   benefits: string[];
   image: string;
 }
