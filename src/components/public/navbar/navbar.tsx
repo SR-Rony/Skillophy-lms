@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
 import {
   ChevronDown,
@@ -15,11 +16,24 @@ import { Container, Logo } from "@/components/shared";
 import { cn } from "@/utils";
 import { CourseMegaMenu } from "./course-mega-menu";
 import { MobileNavbarDrawer } from "./mobile-navbar-drawer";
+import {
+  isBusinessRoute,
+  isCartRoute,
+  isCoursesRoute,
+  isRegisterRoute,
+  navItemClassName,
+} from "./nav-item-classes";
 
 export function Navbar() {
+  const pathname = usePathname();
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+
+  const isCoursesActive = isCoursesRoute(pathname) || isMegaMenuOpen;
+  const isBusinessActive = isBusinessRoute(pathname);
+  const isRegisterActive = isRegisterRoute(pathname);
+  const isCartActive = isCartRoute(pathname);
 
   const closeMegaMenu = useCallback(() => setIsMegaMenuOpen(false), []);
 
@@ -67,8 +81,8 @@ export function Navbar() {
                 aria-expanded={isMegaMenuOpen}
                 aria-controls="course-mega-menu"
                 className={cn(
-                  "flex items-center gap-1 font-medium transition-colors cursor-pointer hover:text-primary",
-                  isMegaMenuOpen ? "text-primary" : "text-gray-700"
+                  "flex cursor-pointer items-center gap-1 transition-colors hover:text-primary",
+                  navItemClassName(isCoursesActive, "text-sm")
                 )}
               >
                 All Courses
@@ -105,7 +119,7 @@ export function Navbar() {
 
             <Link
               href={ROUTES.cart}
-              className="relative text-gray-700 transition-colors hover:text-gray-900"
+              className={navItemClassName(isCartActive, "relative text-sm")}
               aria-label="Cart, 5 items"
             >
               <ShoppingCart size={20} />
@@ -116,14 +130,14 @@ export function Navbar() {
 
             <Link
               href={ROUTES.business}
-              className="text-sm font-medium text-gray-700 transition-colors hover:text-gray-900"
+              className={navItemClassName(isBusinessActive, "text-sm")}
             >
               Business
             </Link>
 
             <Link
               href={ROUTES.auth.register}
-              className="text-sm font-medium text-gray-700 transition-colors hover:text-gray-900"
+              className={navItemClassName(isRegisterActive, "text-sm")}
             >
               Join as Teacher
             </Link>

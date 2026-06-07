@@ -24,12 +24,18 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { ROUTES } from "@/constants";
 import {
   megaMenuCategories,
   type MegaMenuCategory,
 } from "@/data/mock/mega-menu-courses.mock";
 import { CourseCategoryItem } from "./course-category-item";
+import {
+  isBusinessRoute,
+  isRegisterRoute,
+  navItemClassNameMobile,
+} from "./nav-item-classes";
 
 const categoryIcons: Record<MegaMenuCategory["iconName"], LucideIcon> = {
   play: Play,
@@ -59,8 +65,12 @@ export function MobileNavbarDrawer({
   onClose,
   isLoggedIn = false,
 }: MobileNavbarDrawerProps) {
+  const pathname = usePathname();
   const [activeCategory, setActiveCategory] = useState("skill");
   const [view, setView] = useState<"main" | "account">("main");
+
+  const isBusinessActive = isBusinessRoute(pathname);
+  const isRegisterActive = isRegisterRoute(pathname);
 
   const closeDrawer = () => {
     setView("main");
@@ -171,14 +181,14 @@ export function MobileNavbarDrawer({
                   <Link
                     href={ROUTES.business}
                     onClick={closeDrawer}
-                    className="block text-[15px] font-medium text-[#25201f]"
+                    className={navItemClassNameMobile(isBusinessActive, "block text-[15px]")}
                   >
                     Business
                   </Link>
                   <Link
                     href={ROUTES.auth.register}
                     onClick={closeDrawer}
-                    className="block text-[15px] font-medium text-[#25201f]"
+                    className={navItemClassNameMobile(isRegisterActive, "block text-[15px]")}
                   >
                     Join as Teacher
                   </Link>
@@ -222,6 +232,10 @@ function AccountMenuView({
   onBack: () => void;
   onClose: () => void;
 }) {
+  const pathname = usePathname();
+  const isBusinessActive = isBusinessRoute(pathname);
+  const isRegisterActive = isRegisterRoute(pathname);
+
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="flex h-[73px] shrink-0 items-center gap-3 bg-[#f5f5f4] px-4">
@@ -278,7 +292,10 @@ function AccountMenuView({
           <Link
             href={ROUTES.business}
             onClick={onClose}
-            className="flex min-h-[52px] items-center justify-between text-[15px] font-medium text-[#25201f]"
+            className={navItemClassNameMobile(
+              isBusinessActive,
+              "flex min-h-[52px] items-center justify-between text-[15px]"
+            )}
           >
             <span className="flex items-center gap-3">
               <Briefcase className="h-5 w-5 stroke-[1.7] text-[#554a47]" />
@@ -289,7 +306,10 @@ function AccountMenuView({
           <Link
             href={ROUTES.auth.register}
             onClick={onClose}
-            className="flex min-h-[52px] items-center justify-between text-[15px] font-medium text-[#25201f]"
+            className={navItemClassNameMobile(
+              isRegisterActive,
+              "flex min-h-[52px] items-center justify-between text-[15px]"
+            )}
           >
             <span className="flex items-center gap-3">
               <User className="h-5 w-5 stroke-[1.7] text-[#554a47]" />
