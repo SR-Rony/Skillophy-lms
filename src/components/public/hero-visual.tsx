@@ -12,7 +12,7 @@ const COLLAGE = {
 
 export function HeroVisual() {
   return (
-    <div className="relative mx-auto w-full max-w-[560px] grid grid-cols-2 gap-6 sm:gap-8 items-center py-6 sm:py-8">
+    <div className="relative z-10 mx-auto grid w-full max-w-[560px] grid-cols-2 items-center gap-6 py-6 sm:gap-8 sm:py-8">
 
       {/* Left Column - Card 1 (Sky Blue, Middle-Left) */}
       <div className="flex items-center justify-center h-full relative z-20">
