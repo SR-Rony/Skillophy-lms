@@ -15,7 +15,7 @@ export function AllCoursesPageContent() {
     <>
       <AllCoursesPageHero totalCourses={TOTAL_COURSES_COUNT} />
 
-      <section className="bg-[#f7f7f6] py-12 sm:py-16 lg:py-20">
+      <section className="bg-[#f7f7f6] py-7 lg:py-10">
         <Container>
           <div className="sticky top-16 z-40 -mx-4 border-b border-[#ebe8e6] bg-[#f7f7f6]/95 px-4 pb-6 pt-5 backdrop-blur-md sm:-mx-0 sm:px-0">
             <AllCoursesCategoryFilter

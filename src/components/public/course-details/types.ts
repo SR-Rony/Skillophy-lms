@@ -48,6 +48,8 @@ export interface CourseDetailsBookPromo {
   title: string;
   author: string;
   cover: string;
+  /** Optional PDF or asset URL for the download button */
+  downloadUrl?: string;
 }
 
 export interface CourseDetailsRequirement {

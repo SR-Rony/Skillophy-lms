@@ -1,10 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useState } from "react";
 import {
-  ArrowRight,
   BadgeCheck,
   BookOpen,
   Clock,
@@ -15,6 +13,7 @@ import {
 import { Container } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { JobOpeningRateSection } from "@/components/public/course-details/job-opening-rate-section";
+import { BookPromoSection } from "@/components/public/course-details/book-promo-section";
 import { CurriculumSection } from "@/components/public/course-details/curriculum-section";
 import { TeacherSection } from "@/components/public/course-details/teacher-section";
 import { RequirementsSection } from "@/components/public/course-details/requirements-section";
@@ -156,23 +155,7 @@ export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
 
               <CurriculumSection modules={data.curriculum} />
 
-              {/* Book */}
-              <div className="flex items-center gap-4 rounded-[14px] border border-[#ece6e3] bg-[#faf9f8] p-4 sm:gap-5 sm:p-5">
-                <div className="relative h-[72px] w-[52px] shrink-0 overflow-hidden rounded-[6px] shadow-sm sm:h-[84px] sm:w-[60px]">
-                  <Image src={data.bookPromo.cover} alt={data.bookPromo.title} fill className="object-cover" sizes="60px" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[15px] font-bold text-[#1a1a1a]">{data.bookPromo.title}</p>
-                  <p className="mt-1 text-[13px] font-medium text-[#6f6562]">by {data.bookPromo.author}</p>
-                </div>
-                <button
-                  type="button"
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ff4747] text-white hover:bg-[#ef4343]"
-                  aria-label="View book"
-                >
-                  <ArrowRight className="h-4 w-4" aria-hidden />
-                </button>
-              </div>
+              <BookPromoSection book={data.bookPromo} />
 
               <RequirementsSection requirements={data.requirements} />
 

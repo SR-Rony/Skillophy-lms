@@ -81,13 +81,13 @@ export function CoursePagination({
       {previousPage ? (
         <Link
           href={pageHref(previousPage)}
-          className="inline-flex items-center gap-1.5 px-2 text-[15px] font-medium text-white/55 transition hover:text-white"
+          className="inline-flex items-center gap-1.5 px-2 text-[15px] font-medium text-[#6f6562] transition hover:text-[#ff4747]"
         >
           <ChevronLeft className="h-4 w-4" />
           Previous
         </Link>
       ) : (
-        <span className="inline-flex cursor-not-allowed items-center gap-1.5 px-2 text-[15px] font-medium text-white/25">
+        <span className="inline-flex cursor-not-allowed items-center gap-1.5 px-2 text-[15px] font-medium text-[#c4bbb8]">
           <ChevronLeft className="h-4 w-4" />
           Previous
         </span>
@@ -98,7 +98,7 @@ export function CoursePagination({
           item === "ellipsis" ? (
             <span
               key={`ellipsis-${index}`}
-              className="min-w-8 px-1 text-center text-[15px] font-medium text-white/45"
+              className="min-w-8 px-1 text-center text-[15px] font-medium text-[#9a908c]"
             >
               ...
             </span>
@@ -110,8 +110,8 @@ export function CoursePagination({
               className={cn(
                 "flex h-9 min-w-9 items-center justify-center rounded-[8px] px-2 text-[15px] font-semibold transition",
                 item === currentPage
-                  ? "bg-white text-[#1a1a1a]"
-                  : "text-white/55 hover:text-white"
+                  ? "bg-[#ff4747] text-white shadow-[0_6px_16px_rgba(255,71,71,0.22)]"
+                  : "text-[#6f6562] hover:bg-white hover:text-[#1a1a1a]"
               )}
             >
               {item}
@@ -123,13 +123,13 @@ export function CoursePagination({
       {nextPage ? (
         <Link
           href={pageHref(nextPage)}
-          className="inline-flex items-center gap-1.5 px-2 text-[15px] font-medium text-white/55 transition hover:text-white"
+          className="inline-flex items-center gap-1.5 px-2 text-[15px] font-medium text-[#6f6562] transition hover:text-[#ff4747]"
         >
           Next
           <ChevronRight className="h-4 w-4" />
         </Link>
       ) : (
-        <span className="inline-flex cursor-not-allowed items-center gap-1.5 px-2 text-[15px] font-medium text-white/25">
+        <span className="inline-flex cursor-not-allowed items-center gap-1.5 px-2 text-[15px] font-medium text-[#c4bbb8]">
           Next
           <ChevronRight className="h-4 w-4" />
         </span>

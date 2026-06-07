@@ -37,7 +37,7 @@ export function CourseCategoryPageContent({
         title={category.label}
       />
 
-      <section className="bg-[#f7f7f6] py-12 sm:py-16 lg:py-20">
+      <section className="bg-[#f7f7f6] py-7 lg:py-10">
         <Container>
           <div className="grid justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {pageCourses.map((course) => (
