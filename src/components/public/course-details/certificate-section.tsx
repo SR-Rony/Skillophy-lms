@@ -9,7 +9,7 @@ interface CertificateSectionProps {
 export function CertificateSection({ data }: CertificateSectionProps) {
   return (
     <section id="course-certificate" className="scroll-mt-28 min-w-0">
-      <div className="relative overflow-hidden rounded-[20px] bg-[#fff5f2] px-6 py-10 sm:px-8 sm:py-12 lg:px-8 lg:py-12 xl:px-10 xl:py-14">
+      <div className="relative rounded-[20px] bg-[#fff5f2] px-6 py-10 sm:px-8 sm:py-12 lg:px-6 lg:py-12 xl:px-10 xl:py-14">
         <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[20px]">
           <svg
             className="absolute -right-10 top-0 h-48 w-72 text-[#ffd8c8]/85 sm:h-56 sm:w-80"
@@ -44,7 +44,8 @@ export function CertificateSection({ data }: CertificateSectionProps) {
           </svg>
         </div>
 
-        <div className="relative z-[1] flex min-w-0 flex-col gap-10 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,220px)] lg:items-center lg:gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,280px)] xl:gap-10">
+        {/* Below xl: stacked (main column too narrow beside sidebar). xl+: two columns. */}
+        <div className="relative z-[1] flex min-w-0 flex-col gap-10 xl:grid xl:grid-cols-[minmax(0,1fr)_280px] xl:items-center xl:gap-10">
           <div className="min-w-0">
             <h2 className="text-[26px] font-bold leading-tight tracking-[-0.02em] text-[#2d2926] sm:text-[30px] lg:text-[28px] xl:text-[32px]">
               Course Certificate
@@ -69,21 +70,20 @@ export function CertificateSection({ data }: CertificateSectionProps) {
             </ul>
           </div>
 
-          <div className="min-w-0 w-full max-w-[360px] justify-self-center lg:max-w-none lg:justify-self-end">
-            <div className="relative mx-auto aspect-[4/3] w-full max-w-[360px] lg:max-w-full">
+          <div className="mx-auto w-full max-w-[520px] shrink-0 xl:mx-0 xl:w-[280px] xl:max-w-[280px]">
+            <div className="relative aspect-[920/650] w-full">
               <div
                 aria-hidden
-                className="absolute bottom-0 right-0 h-[72%] w-[82%] rounded-[22px] bg-[linear-gradient(145deg,#ff9658_0%,#ff6d42_52%,#ff4034_100%)] shadow-[0_14px_32px_rgba(255,64,52,0.2)] xl:rounded-[26px]"
+                className="absolute bottom-0 right-0 h-[72%] w-[82%] rounded-[clamp(18px,5%,26px)] bg-[linear-gradient(145deg,#ff9658_0%,#ff6d42_52%,#ff4034_100%)] shadow-[0_14px_32px_rgba(255,64,52,0.2)]"
               />
 
-              <div className="absolute inset-0 z-10 flex items-center justify-center">
+              <div className="absolute inset-[1.5%] z-10">
                 <Image
                   src={data.image}
                   alt="Course certificate preview"
-                  width={920}
-                  height={650}
-                  className="h-auto max-h-[72%] w-auto max-w-[88%] object-contain drop-shadow-[0_10px_24px_rgba(35,28,25,0.14)]"
-                  sizes="(max-width: 1024px) 220px, 280px"
+                  fill
+                  className="object-contain drop-shadow-[0_10px_24px_rgba(35,28,25,0.14)]"
+                  sizes="(max-width: 1279px) 520px, 280px"
                 />
               </div>
             </div>
