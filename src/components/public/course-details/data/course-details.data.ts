@@ -258,6 +258,24 @@ Through hands-on projects and guided feedback, you will practice the same workfl
       avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Rahim",
       rating: 5,
     },
+    {
+      id: "t3",
+      quote:
+        "The curriculum is well structured. I could follow along easily and apply what I learned to my freelance projects.",
+      name: "Sadia Akter",
+      role: "UI Designer, Sylhet",
+      avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Sadia",
+      rating: 5,
+    },
+    {
+      id: "t4",
+      quote:
+        "Skillophy made complex UX topics simple. The instructor support and community helped me stay motivated throughout.",
+      name: "Karim Hassan",
+      role: "Junior UX Researcher, Dhaka",
+      avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Karim",
+      rating: 4,
+    },
   ],
   faqs: [
     {

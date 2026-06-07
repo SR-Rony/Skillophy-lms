@@ -27,7 +27,7 @@ export function SimilarCoursesSection({
   }
 
   return (
-    <section className="bg-white py-14 sm:py-16 lg:py-20">
+    <section className="bg-white py-10 lg:py-15">
       <Container>
         <h2 className="text-[24px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[28px]">
           Similar Courses for You

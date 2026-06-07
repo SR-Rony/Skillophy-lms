@@ -7,16 +7,10 @@ import {
   ArrowRight,
   BadgeCheck,
   BookOpen,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
   Clock,
   FileText,
   Play,
   PlayCircle,
-  Quote,
-  Smartphone,
-  Star,
 } from "lucide-react";
 import { Container } from "@/components/shared";
 import { Button } from "@/components/ui/button";
@@ -27,6 +21,8 @@ import { RequirementsSection } from "@/components/public/course-details/requirem
 import { BusinessPromoSection } from "@/components/public/course-details/business-promo-section";
 import { BenefitsSection } from "@/components/public/course-details/benefits-section";
 import { CertificateSection } from "@/components/public/course-details/certificate-section";
+import { ReviewsSection } from "@/components/public/course-details/reviews-section";
+import { FaqSection } from "@/components/public/course-details/faq-section";
 import type { CourseDetailsPageData } from "@/components/public/course-details/types";
 import { cn } from "@/utils";
 
@@ -66,23 +62,11 @@ interface CourseDetailsMainProps {
 export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
   const [activeTab, setActiveTab] = useState(data.tabs[0]?.id ?? "course-overview");
   const [overviewExpanded, setOverviewExpanded] = useState(false);
-  const [openFaqs, setOpenFaqs] = useState(
-    data.faqs.filter((f) => f.defaultOpen).map((f) => f.id)
-  );
-  const [reviewIndex, setReviewIndex] = useState(0);
 
   const handleTabChange = useCallback((tabId: string) => {
     setActiveTab(tabId);
     document.getElementById(tabId)?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
-
-  const toggleFaq = (id: string) => {
-    setOpenFaqs((current) =>
-      current.includes(id) ? current.filter((item) => item !== id) : [...current, id]
-    );
-  };
-
-  const visibleReviews = data.testimonials.slice(reviewIndex, reviewIndex + 2);
 
   return (
     <section className="bg-white pb-16 pt-4 sm:pb-20 sm:pt-6 lg:pt-8">
@@ -198,89 +182,9 @@ export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
 
               <CertificateSection data={data.certificate} />
 
-              {/* Reviews */}
-              <section id="reviews" className="scroll-mt-28">
-                <SectionHeading dark>What Learners Said About this Course</SectionHeading>
-                <div className="mt-5 grid gap-4 md:grid-cols-2">
-                  {visibleReviews.map((item) => (
-                    <article key={item.id} className="relative rounded-[16px] border border-[#ece6e3] bg-white p-5 sm:p-6">
-                      <Quote className="absolute right-5 top-5 h-8 w-8 text-[#f5ebe8]" aria-hidden />
-                      <p className="pr-6 text-[14px] leading-[1.7] text-[#4a4a4a]">{item.quote}</p>
-                      <div className="mt-5 flex items-center gap-3">
-                        <div className="relative h-11 w-11 overflow-hidden rounded-full border border-[#ece6e3]">
-                          <Image src={item.avatar} alt={item.name} fill className="object-cover" sizes="44px" />
-                        </div>
-                        <div>
-                          <p className="text-[14px] font-bold text-[#1a1a1a]">{item.name}</p>
-                          <p className="text-[12px] font-medium text-[#6f6562]">{item.role}</p>
-                        </div>
-                        <div className="ml-auto flex gap-0.5" aria-hidden>
-                          {Array.from({ length: item.rating }).map((_, i) => (
-                            <Star key={i} className="h-4 w-4 fill-[#ffa500] text-[#ffa500]" />
-                          ))}
-                        </div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-                <div className="mt-5 flex gap-2">
-                  <button
-                    type="button"
-                    disabled={reviewIndex === 0}
-                    onClick={() => setReviewIndex((v) => Math.max(0, v - 1))}
-                    className={cn(
-                      "flex h-9 w-9 items-center justify-center rounded-[8px] border",
-                      reviewIndex > 0
-                        ? "border-[#1a1a1a] bg-[#1a1a1a] text-white"
-                        : "cursor-not-allowed border-[#ece6e3] text-[#c4bbb8]"
-                    )}
-                    aria-label="Previous reviews"
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </button>
-                  <button
-                    type="button"
-                    disabled={reviewIndex + 2 >= data.testimonials.length}
-                    onClick={() => setReviewIndex((v) => v + 1)}
-                    className={cn(
-                      "flex h-9 w-9 items-center justify-center rounded-[8px] border",
-                      reviewIndex + 2 < data.testimonials.length
-                        ? "border-[#ff4747] bg-[#ff4747] text-white"
-                        : "cursor-not-allowed border-[#ece6e3] text-[#c4bbb8]"
-                    )}
-                    aria-label="Next reviews"
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                  </button>
-                </div>
-              </section>
+              <ReviewsSection testimonials={data.testimonials} />
 
-              {/* FAQ */}
-              <section id="faq" className="scroll-mt-28">
-                <SectionHeading dark>Frequently Asked Questions</SectionHeading>
-                <div className="mt-5 space-y-3">
-                  {data.faqs.map((item) => {
-                    const isOpen = openFaqs.includes(item.id);
-                    return (
-                      <div key={item.id} className="overflow-hidden rounded-[14px] border border-[#ece6e3] bg-white">
-                        <button
-                          type="button"
-                          onClick={() => toggleFaq(item.id)}
-                          className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left sm:px-5"
-                        >
-                          <span className="text-[15px] font-bold text-[#1a1a1a]">{item.question}</span>
-                          <ChevronDown className={cn("h-5 w-5 shrink-0 transition", isOpen && "rotate-180")} aria-hidden />
-                        </button>
-                        {isOpen && (
-                          <p className="border-t border-[#f0ebe8] px-4 pb-4 text-[14px] leading-[1.65] text-[#4a4a4a] sm:px-5 sm:pb-5">
-                            {item.answer}
-                          </p>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
+              <FaqSection faqs={data.faqs} />
             </div>
           </div>
 
