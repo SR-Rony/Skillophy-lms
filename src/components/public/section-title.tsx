@@ -53,16 +53,16 @@ export function SectionTitle({
   const lines = labelLines ?? (isCenter ? "both" : "trailing");
 
   const lineClassName = isDark
-    ? "bg-[#ff4747]/35"
+    ? "bg-primary/35"
     : lines === "trailing"
       ? "bg-[#a5655c]"
       : "bg-[#efb0aa]";
 
   const labelColorClassName = isDark
-    ? "text-[#ff4747]"
+    ? "text-primary"
     : lines === "trailing"
-      ? "text-[#8a2525]"
-      : "text-[#a94d47]";
+      ? "text-primary-dark"
+      : "text-primary-dark";
 
   return (
     <motion.div

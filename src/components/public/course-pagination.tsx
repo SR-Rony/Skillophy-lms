@@ -81,7 +81,7 @@ export function CoursePagination({
       {previousPage ? (
         <Link
           href={pageHref(previousPage)}
-          className="inline-flex items-center gap-1.5 px-2 text-[15px] font-medium text-[#6f6562] transition hover:text-[#ff4747]"
+          className="inline-flex items-center gap-1.5 px-2 text-[15px] font-medium text-[#6f6562] transition hover:text-primary"
         >
           <ChevronLeft className="h-4 w-4" />
           Previous
@@ -110,7 +110,7 @@ export function CoursePagination({
               className={cn(
                 "flex h-9 min-w-9 items-center justify-center rounded-[8px] px-2 text-[15px] font-semibold transition",
                 item === currentPage
-                  ? "bg-[#ff4747] text-white shadow-[0_6px_16px_rgba(255,71,71,0.22)]"
+                  ? "bg-primary text-white shadow-[0_6px_16px] shadow-primary/22"
                   : "text-[#6f6562] hover:bg-white hover:text-[#1a1a1a]"
               )}
             >
@@ -123,7 +123,7 @@ export function CoursePagination({
       {nextPage ? (
         <Link
           href={pageHref(nextPage)}
-          className="inline-flex items-center gap-1.5 px-2 text-[15px] font-medium text-[#6f6562] transition hover:text-[#ff4747]"
+          className="inline-flex items-center gap-1.5 px-2 text-[15px] font-medium text-[#6f6562] transition hover:text-primary"
         >
           Next
           <ChevronRight className="h-4 w-4" />

@@ -67,8 +67,8 @@ export function Navbar() {
                 aria-expanded={isMegaMenuOpen}
                 aria-controls="course-mega-menu"
                 className={cn(
-                  "flex items-center gap-1 font-medium transition-colors cursor-pointer hover:text-[#ff4747]",
-                  isMegaMenuOpen ? "text-[#ff4747]" : "text-gray-700"
+                  "flex items-center gap-1 font-medium transition-colors cursor-pointer hover:text-primary",
+                  isMegaMenuOpen ? "text-primary" : "text-gray-700"
                 )}
               >
                 All Courses

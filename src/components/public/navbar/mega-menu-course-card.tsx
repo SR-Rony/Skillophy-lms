@@ -23,7 +23,7 @@ export function MegaMenuCourseCard({
     <Link
       href={`${ROUTES.courses}?category=${category}&highlight=${id}`}
       onClick={onClick}
-      className="group flex min-h-[72px] overflow-hidden rounded-[10px] border border-[#eee7e4] bg-white shadow-[0_10px_24px_rgba(35,25,22,0.04)] transition duration-300 hover:-translate-y-0.5 hover:border-[#f2c3c0] hover:shadow-[0_14px_28px_rgba(35,25,22,0.08)]"
+      className="group flex min-h-[72px] overflow-hidden rounded-[10px] border border-[#eee7e4] bg-white shadow-[0_10px_24px_rgba(35,25,22,0.04)] transition duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_14px_28px_rgba(35,25,22,0.08)]"
     >
       <div className="relative h-[72px] w-[86px] shrink-0 overflow-hidden bg-gray-100 sm:w-[92px]">
         <Image

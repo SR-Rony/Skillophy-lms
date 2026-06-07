@@ -62,7 +62,7 @@ interface PublicCourseCardProps {
 function LessonsMeta({ lessons }: { lessons: number }) {
   return (
     <span className="inline-flex items-center gap-2 text-[14px] font-normal leading-none text-[#6b7280]">
-      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#ff4747]">
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary">
         <Play className="ml-[1px] h-[10px] w-[10px] fill-white text-white" aria-hidden />
       </span>
       {lessons} lessons
@@ -108,7 +108,7 @@ export function PublicCourseCard({
             sizes="(max-width: 640px) 92vw, 384px"
           />
           {badge === "live" && (
-            <span className="absolute left-3 top-3 rounded-[6px] bg-[#ff4747] px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
+            <span className="absolute left-3 top-3 rounded-[6px] bg-primary px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
               Live
             </span>
           )}
@@ -163,7 +163,7 @@ export function PublicCourseCard({
             )}
             <button
               type="button"
-              className="shrink-0 rounded-full p-1 text-[#1a1a1a] transition-colors hover:text-[#f05555]"
+              className="shrink-0 rounded-full p-1 text-[#1a1a1a] transition-colors hover:text-primary"
               aria-label={`Add ${course.title} to wishlist`}
               onClick={(event) => event.preventDefault()}
             >

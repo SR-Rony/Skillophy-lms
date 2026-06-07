@@ -9,7 +9,7 @@ import { cn } from "@/utils";
 const GAP_PX = 16;
 
 const arrowButtonClassName =
-  "flex h-11 w-11 items-center justify-center rounded-full border border-[#ece6e3] cursor-pointer bg-[#888888] text-[#1a1a1a] shadow-[0_8px_20px_rgba(35,25,22,0.08)] transition hover:border-[#ff4747] hover:bg-[#ff4747] hover:text-white disabled:cursor-not-allowed disabled:border-[#ece6e3] disabled:bg-white disabled:text-[#c4bbb8] disabled:shadow-none disabled:hover:border-[#ece6e3] disabled:hover:bg-white disabled:hover:text-[#c4bbb8]";
+  "flex h-11 w-11 items-center justify-center rounded-full border border-[#ece6e3] cursor-pointer bg-[#888888] text-[#1a1a1a] shadow-[0_8px_20px_rgba(35,25,22,0.08)] transition hover:border-primary hover:bg-primary hover:text-white disabled:cursor-not-allowed disabled:border-[#ece6e3] disabled:bg-white disabled:text-[#c4bbb8] disabled:shadow-none disabled:hover:border-[#ece6e3] disabled:hover:bg-white disabled:hover:text-[#c4bbb8]";
 
 function useReviewItemsPerPage() {
   const [itemsPerPage, setItemsPerPage] = useState(1);

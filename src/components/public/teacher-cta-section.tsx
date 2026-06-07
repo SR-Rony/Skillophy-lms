@@ -21,7 +21,7 @@ export function TeacherCtaSection() {
   return (
     <section className="relative overflow-hidden bg-[#120202] py-16 sm:py-20 lg:py-[92px]">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(255,172,33,0.18),transparent_28%),radial-gradient(circle_at_88%_18%,rgba(255,71,71,0.16),transparent_30%),linear-gradient(90deg,rgba(27,4,2,0.95),rgba(18,2,2,0.86)_48%,rgba(13,1,2,0.98))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(255,172,33,0.18),transparent_28%),radial-gradient(circle_at_88%_18%,color-mix(in srgb, var(--color-primary) 16%, transparent),transparent_30%),linear-gradient(90deg,rgba(27,4,2,0.95),rgba(18,2,2,0.86)_48%,rgba(13,1,2,0.98))]" />
         <svg
           className="absolute bottom-[-19%] right-[-4%] h-[460px] w-[820px] text-[#8a6428]/22"
           viewBox="0 0 820 460"

@@ -38,7 +38,7 @@ function SectionHeading({
     <h2
       className={cn(
         "text-[22px] font-bold tracking-[-0.02em] sm:text-[24px]",
-        dark ? "text-[#1a1a1a]" : "text-[#ff4747]",
+        dark ? "text-[#1a1a1a]" : "text-primary",
         className
       )}
     >
@@ -84,7 +84,7 @@ export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
                   className={cn(
                     "shrink-0 border-b-2 px-3 py-3 text-[13px] font-semibold transition sm:px-4 sm:text-[14px]",
                     activeTab === tab.id
-                      ? "border-[#ff4747] text-[#ff4747]"
+                      ? "border-primary text-primary"
                       : "border-transparent text-[#5f5553] hover:text-[#2b2220]"
                   )}
                 >
@@ -113,7 +113,7 @@ export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
                 <button
                   type="button"
                   onClick={() => setOverviewExpanded((v) => !v)}
-                  className="mt-3 text-[14px] font-bold text-[#ff4747] hover:text-[#e63d3d]"
+                  className="mt-3 text-[14px] font-bold text-primary hover:text-primary/90"
                 >
                   {overviewExpanded ? "See Less" : "See More"}
                 </button>
@@ -125,8 +125,8 @@ export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
                 <ul className="mt-5 space-y-3.5">
                   {data.learnItems.map((item) => (
                     <li key={item} className="flex items-start gap-3">
-                      <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#fff1ef] text-[#ff4747]">
-                        <Play className="h-3 w-3 fill-[#ff4747]" aria-hidden />
+                      <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/5 text-primary">
+                        <Play className="h-3 w-3 fill-primary" aria-hidden />
                       </span>
                       <span className="text-[15px] leading-[1.6] text-[#4a4a4a]">{item}</span>
                     </li>
@@ -185,14 +185,14 @@ export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
                     key={item.label}
                     className="flex items-center gap-2 rounded-[10px] border border-[#f3eeeb] bg-[#faf9f8] px-3 py-2.5"
                   >
-                    <Icon className="h-4 w-4 shrink-0 text-[#ff4747]" aria-hidden />
+                    <Icon className="h-4 w-4 shrink-0 text-primary" aria-hidden />
                     <span className="text-[12px] font-semibold text-[#3c3332]">{item.label}</span>
                   </div>
                 );
               })}
             </div>
             <div className="mt-6 flex items-baseline gap-2">
-              <span className="text-[32px] font-black text-[#ff4747]">৳{data.sidebar.price}</span>
+              <span className="text-[32px] font-black text-primary">৳{data.sidebar.price}</span>
               <span className="text-[16px] font-medium text-[#9a908c] line-through">
                 ৳{data.sidebar.originalPrice}
               </span>
@@ -204,7 +204,7 @@ export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
               <Button
                 asChild
                 variant="outline"
-                className="h-[52px] w-full rounded-[12px] border-2 border-[#ff4747] bg-white text-[13px] font-black text-[#ff4747] hover:bg-[#fff4f2]"
+                className="h-[52px] w-full rounded-[12px] border-2 border-primary bg-white text-[13px] font-black text-primary hover:bg-primary/5"
               >
                 <Link href="/cart">Add to Cart</Link>
               </Button>

@@ -127,7 +127,7 @@ export function TestimonialSection() {
   const [enableTransition, setEnableTransition] = useState(true);
   const loopTestimonials = [...testimonials, ...testimonials.slice(0, 3)];
   const arrowButtonClassName =
-    "rounded-full bg-[#6d6d6d] text-white shadow-[0_12px_24px_rgba(62,62,62,0.2)] hover:-translate-y-0.5 hover:bg-[#ff4747] hover:shadow-[0_14px_26px_rgba(255,71,71,0.26)]";
+    "rounded-full bg-[#6d6d6d] text-white shadow-[0_12px_24px_rgba(62,62,62,0.2)] hover:-translate-y-0.5 hover:bg-primary hover:shadow-[0_14px_26px] shadow-primary/26";
 
   const goToPrevious = () => {
     if (activeIndex === testimonials.length) {
@@ -174,7 +174,7 @@ export function TestimonialSection() {
   }, [activeIndex]);
 
   return (
-    <section className="overflow-hidden bg-[#fff4f2] py-16 sm:py-20 lg:py-[92px]">
+    <section className="overflow-hidden bg-primary/5 py-16 sm:py-20 lg:py-[92px]">
       <Container
         as={motion.div}
         initial="hidden"

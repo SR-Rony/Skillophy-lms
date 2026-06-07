@@ -31,7 +31,7 @@ export function TryCoursesSection() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#fff4f2] py-16 sm:py-20 lg:py-[92px]">
+    <section className="relative overflow-hidden bg-primary/5 py-16 sm:py-20 lg:py-[92px]">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_48%,rgba(255,214,170,0.22),transparent_42%)]" />
         <svg
@@ -103,7 +103,7 @@ export function TryCoursesSection() {
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder="Enter Email Address"
                   required
-                  className="h-[52px] min-h-[52px] flex-1 rounded-[12px] border-[#ead8d4] bg-white px-5 text-[14px] font-medium text-[#282221] shadow-none placeholder:text-[#9a8f8c] focus-visible:ring-[#ff4747]/30"
+                  className="h-[52px] min-h-[52px] flex-1 rounded-[12px] border-[#ead8d4] bg-white px-5 text-[14px] font-medium text-[#282221] shadow-none placeholder:text-[#9a8f8c] focus-visible:ring-primary/30"
                 />
                 <Button
                   type="submit"
@@ -125,15 +125,15 @@ export function TryCoursesSection() {
                   type="checkbox"
                   checked={agreed}
                   onChange={(event) => setAgreed(event.target.checked)}
-                  className="mt-1 h-4 w-4 shrink-0 cursor-pointer rounded border-[#d9c8c4] accent-[#ff4747]"
+                  className="mt-1 h-4 w-4 shrink-0 cursor-pointer rounded border-[#d9c8c4] accent-primary"
                 />
                 <span>
                   By sharing your email, you agree to our{" "}
-                  <Link href="#" className="font-bold text-[#282221] hover:text-[#ff4747]">
+                  <Link href="#" className="font-bold text-[#282221] hover:text-primary">
                     Terms &amp; Conditions
                   </Link>{" "}
                   and{" "}
-                  <Link href="#" className="font-bold text-[#282221] hover:text-[#ff4747]">
+                  <Link href="#" className="font-bold text-[#282221] hover:text-primary">
                     Privacy Policy
                   </Link>
                 </span>

@@ -25,8 +25,8 @@ const categoryItemClassName = (
     "flex w-full items-center gap-4 rounded-[10px] border bg-white px-4 text-left shadow-[0_10px_24px_rgba(35,25,22,0.04)] transition duration-300",
     size === "large" ? "min-h-[72px] py-4" : "py-3",
     isActive
-      ? "border-[#f2c3c0] bg-[#fff4f2] text-[#8a2525]"
-      : "border-[#eee7e4] text-[#302927] hover:-translate-y-0.5 hover:border-[#f2c3c0]"
+      ? "border-primary/25 bg-primary/5 text-primary-dark"
+      : "border-[#eee7e4] text-[#302927] hover:-translate-y-0.5 hover:border-primary/25"
   );
 
 function CategoryItemContent({
@@ -53,7 +53,7 @@ function CategoryItemContent({
         <div
           className={cn(
             "mt-1 text-[11px] font-semibold",
-            isActive ? "text-[#8a2525]" : "text-[#6f6562]"
+            isActive ? "text-primary-dark" : "text-[#6f6562]"
           )}
         >
           {courseCount} courses

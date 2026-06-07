@@ -275,7 +275,7 @@ function BookCard({ book }: { book: Book }) {
           <p className="mt-2 line-clamp-1 text-[13px] font-semibold text-[#5f5553]">
             By {book.author}
           </p>
-          <span className="mt-4 inline-flex rounded-full bg-[#fff4f2] px-3 py-1 text-[11px] font-bold text-[#a94d47]">
+          <span className="mt-4 inline-flex rounded-full bg-primary/5 px-3 py-1 text-[11px] font-bold text-primary-dark">
             Read Book
           </span>
         </div>

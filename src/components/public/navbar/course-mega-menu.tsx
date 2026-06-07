@@ -132,7 +132,7 @@ export function CourseMegaMenu({ isOpen, onClose }: CourseMegaMenuProps) {
                     <Link
                       href={ROUTES.courseCategory(activeCategory)}
                       onClick={onClose}
-                      className="pointer-events-auto inline-flex items-center gap-1 text-[12px] font-black text-[#25201f] underline-offset-4 transition hover:text-[#ff4747] hover:underline"
+                      className="pointer-events-auto inline-flex items-center gap-1 text-[12px] font-black text-[#25201f] underline-offset-4 transition hover:text-primary hover:underline"
                     >
                       See All in{" "}
                       {megaMenuCategories.find((c) => c.id === activeCategory)?.label ??

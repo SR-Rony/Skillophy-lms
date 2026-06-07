@@ -17,7 +17,7 @@ export function AllCoursesCategoryRow({ category, sectionId }: AllCoursesCategor
         <div className="flex flex-wrap items-center gap-3">
           <Link
             href={ROUTES.courseCategory(category.id)}
-            className="text-[22px] font-black tracking-[-0.03em] text-[#1a1a1a] transition hover:text-[#ff4747] sm:text-[24px]"
+            className="text-[22px] font-black tracking-[-0.03em] text-[#1a1a1a] transition hover:text-primary sm:text-[24px]"
           >
             {category.label}
           </Link>
@@ -28,7 +28,7 @@ export function AllCoursesCategoryRow({ category, sectionId }: AllCoursesCategor
 
         <Link
           href={ROUTES.courseCategory(category.id)}
-          className="text-[14px] font-bold text-[#ff4747] transition hover:text-[#ef3033]"
+          className="text-[14px] font-bold text-primary transition hover:text-primary/90"
         >
           See All
         </Link>

@@ -18,7 +18,7 @@ const LESSON_ICONS: Record<
   CourseDetailsLessonType,
   { icon: typeof PlayCircle; className: string }
 > = {
-  video: { icon: PlayCircle, className: "text-[#ff4747]" },
+  video: { icon: PlayCircle, className: "text-primary" },
   reading: { icon: BookOpen, className: "text-[#22c55e]" },
   quiz: { icon: CircleHelp, className: "text-[#9a908c]" },
 };
@@ -131,7 +131,7 @@ export function CurriculumSection({ modules }: CurriculumSectionProps) {
                         {lesson.preview && (
                           <button
                             type="button"
-                            className="shrink-0 text-[13px] font-bold text-[#ff4747] transition hover:text-[#ff8a8a]"
+                            className="shrink-0 text-[13px] font-bold text-primary transition hover:text-primary/70"
                           >
                             Preview
                           </button>
@@ -150,7 +150,7 @@ export function CurriculumSection({ modules }: CurriculumSectionProps) {
         <button
           type="button"
           onClick={() => setShowAllModules(true)}
-          className="mx-auto mt-5 block text-[14px] font-semibold text-[#6f6562] transition hover:text-[#ff4747]"
+          className="mx-auto mt-5 block text-[14px] font-semibold text-[#6f6562] transition hover:text-primary"
         >
           See More
         </button>

@@ -11,7 +11,7 @@ export function BookPromoSection({ book }: BookPromoSectionProps) {
 
   return (
     <div className="relative overflow-visible rounded-[20px] bg-[#f7f7f6] px-4 py-5 sm:px-6 sm:py-6">
-      <span className="absolute -right-0.5 top-0 z-10 inline-flex items-center gap-1.5 rounded-full bg-[#ff4747] px-3 py-1.5 text-[11px] font-bold text-white shadow-[0_6px_16px_rgba(255,71,71,0.28)] sm:px-3.5 sm:text-[12px]">
+      <span className="absolute -right-0.5 top-0 z-10 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-[11px] font-bold text-white shadow-[0_6px_16px] shadow-primary/28 sm:px-3.5 sm:text-[12px]">
         <Sparkles className="h-3 w-3 shrink-0" aria-hidden />
         Free Book
       </span>
@@ -46,7 +46,7 @@ export function BookPromoSection({ book }: BookPromoSectionProps) {
           <a
             href={book.downloadUrl}
             download
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-[#ff4747] text-white transition hover:bg-[#ef4343] sm:h-12 sm:w-12"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-primary text-white transition hover:bg-primary/90 sm:h-12 sm:w-12"
             aria-label={downloadLabel}
           >
             <Download className="h-5 w-5" aria-hidden />
@@ -54,7 +54,7 @@ export function BookPromoSection({ book }: BookPromoSectionProps) {
         ) : (
           <button
             type="button"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-[#ff4747] text-white transition hover:bg-[#ef4343] sm:h-12 sm:w-12"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-primary text-white transition hover:bg-primary/90 sm:h-12 sm:w-12"
             aria-label={downloadLabel}
           >
             <Download className="h-5 w-5" aria-hidden />

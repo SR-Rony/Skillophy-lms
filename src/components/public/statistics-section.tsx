@@ -74,7 +74,7 @@ export function StatisticsSection() {
                 variants={fadeUpVariants}
                 whileHover={{ y: -8, scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                className="group flex min-h-[166px] flex-col items-center justify-center rounded-[10px] border border-white/5 bg-white/[0.08] px-5 text-center shadow-[0_18px_45px_rgba(0,0,0,0.22)] backdrop-blur-sm transition-colors duration-300 hover:border-white/14 hover:bg-white/[0.12] hover:shadow-[0_24px_60px_rgba(255,71,71,0.12)]"
+                className="group flex min-h-[166px] flex-col items-center justify-center rounded-[10px] border border-white/5 bg-white/[0.08] px-5 text-center shadow-[0_18px_45px_rgba(0,0,0,0.22)] backdrop-blur-sm transition-colors duration-300 hover:border-white/14 hover:bg-white/[0.12] hover:shadow-[0_24px_60px] hover:shadow-primary/12"
               >
                 <Icon
                   className={`mb-5 h-8 w-8 stroke-[1.7] transition-transform duration-300 group-hover:scale-110 ${color}`}

@@ -86,7 +86,7 @@ export function AcademicProgramSection() {
   const [enableTransition, setEnableTransition] = useState(true);
   const loopPrograms = [...programs, ...programs.slice(0, 3)];
   const arrowButtonClassName =
-    "rounded-full bg-[#6d6d6d] text-white shadow-[0_12px_24px_rgba(62,62,62,0.2)] hover:-translate-y-0.5 hover:bg-[#ff4747] hover:shadow-[0_14px_26px_rgba(255,71,71,0.26)] cursor-pointer";
+    "rounded-full bg-[#6d6d6d] text-white shadow-[0_12px_24px_rgba(62,62,62,0.2)] hover:-translate-y-0.5 hover:bg-primary hover:shadow-[0_14px_26px] shadow-primary/26 cursor-pointer";
 
   const goToPrevious = () => {
     if (activeIndex === programs.length) {
@@ -212,7 +212,7 @@ export function AcademicProgramSection() {
               >
                 <Link href={`/courses/${program.slug}`} className="block h-full">
                   <div className={cn("relative h-[220px] overflow-hidden", program.imageBg)}>
-                    <span className="absolute left-4 top-4 z-10 inline-flex items-center gap-1 rounded-[6px] bg-[#ff4747] px-2.5 py-1 text-[11px] font-black uppercase tracking-[0.05em] text-white">
+                    <span className="absolute left-4 top-4 z-10 inline-flex items-center gap-1 rounded-[6px] bg-primary px-2.5 py-1 text-[11px] font-black uppercase tracking-[0.05em] text-white">
                       <span className="h-1.5 w-1.5 rounded-full bg-white" />
                       Live
                     </span>

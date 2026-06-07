@@ -46,7 +46,7 @@ export function FaqSection({ faqs }: FaqSectionProps) {
                 className={cn(
                   "flex w-full items-start justify-between gap-4 px-5 py-5 text-left transition-colors sm:px-6 sm:py-6",
                   isOpen
-                    ? "border-l-4 border-[#ff4747] bg-[#fff4f2] pl-4 sm:pl-5"
+                    ? "border-l-4 border-primary bg-primary/5 pl-4 sm:pl-5"
                     : "border-l-4 border-transparent bg-white hover:bg-[#faf9f8]"
                 )}
               >
@@ -65,7 +65,7 @@ export function FaqSection({ faqs }: FaqSectionProps) {
                   className={cn(
                     "flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors",
                     isOpen
-                      ? "bg-[#ff4747] text-white shadow-[0_8px_18px_rgba(255,71,71,0.24)]"
+                      ? "bg-primary text-white shadow-[0_8px_18px] shadow-primary/24"
                       : "border border-[#e8e4e1] bg-[#f7f7f7] text-[#9a908c]"
                   )}
                   aria-hidden

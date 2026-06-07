@@ -84,7 +84,7 @@ const featuredCourses: PublicCourse[] = [
 
 export function FeaturedCoursesSection() {
   return (
-    <section className="bg-[#fff4f2] py-16 sm:py-20 lg:py-[92px]">
+    <section className="bg-primary/5 py-16 sm:py-20 lg:py-[92px]">
       <Container
         as={motion.div}
         initial="hidden"

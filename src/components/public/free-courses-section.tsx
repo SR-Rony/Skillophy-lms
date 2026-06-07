@@ -86,7 +86,7 @@ const freeCourses: PublicCourse[] = [
 
 export function FreeCoursesSection() {
   return (
-    <section className="relative overflow-hidden bg-[#fff4f2] py-16 sm:py-20 lg:py-[92px]">
+    <section className="relative overflow-hidden bg-primary/5 py-16 sm:py-20 lg:py-[92px]">
       <div className="pointer-events-none absolute inset-0">
         <svg
           className="absolute right-0 top-[12%] hidden h-[335px] w-[600px] text-[#eedb96]/30 lg:block"

@@ -10,7 +10,7 @@ import { ROUTES } from "@/constants";
 
 export function BusinessCtaSection() {
   return (
-    <section className="relative overflow-hidden bg-[#fff4f2] py-16 sm:py-20 lg:py-[92px]">
+    <section className="relative overflow-hidden bg-primary/5 py-16 sm:py-20 lg:py-[92px]">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute right-0 top-0 h-full w-1/2 bg-[radial-gradient(circle_at_82%_42%,rgba(255,225,175,0.28),transparent_38%)]" />
         <svg
@@ -42,7 +42,7 @@ export function BusinessCtaSection() {
           <motion.div variants={sectionTitleFadeUpVariants} className="max-w-[430px]">
             <div className="mb-5 flex flex-wrap items-center gap-2 sm:gap-3">
               <Logo imageClassName="h-8 sm:h-9" />
-              <span className="text-[16px] font-semibold text-[#a94d47]">business</span>
+              <span className="text-[16px] font-semibold text-primary-dark">business</span>
             </div>
 
             <h2 className="text-[34px] font-black leading-[1.12] tracking-[-0.045em] text-[#24201f] sm:text-[42px] lg:text-[46px]">

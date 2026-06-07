@@ -57,7 +57,7 @@ export function PromoAlertBanner({ className }: PromoAlertBannerProps) {
 
         <Link
           href="#enroll"
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#ff4747] px-4 py-1.5 text-[12px] font-bold text-white transition hover:bg-[#e63d3d] sm:px-5 sm:text-[13px]"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-4 py-1.5 text-[12px] font-bold text-white transition hover:bg-primary/90 sm:px-5 sm:text-[13px]"
         >
           Apply Now
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />

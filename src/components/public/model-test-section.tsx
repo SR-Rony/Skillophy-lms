@@ -73,7 +73,7 @@ function ModelTestCard({ test }: { test: ModelTest }) {
         <div className="px-4 pb-5 pt-3 sm:px-5">
           <div className="mb-3 flex items-center justify-between gap-4 text-[13px] font-medium text-[#4f4747]">
             <span className="inline-flex items-center gap-1.5">
-              <Target className="h-3.5 w-3.5 text-[#f05555]" />
+              <Target className="h-3.5 w-3.5 text-primary" />
               {test.questions} questions
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-[#fff3d7] px-2 py-1 text-[12px] font-extrabold text-[#2b2220]">
@@ -105,7 +105,7 @@ function ModelTestCard({ test }: { test: ModelTest }) {
               <Heart
                 className={cn(
                   "h-6 w-6 stroke-[1.7]",
-                  test.isFavorite && "fill-[#ff4747] text-[#ff4747]"
+                  test.isFavorite && "fill-primary text-primary"
                 )}
               />
             </Button>

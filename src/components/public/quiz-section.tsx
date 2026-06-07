@@ -61,7 +61,7 @@ export function QuizSection() {
           viewport={{ once: true, amount: 0.25 }}
         >
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,71,71,0.16),transparent_28%),radial-gradient(circle_at_82%_20%,rgba(255,255,255,0.06),transparent_22%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,color-mix(in srgb, var(--color-primary) 16%, transparent),transparent_28%),radial-gradient(circle_at_82%_20%,rgba(255,255,255,0.06),transparent_22%)]" />
             <svg
               className="absolute bottom-[-22%] left-[-10%] h-[520px] w-[860px] text-[#8a6428]/25"
               viewBox="0 0 860 520"
@@ -93,7 +93,7 @@ export function QuizSection() {
 
             <motion.div
               variants={fadeUpVariants}
-              className="justify-self-center rounded-[18px] bg-[#fff4f2] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.36)] sm:p-8 lg:w-[620px]"
+              className="justify-self-center rounded-[18px] border border-white/10 bg-[#111111] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.36)] sm:p-8 lg:w-[620px]"
             >
               <div className="mb-8">
                 {isSubmitted ? (
@@ -118,20 +118,20 @@ export function QuizSection() {
                   </div>
                 ) : (
                   <>
-                    <div className="h-2 overflow-hidden rounded-full bg-white">
+                    <div className="h-2 overflow-hidden rounded-full bg-white/15">
                       <div
-                        className="h-full rounded-full bg-[#ff4747] transition-all duration-500"
+                        className="h-full rounded-full bg-primary transition-all duration-500"
                         style={{ width: `${progress}%` }}
                       />
                     </div>
-                    <p className="mt-3 text-[12px] font-bold text-[#3b3331]">
+                    <p className="mt-3 text-[12px] font-bold text-white/70">
                       {activeQuestionIndex + 1}/{questions.length} questions
                     </p>
                   </>
                 )}
               </div>
 
-              <h3 className="text-[24px] font-black leading-[1.25] tracking-[-0.035em] text-[#24201f] sm:text-[28px]">
+              <h3 className="text-[24px] font-black leading-[1.3] tracking-[-0.02em] text-white antialiased sm:text-[28px]">
                 {activeQuestionIndex + 1}. {activeQuestion.question}
               </h3>
 
@@ -153,7 +153,7 @@ export function QuizSection() {
                         "flex min-h-[48px] cursor-pointer items-center justify-between rounded-[12px] border bg-white px-4 text-left text-[15px] font-medium text-[#2d2827] transition disabled:cursor-default",
                         isSelected && !isSubmitted && "border-[#252121]",
                         showCorrect && "border-[#13b856] bg-[#dcfae8] text-[#174a2a]",
-                        showWrong && "border-[#ff4747] bg-[#ffc7c7] text-[#471416]"
+                        showWrong && "border-primary bg-primary/25 text-[#471416]"
                       )}
                     >
                       <span>
@@ -164,7 +164,7 @@ export function QuizSection() {
                           "flex h-5 w-5 items-center justify-center rounded-full border",
                           isSelected && !isSubmitted && "border-[#252121] bg-[#252121]",
                           showCorrect && "border-[#13b856] text-[#13b856]",
-                          showWrong && "border-[#ff4747] text-[#ff4747]"
+                          showWrong && "border-primary text-primary"
                         )}
                       >
                         {isSelected && !isSubmitted && (
@@ -181,7 +181,7 @@ export function QuizSection() {
               <div className="mt-8 flex items-center justify-between gap-4">
                 <button
                   type="button"
-                  className="cursor-pointer text-[13px] font-semibold text-[#4f4747]"
+                  className="cursor-pointer text-[13px] font-semibold text-white/60 transition hover:text-white"
                   onClick={() => setIsSubmitted(false)}
                 >
                   Skip
@@ -192,7 +192,7 @@ export function QuizSection() {
                     <Button
                       type="button"
                       variant="outline"
-                      className="h-11 rounded-[12px] border-[#252121] px-5 font-bold"
+                      className="h-11 rounded-[12px] border-white/20 bg-transparent px-5 font-bold text-white hover:bg-white/10 hover:text-white"
                       onClick={() => goToQuestion(activeQuestionIndex - 1)}
                     >
                       <ChevronLeft className="h-4 w-4" />

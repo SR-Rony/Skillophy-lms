@@ -93,8 +93,8 @@ export function PublicFooter() {
     <footer className="relative overflow-hidden bg-[#140808] text-white">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(180deg,#1f0c0b_0%,#160707_48%,#100505_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_12%_0%,rgba(255,71,71,0.18),transparent_42%),radial-gradient(ellipse_at_88%_100%,rgba(255,172,33,0.1),transparent_38%)]" />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#ff4747]/45 to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_12%_0%,color-mix(in srgb, var(--color-primary) 18%, transparent),transparent_42%),radial-gradient(ellipse_at_88%_100%,rgba(255,172,33,0.1),transparent_38%)]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/45 to-transparent" />
         <svg
           className="absolute -right-[12%] top-[8%] h-[420px] w-[620px] text-white/[0.04]"
           viewBox="0 0 620 420"
@@ -150,7 +150,7 @@ export function PublicFooter() {
                 key={label}
                 href={href}
                 aria-label={label}
-                className="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/10 bg-white/[0.05] text-white/88 transition hover:-translate-y-0.5 hover:border-[#ff4747]/50 hover:bg-[#ff4747] hover:text-white hover:shadow-[0_8px_20px_rgba(255,71,71,0.28)]"
+                className="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/10 bg-white/[0.05] text-white/88 transition hover:-translate-y-0.5 hover:border-primary/50 hover:bg-primary hover:text-white hover:shadow-[0_8px_20px] shadow-primary/28"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -169,13 +169,13 @@ export function PublicFooter() {
               <h3 className="text-[14px] font-bold tracking-wide text-white">
                 {column.title}
               </h3>
-              <span className="mt-2 mb-4 block h-[2px] w-8 rounded-full bg-[#ff4747]" />
+              <span className="mt-2 mb-4 block h-[2px] w-8 rounded-full bg-primary" />
               <ul className="space-y-2.5">
                 {column.links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-[13px] font-medium leading-5 text-white/72 transition hover:translate-x-0.5 hover:text-[#ff8a8a]"
+                      className="text-[13px] font-medium leading-5 text-white/72 transition hover:translate-x-0.5 hover:text-primary/70"
                     >
                       {link.label}
                     </Link>
@@ -191,7 +191,7 @@ export function PublicFooter() {
           className="rounded-[16px] border border-white/[0.08] bg-white/[0.04] p-6 backdrop-blur-sm lg:max-w-[260px] lg:pt-2"
         >
           <h3 className="text-[14px] font-bold tracking-wide text-white">Contact Us</h3>
-          <span className="mt-2 mb-5 block h-[2px] w-8 rounded-full bg-[#ff4747]" />
+          <span className="mt-2 mb-5 block h-[2px] w-8 rounded-full bg-primary" />
           <ul className="space-y-4">
             {contactItems.map(({ icon: Icon, label, href }) => (
               <li key={label}>
@@ -201,7 +201,7 @@ export function PublicFooter() {
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel={href.startsWith("http") ? "noreferrer" : undefined}
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] border border-white/10 bg-[#ff4747]/15 text-[#ff8a8a] transition group-hover:border-[#ff4747]/40 group-hover:bg-[#ff4747]/25">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] border border-white/10 bg-primary/15 text-primary/70 transition group-hover:border-primary/40 group-hover:bg-primary/25">
                     <Icon className="h-4 w-4" />
                   </span>
                   <span className="pt-1 leading-5">{label}</span>
@@ -228,7 +228,7 @@ export function PublicFooter() {
               <Link
                 key={item}
                 href="/support"
-                className="text-[12px] font-medium text-white/55 transition hover:text-[#ff8a8a]"
+                className="text-[12px] font-medium text-white/55 transition hover:text-primary/70"
               >
                 {item}
               </Link>
@@ -242,8 +242,8 @@ export function PublicFooter() {
         aria-label="Chat with support"
         className={cn(
           "fixed bottom-6 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-[14px]",
-          "bg-[#ff4747] text-white shadow-[0_14px_32px_rgba(255,71,71,0.38)]",
-          "transition hover:-translate-y-1 hover:bg-[#ef3033] sm:bottom-8 sm:right-8"
+          "bg-primary text-white shadow-[0_14px_32px] shadow-primary/38",
+          "transition hover:-translate-y-1 hover:bg-primary/90 sm:bottom-8 sm:right-8"
         )}
       >
         <MessageCircle className="h-6 w-6 fill-white/15" />

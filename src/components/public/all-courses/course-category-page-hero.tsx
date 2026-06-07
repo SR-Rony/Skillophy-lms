@@ -49,7 +49,7 @@ export function CourseCategoryPageHero({
       >
         <Link
           href={ROUTES.courses}
-          className="mb-8 inline-flex items-center gap-1.5 text-[14px] font-semibold text-[#8a2525] transition hover:text-[#ff4747]"
+          className="mb-8 inline-flex items-center gap-1.5 text-[14px] font-semibold text-primary-dark transition hover:text-primary"
         >
           <ChevronLeft className="h-4 w-4" aria-hidden />
           All Courses

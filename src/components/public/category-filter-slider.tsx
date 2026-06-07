@@ -104,16 +104,16 @@ export function CategoryFilterSlider({
                   Icon && "gap-3",
                   isDark
                     ? isActive
-                      ? "border-[#ff4747]/40 bg-white text-[#1f1514]"
-                      : "border-white/10 bg-white text-[#302927] hover:-translate-y-0.5 hover:border-[#ff4747]/30"
+                      ? "border-primary/40 bg-white text-[#1f1514]"
+                      : "border-white/10 bg-white text-[#302927] hover:-translate-y-0.5 hover:border-primary/30"
                     : isActive
-                      ? "border-[#f1b8b4] bg-[#fff4f2] text-[#8a2525]"
-                      : "border-[#eee5e2] bg-white text-[#302927] hover:-translate-y-0.5 hover:border-[#f1b8b4]"
+                      ? "border-primary/25 bg-primary/5 text-primary-dark"
+                      : "border-[#eee5e2] bg-white text-[#302927] hover:-translate-y-0.5 hover:border-primary/25"
                 );
                 const tabContent = (
                   <>
                     {hasNotification && (
-                      <span className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-[#ff4747]" />
+                      <span className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-primary" />
                     )}
                     {Icon && <Icon className="h-5 w-5 shrink-0 stroke-[1.7]" />}
                     <span>

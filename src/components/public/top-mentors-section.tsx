@@ -96,14 +96,14 @@ function MentorCard({ mentor }: { mentor: Mentor }) {
           <a
             href="#"
             aria-label={`${mentor.name} LinkedIn`}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#fff4f2] text-[13px] font-black text-[#b22222] transition hover:bg-[#ff4747] hover:text-white"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/5 text-[13px] font-black text-primary-dark transition hover:bg-primary hover:text-white"
           >
             in
           </a>
           <a
             href="#"
             aria-label={`${mentor.name} Facebook`}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#fff4f2] text-[13px] font-black text-[#b22222] transition hover:bg-[#ff4747] hover:text-white"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/5 text-[13px] font-black text-primary-dark transition hover:bg-primary hover:text-white"
           >
             f
           </a>

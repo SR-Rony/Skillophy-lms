@@ -47,7 +47,7 @@ export function CourseDetailsHeroVideoPreview({
         />
         <button
           type="button"
-          className="absolute left-1/2 top-1/2 flex h-[64px] w-[64px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#ff4d4d] text-white shadow-[0_0_0_14px_rgba(255,77,77,0.28)] transition hover:scale-105 hover:bg-[#ef4343] sm:h-[72px] sm:w-[72px]"
+          className="absolute left-1/2 top-1/2 flex h-[64px] w-[64px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-white shadow-[0_0_0_14px] shadow-primary/28 transition hover:scale-105 hover:bg-primary/90 sm:h-[72px] sm:w-[72px]"
           aria-label="Play course preview video"
         >
           <Play className="ml-1 h-7 w-7 fill-white sm:h-8 sm:w-8" aria-hidden />
