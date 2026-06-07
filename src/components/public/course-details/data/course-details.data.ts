@@ -192,7 +192,7 @@ Through hands-on projects and guided feedback, you will practice the same workfl
     description:
       "This course was selected for our collection of top-rated courses trusted by businesses worldwide.",
     ctaLabel: "Try Skillophy Business",
-    ctaHref: "/pricing",
+    ctaHref: "/business",
     logos: ["box", "eventbrite", "nasdaq", "netapp", "samsung"],
   },
   benefits: [

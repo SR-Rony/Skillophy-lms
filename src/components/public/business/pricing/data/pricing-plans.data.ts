@@ -1,4 +1,4 @@
-import type { PricingSectionData } from "@/components/public/pricing/types";
+import type { PricingSectionData } from "@/components/public/business/pricing/types";
 import { ROUTES } from "@/constants";
 
 export const pricingSectionData: PricingSectionData = {

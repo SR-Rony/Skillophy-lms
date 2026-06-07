@@ -25,6 +25,10 @@ export const sectionHeadingClassName =
 export const heroHeadingClassName =
   "text-[40px] font-extrabold leading-[1.2] tracking-[0.02em] text-[#24201f] sm:text-[52px] lg:text-[62px]";
 
+/** Trusted clients heading — Outfit 700, 32px, 120% line-height */
+export const trustedClientsHeadingClassName =
+  "font-sans text-[32px] font-bold leading-[1.2] tracking-normal text-[#24201f]";
+
 interface SectionTitleProps {
   label: string;
   title: ReactNode;

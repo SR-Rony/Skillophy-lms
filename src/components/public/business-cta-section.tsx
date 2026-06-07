@@ -58,7 +58,7 @@ export function BusinessCtaSection() {
 
             <div className="mt-9">
               <Button asChild variant="publicCta" size="publicCta">
-                <Link href={ROUTES.pricing}>See Details</Link>
+                <Link href={ROUTES.business}>See Details</Link>
               </Button>
             </div>
           </motion.div>

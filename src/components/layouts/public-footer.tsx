@@ -16,6 +16,7 @@ import {
   Send,
 } from "lucide-react";
 import { Container } from "@/components/shared";
+import { ROUTES } from "@/constants";
 import { cn } from "@/utils";
 
 const FOOTER_LOGO_SRC = "/images/footer.png";
@@ -27,7 +28,7 @@ const footerColumns = [
       { label: "Join as a Teacher", href: "/register" },
       { label: "Career", href: "/about" },
       { label: "Skillophy Affiliation", href: "/about" },
-      { label: "Skillophy Business", href: "/pricing" },
+      { label: "Skillophy Business", href: ROUTES.business },
       { label: "About Us", href: "/about" },
       { label: "Faq", href: "/support" },
       { label: "Press/News Feature", href: "/blog" },

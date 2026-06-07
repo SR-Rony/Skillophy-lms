@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
+    "dev:turbopack": "next dev --turbopack",
     "clean": "rm -rf .next",
     "clean:image-cache": "find .next -path '*cache/images*' -size 0 -delete 2>/dev/null || true",
     "build": "next build",

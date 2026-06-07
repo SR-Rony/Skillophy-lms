@@ -2,19 +2,23 @@
 
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
-import { PricingPlanCard } from "@/components/public/pricing/pricing-plan-card";
+import { PricingPlanCard } from "@/components/public/business/pricing/pricing-plan-card";
 import { SectionTitle, sectionTitleFadeUpVariants } from "@/components/public/section-title";
-import type { PricingSectionData } from "@/components/public/pricing/types";
-import { pricingSectionData } from "@/components/public/pricing/data/pricing-plans.data";
+import type { PricingSectionData } from "@/components/public/business/pricing/types";
+import { pricingSectionData } from "@/components/public/business/pricing/data/pricing-plans.data";
 
 interface PricingSectionProps {
   data?: PricingSectionData;
   className?: string;
+  id?: string;
 }
 
-export function PricingSection({ data = pricingSectionData, className }: PricingSectionProps) {
+export function PricingSection({ data = pricingSectionData, className, id }: PricingSectionProps) {
   return (
-    <section className={className ?? "relative overflow-hidden bg-white py-16 sm:py-20 lg:py-[92px]"}>
+    <section
+      id={id}
+      className={className ?? "relative overflow-hidden bg-white py-16 scroll-mt-24 sm:py-20 lg:py-[92px]"}
+    >
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-[-8%] top-[12%] h-[260px] w-[260px] rounded-full bg-[#ffe2cc]/35 blur-3xl" />
         <svg

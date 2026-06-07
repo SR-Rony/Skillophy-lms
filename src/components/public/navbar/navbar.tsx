@@ -115,7 +115,7 @@ export function Navbar() {
             </Link>
 
             <Link
-              href={ROUTES.pricing}
+              href={ROUTES.business}
               className="text-sm font-medium text-gray-700 transition-colors hover:text-gray-900"
             >
               Business

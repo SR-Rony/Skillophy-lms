@@ -3,7 +3,7 @@ import type { NavItem } from "@/types/navigation.types";
 /** Public marketing site navigation */
 export const publicNav: NavItem[] = [
   { title: "Courses", href: "/courses" },
-  { title: "Pricing", href: "/pricing" },
+  { title: "Business", href: "/business" },
   { title: "Blog", href: "/blog" },
   { title: "About", href: "/about" },
 ];

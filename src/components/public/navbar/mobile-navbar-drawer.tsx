@@ -169,7 +169,7 @@ export function MobileNavbarDrawer({
               ) : (
                 <div className="space-y-5">
                   <Link
-                    href={ROUTES.pricing}
+                    href={ROUTES.business}
                     onClick={closeDrawer}
                     className="block text-[15px] font-medium text-[#25201f]"
                   >
@@ -276,7 +276,7 @@ function AccountMenuView({
 
         <nav className="space-y-1 px-4">
           <Link
-            href={ROUTES.pricing}
+            href={ROUTES.business}
             onClick={onClose}
             className="flex min-h-[52px] items-center justify-between text-[15px] font-medium text-[#25201f]"
           >

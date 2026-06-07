@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Check, Lightbulb, Rocket, Sparkles, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { PricingPlan, PricingPlanIcon } from "@/components/public/pricing/types";
+import type { PricingPlan, PricingPlanIcon } from "@/components/public/business/pricing/types";
 import { cn } from "@/utils";
 
 const planIcons: Record<
@@ -24,8 +24,11 @@ export function PricingPlanCard({ plan }: PricingPlanCardProps) {
   return (
     <article
       className={cn(
-        "relative flex h-full flex-col rounded-[20px] border bg-white p-6 shadow-[0_10px_30px_rgba(80,37,31,0.06)] sm:p-7",
-        isHighlighted ? "border-primary shadow-[0_16px_40px_rgba(255,71,71,0.12)]" : "border-[#ece6e3]"
+        "group/card relative flex h-full flex-col rounded-[20px] border bg-white p-6 shadow-[0_10px_30px_rgba(80,37,31,0.06)] transition-all duration-300 sm:p-7",
+        "hover:-translate-y-1 hover:border-primary hover:shadow-[0_16px_40px_rgba(255,71,71,0.14)] hover:ring-1 hover:ring-primary/15",
+        isHighlighted
+          ? "border-primary shadow-[0_16px_40px_rgba(255,71,71,0.12)] hover:shadow-[0_20px_48px_rgba(255,71,71,0.2)]"
+          : "border-[#ece6e3]"
       )}
     >
       {plan.popular && (
@@ -100,9 +103,11 @@ export function PricingPlanCard({ plan }: PricingPlanCardProps) {
         variant={plan.ctaVariant === "primary" ? "publicCta" : "outline"}
         size="publicCta"
         className={cn(
-          "mt-8 w-full rounded-[14px]",
+          "mt-8 w-full rounded-[14px] transition-all duration-300",
+          plan.ctaVariant === "primary" &&
+            "group-hover/card:-translate-y-0.5 group-hover/card:shadow-[0_14px_28px] group-hover/card:shadow-primary/24 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_16px_32px] hover:shadow-primary/28 active:translate-y-0 active:bg-primary/95",
           plan.ctaVariant === "outline" &&
-            "h-[52px] border-[#1a1a1a] bg-white text-[13px] font-black text-[#1a1a1a] shadow-none hover:bg-[#faf9f8]"
+            "h-[52px] border-[#1a1a1a] bg-white text-[13px] font-black text-[#1a1a1a] shadow-none group-hover/card:border-primary group-hover/card:bg-primary group-hover/card:text-white group-hover/card:shadow-[0_14px_28px] group-hover/card:shadow-primary/24 hover:border-primary hover:bg-primary hover:text-white hover:shadow-[0_14px_28px] hover:shadow-primary/24 active:bg-primary/95"
         )}
       >
         <Link href={plan.ctaHref}>{plan.ctaLabel}</Link>
