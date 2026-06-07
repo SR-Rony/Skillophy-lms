@@ -303,14 +303,22 @@ Through hands-on projects and guided feedback, you will practice the same workfl
     },
   ],
   sidebar: {
-    price: 2500,
-    originalPrice: 3200,
+    variant: "course",
+    price: 2400,
+    originalPrice: 2600,
+    appliedPromo: {
+      code: "WEBDESIGN453",
+    },
     includes: [
-      { icon: "lessons", label: "24 Lessons" },
-      { icon: "video", label: "18 Video Lessons" },
-      { icon: "duration", label: "32h Duration" },
-      { icon: "files", label: "Exercise Files" },
+      { icon: "learners", value: "2873", label: "Learners" },
+      { icon: "video", value: "40+", label: "Video Content" },
+      { icon: "duration", value: "40 hours", label: "Duration" },
+      { icon: "files", value: "34", label: "Lecture Sheets" },
     ],
+    contact: {
+      phone: "165387",
+      hours: "10 am to 10 pm",
+    },
   },
   similarCourses: defaultSimilarCourses,
   similarCoursesVariant: "paid",
@@ -334,6 +342,53 @@ export const courseDetailsBySlug: Partial<
       ratingCount: 3240,
       previewImage:
         "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=793&h=500&auto=format&fit=crop&q=80",
+    },
+  },
+  "bcs-50th": {
+    slug: "bcs-50th",
+    hero: {
+      levelLabel: "MODEL TEST",
+      title: "BCS (50th)",
+      description:
+        "Practice with a full-length model test designed to mirror the real BCS exam pattern and timing.",
+      rating: 4.7,
+      ratingCount: 2873,
+      previewImage:
+        "https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=793&h=500&auto=format&fit=crop&q=80",
+    },
+    sidebar: {
+      variant: "model-test",
+      price: 600,
+      testTime: { value: "40 hours", label: "Test time" },
+      questions: { value: "100", label: "Questions" },
+      contact: {
+        phone: "165387",
+        hours: "10 am to 10 pm",
+      },
+    },
+  },
+  "how-to-achieve-healthy-life": {
+    slug: "how-to-achieve-healthy-life",
+    hero: {
+      levelLabel: "FREE WORKSHOP",
+      title: "How to Achieve Healthy Life",
+      description:
+        "Join this live workshop to learn practical habits for a healthier daily routine and balanced lifestyle.",
+      rating: 4.9,
+      ratingCount: 1200,
+      previewImage:
+        "https://images.unsplash.com/photo-1471943311424-646960669fbc?w=793&h=500&auto=format&fit=crop&q=80",
+    },
+    sidebar: {
+      variant: "workshop",
+      date: { value: "Sep 24", label: "Date" },
+      time: { value: "10:30 AM", label: "Time" },
+      scheduleLabel: "Sep 24, 2024 at 10:30 AM",
+      goToWorkshopHref: "/student/assignments",
+      contact: {
+        phone: "165387",
+        hours: "10 am to 10 pm",
+      },
     },
   },
 };

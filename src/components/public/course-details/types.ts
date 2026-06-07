@@ -96,16 +96,64 @@ export interface CourseDetailsJobOpeningRate {
   chartYears: string[];
 }
 
+export type CourseDetailsSidebarIncludeIcon = "learners" | "video" | "duration" | "files";
+
 export interface CourseDetailsSidebarInclude {
-  icon: "lessons" | "video" | "duration" | "files";
+  icon: CourseDetailsSidebarIncludeIcon;
+  value: string;
   label: string;
 }
 
-export interface CourseDetailsSidebar {
+export interface CourseDetailsSidebarStat {
+  value: string;
+  label: string;
+}
+
+export interface CourseDetailsSidebarContact {
+  phone: string;
+  hours: string;
+}
+
+export interface CourseDetailsSidebarPromo {
+  code: string;
+}
+
+interface CourseDetailsSidebarBase {
+  contact?: CourseDetailsSidebarContact;
+}
+
+export interface CourseDetailsCourseSidebar extends CourseDetailsSidebarBase {
+  variant: "course";
+  /** Final price when promo is applied; otherwise the list price */
   price: number;
-  originalPrice: number;
+  /** List price — shown with strikethrough when `appliedPromo` is set */
+  originalPrice?: number;
+  appliedPromo?: CourseDetailsSidebarPromo;
   includes: CourseDetailsSidebarInclude[];
 }
+
+export interface CourseDetailsModelTestSidebar extends CourseDetailsSidebarBase {
+  variant: "model-test";
+  price: number;
+  originalPrice?: number;
+  appliedPromo?: CourseDetailsSidebarPromo;
+  testTime: CourseDetailsSidebarStat;
+  questions: CourseDetailsSidebarStat;
+}
+
+export interface CourseDetailsWorkshopSidebar extends CourseDetailsSidebarBase {
+  variant: "workshop";
+  date: CourseDetailsSidebarStat;
+  time: CourseDetailsSidebarStat;
+  /** Full schedule line shown in the booking confirmation modal */
+  scheduleLabel?: string;
+  goToWorkshopHref?: string;
+}
+
+export type CourseDetailsSidebar =
+  | CourseDetailsCourseSidebar
+  | CourseDetailsModelTestSidebar
+  | CourseDetailsWorkshopSidebar;
 
 export interface CourseDetailsCertificate {
   descriptionLines: [string, string];

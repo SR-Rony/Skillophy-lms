@@ -104,13 +104,13 @@ export function Navbar() {
             </button>
 
             <Link
-              href={ROUTES.student.wishlist}
+              href={ROUTES.cart}
               className="relative text-gray-700 transition-colors hover:text-gray-900"
-              aria-label="Cart, 2 items"
+              aria-label="Cart, 5 items"
             >
               <ShoppingCart size={20} />
               <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
-                2
+                5
               </span>
             </Link>
 

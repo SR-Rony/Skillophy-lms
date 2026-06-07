@@ -1,17 +1,10 @@
-import { Container } from "@/components/shared";
-import { PageHeader } from "@/components/shared/page-header";
+import { PricingPageContent } from "@/components/public/pricing/pricing-page-content";
 
-export const metadata = { title: "Pricing" };
+export const metadata = {
+  title: "Pricing",
+  description: "Flexible plans for teams, leaders, and enterprise organizations.",
+};
 
 export default function PricingPage() {
-  return (
-    <Container className="py-12">
-      <PageHeader
-        title="Pricing"
-        description="Flexible plans for individuals and teams."
-      />
-      {/* Feature: payments — pricing tiers UI */}
-      <p className="mt-8 text-muted-foreground">Pricing module placeholder.</p>
-    </Container>
-  );
+  return <PricingPageContent />;
 }
