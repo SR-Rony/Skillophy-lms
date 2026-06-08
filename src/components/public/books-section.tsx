@@ -5,7 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { Container } from "@/components/shared";
-import { CategoryFilterSlider } from "@/components/public/category-filter-slider";
+import { CategoryFilterBar } from "@/components/public/category-filter-bar";
 import { Button } from "@/components/ui/button";
 import { SectionTitle, sectionTitleFadeUpVariants } from "@/components/public/section-title";
 
@@ -309,7 +309,7 @@ export function BooksSection() {
         />
 
         <motion.div className="mt-10">
-          <CategoryFilterSlider
+          <CategoryFilterBar
             categories={bookFilterCategories}
             activeCategoryId={activeCategoryId}
             onCategoryChange={setActiveCategoryId}

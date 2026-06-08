@@ -1,6 +1,6 @@
 "use client";
 
-import { CategoryFilterSlider } from "@/components/public/category-filter-slider";
+import { CategoryFilterBar } from "@/components/public/category-filter-bar";
 import { ROUTES } from "@/constants";
 import type { AllCoursesCategory, CategoryId } from "@/data/mock/all-courses-categories";
 
@@ -22,7 +22,7 @@ export function AllCoursesCategoryFilter({
   className,
 }: AllCoursesCategoryFilterProps) {
   return (
-    <CategoryFilterSlider
+    <CategoryFilterBar
       categories={categories.map((category) => ({
         id: category.id,
         label: category.label,

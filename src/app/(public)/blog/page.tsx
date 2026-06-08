@@ -1,13 +1,11 @@
-import { Container } from "@/components/shared";
-import { PageHeader } from "@/components/shared/page-header";
+import { BlogPageContent } from "@/components/public/blog";
 
-export const metadata = { title: "Blog" };
+export const metadata = {
+  title: "Blog",
+  description:
+    "Explore Skillophy blogs and informative content on learning, skills, and career growth.",
+};
 
 export default function BlogPage() {
-  return (
-    <Container className="py-12">
-      <PageHeader title="Blog" description="Insights, tutorials, and product updates." />
-      <p className="mt-8 text-muted-foreground">Blog module placeholder.</p>
-    </Container>
-  );
+  return <BlogPageContent />;
 }

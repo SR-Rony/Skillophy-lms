@@ -13,25 +13,31 @@ const CATEGORY_VISIBLE_COUNT = {
   lg: 5,
 } as const;
 
-function useVisibleCategoryCount() {
-  const [visibleCount, setVisibleCount] = useState<number>(CATEGORY_VISIBLE_COUNT.default);
+type VisibleCategoryCounts = {
+  default: number;
+  md: number;
+  lg: number;
+};
+
+function useVisibleCategoryCount(visibleCounts: VisibleCategoryCounts) {
+  const [visibleCount, setVisibleCount] = useState<number>(visibleCounts.default);
 
   useEffect(() => {
     const mediaQueries = [
-      { query: "(min-width: 1024px)", value: CATEGORY_VISIBLE_COUNT.lg },
-      { query: "(min-width: 768px)", value: CATEGORY_VISIBLE_COUNT.md },
+      { query: "(min-width: 1024px)", value: visibleCounts.lg },
+      { query: "(min-width: 768px)", value: visibleCounts.md },
     ];
 
     const updateVisibleCount = () => {
       const matchedQuery = mediaQueries.find(({ query }) => window.matchMedia(query).matches);
-      setVisibleCount(matchedQuery?.value ?? CATEGORY_VISIBLE_COUNT.default);
+      setVisibleCount(matchedQuery?.value ?? visibleCounts.default);
     };
 
     updateVisibleCount();
     window.addEventListener("resize", updateVisibleCount);
 
     return () => window.removeEventListener("resize", updateVisibleCount);
-  }, []);
+  }, [visibleCounts]);
 
   return visibleCount;
 }
@@ -54,6 +60,12 @@ interface CategoryFilterSliderProps {
   theme?: "light" | "dark";
   className?: string;
   nextButtonAriaLabel?: string;
+  visibleCounts?: {
+    default: number;
+    md: number;
+    lg: number;
+  };
+  gridColumnsClassName?: string;
 }
 
 export function CategoryFilterSlider({
@@ -65,21 +77,33 @@ export function CategoryFilterSlider({
   theme = "light",
   className,
   nextButtonAriaLabel = "Show next category",
+  visibleCounts = CATEGORY_VISIBLE_COUNT,
+  gridColumnsClassName = "grid-cols-2 md:grid-cols-3 lg:grid-cols-5",
 }: CategoryFilterSliderProps) {
   const [categorySlideIndex, setCategorySlideIndex] = useState(0);
-  const visibleCount = useVisibleCategoryCount();
+  const visibleCount = useVisibleCategoryCount(visibleCounts);
   const isDark = theme === "dark";
 
-  const visibleCategories = useMemo(
-    () =>
-      Array.from({ length: visibleCount }, (_, index) => {
-        const categoryIndex = (categorySlideIndex + index) % categories.length;
-        return categories[categoryIndex];
-      }),
-    [categories, categorySlideIndex, visibleCount]
-  );
+  const visibleCategories = useMemo(() => {
+    if (categories.length === 0) {
+      return [];
+    }
+
+    const slotCount = Math.min(visibleCount, categories.length);
+
+    return Array.from({ length: slotCount }, (_, index) => {
+      const categoryIndex = (categorySlideIndex + index) % categories.length;
+      return categories[categoryIndex];
+    });
+  }, [categories, categorySlideIndex, visibleCount]);
+
+  const canSlideCategories = categories.length > visibleCount;
 
   const nextCategory = () => {
+    if (!canSlideCategories) {
+      return;
+    }
+
     setCategorySlideIndex((currentIndex) => (currentIndex + 1) % categories.length);
   };
 
@@ -93,18 +117,18 @@ export function CategoryFilterSlider({
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -36 }}
             transition={{ duration: 0.42, ease: "easeOut" }}
-            className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5"
+            className={cn("grid gap-4", gridColumnsClassName)}
           >
-            {visibleCategories.map(
-              ({ id, label, itemCount, filterLabel, icon: Icon, hasNotification }) => {
-                const isActive = id === activeCategoryId;
+            {visibleCategories.map((category) => {
+              const { id, label, itemCount, filterLabel, icon: Icon, hasNotification } = category;
+              const isActive = id === activeCategoryId;
                 const href = getCategoryHref?.(id);
                 const tabClassName = cn(
                   "relative flex min-h-[58px] items-center rounded-[10px] border px-4 py-3 text-left shadow-[0_12px_28px_rgba(55,41,38,0.05)] transition duration-300",
                   Icon && "gap-3",
                   isDark
                     ? isActive
-                      ? "border-primary/40 bg-white text-[#1f1514]"
+                      ? "border-white bg-white text-[#1f1514] shadow-[0_12px_28px_rgba(0,0,0,0.18)]"
                       : "border-white/10 bg-white text-[#302927] hover:-translate-y-0.5 hover:border-primary/30"
                     : isActive
                       ? "border-primary/25 bg-primary/5 text-primary-dark"
@@ -120,7 +144,12 @@ export function CategoryFilterSlider({
                       <span className="block text-[13px] font-extrabold leading-none">
                         {filterLabel ?? label}
                       </span>
-                      <span className="mt-1 block text-[11px] font-semibold text-[#6f6562]">
+                      <span
+                        className={cn(
+                          "mt-1 block text-[11px] font-semibold",
+                          isActive ? "text-primary" : "text-[#6f6562]"
+                        )}
+                      >
                         {itemCount} {countLabel}
                       </span>
                     </span>
@@ -145,8 +174,7 @@ export function CategoryFilterSlider({
                     {tabContent}
                   </button>
                 );
-              }
-            )}
+              })}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -157,6 +185,7 @@ export function CategoryFilterSlider({
         size="publicIcon"
         aria-label={nextButtonAriaLabel}
         onClick={nextCategory}
+        disabled={!canSlideCategories}
         className="shrink-0"
       >
         <ChevronRight className="h-5 w-5" />

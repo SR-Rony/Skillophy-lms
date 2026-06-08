@@ -1,6 +1,8 @@
 /**
  * Centralized TanStack Query keys — prevents cache key drift across features.
  */
+import type { BlogListFilters } from "@/types/blog.types";
+
 export const queryKeys = {
   auth: {
     session: ["auth", "session"] as const,
@@ -43,5 +45,12 @@ export const queryKeys = {
   },
   analytics: {
     dashboard: (role: string) => ["analytics", "dashboard", role] as const,
+  },
+  blog: {
+    categories: ["blog", "categories"] as const,
+    totalCount: ["blog", "total-count"] as const,
+    list: (filters?: BlogListFilters) => ["blog", "list", filters] as const,
+    detail: (slug: string) => ["blog", "detail", slug] as const,
+    related: (slug: string, limit = 3) => ["blog", "related", slug, limit] as const,
   },
 } as const;

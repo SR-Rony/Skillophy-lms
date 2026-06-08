@@ -10,6 +10,7 @@ export const ROUTES = {
   teachers: "/teachers",
   courseCategory: (categoryId: string) => `/courses/category/${categoryId}`,
   blog: "/blog",
+  blogPost: (slug: string) => `/blog/${slug}`,
   about: "/about",
   auth: {
     login: "/login",
