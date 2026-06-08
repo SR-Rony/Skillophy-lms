@@ -33,7 +33,7 @@ import {
 import { CourseCategoryItem } from "./course-category-item";
 import {
   isBusinessRoute,
-  isRegisterRoute,
+  isTeachersRoute,
   navItemClassNameMobile,
 } from "./nav-item-classes";
 
@@ -70,7 +70,7 @@ export function MobileNavbarDrawer({
   const [view, setView] = useState<"main" | "account">("main");
 
   const isBusinessActive = isBusinessRoute(pathname);
-  const isRegisterActive = isRegisterRoute(pathname);
+  const isTeachersActive = isTeachersRoute(pathname);
 
   const closeDrawer = () => {
     setView("main");
@@ -186,9 +186,9 @@ export function MobileNavbarDrawer({
                     Business
                   </Link>
                   <Link
-                    href={ROUTES.auth.register}
+                    href={ROUTES.teachers}
                     onClick={closeDrawer}
-                    className={navItemClassNameMobile(isRegisterActive, "block text-[15px]")}
+                    className={navItemClassNameMobile(isTeachersActive, "block text-[15px]")}
                   >
                     Join as Teacher
                   </Link>
@@ -234,7 +234,7 @@ function AccountMenuView({
 }) {
   const pathname = usePathname();
   const isBusinessActive = isBusinessRoute(pathname);
-  const isRegisterActive = isRegisterRoute(pathname);
+  const isTeachersActive = isTeachersRoute(pathname);
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -304,10 +304,10 @@ function AccountMenuView({
             <ArrowUpRight className="h-4 w-4 text-[#554a47]" />
           </Link>
           <Link
-            href={ROUTES.auth.register}
+            href={ROUTES.teachers}
             onClick={onClose}
             className={navItemClassNameMobile(
-              isRegisterActive,
+              isTeachersActive,
               "flex min-h-[52px] items-center justify-between text-[15px]"
             )}
           >

@@ -4,6 +4,7 @@ import type { NavItem } from "@/types/navigation.types";
 export const publicNav: NavItem[] = [
   { title: "Courses", href: "/courses" },
   { title: "Business", href: "/business" },
+  { title: "Teachers", href: "/teachers" },
   { title: "Blog", href: "/blog" },
   { title: "About", href: "/about" },
 ];

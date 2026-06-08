@@ -20,7 +20,7 @@ import {
   isBusinessRoute,
   isCartRoute,
   isCoursesRoute,
-  isRegisterRoute,
+  isTeachersRoute,
   navItemClassName,
 } from "./nav-item-classes";
 
@@ -32,7 +32,7 @@ export function Navbar() {
 
   const isCoursesActive = isCoursesRoute(pathname) || isMegaMenuOpen;
   const isBusinessActive = isBusinessRoute(pathname);
-  const isRegisterActive = isRegisterRoute(pathname);
+  const isTeachersActive = isTeachersRoute(pathname);
   const isCartActive = isCartRoute(pathname);
 
   const closeMegaMenu = useCallback(() => setIsMegaMenuOpen(false), []);
@@ -136,8 +136,8 @@ export function Navbar() {
             </Link>
 
             <Link
-              href={ROUTES.auth.register}
-              className={navItemClassName(isRegisterActive, "text-sm")}
+              href={ROUTES.teachers}
+              className={navItemClassName(isTeachersActive, "text-sm")}
             >
               Join as Teacher
             </Link>

@@ -28,6 +28,10 @@ export function isRegisterRoute(pathname: string) {
   return pathname === "/register" || pathname.startsWith("/register/");
 }
 
+export function isTeachersRoute(pathname: string) {
+  return pathname === "/teachers" || pathname.startsWith("/teachers/");
+}
+
 export function isCartRoute(pathname: string) {
   return pathname === "/cart" || pathname === "/checkout";
 }
