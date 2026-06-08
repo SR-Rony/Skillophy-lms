@@ -15,6 +15,8 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
   return (
     <motion.article
       variants={sectionTitleFadeUpVariants}
+      initial="hidden"
+      animate="visible"
       className="group h-full overflow-hidden rounded-2xl border border-[#e5e7eb] bg-white shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition duration-300 hover:shadow-[0_8px_30px_rgba(15,23,42,0.1)]"
     >
       <Link href={ROUTES.blogPost(post.slug)} className="flex h-full flex-col">

@@ -11,6 +11,14 @@ interface BlogDetailsRelatedBlogsSectionProps {
   currentSlug: string;
 }
 
+const relatedGridVariants = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08 },
+  },
+};
+
 export function BlogDetailsRelatedBlogsSection({
   currentSlug,
 }: BlogDetailsRelatedBlogsSectionProps) {
@@ -41,11 +49,17 @@ export function BlogDetailsRelatedBlogsSection({
           </p>
         </motion.div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-7">
+        <motion.div
+          key={isLoading ? "loading" : relatedPosts.map((post) => post.id).join("-")}
+          className="mt-10 grid gap-6 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-7"
+          variants={relatedGridVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {isLoading
             ? Array.from({ length: 3 }).map((_, index) => <BlogPostCardSkeleton key={index} />)
             : relatedPosts.map((post) => <BlogPostCard key={post.id} post={post} />)}
-        </div>
+        </motion.div>
       </Container>
     </section>
   );

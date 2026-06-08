@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
-import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
 import { CategoryFilterBar } from "@/components/public/category-filter-bar";
 import { BlogPostCard } from "@/components/public/blog/blog-post-card";
 import { BlogPagination } from "@/components/public/blog/blog-pagination";
@@ -14,6 +13,14 @@ import type { BlogCategoryId } from "@/types/blog.types";
 interface BlogPostsSectionProps {
   searchQuery: string;
 }
+
+const blogGridVariants = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08 },
+  },
+};
 
 export function BlogPostsSection({ searchQuery }: BlogPostsSectionProps) {
   const [activeCategoryId, setActiveCategoryId] = useState<BlogCategoryId>("all");
@@ -30,6 +37,7 @@ export function BlogPostsSection({ searchQuery }: BlogPostsSectionProps) {
   const totalPages = data?.totalPages ?? 1;
   const safePage = data?.currentPage ?? 1;
   const total = data?.total ?? 0;
+  const postsGridKey = `${searchQuery}-${activeCategoryId}-${safePage}`;
 
   useEffect(() => {
     setCurrentPage(1);
@@ -50,14 +58,8 @@ export function BlogPostsSection({ searchQuery }: BlogPostsSectionProps) {
 
   return (
     <section id="blog-posts" className="bg-white py-12 sm:py-16 lg:py-20">
-      <Container
-        as={motion.div}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.08 }}
-        transition={{ staggerChildren: 0.08 }}
-      >
-        <motion.div variants={sectionTitleFadeUpVariants} className="mb-8 lg:mb-10">
+      <Container className="space-y-0">
+        <div className="mb-8 lg:mb-10">
           {!isCategoriesLoading && categories.length > 0 ? (
             <CategoryFilterBar
               categories={categories.map((category) => ({
@@ -71,7 +73,7 @@ export function BlogPostsSection({ searchQuery }: BlogPostsSectionProps) {
               nextButtonAriaLabel="Show next blog category"
             />
           ) : null}
-        </motion.div>
+        </div>
 
         {isPageLoading ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
@@ -80,43 +82,43 @@ export function BlogPostsSection({ searchQuery }: BlogPostsSectionProps) {
             ))}
           </div>
         ) : isError ? (
-          <motion.div
-            variants={sectionTitleFadeUpVariants}
-            className="rounded-[24px] bg-white px-6 py-14 text-center"
-          >
+          <div className="rounded-[24px] bg-white px-6 py-14 text-center">
             <p className="text-[18px] font-bold text-[#282221]">Unable to load blogs</p>
             <p className="mx-auto mt-2 max-w-md text-[14px] leading-relaxed text-[#6f6562]">
               Please try again in a moment.
             </p>
-          </motion.div>
+          </div>
         ) : total > 0 ? (
           <>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+            <motion.div
+              key={postsGridKey}
+              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7"
+              variants={blogGridVariants}
+              initial="hidden"
+              animate="visible"
+            >
               {posts.map((post) => (
                 <BlogPostCard key={post.id} post={post} />
               ))}
-            </div>
+            </motion.div>
 
             {totalPages > 1 && (
-              <motion.div variants={sectionTitleFadeUpVariants} className="mt-12 lg:mt-14">
+              <div className="mt-12 lg:mt-14">
                 <BlogPagination
                   currentPage={safePage}
                   totalPages={totalPages}
                   onPageChange={setCurrentPage}
                 />
-              </motion.div>
+              </div>
             )}
           </>
         ) : (
-          <motion.div
-            variants={sectionTitleFadeUpVariants}
-            className="rounded-[24px] bg-white px-6 py-14 text-center"
-          >
+          <div className="rounded-[24px] bg-white px-6 py-14 text-center">
             <p className="text-[18px] font-bold text-[#282221]">No blogs found</p>
             <p className="mx-auto mt-2 max-w-md text-[14px] leading-relaxed text-[#6f6562]">
               Try a different search term or category to explore more articles.
             </p>
-          </motion.div>
+          </div>
         )}
       </Container>
     </section>
