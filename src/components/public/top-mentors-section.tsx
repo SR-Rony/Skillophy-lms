@@ -1,10 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Container } from "@/components/shared";
-import { ItemsSlider } from "@/components/public/course-slider";
-import { SectionTitle } from "@/components/public/section-title";
+import { EmployeeSpotlightCard } from "@/components/public/employee-spotlight-card";
+import { SpotlightSliderSection } from "@/components/public/spotlight-slider-section";
 
 interface Mentor {
   id: string;
@@ -115,36 +113,16 @@ function MentorCard({ mentor }: { mentor: Mentor }) {
 
 export function TopMentorsSection() {
   return (
-    <section className="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-[92px]">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-0 top-0 h-full w-1/2 bg-[radial-gradient(circle_at_18%_34%,rgba(255,235,190,0.3),transparent_36%)]" />
-        <div className="absolute right-0 top-0 h-full w-1/2 bg-[radial-gradient(circle_at_82%_52%,rgba(255,221,166,0.22),transparent_34%)]" />
-      </div>
-
-      <Container
-        as={motion.div}
-        className="relative z-10"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ staggerChildren: 0.12 }}
-      >
-        <SectionTitle
-          className="max-w-[840px]"
-          label="Top Mentors"
-          title="Learn with Experienced Mentors"
-          description="Online courses using cutting-edge technology and instructional strategies. We prioritise accessibility and inclusivity."
-        />
-
-        <ItemsSlider
-          className="mt-12"
-          items={mentors}
-          getItemKey={(mentor) => mentor.id}
-          renderItem={(mentor) => <MentorCard mentor={mentor} />}
-          ariaLabelPrefix="top mentors"
-          itemsPerPage={{ lg: 4, sm: 2, default: 1 }}
-        />
-      </Container>
-    </section>
+    <SpotlightSliderSection
+      label="Top Mentors"
+      title="Learn with Experienced Mentors"
+      description="Online courses using cutting-edge technology and instructional strategies. We prioritise accessibility and inclusivity."
+      items={mentors}
+      getItemKey={(mentor) => mentor.id}
+      renderItem={(mentor) => <MentorCard mentor={mentor} />}
+      ariaLabelPrefix="top mentors"
+      itemsPerPage={{ lg: 4, sm: 2, default: 1 }}
+      slideDotCount={3}
+    />
   );
 }
