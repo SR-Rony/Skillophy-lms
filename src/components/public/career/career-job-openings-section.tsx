@@ -16,6 +16,7 @@ import {
   careerJobOpeningsSectionData,
 } from "@/components/public/career/data/career-job-openings.data";
 import type { JobCategoryId } from "@/types/career.types";
+import { cn } from "@/utils";
 
 const gridVariants = {
   hidden: { opacity: 1 },
@@ -57,7 +58,13 @@ function getEmptyStateLabel(categoryId: JobCategoryId) {
   return category?.emptyStateLabel ?? category?.label.toLowerCase() ?? "this category";
 }
 
-export function CareerJobOpeningsSection() {
+interface CareerJobOpeningsSectionProps {
+  showHeader?: boolean;
+}
+
+export function CareerJobOpeningsSection({
+  showHeader = true,
+}: CareerJobOpeningsSectionProps) {
   const [activeCategoryId, setActiveCategoryId] = useState<JobCategoryId>("all");
   const categoryCounts = useMemo(() => getCategoryCounts(careerJobOpenings), []);
 
@@ -97,9 +104,14 @@ export function CareerJobOpeningsSection() {
         viewport={{ once: true, amount: 0.15 }}
         transition={{ staggerChildren: 0.1 }}
       >
-        <SectionTitle label={label} title={title} description={description} align="center" />
+        {showHeader ? (
+          <SectionTitle label={label} title={title} description={description} align="center" />
+        ) : null}
 
-        <motion.div variants={sectionTitleFadeUpVariants} className="mt-10 lg:mt-12">
+        <motion.div
+          variants={sectionTitleFadeUpVariants}
+          className={cn(showHeader ? "mt-10 lg:mt-12" : "")}
+        >
           <CategoryFilterBar
             categories={filterCategories}
             activeCategoryId={activeCategoryId}

@@ -4,7 +4,7 @@ export const careerPageHeroData = {
   description:
     "With a mix of experience and stories, become suitable for life's work for the new generation, have a mentality like the new generation.",
   ctaLabel: "See All Job Openings",
-  ctaHref: "#job-openings",
+  ctaHref: "/position",
   imageSrc: "/images/Career.png",
   imageAlt: "Skillophy team celebrating together in a bright office",
 } as const;
