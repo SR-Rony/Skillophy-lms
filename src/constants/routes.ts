@@ -8,6 +8,7 @@ export const ROUTES = {
   checkout: "/checkout",
   business: "/business",
   teachers: "/teachers",
+  career: "/career",
   courseCategory: (categoryId: string) => `/courses/category/${categoryId}`,
   blog: "/blog",
   blogPost: (slug: string) => `/blog/${slug}`,

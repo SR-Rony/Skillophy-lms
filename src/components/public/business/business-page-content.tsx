@@ -1,5 +1,6 @@
 import { BusinessPageHero } from "@/components/public/business/business-page-hero";
-import { BusinessDifferentiatorsSection } from "@/components/public/business/business-differentiators-section";
+import { FeatureHighlightSection } from "@/components/public/feature-highlight-section";
+import { businessFeatureHighlightData } from "@/components/public/business/data/business-feature-highlight.data";
 import { BusinessFormSection } from "@/components/public/business/business-form-section";
 import { BusinessTestimonialSection } from "@/components/public/business/business-testimonial-section";
 import { TrustedClientsSection } from "@/components/public/business/trusted-clients-section";
@@ -10,7 +11,7 @@ export function BusinessPageContent() {
     <>
       <BusinessPageHero />
       <TrustedClientsSection />
-      <BusinessDifferentiatorsSection />
+      <FeatureHighlightSection {...businessFeatureHighlightData} />
       <BusinessFormSection />
       <BusinessTestimonialSection />
     </>

@@ -1,6 +1,7 @@
 import { HeroSection } from "@/components/public/hero-section";
 import { FeaturedCoursesSection } from "@/components/public/featured-courses-section";
-import { WhySkillophySection } from "@/components/public/why-skillophy-section";
+import { FeatureHighlightSection } from "@/components/public/feature-highlight-section";
+import { homeFeatureHighlightData } from "@/components/public/data/home-feature-highlight.data";
 import { CourseHighlightSection } from "@/components/public/course-highlight-section";
 import { FreeCoursesSection } from "@/components/public/free-courses-section";
 import { AllCoursesSection } from "@/components/public/all-courses";
@@ -21,7 +22,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <FeaturedCoursesSection />
-      <WhySkillophySection />
+      <FeatureHighlightSection {...homeFeatureHighlightData} />
       <CourseHighlightSection />
       <FreeCoursesSection />
       <AllCoursesSection />

@@ -26,7 +26,7 @@ const footerColumns = [
     title: "Company",
     links: [
       { label: "Join as a Teacher", href: "/register" },
-      { label: "Career", href: "/about" },
+      { label: "Career", href: ROUTES.career },
       { label: "Skillophy Affiliation", href: "/about" },
       { label: "Skillophy Business", href: ROUTES.business },
       { label: "About Us", href: "/about" },
