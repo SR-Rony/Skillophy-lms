@@ -2,7 +2,10 @@
 
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
-import { sectionHeadingClassName } from "@/components/public/section-title";
+import {
+  sectionHeadingClassName,
+  sectionLabelClassName,
+} from "@/components/public/section-title";
 import { cn } from "@/utils";
 import type { CenteredPageHeroProps } from "@/types/centered-page-hero.types";
 
@@ -52,7 +55,13 @@ function CenteredPageHeroBackground() {
   );
 }
 
-export function CenteredPageHero({ title, description, className }: CenteredPageHeroProps) {
+export function CenteredPageHero({
+  label,
+  title,
+  description,
+  className,
+  descriptionClassName,
+}: CenteredPageHeroProps) {
   return (
     <section
       className={cn(
@@ -69,10 +78,25 @@ export function CenteredPageHero({ title, description, className }: CenteredPage
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.55, ease: "easeOut" }}
       >
+        {label ? (
+          <div className="mb-5 flex items-center justify-center gap-3 sm:mb-6">
+            <span className="h-px w-12 bg-[#efb0aa] sm:w-16" aria-hidden />
+            <span className={cn(sectionLabelClassName, "font-bold text-primary-dark")}>
+              {label}
+            </span>
+            <span className="h-px w-12 bg-[#efb0aa] sm:w-16" aria-hidden />
+          </div>
+        ) : null}
+
         <h1 className={cn(sectionHeadingClassName, "text-[32px] sm:text-[40px] lg:text-[44px]")}>
           {title}
         </h1>
-        <p className="mx-auto mt-4 max-w-[640px] text-[15px] font-normal leading-[1.6] text-[#5f5553] sm:text-[16px]">
+        <p
+          className={cn(
+            "mx-auto mt-4 max-w-[640px] text-[15px] font-normal leading-[1.6] text-[#5f5553] sm:text-[16px]",
+            descriptionClassName,
+          )}
+        >
           {description}
         </p>
       </Container>

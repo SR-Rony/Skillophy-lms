@@ -10,6 +10,8 @@ export const ROUTES = {
   teachers: "/teachers",
   career: "/career",
   position: "/position",
+  positionJob: (jobId: string) => `/position/${jobId}`,
+  contact: "/contact",
   courseCategory: (categoryId: string) => `/courses/category/${categoryId}`,
   blog: "/blog",
   blogPost: (slug: string) => `/blog/${slug}`,

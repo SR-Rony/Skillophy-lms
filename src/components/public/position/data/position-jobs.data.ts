@@ -92,7 +92,6 @@ const detailOverrides: Partial<
 
 function buildPositionJobDetail(job: JobOpening, index: number): PositionJobDetail {
   const overrides = detailOverrides[job.id];
-  const month = 5 + (index % 4);
   const day = 8 + (index % 20);
 
   return {
@@ -109,3 +108,7 @@ function buildPositionJobDetail(job: JobOpening, index: number): PositionJobDeta
 }
 
 export const positionJobs: PositionJobDetail[] = careerJobOpenings.map(buildPositionJobDetail);
+
+export function getPositionJobById(jobId: string) {
+  return positionJobs.find((job) => job.id === jobId);
+}

@@ -8,6 +8,7 @@ import { PositionJobDetailPanel } from "@/components/public/position/position-jo
 import { PositionJobListCard } from "@/components/public/position/position-job-list-card";
 import { positionJobs } from "@/components/public/position/data/position-jobs.data";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
+import { ROUTES } from "@/constants";
 
 function PositionJobsBackground() {
   return (
@@ -27,7 +28,10 @@ export function PositionJobsSection() {
   return (
     <>
       <div className="lg:hidden">
-        <CareerJobOpeningsSection showHeader={false} />
+        <CareerJobOpeningsSection
+          showHeader={false}
+          getJobHref={(job) => ROUTES.positionJob(job.id)}
+        />
       </div>
 
       <section className="relative hidden overflow-hidden bg-white py-10 lg:block lg:py-14">

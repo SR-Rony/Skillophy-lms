@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
 import { Container } from "@/components/shared";
+import { SeamCornerImageFrame } from "@/components/public/seam-corner-image-frame";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
 import { teacherHowItWorksData } from "@/components/public/teachers/data/teacher-how-it-works.data";
 
@@ -91,30 +90,16 @@ export function TeacherHowItWorksSection() {
 
           <motion.div
             variants={sectionTitleFadeUpVariants}
-            className="relative mx-auto w-full max-w-[520px] lg:mx-0 lg:ml-auto"
+            className="relative mx-auto w-full max-w-[600px] lg:mx-0 lg:ml-auto xl:max-w-[660px]"
           >
-            <div className="pointer-events-none absolute -left-3 -top-3 h-28 w-28 rounded-tl-[28px] border-l-[6px] border-t-[6px] border-primary sm:h-32 sm:w-32" />
-            <div className="pointer-events-none absolute -bottom-3 -right-3 h-28 w-28 rounded-br-[28px] border-b-[6px] border-r-[6px] border-primary sm:h-32 sm:w-32" />
-
-            <div className="relative overflow-hidden rounded-[20px] shadow-[0_20px_50px_rgba(80,37,31,0.12)]">
-              <div className="relative aspect-[4/3] w-full">
-                <Image
-                  src={imageSrc}
-                  alt={imageAlt}
-                  fill
-                  className="object-cover object-center"
-                  sizes="(max-width: 1024px) 90vw, 520px"
-                />
-              </div>
-
-              <button
-                type="button"
-                aria-label="Play video"
-                className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-white shadow-[0_16px_32px] shadow-primary/30 transition hover:scale-105 hover:bg-primary/90 sm:h-[72px] sm:w-[72px]"
-              >
-                <Play className="ml-1 h-7 w-7 fill-current sm:h-8 sm:w-8" />
-              </button>
-            </div>
+            <SeamCornerImageFrame
+              imageSrc={imageSrc}
+              imageAlt={imageAlt}
+              gradientIdPrefix="teacher-how-it-works"
+              imageSizes="(max-width: 1024px) 92vw, 660px"
+              aspectClassName="aspect-[4/3] w-full min-h-[320px] sm:min-h-[380px] lg:min-h-[440px]"
+              playButtonAriaLabel="Play video"
+            />
           </motion.div>
         </div>
       </Container>

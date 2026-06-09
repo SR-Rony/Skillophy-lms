@@ -1,23 +1,36 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import { PricingPlanCard } from "@/components/public/business/pricing/pricing-plan-card";
 import { SectionTitle, sectionTitleFadeUpVariants } from "@/components/public/section-title";
 import type { PricingSectionData } from "@/components/public/business/pricing/types";
 import { pricingSectionData } from "@/components/public/business/pricing/data/pricing-plans.data";
+import { cn } from "@/utils";
 
 interface PricingSectionProps {
   data?: PricingSectionData;
   className?: string;
   id?: string;
+  decorativeImageSrc?: string;
+  decorativeImageAlt?: string;
 }
 
-export function PricingSection({ data = pricingSectionData, className, id }: PricingSectionProps) {
+export function PricingSection({
+  data = pricingSectionData,
+  className,
+  id,
+  decorativeImageSrc,
+  decorativeImageAlt = "",
+}: PricingSectionProps) {
   return (
     <section
       id={id}
-      className={className ?? "relative overflow-hidden bg-white py-16 scroll-mt-24 sm:py-20 lg:py-[92px]"}
+      className={cn(
+        "relative overflow-hidden bg-white py-16 scroll-mt-24 sm:py-20 lg:py-[92px]",
+        className,
+      )}
     >
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-[-8%] top-[12%] h-[260px] w-[260px] rounded-full bg-[#ffe2cc]/35 blur-3xl" />
@@ -36,6 +49,19 @@ export function PricingSection({ data = pricingSectionData, className, id }: Pri
             />
           ))}
         </svg>
+
+        {decorativeImageSrc ? (
+          <div className="absolute bottom-0 left-[-4%] hidden w-[min(34vw,420px)] lg:block">
+            <Image
+              src={decorativeImageSrc}
+              alt={decorativeImageAlt}
+              width={420}
+              height={520}
+              className="h-auto w-full object-contain object-bottom opacity-90"
+              priority={false}
+            />
+          </div>
+        ) : null}
       </div>
 
       <Container

@@ -62,7 +62,7 @@ export function PricingPlanCard({ plan }: PricingPlanCardProps) {
 
       <div className="mt-6 border-t border-[#ece6e3] pt-6">
         <p className="flex flex-wrap items-end gap-x-1">
-          <span className="text-[34px] font-black leading-none tracking-[-0.03em] text-[#1a1a1a] sm:text-[38px]">
+          <span className="text-[34px] font-black leading-none tracking-[-0.03em] text-primary-dark sm:text-[38px]">
             {plan.priceLabel}
           </span>
           {plan.priceSuffix && (
@@ -76,12 +76,10 @@ export function PricingPlanCard({ plan }: PricingPlanCardProps) {
           <li key={feature.label} className="flex items-start gap-3">
             <span
               className={cn(
-                "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border",
+                "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full",
                 feature.included
-                  ? isHighlighted
-                    ? "border-primary bg-primary/10 text-primary"
-                    : "border-[#1a1a1a] text-[#1a1a1a]"
-                  : "border-[#ece6e3] text-[#c4bbb8]"
+                  ? "bg-primary text-white"
+                  : "border border-[#ece6e3] bg-[#faf9f8] text-[#c4bbb8]"
               )}
             >
               <Check className="h-3 w-3" strokeWidth={3} aria-hidden />

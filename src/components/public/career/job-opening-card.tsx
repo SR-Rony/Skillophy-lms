@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
@@ -23,21 +24,20 @@ const jobTypeStyles: Record<
 interface JobOpeningCardProps {
   job: JobOpening;
   className?: string;
+  href?: string;
 }
 
-export function JobOpeningCard({ job, className }: JobOpeningCardProps) {
+export function JobOpeningCard({ job, className, href }: JobOpeningCardProps) {
   const { label, className: badgeClassName } = jobTypeStyles[job.jobType];
 
-  return (
-    <motion.article
-      variants={sectionTitleFadeUpVariants}
-      initial="hidden"
-      animate="visible"
-      className={cn(
-        "group flex h-full flex-col rounded-[18px] border border-[#eee1de] bg-white p-5 shadow-[0_18px_38px_rgba(80,37,31,0.05)] transition duration-300 hover:-translate-y-1 hover:border-[#f0c6c1] hover:shadow-[0_28px_55px_rgba(80,37,31,0.12)] sm:p-6",
-        className,
-      )}
-    >
+  const cardClassName = cn(
+    "group flex h-full flex-col rounded-[18px] border border-[#eee1de] bg-white p-5 shadow-[0_18px_38px_rgba(80,37,31,0.05)] transition duration-300 hover:-translate-y-1 hover:border-[#f0c6c1] hover:shadow-[0_28px_55px_rgba(80,37,31,0.12)] sm:p-6",
+    href && "cursor-pointer",
+    className,
+  );
+
+  const content = (
+    <>
       <div className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#6f6562]">
         <Clock className="h-3.5 w-3.5 shrink-0 text-[#9a908c]" aria-hidden />
         {job.postedAt}
@@ -64,6 +64,23 @@ export function JobOpeningCard({ job, className }: JobOpeningCardProps) {
           {label}
         </span>
       </div>
+    </>
+  );
+
+  return (
+    <motion.article
+      variants={sectionTitleFadeUpVariants}
+      initial="hidden"
+      animate="visible"
+      className={cardClassName}
+    >
+      {href ? (
+        <Link href={href} className="flex h-full flex-col">
+          {content}
+        </Link>
+      ) : (
+        content
+      )}
     </motion.article>
   );
 }

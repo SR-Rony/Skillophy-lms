@@ -15,7 +15,7 @@ import {
   careerJobOpenings,
   careerJobOpeningsSectionData,
 } from "@/components/public/career/data/career-job-openings.data";
-import type { JobCategoryId } from "@/types/career.types";
+import type { JobCategoryId, JobOpening } from "@/types/career.types";
 import { cn } from "@/utils";
 
 const gridVariants = {
@@ -60,10 +60,12 @@ function getEmptyStateLabel(categoryId: JobCategoryId) {
 
 interface CareerJobOpeningsSectionProps {
   showHeader?: boolean;
+  getJobHref?: (job: JobOpening) => string;
 }
 
 export function CareerJobOpeningsSection({
   showHeader = true,
+  getJobHref,
 }: CareerJobOpeningsSectionProps) {
   const [activeCategoryId, setActiveCategoryId] = useState<JobCategoryId>("all");
   const categoryCounts = useMemo(() => getCategoryCounts(careerJobOpenings), []);
@@ -132,7 +134,7 @@ export function CareerJobOpeningsSection({
             animate="visible"
           >
             {filteredJobs.map((job) => (
-              <JobOpeningCard key={job.id} job={job} />
+              <JobOpeningCard key={job.id} job={job} href={getJobHref?.(job)} />
             ))}
           </motion.div>
         ) : (
