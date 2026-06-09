@@ -2,6 +2,7 @@ import { CenteredPageHero } from "@/components/public/centered-page-hero";
 import { FeatureHighlightSection } from "@/components/public/feature-highlight-section";
 import { TractionStatsSection } from "@/components/public/traction-stats-section";
 import { TrustedClientsSection } from "@/components/public/trusted-clients-section";
+import { AboutActionCtaSection } from "@/components/public/action-cta-section";
 import { AboutLeadershipSection } from "@/components/public/about/about-leadership-section";
 import { AboutMissionSection } from "@/components/public/about/about-mission-section";
 import { AboutStorySection } from "@/components/public/about/about-story-section";
@@ -22,6 +23,7 @@ export function AboutPageContent() {
       <TractionStatsSection {...aboutTractionStatsData} />
       <AboutMissionSection />
       <AboutLeadershipSection />
+      <AboutActionCtaSection />
     </>
   );
 }
