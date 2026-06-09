@@ -1,3 +1,6 @@
+import { AffiliateCtaSection } from "@/components/public/affiliate/affiliate-cta-section";
+import { AffiliateFaqSection } from "@/components/public/affiliate/affiliate-faq-section";
+import { AffiliateBestAffiliatesSection } from "@/components/public/affiliate/affiliate-best-affiliates-section";
 import { AffiliateBenefitsSection } from "@/components/public/affiliate/affiliate-benefits-section";
 import { AffiliateHowItWorksSection } from "@/components/public/affiliate/affiliate-how-it-works-section";
 import { AffiliateLearningSection } from "@/components/public/affiliate/affiliate-learning-section";
@@ -15,7 +18,10 @@ export function AffiliatePageContent() {
       <AffiliateLearningSection />
       <StatisticsSection />
       <AffiliateSpecialMomentsSection />
+      <AffiliateBestAffiliatesSection />
       <AffiliateTestimonialSection />
+      <AffiliateFaqSection />
+      <AffiliateCtaSection />
     </>
   );
 }

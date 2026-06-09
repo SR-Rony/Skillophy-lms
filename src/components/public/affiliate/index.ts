@@ -1,5 +1,8 @@
 export { AffiliateTestimonialSection } from "./affiliate-testimonial-section";
 export { AffiliateSpecialMomentsSection } from "./affiliate-special-moments-section";
+export { AffiliateCtaSection } from "./affiliate-cta-section";
+export { AffiliateFaqSection } from "./affiliate-faq-section";
+export { AffiliateBestAffiliatesSection } from "./affiliate-best-affiliates-section";
 export { AffiliateBenefitsSection } from "./affiliate-benefits-section";
 export { AffiliateHowItWorksSection } from "./affiliate-how-it-works-section";
 export { AffiliateLearningSection } from "./affiliate-learning-section";
