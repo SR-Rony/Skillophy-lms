@@ -21,4 +21,5 @@ export interface JobOpening {
 export interface JobCategory {
   id: JobCategoryId;
   label: string;
+  emptyStateLabel?: string;
 }

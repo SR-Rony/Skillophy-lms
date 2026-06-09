@@ -8,12 +8,16 @@ export const careerJobOpeningsSectionData = {
 } as const;
 
 export const careerJobCategories: JobCategory[] = [
-  { id: "all", label: "All Position" },
-  { id: "product-design", label: "Product Design" },
-  { id: "engineering", label: "Engineering" },
-  { id: "marketing", label: "Marketing" },
-  { id: "content", label: "Content" },
-  { id: "operations", label: "Operations" },
+  { id: "all", label: "All Position", emptyStateLabel: "any department" },
+  {
+    id: "product-design",
+    label: "Product Design",
+    emptyStateLabel: "product design & research",
+  },
+  { id: "engineering", label: "Engineering", emptyStateLabel: "engineering" },
+  { id: "marketing", label: "Marketing", emptyStateLabel: "marketing" },
+  { id: "content", label: "Content", emptyStateLabel: "content" },
+  { id: "operations", label: "Operations", emptyStateLabel: "operations" },
 ];
 
 export const careerJobOpenings: JobOpening[] = [

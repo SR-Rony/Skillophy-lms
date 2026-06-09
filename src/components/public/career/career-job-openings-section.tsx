@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import { CategoryFilterBar } from "@/components/public/category-filter-bar";
 import { JobOpeningCard } from "@/components/public/career/job-opening-card";
+import { JobOpeningsEmptyState } from "@/components/public/career/job-openings-empty-state";
 import {
   SectionTitle,
   sectionTitleFadeUpVariants,
@@ -24,6 +25,15 @@ const gridVariants = {
   },
 };
 
+function JobOpeningsBackground() {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+      <div className="absolute -left-[8%] top-[10%] h-[280px] w-[280px] rounded-full bg-[#ffe2cc]/35 blur-[90px]" />
+      <div className="absolute right-[-6%] bottom-[8%] h-[300px] w-[300px] rounded-full bg-[#fff0eb]/55 blur-[100px]" />
+    </div>
+  );
+}
+
 function getCategoryCounts(jobs: typeof careerJobOpenings) {
   const counts = new Map<JobCategoryId, number>();
 
@@ -40,6 +50,11 @@ function getCategoryCounts(jobs: typeof careerJobOpenings) {
   }
 
   return counts;
+}
+
+function getEmptyStateLabel(categoryId: JobCategoryId) {
+  const category = careerJobCategories.find((item) => item.id === categoryId);
+  return category?.emptyStateLabel ?? category?.label.toLowerCase() ?? "this category";
 }
 
 export function CareerJobOpeningsSection() {
@@ -65,11 +80,18 @@ export function CareerJobOpeningsSection() {
   }, [activeCategoryId]);
 
   const { label, title, description } = careerJobOpeningsSectionData;
+  const emptyStateLabel = getEmptyStateLabel(activeCategoryId);
 
   return (
-    <section id="job-openings" className="scroll-mt-24 bg-white py-12 sm:py-16 lg:py-20">
+    <section
+      id="job-openings"
+      className="relative scroll-mt-24 overflow-hidden bg-[#fffcf9] py-12 sm:py-16 lg:py-20"
+    >
+      <JobOpeningsBackground />
+
       <Container
         as={motion.div}
+        className="relative z-10"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
@@ -103,13 +125,13 @@ export function CareerJobOpeningsSection() {
           </motion.div>
         ) : (
           <motion.div
+            key={`empty-${activeCategoryId}`}
             variants={sectionTitleFadeUpVariants}
-            className="mt-10 rounded-[24px] border border-[#eee1de] bg-white px-6 py-14 text-center"
+            initial="hidden"
+            animate="visible"
+            className="mt-12 sm:mt-14 lg:mt-16"
           >
-            <p className="text-[18px] font-bold text-[#282221]">No openings in this category</p>
-            <p className="mx-auto mt-2 max-w-md text-[14px] leading-relaxed text-[#6f6562]">
-              Try another category to explore more opportunities at Skillophy.
-            </p>
+            <JobOpeningsEmptyState categoryLabel={emptyStateLabel} />
           </motion.div>
         )}
       </Container>
