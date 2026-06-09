@@ -6,65 +6,10 @@ import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Container } from "@/components/shared";
 import { Button } from "@/components/ui/button";
+import { homeTestimonials } from "@/components/public/data/home-testimonials.data";
 import { SectionTitle } from "@/components/public/section-title";
 import { cn } from "@/utils";
-
-interface Testimonial {
-  id: string;
-  quote: string;
-  name: string;
-  role: string;
-  avatar: string;
-  rating: number;
-}
-
-const testimonials: Testimonial[] = [
-  {
-    id: "rakib-hasan",
-    quote:
-      "I recommend Skillophy. The quality of content and expertise of instructors are truly top-notch. Whether you're a student looking to supplement.",
-    name: "Rakib Hasan",
-    role: "Graphic Designer",
-    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Rakib",
-    rating: 5,
-  },
-  {
-    id: "mansur-zoha",
-    quote:
-      "Skillophy has completely transformed the way I approach learning. The platform's intuitive interface and diverse range of courses.",
-    name: "Mansur Zoha",
-    role: "Class 9, Rajshahi Govt. School",
-    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Mansur",
-    rating: 4,
-  },
-  {
-    id: "maisha-ferdous",
-    quote:
-      "Skillophy helped me gain confidence, build a portfolio and microcredential to share with prospective employers.",
-    name: "Maisha Ferdous",
-    role: "Online business owner",
-    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Maisha",
-    rating: 5,
-  },
-  {
-    id: "nahid-islam",
-    quote:
-      "The lessons are clear, practical and easy to follow. I could learn at my own pace and apply the skills right away.",
-    name: "Nahid Islam",
-    role: "Frontend Learner",
-    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Nahid",
-    rating: 5,
-  },
-  {
-    id: "sadia-rahman",
-    quote:
-      "The mentors made hard topics simple. Skillophy gave me the confidence to keep learning every day.",
-    name: "Sadia Rahman",
-    role: "College Student",
-    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Sadia",
-    rating: 4,
-  },
-];
+import type { Testimonial, TestimonialSectionProps } from "@/types/testimonial.types";
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 24 },
@@ -108,7 +53,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
                     "h-3.5 w-3.5",
                     index < testimonial.rating
                       ? "fill-[#ffad21] text-[#ffad21]"
-                      : "fill-[#d7d0cd] text-[#d7d0cd]"
+                      : "fill-[#d7d0cd] text-[#d7d0cd]",
                   )}
                 />
               ))}
@@ -122,7 +67,17 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   );
 }
 
-export function TestimonialSection() {
+export function TestimonialSection({
+  label = "Testimonial",
+  title = (
+    <>
+      Learners are <br />
+      Love to Learn
+    </>
+  ),
+  testimonials = homeTestimonials,
+  className,
+}: TestimonialSectionProps = {}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [enableTransition, setEnableTransition] = useState(true);
   const loopTestimonials = [...testimonials, ...testimonials.slice(0, 3)];
@@ -171,10 +126,10 @@ export function TestimonialSection() {
     }, 500);
 
     return () => window.clearTimeout(timeout);
-  }, [activeIndex]);
+  }, [activeIndex, testimonials.length]);
 
   return (
-    <section className="overflow-hidden bg-primary/5 py-16 sm:py-20 lg:py-[92px]">
+    <section className={cn("overflow-hidden bg-primary/5 py-16 sm:py-20 lg:py-[92px]", className)}>
       <Container
         as={motion.div}
         initial="hidden"
@@ -187,13 +142,8 @@ export function TestimonialSection() {
             <SectionTitle
               align="left"
               headingClassName="max-w-[270px]"
-              label="Testimonial"
-              title={
-                <>
-                  Learners are <br />
-                  Love to Learn
-                </>
-              }
+              label={label}
+              title={title}
             />
 
             <div className="mt-9 flex gap-3">
@@ -224,7 +174,7 @@ export function TestimonialSection() {
               <div
                 className={cn(
                   "flex gap-6 [--testimonial-card-width:82%] sm:[--testimonial-card-width:calc((100%_-_24px)/2)] lg:[--testimonial-card-width:calc((100%_-_48px)/3)]",
-                  enableTransition && "transition-transform duration-500 ease-out"
+                  enableTransition && "transition-transform duration-500 ease-out",
                 )}
                 style={{
                   transform: `translateX(calc(-${activeIndex} * (var(--testimonial-card-width) + 24px)))`,

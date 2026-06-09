@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import {
   sectionHeadingClassName,
+  SectionTitle,
   sectionTitleFadeUpVariants,
 } from "@/components/public/section-title";
 import { cn } from "@/utils";
@@ -62,6 +63,7 @@ function PerksBenefitsBackground() {
 }
 
 export function PerksBenefitsSection({
+  label,
   title,
   description,
   items,
@@ -84,15 +86,19 @@ export function PerksBenefitsSection({
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
       >
-        <motion.div
-          variants={sectionTitleFadeUpVariants}
-          className="mx-auto max-w-[760px] text-center"
-        >
-          <h2 className={sectionHeadingClassName}>{title}</h2>
-          <p className="mx-auto mt-5 max-w-[680px] text-base font-normal leading-[1.5] text-[#5f5553]">
-            {description}
-          </p>
-        </motion.div>
+        {label ? (
+          <SectionTitle label={label} title={title} description={description} />
+        ) : (
+          <motion.div
+            variants={sectionTitleFadeUpVariants}
+            className="mx-auto max-w-[760px] text-center"
+          >
+            <h2 className={sectionHeadingClassName}>{title}</h2>
+            <p className="mx-auto mt-5 max-w-[680px] text-base font-normal leading-[1.5] text-[#5f5553]">
+              {description}
+            </p>
+          </motion.div>
+        )}
 
         <div className="mt-12 grid gap-x-8 gap-y-10 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-12">
           {items.map(({ id, title: itemTitle, description: itemDescription, icon }) => (
@@ -107,7 +113,7 @@ export function PerksBenefitsSection({
               <h3 className="text-[18px] font-bold leading-[1.3] tracking-[-0.01em] text-[#24201f] sm:text-[19px]">
                 {itemTitle}
               </h3>
-              <p className="mt-3 max-w-[340px] text-[14px] font-normal leading-[1.65] text-[#6f6562] sm:text-[15px]">
+              <p className="mt-3 min-h-[4.125rem] max-w-[340px] text-[14px] font-normal leading-[1.65] text-[#6f6562] sm:min-h-[4.5rem] sm:text-[15px]">
                 {itemDescription}
               </p>
             </motion.article>

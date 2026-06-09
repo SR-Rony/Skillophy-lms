@@ -89,44 +89,53 @@ function AffiliateHeroImage({
   avatarSeeds: readonly string[];
 }) {
   return (
-    <div className="relative mx-auto w-full max-w-[520px] lg:mx-0 lg:ml-auto">
-      <div className="absolute -right-3 top-3 h-[94%] w-[90%] rounded-[36px] bg-gradient-to-br from-[#ffb347] via-[#ff8c2a] to-[#ff6b35] sm:-right-4 sm:top-4 sm:rounded-[44px]" />
-
-      <div className="relative overflow-hidden rounded-[32px] bg-white p-2 shadow-[0_22px_50px_rgba(80,37,31,0.12)] sm:rounded-[40px] sm:p-2.5">
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[26px] sm:rounded-[34px]">
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            fill
-            className="object-cover object-center"
-            priority
-            sizes="(max-width: 1024px) 88vw, 520px"
-          />
+    <div className="relative mx-auto w-full max-w-[540px] pl-5 sm:pl-6 lg:mx-0 lg:ml-auto">
+      <div className="relative pt-5 pr-5 sm:pt-6 sm:pr-6">
+        <div
+          className="absolute bottom-0 left-6 right-0 top-0 rounded-[44px] bg-[#F99F1C] sm:left-8 sm:rounded-[52px]"
+          aria-hidden
+        >
+          <span className="absolute right-8 top-8 h-2 w-2 rounded-full bg-[#fdf5e6]/90 sm:right-10 sm:top-10" />
+          <span className="absolute right-16 top-14 h-1.5 w-1.5 rounded-full bg-[#fdf5e6]/75 sm:right-20 sm:top-16" />
+          <span className="absolute right-10 top-20 h-1.5 w-1.5 rounded-full bg-[#fdf5e6]/60" />
         </div>
-      </div>
 
-      <div className="absolute bottom-4 left-4 z-10 min-w-[168px] rounded-[18px] border border-[#f3e8dc] bg-[#fff8eb] px-5 py-4 shadow-[0_16px_36px_rgba(80,37,31,0.14)] sm:bottom-6 sm:left-6">
-        <div className="mb-3 flex items-center pl-1">
-          {avatarSeeds.map((seed, index) => (
-            <div
-              key={seed}
-              className="relative h-9 w-9 overflow-hidden rounded-full border-2 border-white bg-[#f3f4f6]"
-              style={{ marginLeft: index === 0 ? 0 : -10, zIndex: avatarSeeds.length - index }}
-            >
-              <Image
-                src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`}
-                alt=""
-                fill
-                className="object-cover"
-                sizes="36px"
-              />
-            </div>
-          ))}
+        <div className="relative overflow-hidden rounded-[36px] rounded-tl-[48px] bg-white p-2.5 shadow-[0_24px_54px_rgba(80,37,31,0.14)] sm:rounded-[44px] sm:rounded-tl-[60px] sm:p-3">
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[28px] rounded-tl-[40px] sm:rounded-[36px] sm:rounded-tl-[52px]">
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              fill
+              className="object-cover object-[center_18%]"
+              priority
+              sizes="(max-width: 1024px) 88vw, 540px"
+            />
+          </div>
         </div>
-        <p className="text-[28px] font-black leading-none tracking-[-0.04em] text-[#f59e0b]">
-          {statValue}
-        </p>
-        <p className="mt-2 text-[13px] font-semibold text-[#4f4747]">{statLabel}</p>
+
+        <div className="absolute -left-2 bottom-5 z-10 min-w-[176px] rounded-[18px] border border-[#f3e8dc]/80 bg-[#fdf5e6] px-5 py-4 shadow-[0_16px_36px_rgba(80,37,31,0.14)] sm:-left-5 sm:bottom-7 sm:min-w-[188px] sm:rounded-[20px] sm:px-6 sm:py-5">
+          <div className="mb-3 flex items-center pl-0.5">
+            {avatarSeeds.map((seed, index) => (
+              <div
+                key={seed}
+                className="relative h-9 w-9 overflow-hidden rounded-full border-2 border-white bg-[#f3f4f6] sm:h-10 sm:w-10"
+                style={{ marginLeft: index === 0 ? 0 : -10, zIndex: avatarSeeds.length - index }}
+              >
+                <Image
+                  src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="40px"
+                />
+              </div>
+            ))}
+          </div>
+          <p className="text-[30px] font-black leading-none tracking-[-0.04em] text-[#F99F1C] sm:text-[32px]">
+            {statValue}
+          </p>
+          <p className="mt-2 text-[13px] font-semibold text-[#4f4747] sm:text-[14px]">{statLabel}</p>
+        </div>
       </div>
     </div>
   );

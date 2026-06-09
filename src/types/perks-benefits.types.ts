@@ -8,6 +8,7 @@ export interface PerksBenefitItem {
 }
 
 export interface PerksBenefitsSectionProps {
+  label?: string;
   title: string;
   description: string;
   items: PerksBenefitItem[];
