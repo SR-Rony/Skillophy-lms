@@ -1,13 +1,12 @@
-import { Logo } from "@/components/shared/logo";
+import { AuthSeamBackground } from "@/components/auth/auth-seam-background";
 
-/** Centered auth layout — login, register, password reset */
+/** Centered auth layout — login, register, OTP verification, password reset */
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-muted/30 p-4">
-      <div className="mb-8">
-        <Logo />
-      </div>
-      <div className="w-full max-w-md rounded-xl border bg-card p-8 shadow-sm">
+    <div className="relative min-h-screen overflow-hidden bg-white">
+      <AuthSeamBackground />
+
+      <div className="relative z-10 flex min-h-screen items-center justify-center px-4 py-10 sm:px-6">
         {children}
       </div>
     </div>

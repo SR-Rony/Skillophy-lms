@@ -11,6 +11,6 @@ export const siteConfig = {
   links: {
     twitter: "https://twitter.com/skillophy",
     github: "https://github.com/skillophy",
-    support: "/support",
+    support: "/help",
   },
 } as const;

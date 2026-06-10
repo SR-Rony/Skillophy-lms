@@ -30,7 +30,7 @@ const footerColumns = [
       { label: "Skillophy Affiliation", href: "/about" },
       { label: "Skillophy Business", href: ROUTES.business },
       { label: "About Us", href: "/about" },
-      { label: "Faq", href: "/support" },
+      { label: "Faq", href: ROUTES.help },
       { label: "Press/News Feature", href: "/blog" },
       { label: "Media Kit", href: "/about" },
     ],
@@ -49,7 +49,7 @@ const footerColumns = [
   {
     title: "Support",
     links: [
-      { label: "Help Center", href: "/support" },
+      { label: "Help Center", href: ROUTES.help },
       { label: "Privacy & Cookie Policy", href: "/support" },
       { label: "Refund Policy", href: "/support" },
       { label: "Terms & Conditions", href: "/support" },

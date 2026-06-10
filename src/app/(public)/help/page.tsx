@@ -6,6 +6,6 @@ export const metadata = {
     "Find answers to common questions about Skillophy accounts, courses, payments, and support.",
 };
 
-export default function SupportPage() {
+export default function HelpPage() {
   return <HelpPageContent />;
 }

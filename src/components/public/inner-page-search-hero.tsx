@@ -63,6 +63,8 @@ export function InnerPageSearchHero({
   searchAriaLabel = "Search",
   scrollTargetId,
   className,
+  showLabel = true,
+  showDescription = true,
 }: InnerPageSearchHeroProps) {
   function handleSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -96,25 +98,32 @@ export function InnerPageSearchHero({
           variants={sectionTitleFadeUpVariants}
           className="mx-auto max-w-[860px] text-center"
         >
-          <div className="mb-4 flex items-center justify-center gap-3">
-            <span className="h-px w-16 bg-[#efb0aa]" aria-hidden />
-            <span className={cn(sectionLabelClassName, "font-bold uppercase text-primary-dark")}>
-              {label}
-            </span>
-            <span className="h-px w-16 bg-[#efb0aa]" aria-hidden />
-          </div>
+          {showLabel ? (
+            <div className="mb-4 flex items-center justify-center gap-3">
+              <span className="h-px w-16 bg-[#efb0aa]" aria-hidden />
+              <span className={cn(sectionLabelClassName, "font-bold uppercase text-primary-dark")}>
+                {label}
+              </span>
+              <span className="h-px w-16 bg-[#efb0aa]" aria-hidden />
+            </div>
+          ) : null}
 
           <h1 className={sectionHeadingClassName}>{title}</h1>
 
-          <p className="mx-auto mt-5 max-w-[680px] text-center text-base font-normal leading-[1.5] tracking-normal text-[#5f5553]">
-            {description}
-          </p>
+          {showDescription ? (
+            <p className="mx-auto mt-5 max-w-[680px] text-center text-base font-normal leading-[1.5] tracking-normal text-[#5f5553]">
+              {description}
+            </p>
+          ) : null}
         </motion.div>
 
         <motion.form
           variants={sectionTitleFadeUpVariants}
           onSubmit={handleSearch}
-          className="mx-auto mt-10 flex w-full max-w-[640px] items-center rounded-lg border border-[#e8e4e2] bg-white py-1.5 pl-6 pr-1.5 shadow-[0_8px_30px_rgba(36,32,31,0.04)] sm:mt-12"
+          className={cn(
+            "mx-auto flex w-full max-w-[640px] items-center rounded-lg border border-[#e8e4e2] bg-white py-1.5 pl-6 pr-1.5 shadow-[0_8px_30px_rgba(36,32,31,0.04)]",
+            showDescription ? "mt-10 sm:mt-12" : "mt-8 sm:mt-10",
+          )}
           role="search"
         >
           <input

@@ -51,7 +51,7 @@ export function FaqAccordion({
               onClick={() => toggleFaq(item.id)}
               aria-expanded={isOpen}
               className={cn(
-                "flex w-full items-start justify-between gap-4 px-5 py-5 text-left transition-colors sm:px-6 sm:py-6",
+                "flex w-full cursor-pointer items-start justify-between gap-4 px-5 py-5 text-left transition-colors sm:px-6 sm:py-6",
                 isOpen
                   ? "border-l-4 border-primary bg-primary/5 pl-4 sm:pl-5"
                   : "border-l-4 border-transparent bg-white hover:bg-[#faf9f8]"

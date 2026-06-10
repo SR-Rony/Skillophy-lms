@@ -9,4 +9,6 @@ export interface InnerPageSearchHeroProps {
   searchAriaLabel?: string;
   scrollTargetId?: string;
   className?: string;
+  showLabel?: boolean;
+  showDescription?: boolean;
 }

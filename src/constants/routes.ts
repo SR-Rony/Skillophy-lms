@@ -20,11 +20,14 @@ export const ROUTES = {
   podcastEpisode: (slug: string) => `/podcast/${slug}`,
   about: "/about",
   affiliate: "/affiliate",
+  help: "/help",
   maintenance: "/maintenance",
   auth: {
     login: "/login",
     register: "/register",
+    verifyOtp: "/verify-otp",
     forgotPassword: "/forgot-password",
+    resetPassword: "/reset-password",
   },
   student: {
     root: "/student",
