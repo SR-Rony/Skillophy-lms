@@ -20,7 +20,7 @@ export function PodcastEpisodeCard({ episode }: PodcastEpisodeCardProps) {
       animate="visible"
       className="group h-full overflow-hidden rounded-2xl border border-[#e5e7eb] bg-white shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition duration-300 hover:shadow-[0_8px_30px_rgba(15,23,42,0.1)]"
     >
-      <Link href={`${ROUTES.podcast}/${episode.slug}`} className="flex h-full flex-col">
+      <Link href={ROUTES.podcastEpisode(episode.slug)} className="flex h-full flex-col">
         <div className="relative h-[210px] overflow-hidden sm:h-[220px]">
           <Image
             src={episode.image}

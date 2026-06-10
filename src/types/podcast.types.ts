@@ -8,6 +8,11 @@ export interface PodcastEpisode {
   categoryId: string;
 }
 
+export interface PodcastEpisodeDetail extends PodcastEpisode {
+  categoryTitle: string;
+  categorySlug: string;
+}
+
 export interface PodcastCategory {
   id: string;
   slug: string;

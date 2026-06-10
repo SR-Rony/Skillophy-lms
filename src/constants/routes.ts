@@ -17,6 +17,7 @@ export const ROUTES = {
   blog: "/blog",
   blogPost: (slug: string) => `/blog/${slug}`,
   podcast: "/podcast",
+  podcastEpisode: (slug: string) => `/podcast/${slug}`,
   about: "/about",
   affiliate: "/affiliate",
   maintenance: "/maintenance",

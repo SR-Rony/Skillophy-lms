@@ -159,3 +159,34 @@ export function filterPodcastCategories(
 }
 
 export const PODCAST_EPISODES_PER_ROW = 3;
+
+export function getAllPodcastEpisodes() {
+  return podcastCategories.flatMap((category) =>
+    category.episodes.map((episode) => ({
+      ...episode,
+      categoryTitle: category.title,
+      categorySlug: category.slug,
+    })),
+  );
+}
+
+export function getPodcastEpisodeBySlug(slug: string) {
+  return getAllPodcastEpisodes().find((episode) => episode.slug === slug);
+}
+
+export function getSimilarPodcastEpisodes(currentSlug: string, limit = 12) {
+  const currentEpisode = getPodcastEpisodeBySlug(currentSlug);
+  if (!currentEpisode) {
+    return [];
+  }
+
+  const sameCategory = getAllPodcastEpisodes().filter(
+    (episode) => episode.categoryId === currentEpisode.categoryId && episode.slug !== currentSlug,
+  );
+
+  const otherEpisodes = getAllPodcastEpisodes().filter(
+    (episode) => episode.categoryId !== currentEpisode.categoryId && episode.slug !== currentSlug,
+  );
+
+  return [...sameCategory, ...otherEpisodes].slice(0, limit);
+}
