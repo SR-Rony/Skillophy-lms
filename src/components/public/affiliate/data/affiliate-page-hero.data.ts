@@ -1,4 +1,4 @@
-import { ROUTES } from "@/constants";
+import { EXTERNAL_LINKS } from "@/constants";
 
 export const affiliatePageHeroData = {
   label: "Join At Skillophy",
@@ -6,7 +6,7 @@ export const affiliatePageHeroData = {
   description:
     "With a mix of experience and stories, become suitable for life's work for the new generation, have a mentality like the new generation.",
   ctaLabel: "Start Earning",
-  ctaHref: ROUTES.auth.register,
+  ctaHref: EXTERNAL_LINKS.affiliateGoogleForm,
   imageSrc: "/images/Affillate.png",
   imageAlt: "Affiliate partner working on a laptop and smiling",
   statValue: "300+",

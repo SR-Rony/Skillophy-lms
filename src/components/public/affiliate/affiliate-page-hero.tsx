@@ -1,10 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { Container } from "@/components/shared";
-import { Button } from "@/components/ui/button";
+import { Container, PublicCtaLink } from "@/components/shared";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
 import { affiliatePageHeroData } from "@/components/public/affiliate/data/affiliate-page-hero.data";
 
@@ -186,9 +184,7 @@ export function AffiliatePageHero() {
             </p>
 
             <div className="mt-9">
-              <Button asChild variant="publicCta" size="publicCta">
-                <Link href={ctaHref}>{ctaLabel}</Link>
-              </Button>
+              <PublicCtaLink href={ctaHref}>{ctaLabel}</PublicCtaLink>
             </div>
           </motion.div>
 

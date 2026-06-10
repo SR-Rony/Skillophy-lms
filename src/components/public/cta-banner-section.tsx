@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { Container } from "@/components/shared";
-import { Button } from "@/components/ui/button";
+import { Container, PublicCtaLink } from "@/components/shared";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
 import { cn } from "@/utils";
 import type { CtaBannerSectionProps } from "@/types/cta-banner.types";
@@ -95,9 +93,7 @@ export function CtaBannerSection({
           </p>
 
           <div className="mt-9 flex justify-center">
-            <Button asChild variant="publicCta" size="publicCta">
-              <Link href={ctaHref}>{ctaLabel}</Link>
-            </Button>
+            <PublicCtaLink href={ctaHref}>{ctaLabel}</PublicCtaLink>
           </div>
         </motion.div>
       </Container>
