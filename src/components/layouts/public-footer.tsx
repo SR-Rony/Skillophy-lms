@@ -38,7 +38,7 @@ const footerColumns = [
   {
     title: "Resources",
     links: [
-      { label: "Podcast", href: "/blog" },
+      { label: "Podcast", href: ROUTES.podcast },
       { label: "Blog", href: "/blog" },
       { label: "Book Store", href: "/courses" },
       { label: "Notes & Resources", href: "/courses" },

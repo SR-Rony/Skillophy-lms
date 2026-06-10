@@ -16,6 +16,7 @@ export const ROUTES = {
   courseCategory: (categoryId: string) => `/courses/category/${categoryId}`,
   blog: "/blog",
   blogPost: (slug: string) => `/blog/${slug}`,
+  podcast: "/podcast",
   about: "/about",
   affiliate: "/affiliate",
   maintenance: "/maintenance",
