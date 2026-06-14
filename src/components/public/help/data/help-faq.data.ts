@@ -134,6 +134,16 @@ export const helpFaqData = {
   ] satisfies HelpFaqItem[],
 } as const;
 
+const teacherTopicIds: HelpTopicId[] = ["course-management", "payouts-earnings", "live-classes"];
+
+export function getHelpAudienceByTopicId(topicId: HelpTopicId): HelpAudience {
+  return teacherTopicIds.includes(topicId) ? "teacher" : "learner";
+}
+
+export function getHelpFaqsByCategory(topicId: HelpTopicId): FaqItem[] {
+  return filterHelpFaqs("", getHelpAudienceByTopicId(topicId), topicId);
+}
+
 export function filterHelpFaqs(
   query: string,
   audience: HelpAudience,

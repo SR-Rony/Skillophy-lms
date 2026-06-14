@@ -23,6 +23,7 @@ export const ROUTES = {
   help: "/help",
   helpArticle: (slug: string) => `/help/${slug}`,
   maintenance: "/maintenance",
+  comingSoon: "/coming-soon",
   auth: {
     login: "/login",
     register: "/register",

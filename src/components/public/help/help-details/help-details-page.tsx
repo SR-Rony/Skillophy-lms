@@ -3,9 +3,10 @@
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
+import { HelpFaqSection } from "@/components/public/help/help-faq-section";
+import { getHelpFaqsByCategory } from "@/components/public/help/data/help-faq.data";
 import { HelpDetailsHeader } from "@/components/public/help/help-details/help-details-header";
 import { HelpDetailsSidebar } from "@/components/public/help/help-details/help-details-sidebar";
-import { HelpDetailsFaqSidebar } from "@/components/public/help/help-details/help-details-faq-sidebar";
 import { HelpDetailsContent } from "@/components/public/help/help-details/help-details-content";
 import type { HelpArticleDetail } from "@/components/public/help/help-details/data/help-details.data";
 import { helpArticleNavCategories } from "@/components/public/help/help-details/data/help-details.data";
@@ -34,7 +35,10 @@ export function HelpDetailsPage({ article }: HelpDetailsPageProps) {
               activeCategoryId={article.categoryId}
               activeSlug={article.slug}
             />
-            <HelpDetailsFaqSidebar categoryId={article.categoryId} />
+            <HelpFaqSection
+              faqs={getHelpFaqsByCategory(article.categoryId)}
+              variant="sidebar"
+            />
           </motion.div>
 
           <motion.div variants={sectionTitleFadeUpVariants}>
