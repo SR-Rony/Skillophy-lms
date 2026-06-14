@@ -1,21 +1,21 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
+import { getHelpArticleSlugByTopicId } from "@/components/public/help/help-details/data/help-details.data";
 import {
   getHelpTopics,
   helpAudienceOptions,
   type HelpAudience,
-  type HelpTopicId,
 } from "@/components/public/help/data/help-topics.data";
+import { ROUTES } from "@/constants/routes";
 import { cn } from "@/utils";
 
 interface HelpTopicsSectionProps {
   audience: HelpAudience;
-  selectedTopicId: HelpTopicId | null;
   onAudienceChange: (audience: HelpAudience) => void;
-  onTopicSelect: (topicId: HelpTopicId) => void;
 }
 
 function HelpSeamBackground() {
@@ -57,9 +57,7 @@ function HelpSeamBackground() {
 
 export function HelpTopicsSection({
   audience,
-  selectedTopicId,
   onAudienceChange,
-  onTopicSelect,
 }: HelpTopicsSectionProps) {
   const topics = getHelpTopics(audience);
 
@@ -112,20 +110,14 @@ export function HelpTopicsSection({
         >
           {topics.map((topic) => {
             const Icon = topic.icon;
-            const isSelected = selectedTopicId === topic.id;
+            const articleSlug = getHelpArticleSlugByTopicId(topic.id);
+            const cardClassName = cn(
+              "block cursor-pointer rounded-[18px] border border-[#ece6e3] bg-white p-5 text-left shadow-[0_8px_24px_rgba(80,37,31,0.05)] transition sm:p-6",
+              "hover:border-primary/25 hover:shadow-[0_12px_28px_rgba(80,37,31,0.08)]",
+            );
 
-            return (
-              <button
-                key={topic.id}
-                type="button"
-                onClick={() => onTopicSelect(topic.id)}
-                className={cn(
-                  "cursor-pointer rounded-[18px] border bg-white p-5 text-left shadow-[0_8px_24px_rgba(80,37,31,0.05)] transition sm:p-6",
-                  isSelected
-                    ? "border-primary/40 ring-2 ring-primary/10"
-                    : "border-[#ece6e3] hover:border-primary/25 hover:shadow-[0_12px_28px_rgba(80,37,31,0.08)]",
-                )}
-              >
+            const cardContent = (
+              <>
                 <span
                   className={cn(
                     "inline-flex h-14 w-14 items-center justify-center rounded-full border-2",
@@ -141,7 +133,25 @@ export function HelpTopicsSection({
                 <p className="mt-2 text-[13px] leading-[1.6] text-[#6f6562] sm:text-[14px]">
                   {topic.description}
                 </p>
-              </button>
+              </>
+            );
+
+            if (!articleSlug) {
+              return (
+                <div key={topic.id} className={cardClassName}>
+                  {cardContent}
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                key={topic.id}
+                href={ROUTES.helpArticle(articleSlug)}
+                className={cardClassName}
+              >
+                {cardContent}
+              </Link>
             );
           })}
         </motion.div>
