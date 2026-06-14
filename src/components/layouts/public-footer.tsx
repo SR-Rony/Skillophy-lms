@@ -52,7 +52,7 @@ const footerColumns = [
       { label: "Help Center", href: ROUTES.help },
       { label: "Privacy & Cookie Policy", href: "/support" },
       { label: "Refund Policy", href: "/support" },
-      { label: "Terms & Conditions", href: "/support" },
+      { label: "Terms & Conditions", href: ROUTES.terms },
       { label: "Verify Certificate", href: "/support" },
     ],
   },
