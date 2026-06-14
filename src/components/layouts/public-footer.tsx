@@ -50,7 +50,7 @@ const footerColumns = [
     title: "Support",
     links: [
       { label: "Help Center", href: ROUTES.help },
-      { label: "Privacy & Cookie Policy", href: "/support" },
+      { label: "Privacy & Cookie Policy", href: ROUTES.privacy },
       { label: "Refund Policy", href: "/support" },
       { label: "Terms & Conditions", href: ROUTES.terms },
       { label: "Verify Certificate", href: "/support" },

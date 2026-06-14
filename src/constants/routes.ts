@@ -25,6 +25,7 @@ export const ROUTES = {
   maintenance: "/maintenance",
   comingSoon: "/coming-soon",
   terms: "/terms",
+  privacy: "/privacy",
   auth: {
     login: "/login",
     register: "/register",
