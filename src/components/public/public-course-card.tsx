@@ -56,6 +56,7 @@ interface PublicCourseCardProps {
   course: PublicCourse;
   variant: PublicCourseCardVariant;
   badge?: PublicCourseCardBadge;
+  wishlisted?: boolean;
   className?: string;
 }
 
@@ -91,6 +92,7 @@ export function PublicCourseCard({
   course,
   variant,
   badge,
+  wishlisted = false,
   className,
 }: PublicCourseCardProps) {
   return (
@@ -163,11 +165,18 @@ export function PublicCourseCard({
             )}
             <button
               type="button"
-              className="shrink-0 rounded-full p-1 text-[#1a1a1a] transition-colors hover:text-primary"
-              aria-label={`Add ${course.title} to wishlist`}
+              className="shrink-0 rounded-full p-1 transition-colors hover:text-primary"
+              aria-label={
+                wishlisted
+                  ? `Remove ${course.title} from wishlist`
+                  : `Add ${course.title} to wishlist`
+              }
               onClick={(event) => event.preventDefault()}
             >
-              <Heart className="h-[22px] w-[22px] stroke-[1.5] fill-none" aria-hidden />
+              <Heart
+                className={`h-[22px] w-[22px] stroke-[1.5] ${wishlisted ? "fill-primary text-primary" : "fill-none text-[#1a1a1a]"}`}
+                aria-hidden
+              />
             </button>
           </div>
         </div>

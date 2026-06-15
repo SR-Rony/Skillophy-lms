@@ -6,8 +6,11 @@ import { Container } from "@/components/shared";
 import { myCoursesByTab } from "@/data/mock/my-courses.mock";
 import type { MyCoursesTab } from "@/types/student-course.types";
 import { DashboardEmptyState } from "@/components/shared/dashboard-empty-state";
+import { MyCoursesCatalogSection } from "./my-courses-catalog-section";
 import { MyCoursesHero } from "./my-courses-hero";
 import { MyCoursesSection } from "./my-courses-section";
+import { MyCoursesUpcomingSection } from "./my-courses-upcoming-section";
+import { MyCoursesWishlistSection } from "./my-courses-wishlist-section";
 
 const emptyMessages: Record<MyCoursesTab, string> = {
   ongoing: "You have no ongoing courses at this time.",
@@ -18,9 +21,14 @@ const emptyMessages: Record<MyCoursesTab, string> = {
 
 export function MyCoursesPage() {
   const [activeTab, setActiveTab] = useState<MyCoursesTab>("ongoing");
-  const { recorded, live } = myCoursesByTab[activeTab];
-  const hasCourses = recorded.length > 0 || live.length > 0;
-  const isCompletedTab = activeTab === "completed";
+  const tabData = myCoursesByTab[activeTab];
+  const { recorded, live, wishlist = [], upcoming = [], recommended = [] } = tabData;
+  const hasCourses =
+    recorded.length > 0 ||
+    live.length > 0 ||
+    wishlist.length > 0 ||
+    upcoming.length > 0 ||
+    recommended.length > 0;
 
   return (
     <>
@@ -28,8 +36,18 @@ export function MyCoursesPage() {
 
       <Container className="space-y-10 py-8 md:space-y-12 md:py-10">
         {hasCourses ? (
-          isCompletedTab ? (
+          activeTab === "completed" ? (
             <MyCoursesSection title="Completed Courses" courses={recorded} />
+          ) : activeTab === "wishlists" ? (
+            <MyCoursesWishlistSection courses={wishlist} />
+          ) : activeTab === "recommended" ? (
+            <>
+              <MyCoursesUpcomingSection courses={upcoming} />
+              <MyCoursesCatalogSection
+                title="Recommended for You"
+                courses={recommended}
+              />
+            </>
           ) : (
             <>
               <MyCoursesSection title="Recorded Courses" courses={recorded} />

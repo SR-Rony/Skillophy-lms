@@ -83,7 +83,7 @@ export const studentDashboardData: StudentDashboardData = {
   stats: {
     completed: 3,
     inProgress: 2,
-    wishlists: 12,
+    wishlists: 6,
   },
   upcomingLiveClass: {
     month: "May",
