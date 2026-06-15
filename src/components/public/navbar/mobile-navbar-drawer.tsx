@@ -5,19 +5,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
-  ArrowUpRight,
   BookOpen,
   Briefcase,
-  CalendarClock,
   ChevronRight,
-  CircleHelp,
-  Grid2X2,
-  MessageCircle,
   Play,
-  Settings,
   SlidersHorizontal,
-  User,
-  WalletCards,
   Wrench,
   X,
   Zap,
@@ -26,6 +18,8 @@ import {
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { ROUTES } from "@/constants";
+import { StudentUserMenuNav } from "@/components/student/student-user-menu-nav";
+import { useAuthStore } from "@/store";
 import {
   megaMenuCategories,
   type MegaMenuCategory,
@@ -45,16 +39,6 @@ const categoryIcons: Record<MegaMenuCategory["iconName"], LucideIcon> = {
   star: SlidersHorizontal,
   "book-open": BookOpen,
 };
-
-const studentMenuItems = [
-  { label: "Dashboard", href: ROUTES.student.root, icon: Grid2X2 },
-  { label: "My Courses", href: ROUTES.student.courses, icon: CalendarClock },
-  { label: "Class Schedule", href: ROUTES.student.live, icon: CalendarClock },
-  { label: "My Workshop", href: ROUTES.student.assignments, icon: SlidersHorizontal },
-  { label: "Messages", href: ROUTES.student.chat, icon: MessageCircle },
-  { label: "Payment History", href: ROUTES.student.payments, icon: WalletCards },
-  { label: "My Certificate", href: ROUTES.student.certificates, icon: SlidersHorizontal },
-];
 
 interface MobileNavbarDrawerProps {
   onClose: () => void;
@@ -77,10 +61,13 @@ export function MobileNavbarDrawer({
     onClose();
   };
 
+  const authUser = useAuthStore((state) => state.user);
   const user = {
-    name: "Nushrat Jahan",
-    email: "nushrat5789@gmail.com",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop",
+    name: authUser?.name ?? "Nushrat Jahan",
+    email: authUser?.email ?? "nushrat5789@gmail.com",
+    avatar:
+      authUser?.avatar ??
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop",
   };
 
   return (
@@ -232,9 +219,14 @@ function AccountMenuView({
   onBack: () => void;
   onClose: () => void;
 }) {
-  const pathname = usePathname();
-  const isBusinessActive = isBusinessRoute(pathname);
-  const isTeachersActive = isTeachersRoute(pathname);
+  const authUser = useAuthStore((state) => state.user);
+  const user = {
+    name: authUser?.name ?? "Nushrat Jahan",
+    email: authUser?.email ?? "nushrat5789@gmail.com",
+    avatar:
+      authUser?.avatar ??
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop",
+  };
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -250,74 +242,23 @@ function AccountMenuView({
         <span className="text-[15px] font-black text-[#25201f]">Menu</span>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-y-auto py-3">
-        <nav className="space-y-1 px-4">
-          {studentMenuItems.map(({ label, href, icon: Icon }) => (
-            <Link
-              key={label}
-              href={href}
-              onClick={onClose}
-              className="flex min-h-[52px] items-center gap-3 text-[15px] font-medium text-[#25201f]"
-            >
-              <Icon className="h-5 w-5 stroke-[1.7] text-[#554a47]" />
-              {label}
-            </Link>
-          ))}
-        </nav>
+      <div className="min-h-0 flex-1 overflow-y-auto p-4">
+        <div className="mb-4 flex items-center gap-3 border-b border-[#f0f0f0] pb-4">
+          <Image
+            src={user.avatar}
+            alt=""
+            width={48}
+            height={48}
+            unoptimized
+            className="h-12 w-12 shrink-0 rounded-full object-cover"
+          />
+          <div className="min-w-0">
+            <p className="truncate text-[15px] font-bold text-[#1a1a1a]">{user.name}</p>
+            <p className="truncate text-[13px] text-[#6b7280]">{user.email}</p>
+          </div>
+        </div>
 
-        <div className="my-3 border-t border-[#e9e4e1]" />
-
-        <nav className="space-y-1 px-4">
-          <Link
-            href={ROUTES.student.settings}
-            onClick={onClose}
-            className="flex min-h-[52px] items-center gap-3 text-[15px] font-medium text-[#25201f]"
-          >
-            <Settings className="h-5 w-5 stroke-[1.7] text-[#554a47]" />
-            Account Settings
-          </Link>
-          <Link
-            href={ROUTES.admin.support}
-            onClick={onClose}
-            className="flex min-h-[52px] items-center gap-3 text-[15px] font-medium text-[#25201f]"
-          >
-            <CircleHelp className="h-5 w-5 stroke-[1.7] text-[#554a47]" />
-            Help Center
-          </Link>
-        </nav>
-
-        <div className="my-3 border-t border-[#e9e4e1]" />
-
-        <nav className="space-y-1 px-4">
-          <Link
-            href={ROUTES.business}
-            onClick={onClose}
-            className={navItemClassNameMobile(
-              isBusinessActive,
-              "flex min-h-[52px] items-center justify-between text-[15px]"
-            )}
-          >
-            <span className="flex items-center gap-3">
-              <Briefcase className="h-5 w-5 stroke-[1.7] text-[#554a47]" />
-              Skillophy Business
-            </span>
-            <ArrowUpRight className="h-4 w-4 text-[#554a47]" />
-          </Link>
-          <Link
-            href={ROUTES.teachers}
-            onClick={onClose}
-            className={navItemClassNameMobile(
-              isTeachersActive,
-              "flex min-h-[52px] items-center justify-between text-[15px]"
-            )}
-          >
-            <span className="flex items-center gap-3">
-              <User className="h-5 w-5 stroke-[1.7] text-[#554a47]" />
-              Join as Teacher
-            </span>
-            <ArrowUpRight className="h-4 w-4 text-[#554a47]" />
-          </Link>
-        </nav>
+        <StudentUserMenuNav onNavigate={onClose} />
       </div>
     </div>
   );

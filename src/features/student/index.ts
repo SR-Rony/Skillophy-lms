@@ -1,1 +1,1 @@
-export { StudentOverview } from "./components/student-overview";
+export { StudentDashboardHome } from "@/components/student";

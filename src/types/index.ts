@@ -4,3 +4,9 @@ export type * from "./blog-detail.types";
 export type { ApiResponse, PaginatedResponse, ApiError } from "./api.types";
 export type { User, UserProfile } from "./user.types";
 export type { Course, Lesson, Enrollment } from "./course.types";
+export type {
+  MyCoursesTab,
+  StudentCourseType,
+  StudentEnrolledCourse,
+  MyCoursesTabData,
+} from "./student-course.types";

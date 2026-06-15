@@ -12,6 +12,8 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import { ROUTES } from "@/constants";
+import { isStudentDashboardRoute } from "@/config/student-user-menu.config";
+import { StudentNavbarActions } from "@/components/student/student-navbar-actions";
 import { Container, Logo } from "@/components/shared";
 import { cn } from "@/utils";
 import { CourseMegaMenu } from "./course-mega-menu";
@@ -26,6 +28,7 @@ import {
 
 export function Navbar() {
   const pathname = usePathname();
+  const isStudentDashboard = isStudentDashboardRoute(pathname);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
@@ -117,37 +120,43 @@ export function Navbar() {
               <ChevronDown className="h-4 w-4" aria-hidden />
             </button>
 
-            <Link
-              href={ROUTES.cart}
-              className={navItemClassName(isCartActive, "relative text-sm")}
-              aria-label="Cart, 5 items"
-            >
-              <ShoppingCart size={20} />
-              <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
-                5
-              </span>
-            </Link>
+            {isStudentDashboard ? (
+              <StudentNavbarActions />
+            ) : (
+              <>
+                <Link
+                  href={ROUTES.cart}
+                  className={navItemClassName(isCartActive, "relative text-sm")}
+                  aria-label="Cart, 5 items"
+                >
+                  <ShoppingCart size={20} />
+                  <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
+                    5
+                  </span>
+                </Link>
 
-            <Link
-              href={ROUTES.business}
-              className={navItemClassName(isBusinessActive, "text-sm")}
-            >
-              Business
-            </Link>
+                <Link
+                  href={ROUTES.business}
+                  className={navItemClassName(isBusinessActive, "text-sm")}
+                >
+                  Business
+                </Link>
 
-            <Link
-              href={ROUTES.teachers}
-              className={navItemClassName(isTeachersActive, "text-sm")}
-            >
-              Join as Teacher
-            </Link>
+                <Link
+                  href={ROUTES.teachers}
+                  className={navItemClassName(isTeachersActive, "text-sm")}
+                >
+                  Join as Teacher
+                </Link>
 
-            <Link
-              href={ROUTES.auth.register}
-              className="rounded bg-gray-900 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800"
-            >
-              Get Started
-            </Link>
+                <Link
+                  href={ROUTES.auth.register}
+                  className="rounded bg-gray-900 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800"
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
           </div>
 
           <button
@@ -171,6 +180,7 @@ export function Navbar() {
         {isMobileMenuOpen && (
           <MobileNavbarDrawer
             onClose={() => setIsMobileMenuOpen(false)}
+            isLoggedIn={isStudentDashboard}
           />
         )}
       </AnimatePresence>
