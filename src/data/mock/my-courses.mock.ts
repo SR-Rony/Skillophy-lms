@@ -36,6 +36,36 @@ const ongoingLiveCourses: MyCoursesTabData["live"] = [
   },
 ];
 
+const completedRecordedCourses: MyCoursesTabData["recorded"] = [
+  {
+    id: "completed-mern",
+    title: "Fundamental of Web Development for MERN",
+    slug: "fundamental-web-development-mern",
+    image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=900&auto=format&fit=crop",
+    type: "recorded",
+    completedOn: "May 11, 2022",
+    certificateHref: "/student/certificates",
+  },
+  {
+    id: "completed-graphic-design",
+    title: "Professional Graphic Design",
+    slug: "professional-graphic-design",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&auto=format&fit=crop",
+    type: "recorded",
+    completedOn: "May 11, 2022",
+    certificateHref: "/student/certificates",
+  },
+  {
+    id: "completed-facebook-marketing",
+    title: "Facebook Marketing",
+    slug: "facebook-marketing",
+    image: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=900&auto=format&fit=crop",
+    type: "recorded",
+    completedOn: "May 11, 2022",
+    certificateHref: "/student/certificates",
+  },
+];
+
 /** Demo data per tab — set arrays to `[]` to preview empty states. */
 export const myCoursesByTab: Record<MyCoursesTab, MyCoursesTabData> = {
   ongoing: {
@@ -43,7 +73,7 @@ export const myCoursesByTab: Record<MyCoursesTab, MyCoursesTabData> = {
     live: ongoingLiveCourses,
   },
   completed: {
-    recorded: [],
+    recorded: completedRecordedCourses,
     live: [],
   },
   wishlists: {

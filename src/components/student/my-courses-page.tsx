@@ -20,6 +20,7 @@ export function MyCoursesPage() {
   const [activeTab, setActiveTab] = useState<MyCoursesTab>("ongoing");
   const { recorded, live } = myCoursesByTab[activeTab];
   const hasCourses = recorded.length > 0 || live.length > 0;
+  const isCompletedTab = activeTab === "completed";
 
   return (
     <>
@@ -27,10 +28,14 @@ export function MyCoursesPage() {
 
       <Container className="space-y-10 py-8 md:space-y-12 md:py-10">
         {hasCourses ? (
-          <>
-            <MyCoursesSection title="Recorded Courses" courses={recorded} />
-            <MyCoursesSection title="LIVE Courses" courses={live} />
-          </>
+          isCompletedTab ? (
+            <MyCoursesSection title="Completed Courses" courses={recorded} />
+          ) : (
+            <>
+              <MyCoursesSection title="Recorded Courses" courses={recorded} />
+              <MyCoursesSection title="LIVE Courses" courses={live} />
+            </>
+          )
         ) : (
           <div className="rounded-2xl border border-dashed border-[#e5e7eb] bg-[#fafafa] py-16">
             <DashboardEmptyState

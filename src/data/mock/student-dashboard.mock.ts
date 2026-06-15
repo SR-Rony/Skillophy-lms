@@ -81,7 +81,7 @@ const recommendedCoursesDemo: PublicCourse[] = [
 /** Demo data — swap arrays to `[]` or set `upcomingLiveClass` to `null` to preview empty states. */
 export const studentDashboardData: StudentDashboardData = {
   stats: {
-    completed: 5,
+    completed: 3,
     inProgress: 2,
     wishlists: 12,
   },

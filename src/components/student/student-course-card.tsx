@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import type { StudentEnrolledCourse } from "@/types/student-course.types";
+import { ROUTES } from "@/constants";
 import { cn } from "@/utils";
 
 interface StudentCourseCardProps {
@@ -47,8 +48,12 @@ function CourseProgress({
 }
 
 export function StudentCourseCard({ course, className }: StudentCourseCardProps) {
-  const href = course.continueHref ?? `/courses/${course.slug}`;
-  const isLive = course.type === "live";
+  const isCompleted = Boolean(course.completedOn);
+  const isLive = course.type === "live" && !isCompleted;
+  const actionHref = isCompleted
+    ? (course.certificateHref ?? ROUTES.student.certificates)
+    : (course.continueHref ?? `/courses/${course.slug}`);
+  const actionLabel = isCompleted ? "Get Certificate" : "Continue";
 
   return (
     <article
@@ -69,12 +74,21 @@ export function StudentCourseCard({ course, className }: StudentCourseCardProps)
       </div>
 
       <div className="flex flex-1 flex-col px-5 pb-5 pt-4">
-        <h3 className="line-clamp-2 min-h-[52px] text-[17px] font-bold leading-snug tracking-tight text-[#1a1a1a]">
+        <h3
+          className={cn(
+            "line-clamp-2 font-bold leading-snug tracking-tight text-[#1a1a1a]",
+            isCompleted ? "text-[17px]" : "min-h-[52px] text-[17px]"
+          )}
+        >
           {course.title}
         </h3>
 
-        <div className="mt-3 flex-1">
-          {isLive && course.description ? (
+        <div className={cn("flex-1", isCompleted ? "mt-2" : "mt-3")}>
+          {isCompleted ? (
+            <p className="text-[14px] leading-relaxed text-[#9ca3af]">
+              Completed on {course.completedOn}
+            </p>
+          ) : isLive && course.description ? (
             <p className="text-[13px] leading-relaxed text-[#9ca3af]">{course.description}</p>
           ) : (
             course.completedLessons != null &&
@@ -90,11 +104,14 @@ export function StudentCourseCard({ course, className }: StudentCourseCardProps)
         </div>
 
         <Link
-          href={href}
-          className="mt-5 inline-flex w-full items-center justify-center gap-1 rounded-xl bg-primary py-3 text-sm font-bold text-white transition-colors hover:bg-primary/90"
+          href={actionHref}
+          className={cn(
+            "inline-flex w-full items-center justify-center rounded-xl bg-primary py-3 text-sm font-bold text-white transition-colors hover:bg-primary/90",
+            isCompleted ? "mt-5" : "mt-5 gap-1"
+          )}
         >
-          Continue
-          <ChevronRight className="h-4 w-4" strokeWidth={2.5} aria-hidden />
+          {actionLabel}
+          {!isCompleted && <ChevronRight className="h-4 w-4" strokeWidth={2.5} aria-hidden />}
         </Link>
       </div>
     </article>

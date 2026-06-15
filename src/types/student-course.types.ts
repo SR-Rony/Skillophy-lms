@@ -13,6 +13,8 @@ export interface StudentEnrolledCourse {
   progressPercent?: number;
   description?: string;
   continueHref?: string;
+  completedOn?: string;
+  certificateHref?: string;
 }
 
 export interface MyCoursesTabData {

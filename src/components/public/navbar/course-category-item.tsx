@@ -34,8 +34,7 @@ function CategoryItemContent({
   courseCount,
   icon: Icon,
   isActive,
-  size,
-}: Pick<CourseCategoryItemProps, "label" | "courseCount" | "icon" | "isActive" | "size">) {
+}: Pick<CourseCategoryItemProps, "label" | "courseCount" | "icon" | "isActive">) {
   return (
     <>
       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[#554a47]">
@@ -44,15 +43,15 @@ function CategoryItemContent({
       <div className="min-w-0 flex-1">
         <div
           className={cn(
-            "font-black leading-none",
-            size === "large" ? "text-[19px]" : "text-[14px]"
+            "font-sans text-[18px] font-medium leading-[1.6] tracking-normal",
+            isActive ? "text-primary-dark" : "text-[#302927]"
           )}
         >
           {label}
         </div>
         <div
           className={cn(
-            "mt-1 text-[11px] font-semibold",
+            "mt-1 font-sans text-[14px] font-normal leading-[1.6] tracking-normal",
             isActive ? "text-primary-dark" : "text-[#6f6562]"
           )}
         >
@@ -92,7 +91,6 @@ export function CourseCategoryItem({
           courseCount={courseCount}
           icon={icon}
           isActive={isActive}
-          size={size}
         />
       </Link>
     );
@@ -110,7 +108,6 @@ export function CourseCategoryItem({
         courseCount={courseCount}
         icon={icon}
         isActive={isActive}
-        size={size}
       />
     </button>
   );
