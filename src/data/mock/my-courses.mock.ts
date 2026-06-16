@@ -1,5 +1,6 @@
 import type { MyCoursesTab, MyCoursesTabData, UpcomingCourse } from "@/types/student-course.types";
 import type { PublicCourse } from "@/components/public/public-course-card";
+import { ROUTES } from "@/constants";
 
 const uxCourseImage =
   "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=900&auto=format&fit=crop";
@@ -14,10 +15,10 @@ function createRecordedCourse(id: string): MyCoursesTabData["recorded"][number] 
     slug: "foundations-user-experience-ux-design",
     image: uxCourseImage,
     type: "recorded",
-    completedLessons: 13,
-    totalLessons: 43,
+    completedLessons: 3,
+    totalLessons: 13,
     progressPercent: 10,
-    continueHref: "/courses/foundations-user-experience-ux-design",
+    continueHref: ROUTES.student.courseDetails("foundations-user-experience-ux-design"),
   };
 }
 
