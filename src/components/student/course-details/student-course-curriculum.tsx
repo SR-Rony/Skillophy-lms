@@ -23,6 +23,7 @@ const LESSON_ICONS = {
 
 interface StudentCourseCurriculumProps {
   modules: StudentCourseCurriculumModule[];
+  isCourseCompleted?: boolean;
 }
 
 function LessonRow({ lesson }: { lesson: StudentCourseCurriculumLesson }) {
@@ -53,9 +54,14 @@ function LessonRow({ lesson }: { lesson: StudentCourseCurriculumLesson }) {
   );
 }
 
-export function StudentCourseCurriculum({ modules }: StudentCourseCurriculumProps) {
+export function StudentCourseCurriculum({
+  modules,
+  isCourseCompleted = false,
+}: StudentCourseCurriculumProps) {
   const [openModules, setOpenModules] = useState<string[]>(
-    modules.filter((module) => module.defaultOpen).map((module) => module.id)
+    isCourseCompleted
+      ? []
+      : modules.filter((module) => module.defaultOpen).map((module) => module.id)
   );
 
   const toggleModule = (id: string) => {
@@ -90,6 +96,11 @@ export function StudentCourseCurriculum({ modules }: StudentCourseCurriculumProp
                 )}
               >
                 <div className="min-w-0">
+                  {(isCourseCompleted || module.completed) && (
+                    <span className="mb-2 inline-flex rounded-full bg-[#ecfdf3] px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide text-[#16a34a]">
+                      Completed
+                    </span>
+                  )}
                   <p className="text-[15px] font-bold leading-snug text-[#1a1a1a]">{module.title}</p>
                   <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] font-medium text-[#6f6562]">
                     <span className="inline-flex items-center gap-1.5">

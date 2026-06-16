@@ -6,10 +6,11 @@ import { Container } from "@/components/shared";
 import { StudentCourseDetailsHero } from "@/components/student/course-details/student-course-details-hero";
 import {
   StudentCourseCurriculumMobileButton,
-  StudentCourseDetailsCertificateTab,
   StudentCourseDetailsOverview,
-  StudentCourseDetailsProgressTab,
 } from "@/components/student/course-details/student-course-details-content";
+import { StudentCourseDetailsProgressTab } from "@/components/student/course-details/student-course-progress-details-tab";
+import { StudentCourseDetailsCertificateTab } from "@/components/student/course-details/student-course-certificate-tab";
+import { StudentCourseCompletedOverview } from "@/components/student/course-details/student-course-completed-overview";
 import { cn } from "@/utils";
 
 interface StudentCourseDetailsPageProps {
@@ -36,21 +37,31 @@ export function StudentCourseDetailsPage({ course }: StudentCourseDetailsPagePro
 
       <Container
         className={cn(
-          "py-5 sm:py-8 md:py-10",
-          showCurriculumButton && "pb-24 lg:pb-10"
+          activeTab === "overview" && "pt-5 sm:pt-8 md:pt-10",
+          activeTab === "overview" &&
+            (showCurriculumButton ? "pb-24 lg:pb-14" : "pb-10 sm:pb-12 md:pb-14")
         )}
       >
-        {activeTab === "overview" && (
-          <StudentCourseDetailsOverview
-            course={course}
-            onViewProgressDetails={() => setActiveTab("progress")}
-            showMobileCurriculum={showMobileCurriculum}
-            onHideMobileCurriculum={() => setShowMobileCurriculum(false)}
-          />
-        )}
-        {activeTab === "progress" && <StudentCourseDetailsProgressTab course={course} />}
-        {activeTab === "certificate" && <StudentCourseDetailsCertificateTab course={course} />}
+        {activeTab === "overview" &&
+          (course.status === "completed" ? (
+            <StudentCourseCompletedOverview
+              course={course}
+              onViewProgressDetails={() => setActiveTab("progress")}
+              showMobileCurriculum={showMobileCurriculum}
+              onHideMobileCurriculum={() => setShowMobileCurriculum(false)}
+            />
+          ) : (
+            <StudentCourseDetailsOverview
+              course={course}
+              onViewProgressDetails={() => setActiveTab("progress")}
+              showMobileCurriculum={showMobileCurriculum}
+              onHideMobileCurriculum={() => setShowMobileCurriculum(false)}
+            />
+          ))}
       </Container>
+
+      {activeTab === "progress" && <StudentCourseDetailsProgressTab course={course} />}
+      {activeTab === "certificate" && <StudentCourseDetailsCertificateTab course={course} />}
 
       {showCurriculumButton && (
         <StudentCourseCurriculumMobileButton onClick={() => setShowMobileCurriculum(true)} />

@@ -40,13 +40,13 @@ const ongoingLiveCourses: MyCoursesTabData["live"] = [
 
 const completedRecordedCourses: MyCoursesTabData["recorded"] = [
   {
-    id: "completed-mern",
-    title: "Fundamental of Web Development for MERN",
-    slug: "fundamental-web-development-mern",
-    image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=900&auto=format&fit=crop",
+    id: "completed-ux",
+    title: "Foundations of User Experience (UX) Design",
+    slug: "foundations-user-experience-ux-design-completed",
+    image: uxCourseImage,
     type: "recorded",
     completedOn: "May 11, 2022",
-    certificateHref: "/student/certificates",
+    certificateHref: ROUTES.student.certificates,
   },
   {
     id: "completed-graphic-design",
@@ -55,7 +55,16 @@ const completedRecordedCourses: MyCoursesTabData["recorded"] = [
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&auto=format&fit=crop",
     type: "recorded",
     completedOn: "May 11, 2022",
-    certificateHref: "/student/certificates",
+    certificateHref: ROUTES.student.certificates,
+  },
+  {
+    id: "completed-mern",
+    title: "Fundamental of Web Development for MERN",
+    slug: "fundamental-web-development-mern",
+    image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=900&auto=format&fit=crop",
+    type: "recorded",
+    completedOn: "May 11, 2022",
+    certificateHref: ROUTES.student.certificates,
   },
   {
     id: "completed-facebook-marketing",
@@ -64,7 +73,7 @@ const completedRecordedCourses: MyCoursesTabData["recorded"] = [
     image: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=900&auto=format&fit=crop",
     type: "recorded",
     completedOn: "May 11, 2022",
-    certificateHref: "/student/certificates",
+    certificateHref: ROUTES.student.certificates,
   },
 ];
 
