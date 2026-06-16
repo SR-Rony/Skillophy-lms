@@ -1,10 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronRight, Phone, Play } from "lucide-react";
+import { ChevronRight, Play } from "lucide-react";
 import { Facebook, MessageCircle } from "lucide-react";
 import type { StudentCourseDetailsData } from "@/types/student-course-details.types";
 import { StudentCourseCurriculum } from "@/components/student/course-details/student-course-curriculum";
+import {
+  StudentCourseRateCard,
+  StudentCourseSupportContact,
+} from "@/components/student/course-details/student-course-details-shared";
 import { cn } from "@/utils";
 
 interface StudentCourseProgressCardProps {
@@ -116,32 +120,6 @@ function StudentCourseProgressCard({
   );
 }
 
-function StudentCourseRateCard() {
-  return (
-    <div className="rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)]">
-      <h3 className="text-[15px] font-bold text-[#1a1a1a]">Rate this Course</h3>
-      <p className="mt-1.5 text-[13px] leading-relaxed text-[#9ca3af]">
-        Your constructive feedback and insights will help other learners
-      </p>
-      <div className="mt-4 flex gap-1" role="group" aria-label="Rate this course">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            className={cn(
-              "text-2xl transition-colors",
-              index < 3 ? "text-[#fbbf24]" : "text-[#e5e7eb] hover:text-[#fbbf24]"
-            )}
-            aria-label={`Rate ${index + 1} stars`}
-          >
-            ★
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function StudentCourseJoinGroupCard() {
   return (
     <div className="rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)]">
@@ -169,20 +147,6 @@ function StudentCourseJoinGroupCard() {
           <MessageCircle className="h-5 w-5" aria-hidden />
         </a>
       </div>
-    </div>
-  );
-}
-
-function StudentCourseSupportContact({ phone }: { phone: string }) {
-  return (
-    <div className="flex items-start gap-3 px-1 py-1">
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#ecfdf3]">
-        <Phone className="h-4 w-4 text-[#22c55e]" aria-hidden />
-      </span>
-      <p className="pt-1.5 text-[12px] leading-relaxed text-[#6b7280] sm:text-[13px]">
-        For any technical issue call{" "}
-        <span className="font-semibold text-[#1a1a1a]">{phone}</span> (10 am to 10 pm)
-      </p>
     </div>
   );
 }
@@ -222,18 +186,20 @@ export function StudentCourseDetailsOverview({
         )}
       >
         <aside className="space-y-4">
-        <StudentCourseProgressCard
-          totalScore={course.totalScore}
-          scoreMessage={course.scoreMessage}
-          onViewProgressDetails={onViewProgressDetails}
-          continueLesson={course.continueLesson}
-        />
-
-          <StudentCourseContinueLesson
-            title={course.continueLesson.title}
-            href={course.continueLesson.href}
-            className="hidden lg:flex"
+          <StudentCourseProgressCard
+            totalScore={course.totalScore}
+            scoreMessage={course.scoreMessage ?? ""}
+            onViewProgressDetails={onViewProgressDetails}
+            continueLesson={course.continueLesson}
           />
+
+          {course.continueLesson && (
+            <StudentCourseContinueLesson
+              title={course.continueLesson.title}
+              href={course.continueLesson.href}
+              className="hidden lg:flex"
+            />
+          )}
 
           <StudentCourseRateCard />
           <StudentCourseJoinGroupCard />
@@ -245,97 +211,6 @@ export function StudentCourseDetailsOverview({
         </div>
       </div>
     </>
-  );
-}
-
-interface StudentCourseDetailsProgressTabProps {
-  course: StudentCourseDetailsData;
-}
-
-export function StudentCourseDetailsProgressTab({ course }: StudentCourseDetailsProgressTabProps) {
-  const stats = [
-    { label: "Topics completed", value: `${course.completedTopics} / ${course.totalTopics}` },
-    { label: "Course progress", value: `${course.progressPercent}%` },
-    { label: "Total score", value: `${course.totalScore}%` },
-  ];
-
-  return (
-    <div className="rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)] sm:p-8">
-      <h2 className="text-xl font-bold text-[#1a1a1a]">Progress Details</h2>
-      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#6b7280]">
-        Track your learning progress across topics, lessons, and assessments for this course.
-      </p>
-
-      <div className="mt-6 grid gap-4 sm:mt-8 sm:grid-cols-3">
-        {stats.map((stat) => (
-          <div
-            key={stat.label}
-            className="rounded-xl border border-[#f0ebe8] bg-[#fafafa] px-5 py-4"
-          >
-            <p className="text-[13px] font-medium text-[#9ca3af]">{stat.label}</p>
-            <p className="mt-1 text-2xl font-bold text-[#1a1a1a]">{stat.value}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-6 sm:mt-8">
-        <div className="flex items-center justify-between text-sm font-semibold text-[#1a1a1a]">
-          <span>Overall completion</span>
-          <span>{course.progressPercent}%</span>
-        </div>
-        <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#ececec]">
-          <div
-            className="h-full rounded-full bg-primary transition-all"
-            style={{ width: `${course.progressPercent}%` }}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-interface StudentCourseDetailsCertificateTabProps {
-  course: StudentCourseDetailsData;
-}
-
-export function StudentCourseDetailsCertificateTab({
-  course,
-}: StudentCourseDetailsCertificateTabProps) {
-  const isEligible = course.progressPercent >= 100;
-
-  return (
-    <div
-      className={cn(
-        "rounded-2xl border bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)] sm:p-8",
-        isEligible ? "border-[#ebe8e6]" : "border-dashed border-[#e5e7eb]"
-      )}
-    >
-      <h2 className="text-xl font-bold text-[#1a1a1a]">Certificate</h2>
-      {isEligible ? (
-        <>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#6b7280]">
-            Congratulations! You have completed this course and can download your certificate.
-          </p>
-          <Link
-            href={course.certificateHref ?? "/student/certificates"}
-            className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-primary/90 sm:w-auto"
-          >
-            Get Certificate
-          </Link>
-        </>
-      ) : (
-        <>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#6b7280]">
-            Complete all topics and assessments to unlock your shareable certificate for{" "}
-            <span className="font-semibold text-[#1a1a1a]">{course.title}</span>.
-          </p>
-          <p className="mt-4 text-sm font-semibold text-[#1a1a1a]">
-            {course.completedTopics} of {course.totalTopics} topics completed ({course.progressPercent}
-            %)
-          </p>
-        </>
-      )}
-    </div>
   );
 }
 

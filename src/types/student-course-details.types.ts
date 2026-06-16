@@ -1,3 +1,5 @@
+export type StudentCourseStatus = "ongoing" | "completed";
+
 export type StudentCourseDetailsTab = "overview" | "progress" | "certificate";
 
 export type StudentCourseLessonStatus = "completed" | "current" | "available";
@@ -16,6 +18,19 @@ export interface StudentCourseCurriculumModule {
   duration: string;
   lessons: StudentCourseCurriculumLesson[];
   defaultOpen?: boolean;
+  completed?: boolean;
+}
+
+export type StudentCourseTopicStatus = "completed" | "ongoing" | "locked";
+
+export interface StudentCourseProgressTopic {
+  id: string;
+  label: string;
+  title: string;
+  status: StudentCourseTopicStatus;
+  quizScore?: number | null;
+  progressPercent: number;
+  href: string;
 }
 
 export interface StudentCourseDetailsData {
@@ -23,12 +38,17 @@ export interface StudentCourseDetailsData {
   slug: string;
   title: string;
   image: string;
+  status: StudentCourseStatus;
   completedTopics: number;
   totalTopics: number;
   progressPercent: number;
   totalScore: number;
-  scoreMessage: string;
-  continueLesson: {
+  scoreMessage?: string;
+  progressSubtext?: string;
+  progressTopics?: StudentCourseProgressTopic[];
+  completedOn?: string;
+  whatNextItems?: string[];
+  continueLesson?: {
     title: string;
     href: string;
   };
