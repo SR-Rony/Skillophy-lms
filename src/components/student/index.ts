@@ -13,6 +13,8 @@ export { MyCoursesCatalogSection } from "./my-courses-catalog-section";
 export { MyCoursesUpcomingSection } from "./my-courses-upcoming-section";
 export { UpcomingCourseCard } from "./upcoming-course-card";
 export { MyCoursesWishlistSection } from "./my-courses-wishlist-section";
+export { StudentCourseDetailsPage } from "./course-details";
+export { MyCoursesSeamBackground } from "./my-courses-seam-background";
 export { StudentUserMenu } from "./student-user-menu";
 export { StudentUserMenuNav } from "./student-user-menu-nav";
 export { StudentNavbarActions } from "./student-navbar-actions";
