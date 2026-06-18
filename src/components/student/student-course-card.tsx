@@ -50,10 +50,7 @@ function CourseProgress({
 export function StudentCourseCard({ course, className }: StudentCourseCardProps) {
   const isCompleted = Boolean(course.completedOn);
   const isLive = course.type === "live" && !isCompleted;
-  const detailsHref =
-    course.type === "recorded"
-      ? ROUTES.student.courseDetails(course.slug)
-      : (course.continueHref ?? ROUTES.student.live);
+  const detailsHref = ROUTES.student.courseDetails(course.slug);
   const actionHref = isCompleted
     ? (course.certificateHref ?? ROUTES.student.certificates)
     : (course.continueHref ?? detailsHref);
