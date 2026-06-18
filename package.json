@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev:turbopack": "next dev --turbopack",
+    "dev": "node api.js && next dev",
+    "dev:turbopack": "node api.js && next dev --turbopack",
     "clean": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\"",
     "clean:image-cache": "find .next -path '*cache/images*' -size 0 -delete 2>/dev/null || true",
     "build": "next build",
-    "start": "next start",
+    "start": "node api.js && next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"
   },
