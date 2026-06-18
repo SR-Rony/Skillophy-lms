@@ -1,4 +1,5 @@
 export type StudentCourseStatus = "ongoing" | "completed";
+export type StudentCourseType = "recorded" | "live";
 
 export type StudentCourseDetailsTab = "overview" | "progress" | "certificate";
 
@@ -33,11 +34,19 @@ export interface StudentCourseProgressTopic {
   href: string;
 }
 
+export interface StudentCourseCertificateInfo {
+  studentName: string;
+  studentAvatar: string;
+  certificateId: string;
+  verificationId?: string;
+}
+
 export interface StudentCourseDetailsData {
   id: string;
   slug: string;
   title: string;
   image: string;
+  courseType: StudentCourseType;
   status: StudentCourseStatus;
   completedTopics: number;
   totalTopics: number;
@@ -54,5 +63,6 @@ export interface StudentCourseDetailsData {
   };
   curriculum: StudentCourseCurriculumModule[];
   certificateHref?: string;
+  certificateInfo?: StudentCourseCertificateInfo;
   supportPhone: string;
 }
