@@ -99,6 +99,17 @@ const completedProgressTopics = [
 const progressSubtext =
   "Dive into class, dominate that exam, and watch yourself soar to master pro status!";
 
+const liveBatchImage =
+  "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop";
+
+const defaultCertificateInfo = {
+  studentName: "Nushrat Jahan",
+  studentAvatar:
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&auto=format&fit=crop",
+  certificateId: "5739skill52078",
+  verificationId: "14562ebwevgh54s",
+};
+
 const completedCurriculum: StudentCourseCurriculumModule[] = [
   {
     id: "module-1",
@@ -182,22 +193,25 @@ function createCompletedCourse(
   slug: string,
   title: string,
   image: string,
+  courseType: StudentCourseDetailsData["courseType"] = "recorded",
 ): StudentCourseDetailsData {
   return {
     id: slug,
     slug,
     title,
     image,
+    courseType,
     status: "completed",
     completedTopics: 13,
     totalTopics: 13,
     progressPercent: 100,
-    totalScore: 66.5,
+    totalScore: 86.5,
     completedOn: "May 11, 2022",
     scoreMessage: "Congratulations on completing this course!",
     progressSubtext: "Review your topic scores and download your certificate anytime.",
     progressTopics: completedProgressTopics,
     certificateHref: ROUTES.student.certificates,
+    certificateInfo: defaultCertificateInfo,
     whatNextItems: [
       "You can download your certificate.",
       "You can add this certificate in your LinkedIn profile",
@@ -214,6 +228,7 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
     slug: "foundations-user-experience-ux-design",
     title: "Foundations of User Experience (UX) Design",
     image: uxCourseImage,
+    courseType: "recorded",
     status: "ongoing",
     completedTopics: 3,
     totalTopics: 13,
@@ -372,21 +387,48 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
     ],
     supportPhone: "165387",
   },
+  "hsc-25-online-batch": {
+    id: "hsc-25-live",
+    slug: "hsc-25-online-batch",
+    title: "HSC 25 Online Batch",
+    image: liveBatchImage,
+    courseType: "live",
+    status: "ongoing",
+    completedTopics: 5,
+    totalTopics: 20,
+    progressPercent: 25,
+    totalScore: 72.5,
+    scoreMessage: "Keep attending live classes to boost your score.",
+    progressSubtext,
+    progressTopics: ongoingProgressTopics,
+    continueLesson: {
+      title: "Physics — Chapter 3 Live Class",
+      href: "/student/live",
+    },
+    curriculum: completedCurriculum.slice(0, 4).map((module) => ({
+      ...module,
+      completed: false,
+      defaultOpen: module.id === "module-1",
+    })),
+    supportPhone: "165387",
+  },
   "foundations-user-experience-ux-design-completed": {
     id: "ux-foundations-completed",
     slug: "foundations-user-experience-ux-design-completed",
     title: "Foundations of User Experience (UX) Design",
     image: uxCourseImage,
+    courseType: "recorded",
     status: "completed",
     completedTopics: 13,
     totalTopics: 13,
     progressPercent: 100,
-    totalScore: 66.5,
+    totalScore: 86.5,
     completedOn: "May 11, 2022",
     scoreMessage: "Congratulations on completing this course!",
     progressSubtext: "Review your topic scores and download your certificate anytime.",
     progressTopics: completedProgressTopics,
     certificateHref: ROUTES.student.certificates,
+    certificateInfo: defaultCertificateInfo,
     whatNextItems: [
       "You can download your certificate.",
       "You can add this certificate in your LinkedIn profile",

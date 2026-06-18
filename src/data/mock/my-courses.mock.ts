@@ -34,7 +34,7 @@ const ongoingLiveCourses: MyCoursesTabData["live"] = [
     image: liveBatchImage,
     type: "live",
     description: "Online courses on physics, chemistry, mathematics",
-    continueHref: "/student/live",
+    continueHref: ROUTES.student.courseDetails("hsc-25-online-batch"),
   },
 ];
 
