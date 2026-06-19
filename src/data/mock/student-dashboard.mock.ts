@@ -1,4 +1,5 @@
 import type { PublicCourse } from "@/components/public/public-course-card";
+import { ROUTES } from "@/constants";
 
 export interface StudentDashboardStats {
   completed: number;
@@ -89,9 +90,9 @@ export const studentDashboardData: StudentDashboardData = {
     month: "May",
     day: 12,
     label: "Upcoming LIVE Class",
-    title: "Platforms to improve user experiences",
+    title: "The Basics of User Experience Design",
     datetime: "Sunday, 9:00 PM",
-    joinUrl: "/student/live",
+    joinUrl: ROUTES.student.courseLive("hsc-25-online-batch", "live-l10"),
   },
   notifications: [
     {

@@ -406,9 +406,9 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
       month: "May",
       day: 12,
       label: "Upcoming LIVE Class",
-      title: "Platforms to improve user experiences",
+      title: "The Basics of User Experience Design",
       datetime: "Sunday, 9:00 PM",
-      joinUrl: "/student/live",
+      joinUrl: ROUTES.student.courseLive("hsc-25-online-batch", "live-l10"),
     },
     liveStats: {
       classAttendancePercent: 100,
@@ -508,13 +508,37 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
         title: "1. Introducing UX design",
         duration: "1hr 35mins",
         completed: true,
+        defaultOpen: true,
         liveClassCount: 4,
         assignmentCount: 1,
         lessons: [
-          createCompletedLesson("live-l1", "Design for different platforms", "live-class"),
-          createCompletedLesson("live-l2", "Get to know platforms", "reading"),
-          createCompletedLesson("live-l3", "Designing cross-platform experiences", "live-class"),
-          createCompletedLesson("live-l4", "Intro UX assignment", "assignment"),
+          {
+            id: "live-l10",
+            title: "The basics of user experience design",
+            type: "live-class",
+            status: "current",
+            href: ROUTES.student.courseLive("hsc-25-online-batch", "live-l10"),
+          },
+          createCompletedLesson(
+            "live-l1",
+            "The basics of user experience design",
+            "reading",
+          ),
+          createCompletedLesson("live-l2", "Design for good user experience", "reading"),
+          createCompletedLesson("live-l3", "Work in a cross-functional team", "reading"),
+          createCompletedLesson("live-l4", "Most common UX tools", "reading"),
+          {
+            id: "live-l5",
+            title: "Assignment on design across platforms",
+            type: "assignment",
+            status: "available",
+          },
+          {
+            id: "live-l6",
+            title: "Quiz on Introducing user experience design",
+            type: "quiz",
+            status: "available",
+          },
         ],
       },
       {
@@ -525,51 +549,32 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
         liveClassCount: 4,
         assignmentCount: 1,
         lessons: [
-          createCompletedLesson("live-l5", "Design mindset", "live-class"),
-          createCompletedLesson("live-l6", "Problem framing", "reading"),
+          createCompletedLesson("live-l7", "Design mindset", "live-class"),
+          createCompletedLesson("live-l8", "Problem framing", "reading"),
         ],
       },
       {
         id: "live-module-3",
         title: "3. Design across platforms",
         duration: "2hr 15min",
-        defaultOpen: true,
         liveClassCount: 4,
         assignmentCount: 1,
         lessons: [
+          createCompletedLesson("live-l9", "Design for different platforms", "live-class"),
+          createCompletedLesson("live-l11", "Get to know platforms", "reading"),
+          createCompletedLesson(
+            "live-l12",
+            "Designing cross-platform experiences & the Four Cs",
+            "live-class",
+          ),
           {
-            id: "live-l7",
-            title: "Design for different platforms",
-            type: "live-class",
-            status: "completed",
-          },
-          {
-            id: "live-l8",
-            title: "Get to know platforms",
-            type: "reading",
-            status: "completed",
-          },
-          {
-            id: "live-l9",
-            title: "Designing cross-platform experiences & the Four Cs",
-            type: "live-class",
-            status: "completed",
-          },
-          {
-            id: "live-l10",
-            title: "Platforms to improve user experiences",
-            type: "video",
-            status: "current",
-            href: "/student/live",
-          },
-          {
-            id: "live-l11",
+            id: "live-l13",
             title: "Design a homepage for both desktop and mobile version",
             type: "assignment",
             status: "available",
           },
           {
-            id: "live-l12",
+            id: "live-l14",
             title: "Quiz on how UX designers think across platforms",
             type: "quiz",
             status: "available",
@@ -582,7 +587,7 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
         duration: "1hr 02min",
         lessons: [
           {
-            id: "live-l13",
+            id: "live-l15",
             title: "Research basics",
             type: "reading",
             status: "available",
@@ -595,7 +600,7 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
         duration: "1hr 02min",
         lessons: [
           {
-            id: "live-l14",
+            id: "live-l16",
             title: "UX career paths",
             type: "video",
             status: "available",
@@ -608,7 +613,7 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
         duration: "1hr 02min",
         lessons: [
           {
-            id: "live-l15",
+            id: "live-l17",
             title: "Preparing for UX interviews",
             type: "reading",
             status: "available",
@@ -621,7 +626,7 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
         duration: "1hr 02min",
         lessons: [
           {
-            id: "live-l16",
+            id: "live-l18",
             title: "Product development stages",
             type: "video",
             status: "available",

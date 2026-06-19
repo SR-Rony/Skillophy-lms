@@ -138,7 +138,7 @@ export function StudentCourseLiveOverview({
           >
             ← Back to Overview
           </button>
-          <StudentCourseLiveCurriculum modules={course.curriculum} />
+          <StudentCourseLiveCurriculum modules={course.curriculum} courseSlug={course.slug} />
         </div>
       )}
 
@@ -181,7 +181,7 @@ export function StudentCourseLiveOverview({
         </aside>
 
         <div className="hidden lg:block">
-          <StudentCourseLiveCurriculum modules={course.curriculum} />
+          <StudentCourseLiveCurriculum modules={course.curriculum} courseSlug={course.slug} />
         </div>
       </div>
     </>

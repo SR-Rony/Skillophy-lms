@@ -1,16 +1,8 @@
-import { Container } from "@/components/shared";
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { redirect } from "next/navigation";
+import { ROUTES } from "@/constants";
 
 export const metadata = { title: "Live Classes" };
 
 export default function StudentLivePage() {
-  return (
-    <Container className="py-8">
-      <ModulePlaceholder
-        title="Live classes"
-        description="Join scheduled sessions and view recordings."
-        feature="live-class"
-      />
-    </Container>
-  );
+  redirect(ROUTES.student.courseLive("hsc-25-online-batch", "live-l10"));
 }
