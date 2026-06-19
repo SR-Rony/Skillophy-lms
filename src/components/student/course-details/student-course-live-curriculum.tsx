@@ -50,6 +50,10 @@ function getLessonHref(lesson: StudentCourseCurriculumLesson, courseSlug?: strin
     return ROUTES.student.courseAssignment(courseSlug, lesson.id);
   }
 
+  if (lesson.type === "reading") {
+    return ROUTES.student.courseResources(courseSlug, lesson.id);
+  }
+
   return undefined;
 }
 
@@ -67,7 +71,9 @@ function LiveLessonRow({
   const LessonIcon = isCompleted ? CheckCircle2 : LIVE_LESSON_ICONS[lesson.type].icon;
   const iconClassName = isCompleted
     ? "text-[#22c55e]"
-    : LIVE_LESSON_ICONS[lesson.type].className;
+    : isCurrent
+      ? "text-primary"
+      : LIVE_LESSON_ICONS[lesson.type].className;
   const href = getLessonHref(lesson, courseSlug);
 
   const content = (
@@ -88,7 +94,7 @@ function LiveLessonRow({
     <li
       className={cn(
         "border-t border-[#f0ebe8] first:border-t-0",
-        isCurrent && "-mx-2 rounded-lg bg-[#fff5f3] px-2"
+        isCurrent && "-mx-2 rounded-lg border-l-4 border-primary bg-[#fff5f3] px-2"
       )}
     >
       {href ? (

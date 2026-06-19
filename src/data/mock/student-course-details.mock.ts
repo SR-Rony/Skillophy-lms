@@ -438,7 +438,7 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
         action: {
           label: "Check Assignment",
           variant: "check",
-          href: "#assignment-2",
+          href: ROUTES.student.courseAssignmentFeedback("hsc-25-online-batch", "live-l5"),
         },
       },
       {
@@ -450,7 +450,10 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
         action: {
           label: "Check Assignment",
           variant: "check",
-          href: "#assignment-3",
+          href: ROUTES.student.courseAssignmentFeedback(
+            "hsc-25-online-batch",
+            "live-assignment-platforms",
+          ),
         },
       },
       {
@@ -477,7 +480,10 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
         action: {
           label: "Check Assignment",
           variant: "check",
-          href: "#assignment-5",
+          href: ROUTES.student.courseAssignmentFeedback(
+            "hsc-25-online-batch",
+            "live-l13-homepage",
+          ),
         },
       },
       {
@@ -489,7 +495,10 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
         action: {
           label: "Check Assignment",
           variant: "check",
-          href: "#assignment-6",
+          href: ROUTES.student.courseAssignmentFeedback(
+            "hsc-25-online-batch",
+            "live-assignment-platforms",
+          ),
         },
       },
       {
@@ -565,7 +574,13 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
         assignmentCount: 1,
         lessons: [
           createCompletedLesson("live-l9", "Design for different platforms", "live-class"),
-          createCompletedLesson("live-l11", "Get to know platforms", "reading"),
+          {
+            id: "live-l11",
+            title: "Get to know platforms",
+            type: "reading",
+            status: "current",
+            href: ROUTES.student.courseResources("hsc-25-online-batch", "live-l11"),
+          },
           createCompletedLesson(
             "live-l12",
             "Designing cross-platform experiences & the Four Cs",

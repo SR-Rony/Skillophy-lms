@@ -41,6 +41,10 @@ export const ROUTES = {
       `/student/courses/${slug}/live?lesson=${lessonId}`,
     courseAssignment: (slug: string, assignmentId = "live-assignment-platforms") =>
       `/student/courses/${slug}/assignment?assignment=${assignmentId}`,
+    courseAssignmentFeedback: (slug: string, assignmentId = "live-assignment-platforms") =>
+      `/student/courses/${slug}/assignment/feedback?assignment=${assignmentId}`,
+    courseResources: (slug: string, resourceId = "live-l11") =>
+      `/student/courses/${slug}/resources?resource=${resourceId}`,
     live: "/student/live",
     assignments: "/student/assignments",
     certificates: "/student/certificates",

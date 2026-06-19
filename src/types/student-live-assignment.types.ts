@@ -21,3 +21,11 @@ export interface StudentLiveAssignmentTask {
   nextAssignment?: StudentLiveAssignmentNav;
   placeholderUrl?: string;
 }
+
+export interface StudentLiveAssignmentFeedback extends StudentLiveAssignmentTask {
+  marks: number;
+  maxMarks: number;
+  instructorFeedback: string;
+  submissionUrl: string;
+  assignmentHref: string;
+}
