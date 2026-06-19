@@ -426,7 +426,7 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
         action: {
           label: "Submit Assignment",
           variant: "submit",
-          href: "#assignment-1",
+          href: ROUTES.student.courseAssignment("hsc-25-online-batch", "live-l5"),
         },
       },
       {
@@ -462,7 +462,10 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
         action: {
           label: "Submit Assignment",
           variant: "submit",
-          href: "#assignment-4",
+          href: ROUTES.student.courseAssignment(
+            "hsc-25-online-batch",
+            "live-assignment-platforms",
+          ),
         },
       },
       {
@@ -532,6 +535,7 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
             title: "Assignment on design across platforms",
             type: "assignment",
             status: "available",
+            href: ROUTES.student.courseAssignment("hsc-25-online-batch", "live-l5"),
           },
           {
             id: "live-l6",
@@ -567,11 +571,22 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
             "Designing cross-platform experiences & the Four Cs",
             "live-class",
           ),
+          createCompletedLesson(
+            "live-l12b",
+            "The basics of user experience design",
+            "reading",
+          ),
+          createCompletedLesson("live-l12c", "Design for good user experience", "reading"),
+          createCompletedLesson("live-l12d", "Work in a cross-functional team", "reading"),
           {
-            id: "live-l13",
-            title: "Design a homepage for both desktop and mobile version",
+            id: "live-assignment-platforms",
+            title: "Assignment on design across platforms",
             type: "assignment",
             status: "available",
+            href: ROUTES.student.courseAssignment(
+              "hsc-25-online-batch",
+              "live-assignment-platforms",
+            ),
           },
           {
             id: "live-l14",

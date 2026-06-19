@@ -39,6 +39,8 @@ export const ROUTES = {
     courseDetails: (slug: string) => `/student/courses/${slug}`,
     courseLive: (slug: string, lessonId = "live-l10") =>
       `/student/courses/${slug}/live?lesson=${lessonId}`,
+    courseAssignment: (slug: string, assignmentId = "live-assignment-platforms") =>
+      `/student/courses/${slug}/assignment?assignment=${assignmentId}`,
     live: "/student/live",
     assignments: "/student/assignments",
     certificates: "/student/certificates",

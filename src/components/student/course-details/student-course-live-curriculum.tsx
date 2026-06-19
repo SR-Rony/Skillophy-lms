@@ -30,6 +30,7 @@ const LIVE_LESSON_ICONS = {
 interface StudentCourseLiveCurriculumProps {
   modules: StudentCourseCurriculumModule[];
   courseSlug?: string;
+  activeLessonId?: string;
 }
 
 function getLessonHref(lesson: StudentCourseCurriculumLesson, courseSlug?: string) {
@@ -37,8 +38,16 @@ function getLessonHref(lesson: StudentCourseCurriculumLesson, courseSlug?: strin
     return lesson.href;
   }
 
-  if (courseSlug && (lesson.type === "live-class" || lesson.type === "video")) {
+  if (!courseSlug) {
+    return undefined;
+  }
+
+  if (lesson.type === "live-class" || lesson.type === "video") {
     return ROUTES.student.courseLive(courseSlug, lesson.id);
+  }
+
+  if (lesson.type === "assignment") {
+    return ROUTES.student.courseAssignment(courseSlug, lesson.id);
   }
 
   return undefined;
@@ -47,12 +56,14 @@ function getLessonHref(lesson: StudentCourseCurriculumLesson, courseSlug?: strin
 function LiveLessonRow({
   lesson,
   courseSlug,
+  activeLessonId,
 }: {
   lesson: StudentCourseCurriculumLesson;
   courseSlug?: string;
+  activeLessonId?: string;
 }) {
   const isCompleted = lesson.status === "completed";
-  const isCurrent = lesson.status === "current";
+  const isCurrent = lesson.status === "current" || lesson.id === activeLessonId;
   const LessonIcon = isCompleted ? CheckCircle2 : LIVE_LESSON_ICONS[lesson.type].icon;
   const iconClassName = isCompleted
     ? "text-[#22c55e]"
@@ -97,10 +108,25 @@ function LiveLessonRow({
 export function StudentCourseLiveCurriculum({
   modules,
   courseSlug,
+  activeLessonId,
 }: StudentCourseLiveCurriculumProps) {
-  const [openModules, setOpenModules] = useState<string[]>(
-    modules.filter((module) => module.defaultOpen).map((module) => module.id)
-  );
+  const [openModules, setOpenModules] = useState<string[]>(() => {
+    const defaults = modules.filter((module) => module.defaultOpen).map((module) => module.id);
+
+    if (!activeLessonId) {
+      return defaults;
+    }
+
+    const activeModule = modules.find((module) =>
+      module.lessons.some((lesson) => lesson.id === activeLessonId)
+    );
+
+    if (activeModule && !defaults.includes(activeModule.id)) {
+      return [...defaults, activeModule.id];
+    }
+
+    return defaults;
+  });
 
   const toggleModule = (id: string) => {
     setOpenModules((current) =>
@@ -184,7 +210,12 @@ export function StudentCourseLiveCurriculum({
               {isOpen && (
                 <ul className="bg-white px-4 pb-2 sm:px-5">
                   {module.lessons.map((lesson) => (
-                    <LiveLessonRow key={lesson.id} lesson={lesson} courseSlug={courseSlug} />
+                    <LiveLessonRow
+                      key={lesson.id}
+                      lesson={lesson}
+                      courseSlug={courseSlug}
+                      activeLessonId={activeLessonId}
+                    />
                   ))}
                 </ul>
               )}
