@@ -9,7 +9,6 @@ import type {
   StudentCourseTopicStatus,
 } from "@/types/student-course-details.types";
 import { Container } from "@/components/shared";
-import { MyCoursesSeamBackground } from "@/components/student/my-courses-seam-background";
 import { cn } from "@/utils";
 
 const STATUS_STYLES: Record<StudentCourseTopicStatus, string> = {
@@ -54,24 +53,8 @@ function ProgressSummaryCard({ course }: { course: StudentCourseDetailsData }) {
     "Dive into class, dominate that exam, and watch yourself soar to master pro status!";
 
   return (
-    <div className="relative overflow-hidden border-b border-[#f3f4f6] px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-      <svg
-        className="pointer-events-none absolute bottom-0 right-0 h-32 w-40 text-[#ead8d2]/50 sm:h-36 sm:w-48"
-        viewBox="0 0 160 140"
-        fill="none"
-        aria-hidden
-      >
-        {Array.from({ length: 8 }).map((_, index) => (
-          <path
-            key={index}
-            d={`M${8 + index * 10} ${120 - index * 6} C ${40 + index * 8} ${60 - index * 2}, ${80 + index * 6} ${50 + index * 3}, ${150 - index * 5} ${100 - index * 4}`}
-            stroke="currentColor"
-            strokeWidth="1"
-          />
-        ))}
-      </svg>
-
-      <div className="relative z-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
+    <div className="border-b border-[#f3f4f6] px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
         <div className="flex flex-col items-center sm:items-start">
           <ProgressScoreRing totalScore={course.totalScore} />
           <span className="mt-3 inline-flex rounded-full bg-primary px-3.5 py-1 text-[12px] font-bold text-white sm:text-[13px]">
@@ -193,7 +176,7 @@ function ProgressTopicsTable({ topics }: { topics: StudentCourseProgressTopic[] 
       <div className="hidden overflow-x-auto sm:block">
         <table className="w-full min-w-[640px] border-collapse text-left">
           <thead>
-            <tr className="border-b border-[#ececec] bg-[#fafafa]">
+            <tr className="border-b border-[#ececec] bg-white">
               <th className="px-4 py-3.5 text-[12px] font-semibold uppercase tracking-wide text-[#9ca3af] sm:px-6">
                 Topic Name
               </th>
@@ -236,10 +219,8 @@ export function StudentCourseDetailsProgressTab({ course }: StudentCourseDetails
   const topics = course.progressTopics ?? [];
 
   return (
-    <section className="relative overflow-hidden bg-white pb-10 sm:pb-12 md:pb-14">
-      <MyCoursesSeamBackground />
-
-      <Container className="relative z-10 px-4 pt-5 sm:px-6 sm:pt-6 lg:px-8 lg:pt-8">
+    <section className="bg-white pb-10 sm:pb-12 md:pb-14">
+      <Container className="px-4 pt-5 sm:px-6 sm:pt-6 lg:px-8 lg:pt-8">
         <div className="overflow-hidden rounded-2xl border border-[#ebe8e6] bg-white shadow-[0_8px_30px_rgba(35,25,22,0.08)]">
           <ProgressSummaryCard course={course} />
           {topics.length > 0 && <ProgressTopicsTable topics={topics} />}

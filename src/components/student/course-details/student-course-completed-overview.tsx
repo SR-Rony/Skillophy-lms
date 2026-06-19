@@ -12,27 +12,6 @@ import {
 } from "@/components/student/course-details/student-course-details-shared";
 import { cn } from "@/utils";
 
-function ConfettiBackground() {
-  const colors = ["#fbbf24", "#f87171", "#60a5fa", "#34d399", "#a78bfa"];
-
-  return (
-    <div className="pointer-events-none absolute inset-x-0 top-0 h-24 overflow-hidden" aria-hidden>
-      {Array.from({ length: 18 }).map((_, index) => (
-        <span
-          key={index}
-          className="absolute h-2 w-1.5 rounded-sm opacity-80"
-          style={{
-            backgroundColor: colors[index % colors.length],
-            left: `${(index * 17) % 100}%`,
-            top: `${(index * 11) % 70}%`,
-            transform: `rotate(${index * 24}deg)`,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 function CompletedScoreRing({ totalScore }: { totalScore: number }) {
   const radius = 54;
   const circumference = 2 * Math.PI * radius;
@@ -75,13 +54,11 @@ function StudentCourseCompletedCard({
   onViewProgressDetails,
 }: StudentCourseCompletedCardProps) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)] sm:p-6">
-      <ConfettiBackground />
-
-      <div className="relative flex flex-col items-center text-center">
+    <div className="rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)] sm:p-6">
+      <div className="flex flex-col items-center text-center">
         <CompletedScoreRing totalScore={totalScore} />
 
-        <span className="relative z-10 -mt-3 inline-flex rounded-full bg-primary px-4 py-1.5 text-[13px] font-bold text-white">
+        <span className="-mt-3 inline-flex rounded-full bg-primary px-4 py-1.5 text-[13px] font-bold text-white">
           Total Score {totalScore}%
         </span>
 
@@ -92,7 +69,7 @@ function StudentCourseCompletedCard({
         </p>
       </div>
 
-      <div className="relative mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <button
           type="button"
           onClick={onViewProgressDetails}
@@ -113,23 +90,7 @@ function StudentCourseCompletedCard({
 
 function StudentCourseWhatNextCard({ items }: { items: string[] }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-[#ebe8e6] bg-gradient-to-br from-white to-[#fafafa] p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)]">
-      <svg
-        className="pointer-events-none absolute bottom-0 right-0 h-28 w-28 text-[#ead8d2]/40"
-        viewBox="0 0 120 120"
-        fill="none"
-        aria-hidden
-      >
-        {Array.from({ length: 6 }).map((_, index) => (
-          <path
-            key={index}
-            d={`M${8 + index * 8} ${100 - index * 6} C ${30 + index * 6} ${60 - index * 2}, ${60 + index * 4} ${50 + index * 3}, ${110 - index * 4} ${90 - index * 4}`}
-            stroke="currentColor"
-            strokeWidth="1"
-          />
-        ))}
-      </svg>
-
+    <div className="rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)]">
       <Heading as="h3" variant="position-card">What Next?</Heading>
       <ul className="mt-4 space-y-3">
         {items.map((item) => (

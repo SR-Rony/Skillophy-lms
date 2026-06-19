@@ -1,7 +1,5 @@
 "use client";
 
-import { Heading } from "@/components/shared/heading";
-
 import { useState } from "react";
 import {
   BookOpen,
@@ -12,38 +10,38 @@ import {
   Clock,
   PlayCircle,
 } from "lucide-react";
+import { Heading } from "@/components/shared/heading";
 import type {
   StudentCourseCurriculumLesson,
   StudentCourseCurriculumModule,
 } from "@/types/student-course-details.types";
 import { cn } from "@/utils";
 
-const LESSON_ICONS = {
+const LIVE_LESSON_ICONS = {
+  "live-class": { icon: PlayCircle, className: "text-primary" },
   video: { icon: PlayCircle, className: "text-primary" },
   reading: { icon: BookOpen, className: "text-[#22c55e]" },
   quiz: { icon: CircleHelp, className: "text-[#3b82f6]" },
-  "live-class": { icon: PlayCircle, className: "text-primary" },
   assignment: { icon: ClipboardList, className: "text-[#a855f7]" },
 } as const;
 
-interface StudentCourseCurriculumProps {
+interface StudentCourseLiveCurriculumProps {
   modules: StudentCourseCurriculumModule[];
-  isCourseCompleted?: boolean;
 }
 
-function LessonRow({ lesson }: { lesson: StudentCourseCurriculumLesson }) {
+function LiveLessonRow({ lesson }: { lesson: StudentCourseCurriculumLesson }) {
   const isCompleted = lesson.status === "completed";
   const isCurrent = lesson.status === "current";
-  const LessonIcon = isCompleted ? CheckCircle2 : LESSON_ICONS[lesson.type].icon;
+  const LessonIcon = isCompleted ? CheckCircle2 : LIVE_LESSON_ICONS[lesson.type].icon;
   const iconClassName = isCompleted
     ? "text-[#22c55e]"
-    : LESSON_ICONS[lesson.type].className;
+    : LIVE_LESSON_ICONS[lesson.type].className;
 
   return (
     <li
       className={cn(
         "flex items-center gap-3 border-t border-[#f0ebe8] py-3.5 first:border-t-0",
-        isCurrent && "rounded-lg bg-[#fff5f3] px-2 -mx-2"
+        isCurrent && "-mx-2 rounded-lg bg-[#fff5f3] px-2"
       )}
     >
       <LessonIcon className={cn("h-[18px] w-[18px] shrink-0", iconClassName)} aria-hidden />
@@ -59,14 +57,9 @@ function LessonRow({ lesson }: { lesson: StudentCourseCurriculumLesson }) {
   );
 }
 
-export function StudentCourseCurriculum({
-  modules,
-  isCourseCompleted = false,
-}: StudentCourseCurriculumProps) {
+export function StudentCourseLiveCurriculum({ modules }: StudentCourseLiveCurriculumProps) {
   const [openModules, setOpenModules] = useState<string[]>(
-    isCourseCompleted
-      ? []
-      : modules.filter((module) => module.defaultOpen).map((module) => module.id)
+    modules.filter((module) => module.defaultOpen).map((module) => module.id)
   );
 
   const toggleModule = (id: string) => {
@@ -77,12 +70,14 @@ export function StudentCourseCurriculum({
 
   return (
     <div className="rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)] sm:p-6">
-      <Heading as="h2" variant="dashboard-section">Course Curriculum</Heading>
+      <Heading as="h2" variant="dashboard-section">
+        Course Curriculum
+      </Heading>
 
       <div className="mt-5 max-h-none space-y-3 overflow-visible pr-1 lg:max-h-[640px] lg:overflow-y-auto">
         {modules.map((module) => {
           const isOpen = openModules.includes(module.id);
-          const lessonCount = module.lessons.length;
+          const isLiveModule = module.liveClassCount != null || module.assignmentCount != null;
 
           return (
             <div
@@ -101,21 +96,40 @@ export function StudentCourseCurriculum({
                 )}
               >
                 <div className="min-w-0">
-                  {(isCourseCompleted || module.completed) && (
+                  {module.completed && (
                     <span className="mb-2 inline-flex rounded-full bg-[#ecfdf3] px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide text-[#16a34a]">
                       Completed
                     </span>
                   )}
                   <p className="text-[15px] font-bold leading-snug text-[#1a1a1a]">{module.title}</p>
                   <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] font-medium text-[#6f6562]">
-                    <span className="inline-flex items-center gap-1.5">
-                      <PlayCircle className="h-4 w-4" aria-hidden />
-                      {lessonCount} lessons
-                    </span>
-                    <span className="inline-flex items-center gap-1.5">
-                      <Clock className="h-4 w-4" aria-hidden />
-                      {module.duration}
-                    </span>
+                    {isLiveModule ? (
+                      <>
+                        {module.liveClassCount != null && (
+                          <span className="inline-flex items-center gap-1.5">
+                            <PlayCircle className="h-4 w-4" aria-hidden />
+                            {module.liveClassCount} LIVE class
+                          </span>
+                        )}
+                        {module.assignmentCount != null && (
+                          <span className="inline-flex items-center gap-1.5">
+                            <ClipboardList className="h-4 w-4" aria-hidden />
+                            {module.assignmentCount} assignment
+                          </span>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <span className="inline-flex items-center gap-1.5">
+                          <PlayCircle className="h-4 w-4" aria-hidden />
+                          {module.lessons.length} lessons
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <Clock className="h-4 w-4" aria-hidden />
+                          {module.duration}
+                        </span>
+                      </>
+                    )}
                   </div>
                 </div>
                 <ChevronDown
@@ -130,7 +144,7 @@ export function StudentCourseCurriculum({
               {isOpen && (
                 <ul className="bg-white px-4 pb-2 sm:px-5">
                   {module.lessons.map((lesson) => (
-                    <LessonRow key={lesson.id} lesson={lesson} />
+                    <LiveLessonRow key={lesson.id} lesson={lesson} />
                   ))}
                 </ul>
               )}

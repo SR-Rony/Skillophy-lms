@@ -1,14 +1,28 @@
+import type { AssignmentProgressRow } from "@/types/assignment-progress-table.types";
+
 export type StudentCourseStatus = "ongoing" | "completed";
 export type StudentCourseType = "recorded" | "live";
 
-export type StudentCourseDetailsTab = "overview" | "progress" | "certificate";
+export type StudentCourseDetailsTab =
+  | "overview"
+  | "assignment"
+  | "progress"
+  | "leaderboard"
+  | "certificate";
 
 export type StudentCourseLessonStatus = "completed" | "current" | "available";
+
+export type StudentCourseLessonType =
+  | "video"
+  | "reading"
+  | "quiz"
+  | "live-class"
+  | "assignment";
 
 export interface StudentCourseCurriculumLesson {
   id: string;
   title: string;
-  type: "video" | "reading" | "quiz";
+  type: StudentCourseLessonType;
   status: StudentCourseLessonStatus;
   href?: string;
 }
@@ -20,6 +34,23 @@ export interface StudentCourseCurriculumModule {
   lessons: StudentCourseCurriculumLesson[];
   defaultOpen?: boolean;
   completed?: boolean;
+  liveClassCount?: number;
+  assignmentCount?: number;
+}
+
+export interface StudentUpcomingLiveClass {
+  month: string;
+  day: string | number;
+  label: string;
+  title: string;
+  datetime: string;
+  joinUrl: string;
+}
+
+export interface StudentLiveCourseStats {
+  classAttendancePercent: number;
+  rank: number;
+  totalStudents: number;
 }
 
 export type StudentCourseTopicStatus = "completed" | "ongoing" | "locked";
@@ -61,6 +92,9 @@ export interface StudentCourseDetailsData {
     title: string;
     href: string;
   };
+  upcomingLiveClass?: StudentUpcomingLiveClass;
+  liveStats?: StudentLiveCourseStats;
+  assignments?: AssignmentProgressRow[];
   curriculum: StudentCourseCurriculumModule[];
   certificateHref?: string;
   certificateInfo?: StudentCourseCertificateInfo;

@@ -8,7 +8,6 @@ import type {
   StudentCourseDetailsData,
 } from "@/types/student-course-details.types";
 import { Container } from "@/components/shared";
-import { MyCoursesSeamBackground } from "@/components/student/my-courses-seam-background";
 import { Heading } from "@/components/shared/heading";
 import { cn } from "@/utils";
 
@@ -27,7 +26,7 @@ interface StudentCourseDetailsCertificateTabProps {
 
 function CertificatePreview({ isLocked, alt }: { isLocked: boolean; alt: string }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-[#ebe8e6] bg-[#fafafa] shadow-[0_8px_30px_rgba(35,25,22,0.06)]">
+    <div className="overflow-hidden rounded-2xl border border-[#ebe8e6] bg-white shadow-[0_8px_30px_rgba(35,25,22,0.06)]">
       <div className="relative aspect-[1.35/1] w-full">
         <Image
           src={CERTIFICATE_IMAGE}
@@ -60,7 +59,7 @@ function CertificateLockedPanel({ course }: { course: StudentCourseDetailsData }
   const continueHref = course.continueLesson?.href ?? "#";
 
   return (
-    <div className="flex h-full flex-col justify-center rounded-2xl border border-[#f5d5cf] bg-[#fff8f6] p-6 shadow-[0_8px_30px_rgba(35,25,22,0.04)] sm:p-8">
+    <div className="flex h-full flex-col justify-center rounded-2xl border border-[#ebe8e6] bg-white p-6 shadow-[0_8px_30px_rgba(35,25,22,0.04)] sm:p-8">
       <Heading as="h2" variant="dashboard-certificate" className="sm:text-[22px]">
         No Certificate Yet!
       </Heading>
@@ -90,7 +89,7 @@ function CertificateSummaryCard({
   const completedOn = course.completedOn ?? "May 11, 2022";
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-[#f5d5cf] bg-[#fff8f6] p-6 shadow-[0_8px_30px_rgba(35,25,22,0.06)] sm:p-8">
+    <div className="rounded-2xl border border-[#ebe8e6] bg-white p-6 shadow-[0_8px_30px_rgba(35,25,22,0.06)] sm:p-8">
       <BadgeCheck
         className="pointer-events-none absolute right-4 top-4 h-16 w-16 text-white/70 sm:right-6 sm:top-6 sm:h-20 sm:w-20"
         strokeWidth={1.25}
@@ -196,10 +195,8 @@ export function StudentCourseDetailsCertificateTab({ course }: StudentCourseDeta
   const isEligible = course.status === "completed" || course.progressPercent >= 100;
 
   return (
-    <section className="relative overflow-hidden bg-white pb-10 sm:pb-12 md:pb-14">
-      <MyCoursesSeamBackground />
-
-      <Container className="relative z-10 px-4 pt-5 sm:px-6 sm:pt-6 lg:px-8 lg:pt-8">
+    <section className="bg-white pb-10 sm:pb-12 md:pb-14">
+      <Container className="px-4 pt-5 sm:px-6 sm:pt-6 lg:px-8 lg:pt-8">
         {isEligible ? (
           <CertificateUnlockedView course={course} />
         ) : (

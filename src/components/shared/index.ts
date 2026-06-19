@@ -9,6 +9,8 @@ export {
   blogDetailsSectionHeadingClassName,
 } from "./heading";
 export type { HeadingLevel, HeadingProps, HeadingVariant } from "./heading";
+export { AssignmentProgressTable } from "./assignment-progress-table";
+export type { AssignmentProgressTableProps } from "./assignment-progress-table";
 export { Logo } from "./logo";
 export { Container } from "./container";
 export { AccordionPanel } from "./accordion-panel";

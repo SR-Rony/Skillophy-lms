@@ -1,4 +1,5 @@
 import type {
+  StudentCourseCurriculumLesson,
   StudentCourseCurriculumModule,
   StudentCourseDetailsData,
 } from "@/types/student-course-details.types";
@@ -7,7 +8,11 @@ import { ROUTES } from "@/constants";
 const uxCourseImage =
   "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=900&auto=format&fit=crop";
 
-function createCompletedLesson(id: string, title: string, type: "video" | "reading" | "quiz") {
+function createCompletedLesson(
+  id: string,
+  title: string,
+  type: StudentCourseCurriculumLesson["type"],
+) {
   return { id, title, type, status: "completed" as const };
 }
 
@@ -98,9 +103,6 @@ const completedProgressTopics = [
 
 const progressSubtext =
   "Dive into class, dominate that exam, and watch yourself soar to master pro status!";
-
-const liveBatchImage =
-  "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop";
 
 const defaultCertificateInfo = {
   studentName: "Nushrat Jahan",
@@ -388,28 +390,245 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
     supportPhone: "165387",
   },
   "hsc-25-online-batch": {
-    id: "hsc-25-live",
+    id: "ux-foundations-live",
     slug: "hsc-25-online-batch",
-    title: "HSC 25 Online Batch",
-    image: liveBatchImage,
+    title: "Foundations of User Experience (UX) Design",
+    image: uxCourseImage,
     courseType: "live",
     status: "ongoing",
-    completedTopics: 5,
-    totalTopics: 20,
-    progressPercent: 25,
-    totalScore: 72.5,
-    scoreMessage: "Keep attending live classes to boost your score.",
+    completedTopics: 3,
+    totalTopics: 13,
+    progressPercent: 10,
+    totalScore: 66.5,
+    scoreMessage: "You are chilling like a panda, boost up your score.",
     progressSubtext,
     progressTopics: ongoingProgressTopics,
-    continueLesson: {
-      title: "Physics — Chapter 3 Live Class",
-      href: "/student/live",
+    upcomingLiveClass: {
+      month: "May",
+      day: 12,
+      label: "Upcoming LIVE Class",
+      title: "Platforms to improve user experiences",
+      datetime: "Sunday, 9:00 PM",
+      joinUrl: "/student/live",
     },
-    curriculum: completedCurriculum.slice(0, 4).map((module) => ({
-      ...module,
-      completed: false,
-      defaultOpen: module.id === "module-1",
-    })),
+    liveStats: {
+      classAttendancePercent: 100,
+      rank: 5,
+      totalStudents: 24,
+    },
+    assignments: [
+      {
+        id: "assignment-1",
+        topicLabel: "Topic 1",
+        topicTitle: "Introducing UX design",
+        lastSubmissionDate: "May 11, 2022",
+        status: "pending",
+        action: {
+          label: "Submit Assignment",
+          variant: "submit",
+          href: "#assignment-1",
+        },
+      },
+      {
+        id: "assignment-2",
+        topicLabel: "Topic 2",
+        topicTitle: "Thinking like a UX designer",
+        lastSubmissionDate: "May 11, 2022",
+        status: "submitted",
+        action: {
+          label: "Check Assignment",
+          variant: "check",
+          href: "#assignment-2",
+        },
+      },
+      {
+        id: "assignment-3",
+        topicLabel: "Topic 3",
+        topicTitle: "Joining design sprints",
+        lastSubmissionDate: "May 11, 2022",
+        status: "approved",
+        action: {
+          label: "Check Assignment",
+          variant: "check",
+          href: "#assignment-3",
+        },
+      },
+      {
+        id: "assignment-4",
+        topicLabel: "Topic 4",
+        topicTitle: "Integrating research into the design",
+        lastSubmissionDate: "May 11, 2022",
+        status: "pending",
+        action: {
+          label: "Submit Assignment",
+          variant: "submit",
+          href: "#assignment-4",
+        },
+      },
+      {
+        id: "assignment-5",
+        topicLabel: "Topic 5",
+        topicTitle: "Jobs in the field of user experience",
+        lastSubmissionDate: "May 11, 2022",
+        status: "submitted",
+        action: {
+          label: "Check Assignment",
+          variant: "check",
+          href: "#assignment-5",
+        },
+      },
+      {
+        id: "assignment-6",
+        topicLabel: "Topic 6",
+        topicTitle: "User experience careers",
+        lastSubmissionDate: "May 11, 2022",
+        status: "approved",
+        action: {
+          label: "Check Assignment",
+          variant: "check",
+          href: "#assignment-6",
+        },
+      },
+      {
+        id: "assignment-7",
+        topicLabel: "Topic 7",
+        topicTitle: "The product development life cycle",
+        lastSubmissionDate: "May 11, 2022",
+        status: "pending",
+        action: {
+          label: "Submit Assignment",
+          variant: "submit",
+          href: "#assignment-7",
+        },
+      },
+    ],
+    curriculum: [
+      {
+        id: "live-module-1",
+        title: "1. Introducing UX design",
+        duration: "1hr 35mins",
+        completed: true,
+        liveClassCount: 4,
+        assignmentCount: 1,
+        lessons: [
+          createCompletedLesson("live-l1", "Design for different platforms", "live-class"),
+          createCompletedLesson("live-l2", "Get to know platforms", "reading"),
+          createCompletedLesson("live-l3", "Designing cross-platform experiences", "live-class"),
+          createCompletedLesson("live-l4", "Intro UX assignment", "assignment"),
+        ],
+      },
+      {
+        id: "live-module-2",
+        title: "2. Thinking like a UX designer",
+        duration: "1hr 20min",
+        completed: true,
+        liveClassCount: 4,
+        assignmentCount: 1,
+        lessons: [
+          createCompletedLesson("live-l5", "Design mindset", "live-class"),
+          createCompletedLesson("live-l6", "Problem framing", "reading"),
+        ],
+      },
+      {
+        id: "live-module-3",
+        title: "3. Design across platforms",
+        duration: "2hr 15min",
+        defaultOpen: true,
+        liveClassCount: 4,
+        assignmentCount: 1,
+        lessons: [
+          {
+            id: "live-l7",
+            title: "Design for different platforms",
+            type: "live-class",
+            status: "completed",
+          },
+          {
+            id: "live-l8",
+            title: "Get to know platforms",
+            type: "reading",
+            status: "completed",
+          },
+          {
+            id: "live-l9",
+            title: "Designing cross-platform experiences & the Four Cs",
+            type: "live-class",
+            status: "completed",
+          },
+          {
+            id: "live-l10",
+            title: "Platforms to improve user experiences",
+            type: "video",
+            status: "current",
+            href: "/student/live",
+          },
+          {
+            id: "live-l11",
+            title: "Design a homepage for both desktop and mobile version",
+            type: "assignment",
+            status: "available",
+          },
+          {
+            id: "live-l12",
+            title: "Quiz on how UX designers think across platforms",
+            type: "quiz",
+            status: "available",
+          },
+        ],
+      },
+      {
+        id: "live-module-4",
+        title: "4. Integrating research into the design",
+        duration: "1hr 02min",
+        lessons: [
+          {
+            id: "live-l13",
+            title: "Research basics",
+            type: "reading",
+            status: "available",
+          },
+        ],
+      },
+      {
+        id: "live-module-5",
+        title: "5. Jobs in the field of user experience",
+        duration: "1hr 02min",
+        lessons: [
+          {
+            id: "live-l14",
+            title: "UX career paths",
+            type: "video",
+            status: "available",
+          },
+        ],
+      },
+      {
+        id: "live-module-6",
+        title: "6. User experience careers",
+        duration: "1hr 02min",
+        lessons: [
+          {
+            id: "live-l15",
+            title: "Preparing for UX interviews",
+            type: "reading",
+            status: "available",
+          },
+        ],
+      },
+      {
+        id: "live-module-7",
+        title: "7. The product development life cycle",
+        duration: "1hr 02min",
+        lessons: [
+          {
+            id: "live-l16",
+            title: "Product development stages",
+            type: "video",
+            status: "available",
+          },
+        ],
+      },
+    ] satisfies StudentCourseCurriculumModule[],
     supportPhone: "165387",
   },
   "foundations-user-experience-ux-design-completed": {

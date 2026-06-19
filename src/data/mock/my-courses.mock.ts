@@ -29,11 +29,11 @@ const ongoingRecordedCourses = Array.from({ length: 6 }, (_, index) =>
 const ongoingLiveCourses: MyCoursesTabData["live"] = [
   {
     id: "ongoing-live-1",
-    title: "HSC 25 Online Batch",
+    title: "Foundations of User Experience (UX) Design",
     slug: "hsc-25-online-batch",
-    image: liveBatchImage,
+    image: uxCourseImage,
     type: "live",
-    description: "Online courses on physics, chemistry, mathematics",
+    description: "Live batch with interactive classes and assignments",
     continueHref: ROUTES.student.courseDetails("hsc-25-online-batch"),
   },
 ];

@@ -8,6 +8,12 @@ import {
   StudentCourseCurriculumMobileButton,
   StudentCourseDetailsOverview,
 } from "@/components/student/course-details/student-course-details-content";
+import {
+  StudentCourseLiveCurriculumMobileButton,
+  StudentCourseLiveOverview,
+} from "@/components/student/course-details/student-course-live-overview";
+import { StudentCourseAssignmentTab } from "@/components/student/course-details/student-course-assignment-tab";
+import { StudentCourseDetailsTabPlaceholder } from "@/components/student/course-details/student-course-details-tab-placeholder";
 import { StudentCourseDetailsProgressTab } from "@/components/student/course-details/student-course-progress-details-tab";
 import { StudentCourseDetailsCertificateTab } from "@/components/student/course-details/student-course-certificate-tab";
 import { StudentCourseCompletedOverview } from "@/components/student/course-details/student-course-completed-overview";
@@ -20,12 +26,46 @@ interface StudentCourseDetailsPageProps {
 export function StudentCourseDetailsPage({ course }: StudentCourseDetailsPageProps) {
   const [activeTab, setActiveTab] = useState<StudentCourseDetailsTab>("overview");
   const [showMobileCurriculum, setShowMobileCurriculum] = useState(false);
+  const isLiveCourse = course.courseType === "live";
 
   useEffect(() => {
     setShowMobileCurriculum(false);
   }, [activeTab]);
 
   const showCurriculumButton = activeTab === "overview" && !showMobileCurriculum;
+
+  const renderOverview = () => {
+    if (course.status === "completed") {
+      return (
+        <StudentCourseCompletedOverview
+          course={course}
+          onViewProgressDetails={() => setActiveTab("progress")}
+          showMobileCurriculum={showMobileCurriculum}
+          onHideMobileCurriculum={() => setShowMobileCurriculum(false)}
+        />
+      );
+    }
+
+    if (isLiveCourse) {
+      return (
+        <StudentCourseLiveOverview
+          course={course}
+          onViewProgressDetails={() => setActiveTab("progress")}
+          showMobileCurriculum={showMobileCurriculum}
+          onHideMobileCurriculum={() => setShowMobileCurriculum(false)}
+        />
+      );
+    }
+
+    return (
+      <StudentCourseDetailsOverview
+        course={course}
+        onViewProgressDetails={() => setActiveTab("progress")}
+        showMobileCurriculum={showMobileCurriculum}
+        onHideMobileCurriculum={() => setShowMobileCurriculum(false)}
+      />
+    );
+  };
 
   return (
     <>
@@ -35,37 +75,51 @@ export function StudentCourseDetailsPage({ course }: StudentCourseDetailsPagePro
         onTabChange={setActiveTab}
       />
 
-      <Container
+      <section
         className={cn(
-          activeTab === "overview" && "pt-5 sm:pt-8 md:pt-10",
+          "bg-white",
           activeTab === "overview" &&
             (showCurriculumButton ? "pb-24 lg:pb-14" : "pb-10 sm:pb-12 md:pb-14")
         )}
       >
-        {activeTab === "overview" &&
-          (course.status === "completed" ? (
-            <StudentCourseCompletedOverview
-              course={course}
-              onViewProgressDetails={() => setActiveTab("progress")}
-              showMobileCurriculum={showMobileCurriculum}
-              onHideMobileCurriculum={() => setShowMobileCurriculum(false)}
-            />
-          ) : (
-            <StudentCourseDetailsOverview
-              course={course}
-              onViewProgressDetails={() => setActiveTab("progress")}
-              showMobileCurriculum={showMobileCurriculum}
-              onHideMobileCurriculum={() => setShowMobileCurriculum(false)}
-            />
-          ))}
-      </Container>
+        <Container
+          className={cn(activeTab === "overview" && "pt-5 sm:pt-8 md:pt-10")}
+        >
+          {activeTab === "overview" && renderOverview()}
+        </Container>
+      </section>
+
+      {activeTab === "assignment" &&
+        (isLiveCourse ? (
+          <StudentCourseAssignmentTab course={course} />
+        ) : (
+          <StudentCourseDetailsTabPlaceholder
+            course={course}
+            feature="assignments"
+            title="Assignments"
+            description="View and submit assignments for this course."
+          />
+        ))}
 
       {activeTab === "progress" && <StudentCourseDetailsProgressTab course={course} />}
+
+      {activeTab === "leaderboard" && (
+        <StudentCourseDetailsTabPlaceholder
+          course={course}
+          feature="leaderboard"
+          title="Leaderboard"
+          description="See how you rank against other learners in this batch."
+        />
+      )}
+
       {activeTab === "certificate" && <StudentCourseDetailsCertificateTab course={course} />}
 
-      {showCurriculumButton && (
-        <StudentCourseCurriculumMobileButton onClick={() => setShowMobileCurriculum(true)} />
-      )}
+      {showCurriculumButton &&
+        (isLiveCourse ? (
+          <StudentCourseLiveCurriculumMobileButton onClick={() => setShowMobileCurriculum(true)} />
+        ) : (
+          <StudentCourseCurriculumMobileButton onClick={() => setShowMobileCurriculum(true)} />
+        ))}
     </>
   );
 }

@@ -17,6 +17,14 @@ const courseDetailsTabs: { id: StudentCourseDetailsTab; label: string }[] = [
   { id: "certificate", label: "Certificate" },
 ];
 
+const liveCourseDetailsTabs: { id: StudentCourseDetailsTab; label: string }[] = [
+  { id: "overview", label: "Overview" },
+  { id: "assignment", label: "Assignment" },
+  { id: "progress", label: "Progress Details" },
+  { id: "leaderboard", label: "Leaderboard" },
+  { id: "certificate", label: "Certificate" },
+];
+
 interface StudentCourseDetailsHeroProps {
   course: StudentCourseDetailsData;
   activeTab: StudentCourseDetailsTab;
@@ -28,8 +36,10 @@ export function StudentCourseDetailsHero({
   activeTab,
   onTabChange,
 }: StudentCourseDetailsHeroProps) {
+  const tabs = course.courseType === "live" ? liveCourseDetailsTabs : courseDetailsTabs;
+
   return (
-    <section className="relative overflow-hidden border-b border-[#f3f4f6] bg-white">
+    <section className="relative overflow-hidden border-b border-[#f3f4f6]">
       <MyCoursesSeamBackground />
 
       <Container className="relative z-10 pb-0 pt-6 md:pt-8 lg:pt-10">
@@ -83,7 +93,7 @@ export function StudentCourseDetailsHero({
           aria-label="Course sections"
           className="scrollbar-hide -mx-1 mt-6 flex w-full gap-0 overflow-x-auto sm:mt-8 lg:mt-10"
         >
-          {courseDetailsTabs.map((tab) => {
+          {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
 
             return (
