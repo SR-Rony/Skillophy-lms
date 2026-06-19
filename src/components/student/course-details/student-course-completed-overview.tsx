@@ -3,42 +3,15 @@
 import { Heading } from "@/components/shared/heading";
 
 import Link from "next/link";
-import { Sparkles, Trophy } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import type { StudentCourseDetailsData } from "@/types/student-course-details.types";
 import { StudentCourseCurriculum } from "@/components/student/course-details/student-course-curriculum";
+import { StudentCourseScoreRing } from "@/components/student/course-details/student-course-score-ring";
 import {
   StudentCourseRateCard,
   StudentCourseSupportContact,
 } from "@/components/student/course-details/student-course-details-shared";
 import { cn } from "@/utils";
-
-function CompletedScoreRing({ totalScore }: { totalScore: number }) {
-  const radius = 54;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (totalScore / 100) * circumference;
-
-  return (
-    <div className="relative flex h-[140px] w-[140px] items-center justify-center">
-      <svg className="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 140 140">
-        <circle cx="70" cy="70" r={radius} fill="none" stroke="#f0ebe8" strokeWidth="10" />
-        <circle
-          cx="70"
-          cy="70"
-          r={radius}
-          fill="none"
-          stroke="#e85d4c"
-          strokeWidth="10"
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset}
-        />
-      </svg>
-      <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#fff7ed] text-[#f59e0b]">
-        <Trophy className="h-8 w-8" strokeWidth={1.75} aria-hidden />
-      </span>
-    </div>
-  );
-}
 
 interface StudentCourseCompletedCardProps {
   totalScore: number;
@@ -56,9 +29,9 @@ function StudentCourseCompletedCard({
   return (
     <div className="rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)] sm:p-6">
       <div className="flex flex-col items-center text-center">
-        <CompletedScoreRing totalScore={totalScore} />
+        <StudentCourseScoreRing totalScore={totalScore} />
 
-        <span className="-mt-3 inline-flex rounded-full bg-primary px-4 py-1.5 text-[13px] font-bold text-white">
+        <span className="-mt-4 inline-flex rounded-full bg-primary px-4 py-1.5 text-[13px] font-bold text-white">
           Total Score {totalScore}%
         </span>
 

@@ -7,8 +7,11 @@ import type {
   StudentCourseDetailsData,
   StudentCourseProgressTopic,
   StudentCourseTopicStatus,
+  StudentLiveCourseStats,
 } from "@/types/student-course-details.types";
 import { Container } from "@/components/shared";
+import { StudentCourseScoreRing } from "@/components/student/course-details/student-course-score-ring";
+import { getStudentScoreMessage } from "@/components/student/course-details/student-course-score-tier";
 import { cn } from "@/utils";
 
 const STATUS_STYLES: Record<StudentCourseTopicStatus, string> = {
@@ -17,37 +20,92 @@ const STATUS_STYLES: Record<StudentCourseTopicStatus, string> = {
   locked: "bg-[#f3f4f6] text-[#9ca3af]",
 };
 
-function ProgressScoreRing({ totalScore }: { totalScore: number }) {
-  const radius = 44;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (totalScore / 100) * circumference;
+function LiveProgressStatsCards({ liveStats }: { liveStats: StudentLiveCourseStats }) {
+  return (
+    <div className="grid w-full grid-cols-2 gap-3 sm:max-w-[280px] lg:w-auto lg:shrink-0">
+      <div className="rounded-2xl bg-[#f3f0ff] px-4 py-5 text-center">
+        <p className="text-[22px] font-extrabold leading-none text-[#7c5ce0] sm:text-[24px]">
+          {liveStats.classAttendancePercent}%
+        </p>
+        <p className="mt-2 text-[12px] font-semibold leading-snug text-[#6f6562] sm:text-[13px]">
+          Class Attendance
+        </p>
+      </div>
+      <div className="rounded-2xl bg-[#fdf2f8] px-4 py-5 text-center">
+        <p className="text-[22px] font-extrabold leading-none text-[#7c5ce0] sm:text-[24px]">
+          {liveStats.rank}/{liveStats.totalStudents}
+        </p>
+        <p className="mt-2 text-[12px] font-semibold leading-snug text-[#6f6562] sm:text-[13px]">
+          Your Rank
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function LiveProgressSummaryCard({ course }: { course: StudentCourseDetailsData }) {
+  const scoreMessage = getStudentScoreMessage(course.totalScore, course.scoreMessage);
+  const progressSubtext =
+    course.progressSubtext ??
+    "Dive into class, dominate that exam, and watch yourself soar to master pro status!";
+  const liveStats = course.liveStats ?? {
+    classAttendancePercent: 100,
+    rank: 5,
+    totalStudents: 24,
+  };
 
   return (
-    <div className="relative flex h-[112px] w-[112px] shrink-0 items-center justify-center sm:h-[120px] sm:w-[120px]">
-      <svg className="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 120 120">
-        <circle cx="60" cy="60" r={radius} fill="none" stroke="#f0ebe8" strokeWidth="8" />
-        <circle
-          cx="60"
-          cy="60"
-          r={radius}
-          fill="none"
-          stroke="#e85d4c"
-          strokeWidth="8"
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset}
-        />
+    <div className="relative overflow-hidden border-b border-[#f3f4f6] bg-[#fafafa] px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+      <svg
+        className="pointer-events-none absolute bottom-0 right-0 h-28 w-36 text-[#ead8d2]/35 sm:h-32 sm:w-44"
+        viewBox="0 0 160 140"
+        fill="none"
+        aria-hidden
+      >
+        {Array.from({ length: 6 }).map((_, index) => (
+          <ellipse
+            key={index}
+            cx="120"
+            cy="100"
+            rx={24 + index * 14}
+            ry={18 + index * 10}
+            stroke="currentColor"
+            strokeWidth="1"
+          />
+        ))}
       </svg>
-      <span className="text-4xl sm:text-5xl" role="img" aria-label="Panda">
-        🐼
-      </span>
+
+      <div className="relative z-10 flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
+        <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-6 lg:gap-8">
+          <div className="relative flex shrink-0 flex-col items-center">
+            <StudentCourseScoreRing totalScore={course.totalScore} size="md" />
+            <span className="relative z-10 -mt-4 inline-flex rounded-full bg-gradient-to-r from-primary to-[#f97316] px-4 py-1.5 text-[12px] font-bold text-white shadow-[0_6px_16px_rgba(232,93,76,0.28)] sm:text-[13px]">
+              Total Score {course.totalScore}%
+            </span>
+          </div>
+
+          <div className="min-w-0 flex-1 text-center sm:text-left">
+            <Heading as="h2" variant="dashboard-section-bold">
+              {scoreMessage}
+            </Heading>
+            <p className="mt-2 max-w-xl text-[13px] leading-relaxed text-[#6b7280] sm:text-[14px]">
+              {progressSubtext}
+            </p>
+          </div>
+        </div>
+
+        <LiveProgressStatsCards liveStats={liveStats} />
+      </div>
     </div>
   );
 }
 
 function ProgressSummaryCard({ course }: { course: StudentCourseDetailsData }) {
-  const scoreMessage =
-    course.scoreMessage ?? "You are chilling like a panda, boost up your score.";
+  if (course.courseType === "live") {
+    return <LiveProgressSummaryCard course={course} />;
+  }
+
+  const scoreMessage = getStudentScoreMessage(course.totalScore, course.scoreMessage);
   const progressSubtext =
     course.progressSubtext ??
     "Dive into class, dominate that exam, and watch yourself soar to master pro status!";
@@ -56,7 +114,7 @@ function ProgressSummaryCard({ course }: { course: StudentCourseDetailsData }) {
     <div className="border-b border-[#f3f4f6] px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
         <div className="flex flex-col items-center sm:items-start">
-          <ProgressScoreRing totalScore={course.totalScore} />
+          <StudentCourseScoreRing totalScore={course.totalScore} size="md" />
           <span className="mt-3 inline-flex rounded-full bg-primary px-3.5 py-1 text-[12px] font-bold text-white sm:text-[13px]">
             Total Score {course.totalScore}%
           </span>

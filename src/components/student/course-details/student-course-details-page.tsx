@@ -12,6 +12,7 @@ import {
   StudentCourseLiveCurriculumMobileButton,
   StudentCourseLiveOverview,
 } from "@/components/student/course-details/student-course-live-overview";
+import { StudentCourseLeaderboardTab } from "@/components/student/course-details/student-course-leaderboard-tab";
 import { StudentCourseAssignmentTab } from "@/components/student/course-details/student-course-assignment-tab";
 import { StudentCourseDetailsTabPlaceholder } from "@/components/student/course-details/student-course-details-tab-placeholder";
 import { StudentCourseDetailsProgressTab } from "@/components/student/course-details/student-course-progress-details-tab";
@@ -103,14 +104,17 @@ export function StudentCourseDetailsPage({ course }: StudentCourseDetailsPagePro
 
       {activeTab === "progress" && <StudentCourseDetailsProgressTab course={course} />}
 
-      {activeTab === "leaderboard" && (
-        <StudentCourseDetailsTabPlaceholder
-          course={course}
-          feature="leaderboard"
-          title="Leaderboard"
-          description="See how you rank against other learners in this batch."
-        />
-      )}
+      {activeTab === "leaderboard" &&
+        (isLiveCourse ? (
+          <StudentCourseLeaderboardTab course={course} />
+        ) : (
+          <StudentCourseDetailsTabPlaceholder
+            course={course}
+            feature="leaderboard"
+            title="Leaderboard"
+            description="See how you rank against other learners in this batch."
+          />
+        ))}
 
       {activeTab === "certificate" && <StudentCourseDetailsCertificateTab course={course} />}
 

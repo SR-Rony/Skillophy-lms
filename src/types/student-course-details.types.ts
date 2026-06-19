@@ -1,4 +1,5 @@
 import type { AssignmentProgressRow } from "@/types/assignment-progress-table.types";
+import type { CourseLeaderboardData } from "@/types/course-leaderboard.types";
 
 export type StudentCourseStatus = "ongoing" | "completed";
 export type StudentCourseType = "recorded" | "live";
@@ -95,6 +96,7 @@ export interface StudentCourseDetailsData {
   upcomingLiveClass?: StudentUpcomingLiveClass;
   liveStats?: StudentLiveCourseStats;
   assignments?: AssignmentProgressRow[];
+  leaderboard?: CourseLeaderboardData;
   curriculum: StudentCourseCurriculumModule[];
   certificateHref?: string;
   certificateInfo?: StudentCourseCertificateInfo;

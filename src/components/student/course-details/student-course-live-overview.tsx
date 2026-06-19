@@ -9,35 +9,9 @@ import {
   StudentCourseRateCard,
   StudentCourseSupportContact,
 } from "@/components/student/course-details/student-course-details-shared";
+import { StudentCourseScoreRing } from "@/components/student/course-details/student-course-score-ring";
+import { getStudentScoreMessage } from "@/components/student/course-details/student-course-score-tier";
 import { cn } from "@/utils";
-
-function ScoreRing({ totalScore }: { totalScore: number }) {
-  const radius = 54;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (totalScore / 100) * circumference;
-
-  return (
-    <div className="relative flex h-[140px] w-[140px] items-center justify-center">
-      <svg className="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 140 140">
-        <circle cx="70" cy="70" r={radius} fill="none" stroke="#f0ebe8" strokeWidth="10" />
-        <circle
-          cx="70"
-          cy="70"
-          r={radius}
-          fill="none"
-          stroke="#e85d4c"
-          strokeWidth="10"
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset}
-        />
-      </svg>
-      <span className="text-5xl" role="img" aria-label="Panda">
-        🐼
-      </span>
-    </div>
-  );
-}
 
 function UpcomingLiveClassCard({
   upcomingLiveClass,
@@ -177,14 +151,12 @@ export function StudentCourseLiveOverview({
         <aside className="space-y-4">
           <div className="rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)] sm:p-6">
             <div className="flex flex-col items-center text-center">
-              <ScoreRing totalScore={course.totalScore} />
-
-              <span className="mt-4 inline-flex rounded-full bg-primary px-4 py-1.5 text-[13px] font-bold text-white">
+              <StudentCourseScoreRing totalScore={course.totalScore} />
+              <span className="relative z-10 -mt-4 inline-flex rounded-full bg-gradient-to-r from-primary to-[#f97316] px-4 py-1.5 text-[13px] font-bold text-white shadow-[0_6px_16px_rgba(232,93,76,0.28)]">
                 Total Score {course.totalScore}%
               </span>
-
               <p className="mt-4 text-[15px] font-bold leading-snug text-[#1a1a1a]">
-                {course.scoreMessage}
+                {getStudentScoreMessage(course.totalScore, course.scoreMessage)}
               </p>
             </div>
 

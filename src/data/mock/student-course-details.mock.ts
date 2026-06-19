@@ -3,6 +3,7 @@ import type {
   StudentCourseCurriculumModule,
   StudentCourseDetailsData,
 } from "@/types/student-course-details.types";
+import { liveCourseLeaderboardMock } from "@/data/mock/course-leaderboard.mock";
 import { ROUTES } from "@/constants";
 
 const uxCourseImage =
@@ -236,7 +237,6 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
     totalTopics: 13,
     progressPercent: 10,
     totalScore: 66.5,
-    scoreMessage: "You are chilling like a panda, boost up your score.",
     progressSubtext,
     progressTopics: ongoingProgressTopics,
     continueLesson: {
@@ -400,7 +400,6 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
     totalTopics: 13,
     progressPercent: 10,
     totalScore: 66.5,
-    scoreMessage: "You are chilling like a panda, boost up your score.",
     progressSubtext,
     progressTopics: ongoingProgressTopics,
     upcomingLiveClass: {
@@ -413,9 +412,10 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
     },
     liveStats: {
       classAttendancePercent: 100,
-      rank: 5,
+      rank: 12,
       totalStudents: 24,
     },
+    leaderboard: liveCourseLeaderboardMock,
     assignments: [
       {
         id: "assignment-1",
