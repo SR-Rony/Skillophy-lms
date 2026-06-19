@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
@@ -82,14 +83,13 @@ export function StudentCourseCard({ course, className }: StudentCourseCardProps)
         </div>
 
         <div className="flex flex-1 flex-col px-5 pb-5 pt-4">
-          <h3
-            className={cn(
-              "line-clamp-2 font-bold leading-snug tracking-tight text-[#1a1a1a]",
-              isCompleted ? "text-[17px]" : "min-h-[52px] text-[17px]"
-            )}
+          <Heading
+            as="h3"
+            variant="dashboard-card"
+            className={cn(isCompleted && "min-h-[52px]")}
           >
             {course.title}
-          </h3>
+          </Heading>
 
           <div className={cn("flex-1", isCompleted ? "mt-2" : "mt-3")}>
             {isCompleted ? (

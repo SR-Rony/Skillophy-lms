@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { Lock, Phone } from "lucide-react";
 import type {
   CheckoutContact,
@@ -24,9 +26,9 @@ export function CheckoutPaymentSection({
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-[18px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[20px]">
+        <Heading as="h2" variant="course-detail-sidebar">
           Payment Methods
-        </h2>
+        </Heading>
         <span className="inline-flex items-center gap-1.5 rounded-full bg-[#e8f8ef] px-3 py-1.5 text-[12px] font-semibold text-[#22c55e] sm:text-[13px]">
           <Lock className="h-3.5 w-3.5" aria-hidden />
           Secured payment

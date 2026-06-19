@@ -1,9 +1,11 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import { ItemsSlider } from "@/components/public/course-slider";
-import { SectionTitle, sectionTitleFadeUpVariants, sectionHeadingClassName } from "@/components/public/section-title";
+import { SectionTitle, sectionTitleFadeUpVariants } from "@/components/public/section-title";
 import { cn } from "@/utils";
 import type { SpotlightSliderSectionProps } from "@/types/spotlight-slider.types";
 
@@ -89,7 +91,7 @@ export function SpotlightSliderSection<T>({
             variants={sectionTitleFadeUpVariants}
             className={cn("mx-auto max-w-[840px] text-center", titleClassName)}
           >
-            <h2 className={sectionHeadingClassName}>{title}</h2>
+            <Heading as="h2" variant="section">{title}</Heading>
             <p className="mx-auto mt-5 max-w-[680px] text-base font-normal leading-[1.5] text-[#5f5553]">
               {description}
             </p>

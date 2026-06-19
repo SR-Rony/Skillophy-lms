@@ -9,6 +9,7 @@ import type {
 } from "@/types/student-course-details.types";
 import { Container } from "@/components/shared";
 import { MyCoursesSeamBackground } from "@/components/student/my-courses-seam-background";
+import { Heading } from "@/components/shared/heading";
 import { cn } from "@/utils";
 
 const CERTIFICATE_IMAGE = "/images/certificate.png";
@@ -60,7 +61,9 @@ function CertificateLockedPanel({ course }: { course: StudentCourseDetailsData }
 
   return (
     <div className="flex h-full flex-col justify-center rounded-2xl border border-[#f5d5cf] bg-[#fff8f6] p-6 shadow-[0_8px_30px_rgba(35,25,22,0.04)] sm:p-8">
-      <h2 className="text-xl font-extrabold text-[#1a1a1a] sm:text-[22px]">No Certificate Yet!</h2>
+      <Heading as="h2" variant="dashboard-certificate" className="sm:text-[22px]">
+        No Certificate Yet!
+      </Heading>
       <p className="mt-3 text-[14px] leading-relaxed text-[#6b7280] sm:text-[15px]">
         You currently have no certificates. Enroll a course today or finish your existing course!
       </p>
@@ -110,9 +113,9 @@ function CertificateSummaryCard({
           </span>
         </div>
 
-        <h3 className="mt-8 text-lg font-extrabold text-[#1a1a1a] sm:text-xl">
+        <Heading as="h3" variant="dashboard-section-bold" className="mt-8">
           Completed by {certificateInfo.studentName}
-        </h3>
+        </Heading>
         <p className="mt-2 text-[13px] text-[#6b7280]">
           Certificate ID:{" "}
           <span className="font-semibold text-[#1a1a1a]">{certificateInfo.certificateId}</span>
@@ -170,7 +173,7 @@ function CertificateUnlockedView({ course }: { course: StudentCourseDetailsData 
     <div className="space-y-6 sm:space-y-8">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div className="max-w-2xl">
-          <h2 className="text-xl font-extrabold text-[#1a1a1a] sm:text-2xl">Completion Certificate</h2>
+          <Heading as="h2" variant="dashboard-certificate">Completion Certificate</Heading>
           <p className="mt-2 text-[14px] leading-relaxed text-[#6b7280] sm:text-[15px]">
             You successfully completed this course. Your certificate is ready to download and share.
           </p>

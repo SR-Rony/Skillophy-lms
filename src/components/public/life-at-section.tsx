@@ -1,12 +1,11 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
-import {
-  sectionHeadingClassName,
-  sectionTitleFadeUpVariants,
-} from "@/components/public/section-title";
+import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
 import { cn } from "@/utils";
 import type { LifeAtGalleryImage, LifeAtSectionProps } from "@/types/life-at.types";
 
@@ -122,7 +121,7 @@ export function LifeAtSection({ title, description, images, className }: LifeAtS
           variants={sectionTitleFadeUpVariants}
           className="mx-auto max-w-[760px] text-center"
         >
-          <h2 className={sectionHeadingClassName}>{title}</h2>
+          <Heading as="h2" variant="section">{title}</Heading>
           <p className="mx-auto mt-5 max-w-[680px] text-base font-normal leading-[1.5] text-[#5f5553]">
             {description}
           </p>

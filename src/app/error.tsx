@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Heading } from "@/components/shared/heading";
 
 export default function RootError({
   error,
@@ -16,7 +17,7 @@ export default function RootError({
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-8 text-center">
-      <h1 className="text-2xl font-bold">Something went wrong</h1>
+      <Heading as="h1" variant="page-header">Something went wrong</Heading>
       <p className="max-w-md text-muted-foreground">
         An unexpected error occurred. Please try again.
       </p>

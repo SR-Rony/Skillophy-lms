@@ -7,6 +7,7 @@ import { ArrowLeft, Clock3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants";
 import { cn } from "@/utils";
+import { Heading } from "@/components/shared/heading";
 
 const OTP_LENGTH = 4;
 const RESEND_SECONDS = 300;
@@ -212,9 +213,7 @@ export function OtpVerificationPageContent() {
       </Link>
 
       <div className="mt-6">
-        <h1 className="text-[28px] font-black leading-[1.15] tracking-[-0.03em] text-[#1a1a1a] sm:text-[32px]">
-          OTP Verification
-        </h1>
+        <Heading as="h1" variant="auth">OTP Verification</Heading>
         <p className="mt-3 text-[14px] leading-[1.65] text-[#6f6562] sm:text-[15px]">
           Please enter the 4-digit code sent to your mobile number{" "}
           <span className="font-semibold text-[#24201f]">{formattedMobile}</span>

@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -184,9 +186,9 @@ export function MobileNavbarDrawer({
             </div>
 
             <div className="min-h-0 flex-1 overflow-hidden px-4 py-4">
-              <h2 className="mb-4 text-[21px] font-black tracking-[-0.03em] text-[#25201f]">
+              <Heading as="h2" variant="nav-menu-mobile">
                 Course Categories
-              </h2>
+              </Heading>
               <div className="h-full space-y-4 overflow-y-auto pr-3 [scrollbar-color:#2e2b2a_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#2e2b2a] [&::-webkit-scrollbar-track]:bg-transparent">
                 {megaMenuCategories.map((category) => {
                   const Icon = categoryIcons[category.iconName] ?? BookOpen;

@@ -6,7 +6,8 @@ import { Sparkles } from "lucide-react";
 import { Container } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants";
-import { heroHeadingClassName, sectionLabelClassName } from "@/components/public/section-title";
+import { getHeadingClassName } from "@/components/shared/heading";
+import { sectionLabelClassName } from "@/components/public/section-title";
 import { cn } from "@/utils";
 import { HeroVisual } from "./hero-visual";
 
@@ -149,7 +150,7 @@ export function HeroSection({ className }: HeroSectionProps) {
 
             <motion.h1
               variants={itemVariants}
-              className={cn(heroHeadingClassName, "mb-6 text-left")}
+              className={cn(getHeadingClassName("hero"), "mb-6 text-left")}
             >
               Explore Endless <br />
               Education <br />

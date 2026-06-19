@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import { Quote } from "lucide-react";
 import { TeacherPortrait } from "@/components/public/teacher-portrait";
 import type { CourseDetailsTeacher } from "@/components/public/course-details/types";
@@ -9,9 +10,9 @@ interface TeacherSectionProps {
 export function TeacherSection({ teacher }: TeacherSectionProps) {
   return (
     <section id="teacher" className="scroll-mt-28">
-      <h2 className="text-[22px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[24px]">
+      <Heading as="h2" variant="course-detail-section">
         Teacher
-      </h2>
+      </Heading>
 
       <div className="relative mt-5 overflow-hidden rounded-[22px] bg-[#fff5f5] px-5 py-6 sm:px-6 sm:py-7 lg:px-8 lg:py-8">
         <Quote
@@ -27,7 +28,7 @@ export function TeacherSection({ teacher }: TeacherSectionProps) {
           />
 
           <div className="relative min-w-0 pr-2 sm:pr-10">
-            <h3 className="text-[20px] font-bold text-[#1a1a1a] sm:text-[22px]">{teacher.name}</h3>
+            <Heading as="h3" variant="course-detail-card">{teacher.name}</Heading>
             <p className="mt-1.5 text-[14px] font-medium text-[#6f6562] sm:text-[15px]">
               {teacher.role}
             </p>

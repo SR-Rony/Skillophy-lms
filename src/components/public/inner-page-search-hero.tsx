@@ -1,11 +1,12 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { Container } from "@/components/shared";
 import {
-  sectionHeadingClassName,
   sectionLabelClassName,
   sectionTitleFadeUpVariants,
 } from "@/components/public/section-title";
@@ -108,7 +109,7 @@ export function InnerPageSearchHero({
             </div>
           ) : null}
 
-          <h1 className={sectionHeadingClassName}>{title}</h1>
+          <Heading as="h1" variant="section">{title}</Heading>
 
           {showDescription ? (
             <p className="mx-auto mt-5 max-w-[680px] text-center text-base font-normal leading-[1.5] tracking-normal text-[#5f5553]">

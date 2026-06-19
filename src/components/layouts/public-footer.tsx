@@ -16,6 +16,7 @@ import {
   Send,
 } from "lucide-react";
 import { Container } from "@/components/shared";
+import { Heading } from "@/components/shared/heading";
 import { ROUTES } from "@/constants";
 import { cn } from "@/utils";
 
@@ -167,9 +168,9 @@ export function PublicFooter() {
         >
           {footerColumns.map((column) => (
             <motion.nav key={column.title} variants={footerVariants} aria-label={column.title}>
-              <h3 className="text-[14px] font-bold tracking-wide text-white">
+              <Heading as="h3" variant="footer-column" className="text-[14px] tracking-wide text-white">
                 {column.title}
-              </h3>
+              </Heading>
               <span className="mt-2 mb-4 block h-[2px] w-8 rounded-full bg-primary" />
               <ul className="space-y-2.5">
                 {column.links.map((link) => (
@@ -191,7 +192,9 @@ export function PublicFooter() {
           variants={footerVariants}
           className="rounded-[16px] border border-white/[0.08] bg-white/[0.04] p-6 backdrop-blur-sm lg:max-w-[260px] lg:pt-2"
         >
-          <h3 className="text-[14px] font-bold tracking-wide text-white">Contact Us</h3>
+          <Heading as="h3" variant="footer-column" className="text-[14px] tracking-wide text-white">
+            Contact Us
+          </Heading>
           <span className="mt-2 mb-5 block h-[2px] w-8 rounded-full bg-primary" />
           <ul className="space-y-4">
             {contactItems.map(({ icon: Icon, label, href }) => (

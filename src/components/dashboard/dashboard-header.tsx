@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useAuthStore, useUIStore } from "@/store";
 import { getInitials } from "@/utils";
+import { Heading } from "@/components/shared/heading";
 
 interface DashboardHeaderProps {
   title?: string;
@@ -25,7 +26,7 @@ export function DashboardHeader({ title }: DashboardHeaderProps) {
       >
         <Menu className="h-5 w-5" />
       </Button>
-      {title && <h2 className="text-lg font-semibold lg:hidden">{title}</h2>}
+      {title && <Heading as="h2" variant="empty-state" className="lg:hidden">{title}</Heading>}
       <div className="ml-auto flex items-center gap-2">
         <Button variant="ghost" size="icon" aria-label="Notifications">
           <Bell className="h-4 w-4" />

@@ -12,9 +12,9 @@ import {
   authCardClassName,
   authFieldClassName,
   authGoBackClassName,
-  authHeadingClassName,
   authSubtextClassName,
 } from "@/components/auth/auth-form-styles";
+import { Heading } from "@/components/shared/heading";
 import { ROUTES } from "@/constants";
 import { resetPasswordSchema, type ResetPasswordFormValues } from "@/validations/auth.schema";
 
@@ -94,7 +94,7 @@ export function ResetPasswordPageContent() {
       </Link>
 
       <div className="mt-6">
-        <h1 className={authHeadingClassName}>Reset Password</h1>
+        <Heading as="h1" variant="auth">Reset Password</Heading>
         <p className={`mt-3 ${authSubtextClassName}`}>
           Enter new password &amp; confirm new password to reset your account password
         </p>

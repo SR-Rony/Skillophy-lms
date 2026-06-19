@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import type { CourseDetailsRequirement } from "@/components/public/course-details/types";
 
 const THEMES = {
@@ -112,9 +113,9 @@ interface RequirementsSectionProps {
 export function RequirementsSection({ requirements }: RequirementsSectionProps) {
   return (
     <section id="requirements" className="scroll-mt-28">
-      <h2 className="text-[22px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[24px]">
+      <Heading as="h2" variant="course-detail-section">
         Requirements
-      </h2>
+      </Heading>
 
       <div className="mt-6 grid gap-4 sm:mt-8 sm:grid-cols-3 sm:gap-5">
         {requirements.map((item) => {

@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ROUTES } from "@/constants";
@@ -35,9 +37,9 @@ export function MegaMenuCourseCard({
         />
       </div>
       <div className="flex min-w-0 flex-1 items-center px-4 py-3">
-        <h3 className="line-clamp-2 text-[15px] font-black leading-snug tracking-[-0.02em] text-[#25201f]">
+        <Heading as="h3" variant="nav-card">
           {title}
-        </h3>
+        </Heading>
       </div>
     </Link>
   );

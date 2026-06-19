@@ -1,9 +1,10 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import {
-  sectionHeadingClassName,
   sectionLabelClassName,
 } from "@/components/public/section-title";
 import { cn } from "@/utils";
@@ -88,9 +89,9 @@ export function CenteredPageHero({
           </div>
         ) : null}
 
-        <h1 className={cn(sectionHeadingClassName, "text-[32px] sm:text-[40px] lg:text-[44px]")}>
+        <Heading as="h1" variant="section" className="text-[32px] sm:text-[40px] lg:text-[44px]">
           {title}
-        </h1>
+        </Heading>
         <p
           className={cn(
             "mx-auto mt-4 max-w-[640px] text-[15px] font-normal leading-[1.6] text-[#5f5553] sm:text-[16px]",

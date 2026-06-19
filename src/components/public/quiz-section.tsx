@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { motion } from "framer-motion";
 import { Check, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useState } from "react";
@@ -131,9 +133,9 @@ export function QuizSection() {
                 )}
               </div>
 
-              <h3 className="text-[24px] font-black leading-[1.3] tracking-[-0.02em] text-white antialiased sm:text-[28px]">
+              <Heading as="h3" variant="quiz">
                 {activeQuestionIndex + 1}. {activeQuestion.question}
-              </h3>
+              </Heading>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 {activeQuestion.options.map((option, index) => {

@@ -8,6 +8,7 @@ import { Container } from "@/components/shared";
 import { CategoryFilterBar } from "@/components/public/category-filter-bar";
 import { Button } from "@/components/ui/button";
 import { SectionTitle, sectionTitleFadeUpVariants } from "@/components/public/section-title";
+import { Heading } from "@/components/shared/heading";
 
 interface Book {
   id: string;
@@ -269,9 +270,9 @@ function BookCard({ book }: { book: Book }) {
         </div>
 
         <div className="px-4 pb-5 pt-4 sm:px-5">
-          <h3 className="line-clamp-1 text-[20px] font-black leading-[1.18] tracking-[-0.02em] text-[#282221]">
+          <Heading as="h3" variant="card-display" className="line-clamp-1">
             {book.title}
-          </h3>
+          </Heading>
           <p className="mt-2 line-clamp-1 text-[13px] font-semibold text-[#5f5553]">
             By {book.author}
           </p>

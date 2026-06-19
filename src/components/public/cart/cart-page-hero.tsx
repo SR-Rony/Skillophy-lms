@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 
@@ -37,9 +39,9 @@ export function CartPageHero({ itemCount }: CartPageHeroProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.55, ease: "easeOut" }}
       >
-        <h1 className="text-[32px] font-black tracking-[-0.03em] text-[#1a1a1a] sm:text-[40px] lg:text-[44px]">
+        <Heading as="h1" variant="page-hero">
           Shopping Cart
-        </h1>
+        </Heading>
         <p className="mt-3 text-[15px] font-medium text-[#6f6562] sm:text-[16px]">
           You added {itemCount} {itemCount === 1 ? "course" : "courses"} to your cart
         </p>

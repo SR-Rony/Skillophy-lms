@@ -1,3 +1,14 @@
+export {
+  Heading,
+  getHeadingClassName,
+  headingVariantClassNames,
+  sectionHeadingClassName,
+  heroHeadingClassName,
+  trustedClientsHeadingClassName,
+  authHeadingClassName,
+  blogDetailsSectionHeadingClassName,
+} from "./heading";
+export type { HeadingLevel, HeadingProps, HeadingVariant } from "./heading";
 export { Logo } from "./logo";
 export { Container } from "./container";
 export { AccordionPanel } from "./accordion-panel";

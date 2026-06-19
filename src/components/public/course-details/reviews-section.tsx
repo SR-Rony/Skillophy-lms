@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
@@ -75,9 +77,9 @@ export function ReviewsSection({ testimonials }: ReviewsSectionProps) {
 
   return (
     <section id="reviews" className="scroll-mt-28">
-      <h2 className="text-[22px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[24px]">
+      <Heading as="h2" variant="course-detail-section">
         What Learners Said About this Course
-      </h2>
+      </Heading>
 
       <div className="relative mt-5 min-w-0">
         <div className="overflow-hidden">

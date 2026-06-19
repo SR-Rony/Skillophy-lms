@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Check } from "lucide-react";
+import { Heading } from "@/components/shared/heading";
 import type { CourseDetailsCertificate } from "@/components/public/course-details/types";
 
 interface CertificateSectionProps {
@@ -47,9 +48,13 @@ export function CertificateSection({ data }: CertificateSectionProps) {
         {/* Below xl: stacked (main column too narrow beside sidebar). xl+: two columns. */}
         <div className="relative z-[1] flex min-w-0 flex-col gap-10 xl:grid xl:grid-cols-[minmax(0,1fr)_280px] xl:items-center xl:gap-10">
           <div className="min-w-0">
-            <h2 className="text-[26px] font-bold leading-tight tracking-[-0.02em] text-[#2d2926] sm:text-[30px] lg:text-[28px] xl:text-[32px]">
+            <Heading
+              as="h2"
+              variant="course-detail-section-lg"
+              className="leading-tight text-[#2d2926] text-[26px] sm:text-[30px] lg:text-[28px] xl:text-[32px]"
+            >
               Course Certificate
-            </h2>
+            </Heading>
             <p className="mt-4 text-[16px] font-normal leading-[1.55] text-[#4a4a4a] sm:text-[17px] lg:text-[16px] xl:text-[18px]">
               {data.descriptionLines[0]}
               <br />

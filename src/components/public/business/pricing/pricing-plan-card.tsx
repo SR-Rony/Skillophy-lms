@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Check, Lightbulb, Rocket, Sparkles, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { PricingPlan, PricingPlanIcon } from "@/components/public/business/pricing/types";
+import { Heading } from "@/components/shared/heading";
 import { cn } from "@/utils";
 
 const planIcons: Record<
@@ -56,7 +57,7 @@ export function PricingPlanCard({ plan }: PricingPlanCardProps) {
       </div>
 
       <div className="mt-5">
-        <h3 className="text-[22px] font-black tracking-[-0.03em] text-[#1a1a1a]">{plan.title}</h3>
+        <Heading as="h3" variant="section-sm-black">{plan.title}</Heading>
         <p className="mt-1 text-[13px] font-medium text-[#6f6562]">{plan.subtitle}</p>
       </div>
 

@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Link from "next/link";
 import { Sparkles, Trophy } from "lucide-react";
 import type { StudentCourseDetailsData } from "@/types/student-course-details.types";
@@ -83,7 +85,7 @@ function StudentCourseCompletedCard({
           Total Score {totalScore}%
         </span>
 
-        <h2 className="mt-5 text-xl font-extrabold text-[#16a34a]">Congratulations!</h2>
+        <Heading as="h2" variant="dashboard-success">Congratulations!</Heading>
         <p className="mt-2 text-[14px] leading-relaxed text-[#6b7280]">
           You successfully completed this course on{" "}
           <span className="font-semibold text-[#1a1a1a]">{completedOn}</span>
@@ -128,7 +130,7 @@ function StudentCourseWhatNextCard({ items }: { items: string[] }) {
         ))}
       </svg>
 
-      <h3 className="text-[15px] font-bold text-[#1a1a1a]">What Next?</h3>
+      <Heading as="h3" variant="position-card">What Next?</Heading>
       <ul className="mt-4 space-y-3">
         {items.map((item) => (
           <li key={item} className="flex items-start gap-2.5 text-[13px] leading-relaxed text-[#6b7280]">

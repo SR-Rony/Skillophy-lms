@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import { cn } from "@/utils";
@@ -66,9 +68,9 @@ export function FeatureHighlightSection({
         viewport={{ once: true, amount: 0.25 }}
       >
         <motion.div variants={fadeUpVariants} className="mx-auto max-w-[650px] text-center">
-          <h2 className="text-[34px] font-black leading-tight tracking-[-0.04em] sm:text-[42px] lg:text-[46px]">
+          <Heading as="h2" variant="display-feature">
             {title}
-          </h2>
+          </Heading>
           <p className="mx-auto mt-4 max-w-[620px] text-[13px] font-medium leading-6 text-white/76 sm:text-sm">
             {description}
           </p>
@@ -91,9 +93,9 @@ export function FeatureHighlightSection({
                 />
                 <div className="relative flex h-12 w-12 items-center justify-center">{icon}</div>
               </div>
-              <h3 className="text-[21px] font-black leading-tight tracking-[-0.03em] text-white">
+              <Heading as="h3" variant="card-display-inverse">
                 {itemTitle}
-              </h3>
+              </Heading>
               {itemDescription ? (
                 <p className="mt-3 max-w-[285px] text-[13px] font-medium leading-6 text-white/74">
                   {itemDescription}

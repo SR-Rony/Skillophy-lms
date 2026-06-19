@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -82,9 +84,9 @@ function ModelTestCard({ test }: { test: ModelTest }) {
             </span>
           </div>
 
-          <h3 className="min-h-[48px] text-[19px] font-black leading-[1.18] tracking-[-0.02em] text-[#282221] sm:text-[21px]">
+          <Heading as="h3" variant="card-display">
             {test.title}
-          </h3>
+          </Heading>
 
           <div className="mt-4 flex items-end justify-between gap-4">
             {test.price ? (

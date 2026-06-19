@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Heart, MessageCircle } from "lucide-react";
 import { ROUTES } from "@/constants";
 import type { BlogComment } from "@/types/blog-detail.types";
+import { Heading } from "@/components/shared/heading";
 import { cn } from "@/utils";
 
 interface BlogDetailsCommentsSectionProps {
@@ -148,9 +149,9 @@ export function BlogDetailsCommentsSection({
 
   return (
     <section className="rounded-2xl border border-[#E5E7EB] bg-white p-5 shadow-[0_4px_24px_rgba(15,23,42,0.06)] sm:p-6 lg:p-7">
-      <h3 className="font-sans text-[20px] font-bold leading-tight text-[#111827] sm:text-[22px]">
+      <Heading as="h3" variant="course-detail-card" className="font-sans text-[#111827]">
         {commentCount} Comments
-      </h3>
+      </Heading>
 
       <div className="mt-5 flex flex-col gap-4 rounded-xl bg-[#F5F5F5] p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:p-5">
         <div>

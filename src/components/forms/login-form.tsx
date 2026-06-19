@@ -14,10 +14,10 @@ import {
   authCardClassName,
   authFieldClassName,
   authGoBackClassName,
-  authHeadingClassName,
   authLabelClassName,
   authSubtextClassName,
 } from "@/components/auth/auth-form-styles";
+import { Heading } from "@/components/shared/heading";
 import { AuthSocialLoginSection } from "@/components/auth/auth-social-login-section";
 import { loginSchema, type LoginFormValues } from "@/validations";
 import { authService } from "@/services";
@@ -103,7 +103,7 @@ export function LoginPageContent() {
       </Link>
 
       <div className="mt-6">
-        <h1 className={authHeadingClassName}>Welcome back</h1>
+        <Heading as="h1" variant="auth">Welcome back</Heading>
         <p className={`mt-3 ${authSubtextClassName}`}>
           Sign in to your Skillophy account to continue learning.
         </p>

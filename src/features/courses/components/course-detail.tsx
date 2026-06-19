@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Course } from "@/types";
 import { formatCurrency } from "@/utils";
+import { Heading } from "@/components/shared/heading";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -23,7 +24,9 @@ export function CourseDetail({ course }: CourseDetailProps) {
           />
         </div>
         <div>
-          <h1 className="text-3xl font-bold">{course.title}</h1>
+          <Heading as="h1" variant="page-title" className="text-3xl">
+            {course.title}
+          </Heading>
           <p className="mt-2 text-muted-foreground">By {course.instructorName}</p>
           <p className="mt-6 leading-relaxed">{course.description}</p>
         </div>

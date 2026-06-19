@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import type { CheckoutSummary } from "@/components/public/checkout/types";
@@ -24,9 +26,9 @@ export function CheckoutSummaryCard({ summary, className }: CheckoutSummaryCardP
         className
       )}
     >
-      <h2 className="text-[18px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[20px]">
+      <Heading as="h2" variant="course-detail-sidebar">
         Checkout Summary
-      </h2>
+      </Heading>
 
       <div className="mt-6 space-y-4">
         <div className="flex items-center justify-between gap-4 text-[14px] sm:text-[15px]">

@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import Image from "next/image";
 import { Download, Sparkles } from "lucide-react";
 import type { CourseDetailsBookPromo } from "@/components/public/course-details/types";
@@ -34,9 +35,9 @@ export function BookPromoSection({ book }: BookPromoSectionProps) {
         </div>
 
         <div className="min-w-0 flex-1 pr-2 sm:pr-4">
-          <h3 className="text-[16px] font-bold leading-snug text-[#1a1a1a] sm:text-[18px]">
+          <Heading as="h3" variant="course-detail-promo-sm">
             {book.title}
-          </h3>
+          </Heading>
           <p className="mt-1 text-[13px] font-medium text-[#6f6562] sm:text-[14px]">
             By {book.author}
           </p>

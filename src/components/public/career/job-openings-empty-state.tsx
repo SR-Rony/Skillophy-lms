@@ -1,3 +1,5 @@
+import { Heading } from "@/components/shared/heading";
+
 interface JobOpeningsEmptyStateProps {
   categoryLabel: string;
   className?: string;
@@ -40,9 +42,9 @@ export function JobOpeningsEmptyState({ categoryLabel, className }: JobOpeningsE
           />
         </svg>
 
-        <h3 className="mt-8 text-[22px] font-bold leading-tight text-[#24201f] sm:text-[24px]">
+        <Heading as="h3" variant="section-xs" className="mt-8 leading-tight sm:text-[24px]">
           No Job Opening
-        </h3>
+        </Heading>
         <p className="mt-3 max-w-[360px] text-[14px] leading-[1.65] text-[#6f6562] sm:text-[15px]">
           There is no job opening for {categoryLabel} at this moment.
         </p>

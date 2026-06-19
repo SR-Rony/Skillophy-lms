@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import type { LucideIcon } from "lucide-react";
 import { Facebook, Link2, Linkedin, Mail, MessageCircle } from "lucide-react";
 import { cn } from "@/utils";
@@ -51,7 +52,7 @@ function PodcastShareIcon({ link }: { link: PodcastShareLink }) {
 export function PodcastDetailShareSection() {
   return (
     <div className="border-t border-[#ece6e3] pt-8">
-      <h2 className="text-[18px] font-bold text-[#1a1a1a]">Share Now</h2>
+      <Heading as="h2" variant="podcast-share">Share Now</Heading>
 
       <div className="mt-5 flex flex-wrap items-center gap-3">
         {shareLinks.map((link) => (

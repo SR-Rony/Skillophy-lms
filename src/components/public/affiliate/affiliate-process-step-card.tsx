@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { cn } from "@/utils";
 import type { AffiliateHowItWorksStep } from "@/components/public/affiliate/data/affiliate-how-it-works.data";
+import { Heading } from "@/components/shared/heading";
 
 function StepSparkle({
   className,
@@ -66,9 +67,9 @@ export function AffiliateProcessStepCard({ step, index, className }: AffiliatePr
           {step.step}
         </span>
 
-        <h3 className="mt-4 text-[16px] font-bold leading-[1.35] text-[#1a1a1a] sm:text-[17px]">
+        <Heading as="h3" variant="card-title-xs" className="mt-4 text-[16px] leading-[1.35] text-[#1a1a1a] sm:text-[17px]">
           {step.title}
-        </h3>
+        </Heading>
         <p className="mt-2.5 min-h-[4.125rem] max-w-[240px] text-[13px] leading-[1.72] text-[#5f5553] sm:min-h-[4.5rem] sm:max-w-[252px] sm:text-[14px]">
           {step.description}
         </p>

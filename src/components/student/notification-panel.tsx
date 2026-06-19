@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import Link from "next/link";
 import { Bell, FileText, MessageCircleQuestion, Radio } from "lucide-react";
 import { DashboardEmptyState } from "@/components/shared/dashboard-empty-state";
@@ -70,9 +71,9 @@ function NotificationItem({ notification }: { notification: DashboardNotificatio
       <NotificationIcon type={notification.type} isUnread={notification.isUnread} />
       <div className="min-w-0 flex-1">
         <div className="flex items-start justify-between gap-3">
-          <h3 className="text-[13px] font-bold leading-snug text-[#1a1a1a]">
+          <Heading as="h3" variant="muted-label">
             {notification.title}
-          </h3>
+          </Heading>
           <span className="shrink-0 text-[11px] leading-none text-[#9ca3af]">
             {notification.timeAgo}
           </span>
@@ -94,7 +95,7 @@ export function NotificationPanel({ notifications, className }: NotificationPane
       )}
     >
       <div className="flex items-center justify-between border-b border-[#f3f4f6] px-5 py-[18px]">
-        <h2 className="text-base font-bold text-[#1a1a1a]">Notifications</h2>
+        <Heading as="h2" variant="dashboard-panel">Notifications</Heading>
         {hasNotifications && (
           <Link
             href={ROUTES.student.root}

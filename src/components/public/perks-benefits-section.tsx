@@ -1,9 +1,10 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import {
-  sectionHeadingClassName,
   SectionTitle,
   sectionTitleFadeUpVariants,
 } from "@/components/public/section-title";
@@ -93,7 +94,7 @@ export function PerksBenefitsSection({
             variants={sectionTitleFadeUpVariants}
             className="mx-auto max-w-[760px] text-center"
           >
-            <h2 className={sectionHeadingClassName}>{title}</h2>
+            <Heading as="h2" variant="section">{title}</Heading>
             <p className="mx-auto mt-5 max-w-[680px] text-base font-normal leading-[1.5] text-[#5f5553]">
               {description}
             </p>
@@ -110,9 +111,9 @@ export function PerksBenefitsSection({
               <div className="mb-5 inline-flex h-12 w-12 items-center justify-center">
                 {icon}
               </div>
-              <h3 className="text-[18px] font-bold leading-[1.3] tracking-[-0.01em] text-[#24201f] sm:text-[19px]">
+              <Heading as="h3" variant="course-card-sm">
                 {itemTitle}
-              </h3>
+              </Heading>
               <p className="mt-3 min-h-[4.125rem] max-w-[340px] text-[14px] font-normal leading-[1.65] text-[#6f6562] sm:min-h-[4.5rem] sm:text-[15px]">
                 {itemDescription}
               </p>

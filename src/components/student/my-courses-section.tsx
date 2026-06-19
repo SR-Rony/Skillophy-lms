@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import { StudentCourseCard } from "./student-course-card";
 import type { StudentEnrolledCourse } from "@/types/student-course.types";
 import { cn } from "@/utils";
@@ -24,7 +25,7 @@ export function MyCoursesSection({ title, courses, className }: MyCoursesSection
   return (
     <section className={cn("space-y-5", className)}>
       <div className="flex flex-wrap items-center gap-3">
-        <h2 className="text-lg font-bold text-[#1a1a1a] sm:text-xl">{title}</h2>
+        <Heading as="h2" variant="dashboard-section">{title}</Heading>
         <SectionCountBadge count={courses.length} />
       </div>
 

@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import type { MyCoursesTab } from "@/types/student-course.types";
 import { Container } from "@/components/shared";
 import { MyCoursesSeamBackground } from "@/components/student/my-courses-seam-background";
@@ -23,9 +25,9 @@ export function MyCoursesHero({ activeTab, onTabChange, className }: MyCoursesHe
       <MyCoursesSeamBackground />
 
       <Container className="relative z-10">
-        <h1 className="text-2xl font-extrabold tracking-tight text-[#1a1a1a] sm:text-[28px] lg:text-[32px]">
+        <Heading as="h1" variant="dashboard-page-sm">
           My Courses
-        </h1>
+        </Heading>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#6b7280] sm:text-[15px]">
           You will get your all enrolled courses here. You will also get your wish-lists course
           here.

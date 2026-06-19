@@ -8,6 +8,7 @@ import { useState, type FormEvent } from "react";
 import { Container } from "@/components/shared";
 import { NotFoundIllustration } from "@/components/public/not-found/not-found-illustration";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
+import { getHeadingClassName } from "@/components/shared/heading";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants";
 
@@ -96,7 +97,7 @@ export function NotFoundContent() {
 
           <motion.h1
             variants={sectionTitleFadeUpVariants}
-            className="mt-5 text-[34px] font-bold leading-[1.15] tracking-[-0.02em] text-[#1a1a1a] sm:text-[40px] lg:text-[44px]"
+            className={getHeadingClassName("display-bold", "mt-5")}
           >
             Page Not Found!
           </motion.h1>

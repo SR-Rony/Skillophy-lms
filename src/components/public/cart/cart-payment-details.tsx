@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { useState } from "react";
 import Link from "next/link";
 import { Tag, X } from "lucide-react";
@@ -49,9 +51,9 @@ export function CartPaymentDetails({
 
   return (
     <aside className="rounded-[20px] border border-[#ece6e3] bg-white p-6 shadow-[0_8px_24px_rgba(80,37,31,0.06)] sm:p-7 lg:sticky lg:top-24">
-      <h2 className="text-[18px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[20px]">
+      <Heading as="h2" variant="course-detail-sidebar">
         Payment Details
-      </h2>
+      </Heading>
 
       <div className="mt-6 space-y-4">
         <div className="flex items-center justify-between gap-4 text-[14px] sm:text-[15px]">

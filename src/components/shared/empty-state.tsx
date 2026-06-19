@@ -1,4 +1,5 @@
 import { Inbox } from "lucide-react";
+import { Heading } from "@/components/shared/heading";
 import { cn } from "@/utils";
 
 interface EmptyStateProps {
@@ -17,7 +18,7 @@ export function EmptyState({ title, description, action, className }: EmptyState
       )}
     >
       <Inbox className="mb-4 h-12 w-12 text-muted-foreground/50" />
-      <h3 className="text-lg font-semibold">{title}</h3>
+      <Heading as="h3" variant="empty-state">{title}</Heading>
       {description && (
         <p className="mt-2 max-w-sm text-sm text-muted-foreground">{description}</p>
       )}

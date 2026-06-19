@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -130,9 +132,9 @@ export function PublicCourseCard({
             </span>
           </div>
 
-          <h3 className="text-[20px] font-bold leading-[1.35] tracking-[-0.01em] text-[#1a1a1a]">
+          <Heading as="h3" variant="course-card">
             {course.title}
-          </h3>
+          </Heading>
 
           <div className="flex items-center gap-2">
             <Image

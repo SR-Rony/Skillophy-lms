@@ -1,7 +1,6 @@
+import { Heading } from "@/components/shared/heading";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { blogDetailsSectionHeadingClassName } from "@/components/public/blog/blog-details/content/blog-details-article-body";
-
 export function BlogDetailsWriterCta() {
   return (
     <div className="relative overflow-hidden rounded-2xl bg-[#fff5f2] px-6 py-10 sm:px-10 sm:py-12 lg:px-12 lg:py-14">
@@ -37,7 +36,7 @@ export function BlogDetailsWriterCta() {
       </div>
 
       <div className="relative z-10 mx-auto flex max-w-[640px] flex-col items-center text-center">
-        <h3 className={blogDetailsSectionHeadingClassName}>Want to be a Writer?</h3>
+        <Heading as="h3" variant="blog-section">Want to be a Writer?</Heading>
 
         <p className="mt-4 max-w-[520px] font-sans text-[16px] font-normal leading-[1.75] tracking-normal text-[#4B5563] sm:text-[18px]">
           If you aspire to contribute as a writer to our blog, please feel free to submit your blog

@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -37,9 +39,9 @@ export function PodcastEpisodeCard({ episode }: PodcastEpisodeCardProps) {
         <div className="flex flex-1 flex-col px-5 pb-5 pt-5 sm:px-6 sm:pb-6">
           <p className="text-[12px] font-medium leading-none text-[#6b7280]">{episode.seasonLabel}</p>
 
-          <h3 className="mt-3 line-clamp-2 text-[20px] font-bold leading-[1.3] tracking-[-0.01em] text-[#111827]">
+          <Heading as="h3" variant="card-title" className="mt-3 line-clamp-2">
             {episode.title}
-          </h3>
+          </Heading>
 
           <p className="mt-3 line-clamp-3 text-[14px] leading-[1.65] text-[#4b5563]">
             {episode.description}

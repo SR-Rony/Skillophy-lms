@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { useState } from "react";
 import {
   BookOpen,
@@ -72,7 +74,7 @@ export function StudentCourseCurriculum({
 
   return (
     <div className="rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)] sm:p-6">
-      <h2 className="text-lg font-bold text-[#1a1a1a] sm:text-xl">Course Curriculum</h2>
+      <Heading as="h2" variant="dashboard-section">Course Curriculum</Heading>
 
       <div className="mt-5 max-h-none space-y-3 overflow-visible pr-1 lg:max-h-[640px] lg:overflow-y-auto">
         {modules.map((module) => {

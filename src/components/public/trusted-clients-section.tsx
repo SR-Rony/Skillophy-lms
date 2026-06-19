@@ -2,10 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
-import {
-  sectionTitleFadeUpVariants,
-  trustedClientsHeadingClassName,
-} from "@/components/public/section-title";
+import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
+import { Heading } from "@/components/shared/heading";
 import { trustedClientsData } from "@/components/public/data/trusted-clients.data";
 import { TrustedClientLogo } from "@/components/public/trusted-client-logo";
 import type { TrustedClientsSectionProps } from "@/types/trusted-clients.types";
@@ -35,7 +33,9 @@ export function TrustedClientsSection({
       <TrustedClientsBackground />
 
       <Container className="relative z-10">
-        <h2 className={`text-center ${trustedClientsHeadingClassName}`}>{data.title}</h2>
+        <Heading as="h2" variant="trusted-clients" className="text-center">
+          {data.title}
+        </Heading>
 
         <motion.ul
           initial="hidden"

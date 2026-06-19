@@ -1,12 +1,13 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { SeamCornerImageFrame } from "@/components/public/seam-corner-image-frame";
 import {
-  sectionHeadingClassName,
   sectionLabelClassName,
   sectionTitleFadeUpVariants,
 } from "@/components/public/section-title";
@@ -102,9 +103,9 @@ export function AboutStorySection() {
               <span className="h-px w-10 bg-primary/70 sm:w-14" aria-hidden />
             </div>
 
-            <h2 className={cn(sectionHeadingClassName, "text-left text-[32px] sm:text-[36px] lg:text-[40px]")}>
+            <Heading as="h2" variant="section" className="text-left text-[32px] sm:text-[36px] lg:text-[40px]">
               {title}
-            </h2>
+            </Heading>
 
             <div className="mt-5 space-y-4">
               {paragraphs.map((paragraph) => (

@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { FaqAccordion } from "@/components/public/faq/faq-accordion";
 import type { CourseDetailsFaq } from "@/components/public/course-details/types";
 
@@ -14,9 +16,9 @@ export function FaqSection({ faqs }: FaqSectionProps) {
 
   return (
     <section id="faq" className="scroll-mt-28">
-      <h2 className="text-[22px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[24px]">
+      <Heading as="h2" variant="course-detail-section">
         Frequently Asked Questions
-      </h2>
+      </Heading>
 
       <FaqAccordion faqs={faqs} allowMultiple className="mt-5" />
     </section>

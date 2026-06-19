@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Link from "next/link";
 import { useState } from "react";
 import {
@@ -245,9 +247,9 @@ function WorkshopSidebarCard({ sidebar }: { sidebar: CourseDetailsWorkshopSideba
     <>
       <aside id="enroll" className="mt-10 lg:sticky lg:top-24 lg:mt-0 lg:self-start">
         <div className={CARD_CLASS}>
-          <h3 className="text-[18px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[20px]">
+          <Heading as="h3" variant="course-detail-sidebar">
             Free Workshop
-          </h3>
+          </Heading>
 
           <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-6">
             <SidebarStatItem stat={sidebar.date} themeKey="date" />
@@ -285,9 +287,9 @@ export function CourseDetailsSidebarCard({ sidebar }: CourseDetailsSidebarCardPr
     return (
       <aside id="enroll" className="mt-10 lg:sticky lg:top-24 lg:mt-0 lg:self-start">
         <div className={CARD_CLASS}>
-          <h3 className="text-[18px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[20px]">
+          <Heading as="h3" variant="course-detail-sidebar">
             This Model Test Include
-          </h3>
+          </Heading>
 
           <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-6">
             <SidebarStatItem stat={sidebar.testTime} themeKey="testTime" />
@@ -315,9 +317,9 @@ export function CourseDetailsSidebarCard({ sidebar }: CourseDetailsSidebarCardPr
   return (
     <aside id="enroll" className="mt-10 lg:sticky lg:top-24 lg:mt-0 lg:self-start">
       <div className={CARD_CLASS}>
-        <h3 className="text-[18px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[20px]">
+        <Heading as="h3" variant="course-detail-sidebar">
           This Course Include
-        </h3>
+        </Heading>
 
         <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-6 sm:gap-y-7">
           {sidebar.includes.map((item) => (

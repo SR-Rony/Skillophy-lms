@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -41,9 +43,9 @@ export function StudentCourseDetailsHero({
 
         <div className="mt-5 flex flex-col gap-8 lg:mt-8 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
           <div className="min-w-0 flex-1">
-            <h1 className="text-[22px] font-extrabold leading-tight tracking-tight text-[#1a1a1a] sm:text-[28px] lg:text-[32px]">
+            <Heading as="h1" variant="dashboard-page-compact">
               {course.title}
-            </h1>
+            </Heading>
 
             <div className="mt-4 max-w-xl space-y-2.5 sm:mt-5">
               <p className="text-[13px] text-[#9ca3af]">

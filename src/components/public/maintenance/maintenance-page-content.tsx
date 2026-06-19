@@ -9,6 +9,7 @@ import {
   type MaintenanceSocialLink,
 } from "@/components/public/maintenance/data/maintenance-page.data";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
+import { getHeadingClassName } from "@/components/shared/heading";
 import { cn } from "@/utils";
 
 function MaintenanceBackground() {
@@ -97,7 +98,7 @@ export function MaintenancePageContent() {
 
           <motion.h1
             variants={sectionTitleFadeUpVariants}
-            className="mt-8 text-[30px] font-bold leading-[1.2] tracking-[-0.02em] text-[#1a1a1a] sm:text-[34px] lg:text-[38px]"
+            className={getHeadingClassName("page-hero-soft", "mt-8")}
           >
             {title}
           </motion.h1>

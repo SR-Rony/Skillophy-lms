@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import Image from "next/image";
 import Link from "next/link";
 import { ROUTES } from "@/constants";
@@ -25,9 +26,9 @@ export function PodcastDetailSimilarItem({ episode }: PodcastDetailSimilarItemPr
 
       <div className="min-w-0 flex-1 py-1">
         <p className="text-[12px] font-medium leading-none text-[#6b7280]">{episode.seasonLabel}</p>
-        <h3 className="mt-2 line-clamp-2 text-[15px] font-bold leading-[1.35] text-[#111827] transition group-hover:text-primary">
+        <Heading as="h3" variant="podcast-similar" className="text-primary">
           {episode.title}
-        </h3>
+        </Heading>
       </div>
     </Link>
   );

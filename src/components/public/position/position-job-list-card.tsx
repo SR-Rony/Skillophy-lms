@@ -3,6 +3,7 @@
 import { Clock } from "lucide-react";
 import { cn } from "@/utils";
 import type { PositionJobDetail } from "@/types/position.types";
+import { Heading } from "@/components/shared/heading";
 import { positionJobTypeLabels } from "@/types/position.types";
 import type { JobType } from "@/types/career.types";
 
@@ -37,14 +38,16 @@ export function PositionJobListCard({ job, isActive, onSelect }: PositionJobList
         {job.postedAt}
       </div>
 
-      <h3
+      <Heading
+        as="h3"
+        variant="position-card"
         className={cn(
-          "mt-3 text-[17px] font-bold leading-[1.3] tracking-[-0.01em] sm:text-[18px]",
-          isActive ? "text-[#24201f]" : "text-[#302927]",
+          "mt-3 text-[17px] leading-[1.3] tracking-[-0.01em] sm:text-[18px]",
+          isActive ? "text-[#24201f]" : "text-[#302927]"
         )}
       >
         {job.title}
-      </h3>
+      </Heading>
 
       <p className="mt-2 line-clamp-2 text-[14px] leading-[1.65] text-[#6f6562]">
         {job.description}

@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -65,9 +67,9 @@ function WorkshopCard({ workshop }: { workshop: Workshop }) {
           <span className="inline-flex rounded-full bg-[#fff8e8] px-3 py-1 text-[11px] font-semibold text-[#d6a43a]">
             {workshop.category}
           </span>
-          <h3 className="mt-3 min-h-[52px] text-[19px] font-black leading-[1.18] tracking-[-0.02em] text-[#282221] sm:text-[21px]">
+          <Heading as="h3" variant="card-display-sm">
             {workshop.title}
-          </h3>
+          </Heading>
           <p className="mt-3 flex items-center gap-1.5 text-[13px] font-medium text-[#4f4747]">
             <CalendarDays className="h-3.5 w-3.5 stroke-[1.8]" />
             {workshop.schedule}

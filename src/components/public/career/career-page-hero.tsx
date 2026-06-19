@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -93,9 +95,9 @@ export function CareerPageHero() {
               <span className="h-px w-10 bg-primary/70 sm:w-14" aria-hidden />
             </div>
 
-            <h1 className="text-[34px] font-black leading-[1.12] tracking-[-0.04em] text-[#1a1a1a] sm:text-[42px] lg:text-[48px]">
+            <Heading as="h1" variant="display">
               {title}
-            </h1>
+            </Heading>
 
             <p className="mt-5 max-w-[500px] text-[14px] leading-[1.75] text-[#6f6562] sm:text-[15px]">
               {description}

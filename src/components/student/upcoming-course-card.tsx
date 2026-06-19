@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
@@ -35,9 +36,9 @@ export function UpcomingCourseCard({ course, className }: UpcomingCourseCardProp
             {course.category}
           </span>
 
-          <h3 className="mt-3 line-clamp-2 text-[17px] font-bold leading-snug tracking-tight text-[#1a1a1a]">
+          <Heading as="h3" variant="dashboard-card">
             {course.title}
-          </h3>
+          </Heading>
 
           <p className="mt-3 flex items-center gap-2 text-[14px] text-[#9ca3af]">
             <Calendar className="h-4 w-4 shrink-0" aria-hidden />

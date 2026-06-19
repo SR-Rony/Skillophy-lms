@@ -13,6 +13,7 @@ import { AuthSocialLoginSection } from "@/components/auth/auth-social-login-sect
 import { ROUTES } from "@/constants";
 import { registerPageSchema, type RegisterPageFormValues } from "@/validations/auth.schema";
 import { cn } from "@/utils";
+import { Heading } from "@/components/shared/heading";
 
 const authFieldClassName =
   "h-[52px] rounded-lg border-[#ece6e3] bg-white px-4 text-[14px] font-medium text-[#24201f] shadow-none placeholder:text-[#b8b0ad] focus-visible:ring-primary/20";
@@ -177,9 +178,7 @@ export function RegisterPageContent() {
       </Link>
 
       <div className="mt-6">
-        <h1 className="text-[28px] font-black leading-[1.15] tracking-[-0.03em] text-[#1a1a1a] sm:text-[32px]">
-          Create Account in Skillophy
-        </h1>
+        <Heading as="h1" variant="auth">Create Account in Skillophy</Heading>
         <p className="mt-3 text-[14px] leading-[1.65] text-[#6f6562] sm:text-[15px]">
           Let&apos;s begin setting up your Skillophy account. It all starts with creating one!
         </p>

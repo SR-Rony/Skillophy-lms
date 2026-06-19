@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
@@ -94,9 +96,9 @@ export function BusinessTestimonialSection() {
                   aria-hidden="true"
                 />
 
-                <h2 className="text-[22px] font-bold leading-[1.35] tracking-normal text-[#141414] sm:text-[24px] lg:text-[26px]">
+                <Heading as="h2" variant="section-xs">
                   {headline}
-                </h2>
+                </Heading>
 
                 <p className="mx-auto mt-5 max-w-[520px] text-[14px] leading-[1.75] text-[#4f4f4f] sm:text-[15px]">
                   {body}

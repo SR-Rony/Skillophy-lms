@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Badge } from "@/components/shared/badge";
+import { Heading } from "@/components/shared/heading";
 import { cn } from "@/utils";
 
 interface SectionHeaderProps {
@@ -23,14 +24,12 @@ export function SectionHeader({
   return (
     <div className={cn("flex items-center justify-between gap-4", className)}>
       <div className="flex items-center gap-3">
-        <h2
-          className={cn(
-            "text-xl font-bold tracking-tight sm:text-2xl",
-            theme === "dark" ? "text-white" : "text-[#1a1a1a]"
-          )}
+        <Heading
+          as="h2"
+          variant={theme === "dark" ? "section-header-dark" : "section-header-light"}
         >
           {title}
-        </h2>
+        </Heading>
         {badge && <Badge variant="new">{badge}</Badge>}
       </div>
       {action && (

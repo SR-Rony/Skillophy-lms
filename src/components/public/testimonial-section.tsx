@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
@@ -41,9 +43,9 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             className="rounded-full bg-[#f7ebe8]"
           />
           <div>
-            <h3 className="text-[13px] font-black leading-none text-[#2d2625]">
+            <Heading as="h3" variant="testimonial-quote">
               {testimonial.name}
-            </h3>
+            </Heading>
             <p className="mt-1 text-[11px] font-semibold text-[#6a5d5b]">{testimonial.role}</p>
             <div className="mt-2 flex gap-0.5">
               {Array.from({ length: 5 }).map((_, index) => (

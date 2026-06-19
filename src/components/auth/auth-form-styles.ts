@@ -9,7 +9,6 @@ export const authLabelClassName = "text-[14px] font-semibold text-[#24201f]";
 export const authGoBackClassName =
   "inline-flex items-center gap-2 text-[14px] font-semibold text-[#6f6562] transition hover:text-primary";
 
-export const authHeadingClassName =
-  "text-[28px] font-black leading-[1.15] tracking-[-0.03em] text-[#1a1a1a] sm:text-[32px]";
+export { authHeadingClassName } from "@/components/shared/heading";
 
 export const authSubtextClassName = "text-[14px] leading-[1.65] text-[#6f6562] sm:text-[15px]";

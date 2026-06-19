@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Heading } from "@/components/shared/heading";
 import type { BlogAuthorBio } from "@/types/blog-detail.types";
 
 interface BlogDetailsAuthorCardProps {
@@ -20,9 +21,9 @@ export function BlogDetailsAuthorCard({ author }: BlogDetailsAuthorCardProps) {
       </div>
 
       <div className="min-w-0 text-center sm:text-left">
-        <h3 className="font-sans text-[20px] font-bold leading-tight text-[#111827] sm:text-[22px]">
+        <Heading as="h3" variant="course-detail-card" className="font-sans text-[#111827]">
           {author.name}
-        </h3>
+        </Heading>
         <p className="mt-1 font-sans text-[14px] font-normal leading-snug text-[#888888] sm:text-[15px]">
           {author.title}
         </p>

@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { useState } from "react";
 import {
   BookOpen,
@@ -48,9 +50,9 @@ export function CurriculumSection({ modules }: CurriculumSectionProps) {
 
   return (
     <section id="curriculum" className="scroll-mt-28">
-      <h2 className="text-[22px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[24px]">
+      <Heading as="h2" variant="course-detail-section">
         Course Curriculum
-      </h2>
+      </Heading>
 
       <div className="mt-5 space-y-3">
         {visibleModules.map((module) => {

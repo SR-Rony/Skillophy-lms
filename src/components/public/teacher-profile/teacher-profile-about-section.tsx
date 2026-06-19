@@ -1,13 +1,12 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import { SeamCornerImageFrame } from "@/components/public/seam-corner-image-frame";
-import {
-  sectionHeadingClassName,
-  sectionTitleFadeUpVariants,
-} from "@/components/public/section-title";
+import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
 import { cn } from "@/utils";
 import type { TeacherProfileAbout } from "@/types/teacher-profile.types";
 
@@ -87,14 +86,9 @@ export function TeacherProfileAboutSection({ about }: TeacherProfileAboutSection
           </motion.div>
 
           <motion.div variants={sectionTitleFadeUpVariants} className="min-w-0 lg:py-4">
-            <h2
-              className={cn(
-                sectionHeadingClassName,
-                "text-left text-[32px] sm:text-[36px] lg:text-[40px]",
-              )}
-            >
+            <Heading as="h2" variant="section" className="text-left text-[32px] sm:text-[36px] lg:text-[40px]">
               {title}
-            </h2>
+            </Heading>
 
             <div className="mt-5 space-y-4">
               {paragraphs.map((paragraph) => (

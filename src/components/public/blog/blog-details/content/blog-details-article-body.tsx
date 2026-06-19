@@ -1,9 +1,12 @@
 import type { BlogArticleBlock } from "@/types/blog-detail.types";
+import { getHeadingClassName } from "@/components/shared/heading";
 import { cn } from "@/utils";
 
 /** Blog section heading — Outfit 700, 32px, 120% line-height */
-export const blogDetailsSectionHeadingClassName =
-  "font-sans text-[32px] font-bold leading-[1.2] tracking-normal text-[#111827]";
+export const blogDetailsSectionHeadingClassName = getHeadingClassName(
+  "blog-section",
+  "font-sans text-[#111827]"
+);
 
 /** Blog intro lead — Outfit 600, 20px, 130% line-height */
 export const blogDetailsLeadClassName =

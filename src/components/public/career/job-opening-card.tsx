@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
@@ -43,9 +45,9 @@ export function JobOpeningCard({ job, className, href }: JobOpeningCardProps) {
         {job.postedAt}
       </div>
 
-      <h3 className="mt-3 text-[18px] font-bold leading-[1.3] tracking-[-0.01em] text-[#24201f] sm:text-[19px]">
+      <Heading as="h3" variant="course-card-sm" className="mt-3">
         {job.title}
-      </h3>
+      </Heading>
 
       <p className="mt-2 line-clamp-2 flex-1 text-[14px] leading-[1.65] text-[#6f6562]">
         {job.description}

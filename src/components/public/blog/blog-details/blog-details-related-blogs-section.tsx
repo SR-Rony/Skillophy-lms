@@ -5,6 +5,7 @@ import { BlogPostCard } from "@/components/public/blog/blog-post-card";
 import { BlogPostCardSkeleton } from "@/components/public/blog/blog-post-card-skeleton";
 import { Container } from "@/components/shared";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
+import { Heading } from "@/components/shared/heading";
 import { useRelatedBlogPosts } from "@/hooks/use-blog";
 
 interface BlogDetailsRelatedBlogsSectionProps {
@@ -40,9 +41,9 @@ export function BlogDetailsRelatedBlogsSection({
         transition={{ staggerChildren: 0.08 }}
       >
         <motion.div variants={sectionTitleFadeUpVariants} className="max-w-[720px]">
-          <h2 className="font-sans text-[28px] font-bold leading-[1.2] tracking-normal text-[#111827] sm:text-[32px]">
+          <Heading as="h2" variant="blog-section" className="font-sans text-[28px] text-[#111827] sm:text-[32px]">
             Related Blogs
-          </h2>
+          </Heading>
           <p className="mx-auto mt-3 max-w-[520px] font-sans text-[15px] font-normal leading-[1.7] text-[#888888] sm:text-[16px]">
             Online courses using cutting-edge technology and instructional strategies. We prioritise
             accessibility and inclusivity.

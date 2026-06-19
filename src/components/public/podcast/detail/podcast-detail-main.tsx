@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Play } from "lucide-react";
@@ -22,9 +24,9 @@ export function PodcastDetailMain({ episode }: PodcastDetailMainProps) {
         Go Back
       </Link>
 
-      <h1 className="mt-6 text-[32px] font-black leading-[1.12] tracking-[-0.03em] text-[#1a1a1a] sm:text-[36px] lg:text-[40px]">
+      <Heading as="h1" variant="page-hero-large">
         {episode.categoryTitle}
-      </h1>
+      </Heading>
 
       <div className="relative mt-8 overflow-hidden rounded-[20px] border border-[#ece6e3] bg-white shadow-[0_16px_40px_rgba(80,37,31,0.08)]">
         <div className="relative aspect-[16/10] w-full min-h-[260px] sm:min-h-[320px] lg:min-h-[380px]">
@@ -50,9 +52,9 @@ export function PodcastDetailMain({ episode }: PodcastDetailMainProps) {
         <p className="text-[13px] font-medium leading-none text-[#6b7280] sm:text-[14px]">
           {episode.seasonLabel}
         </p>
-        <h2 className="mt-3 text-[24px] font-bold leading-[1.25] tracking-[-0.02em] text-[#111827] sm:text-[28px]">
+        <Heading as="h2" variant="podcast-title">
           {episode.title}
-        </h2>
+        </Heading>
         <p className="mt-4 max-w-[720px] text-[15px] leading-[1.75] text-[#4b5563] sm:text-[16px]">
           {episode.description}
         </p>

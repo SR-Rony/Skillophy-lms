@@ -1,12 +1,11 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import { PublicCourseCard } from "@/components/public/public-course-card";
-import {
-  sectionHeadingClassName,
-  sectionTitleFadeUpVariants,
-} from "@/components/public/section-title";
+import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
 import { teacherProfileCoursesData } from "@/components/public/teacher-profile/data/teacher-profile-courses.data";
 import { cn } from "@/utils";
 
@@ -43,9 +42,9 @@ export function TeacherProfileCoursesSection() {
           variants={sectionTitleFadeUpVariants}
           className="mx-auto max-w-[760px] text-center"
         >
-          <h2 className={cn(sectionHeadingClassName, "text-[32px] sm:text-[40px] lg:text-[48px]")}>
+          <Heading as="h2" variant="section" className="text-[32px] sm:text-[40px] lg:text-[48px]">
             {title}
-          </h2>
+          </Heading>
           <p className="mx-auto mt-5 max-w-[680px] text-base font-normal leading-[1.5] text-[#5f5553]">
             {description}
           </p>

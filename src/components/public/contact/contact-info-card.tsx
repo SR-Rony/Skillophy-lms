@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { cn } from "@/utils";
@@ -65,9 +66,9 @@ export function ContactInfoCard({ title, lines, iconTone, className }: ContactIn
         <Icon className="h-5 w-5 stroke-[1.8]" aria-hidden />
       </div>
 
-      <h3 className="text-[18px] font-bold leading-[1.3] tracking-[-0.01em] text-[#24201f] sm:text-[19px]">
+      <Heading as="h3" variant="course-card-sm">
         {title}
-      </h3>
+      </Heading>
 
       <div className="mt-3 space-y-1">
         {lines.map((line) => (

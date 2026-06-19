@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -226,9 +228,9 @@ export function AcademicProgramSection() {
                   </div>
 
                   <div className="px-4 pb-5 pt-4 sm:px-5">
-                    <h3 className="text-[20px] font-black leading-[1.16] tracking-[-0.02em] text-[#282221]">
+                    <Heading as="h3" variant="team-name">
                       {program.title}
-                    </h3>
+                    </Heading>
                     <p className="mt-3 max-w-[250px] text-[13px] font-medium leading-5 text-[#4f4747]">
                       {program.description}
                     </p>

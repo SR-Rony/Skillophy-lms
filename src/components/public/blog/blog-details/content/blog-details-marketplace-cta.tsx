@@ -1,6 +1,7 @@
+import { Heading } from "@/components/shared/heading";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { blogDetailsLeadClassName, blogDetailsSectionHeadingClassName } from "@/components/public/blog/blog-details/content/blog-details-article-body";
+import { blogDetailsLeadClassName } from "@/components/public/blog/blog-details/content/blog-details-article-body";
 import { ROUTES } from "@/constants";
 
 export function BlogDetailsMarketplaceCta() {
@@ -38,9 +39,9 @@ export function BlogDetailsMarketplaceCta() {
       </div>
 
       <div className="relative z-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center sm:gap-10">
-        <h4 className={`max-w-[400px] ${blogDetailsSectionHeadingClassName}`}>
+        <Heading as="h4" variant="blog-section" className="max-w-[400px] font-sans text-[#111827]">
           Join one of the largest online learning marketplace
-        </h4>
+        </Heading>
 
         <Button
           asChild

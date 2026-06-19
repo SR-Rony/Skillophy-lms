@@ -5,6 +5,7 @@ import { Container } from "@/components/shared";
 import { FaqAccordion } from "@/components/public/faq/faq-accordion";
 import { helpFaqData } from "@/components/public/help/data/help-faq.data";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
+import { getHeadingClassName, Heading } from "@/components/shared/heading";
 import type { FaqItem } from "@/components/public/faq/types";
 import { cn } from "@/utils";
 
@@ -32,9 +33,9 @@ export function HelpFaqSection({ faqs, variant = "page" }: HelpFaqSectionProps) 
   if (variant === "sidebar") {
     return (
       <div>
-        <h2 className="text-[15px] font-medium text-[#6f6562] sm:text-[16px]">
+        <Heading as="h2" variant="help-label">
           {helpFaqData.title}
-        </h2>
+        </Heading>
         <div className="mt-6">
           <HelpFaqList faqs={faqs} />
         </div>
@@ -57,9 +58,7 @@ export function HelpFaqSection({ faqs, variant = "page" }: HelpFaqSectionProps) 
       >
         <motion.h2
           variants={sectionTitleFadeUpVariants}
-          className={cn(
-            "text-center text-[15px] font-medium text-[#6f6562] sm:text-[16px]",
-          )}
+          className={getHeadingClassName("help-label", "text-center")}
         >
           {helpFaqData.title}
         </motion.h2>

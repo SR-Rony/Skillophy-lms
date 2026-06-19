@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import { Container } from "@/components/shared";
 import { cn } from "@/utils";
 
@@ -15,9 +16,9 @@ export function WelcomeHeader({ firstName, className }: WelcomeHeaderProps) {
       )}
     >
       <Container className="relative z-10">
-        <h1 className="text-2xl font-extrabold tracking-tight text-[#1a1a1a] sm:text-3xl lg:text-[32px]">
+        <Heading as="h1" variant="dashboard-page">
           Welcome Back, {firstName}
-        </h1>
+        </Heading>
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#6b7280] sm:text-[15px]">
           It&apos;s wonderful to reconnect with you! Your progress and activity in the course are
           truly impressive. Keep up the fantastic work!

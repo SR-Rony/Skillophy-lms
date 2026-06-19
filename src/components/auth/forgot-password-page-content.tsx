@@ -12,9 +12,9 @@ import {
   authCardClassName,
   authFieldClassName,
   authGoBackClassName,
-  authHeadingClassName,
   authSubtextClassName,
 } from "@/components/auth/auth-form-styles";
+import { Heading } from "@/components/shared/heading";
 import { ROUTES } from "@/constants";
 import { forgotPasswordSchema, type ForgotPasswordFormValues } from "@/validations/auth.schema";
 
@@ -77,7 +77,7 @@ export function ForgotPasswordPageContent() {
       </Link>
 
       <div className="mt-6">
-        <h1 className={authHeadingClassName}>Forgot Password</h1>
+        <Heading as="h1" variant="auth">Forgot Password</Heading>
         <p className={`mt-3 ${authSubtextClassName}`}>
           Enter your mobile number and we&apos;ll send you a 4-digit code to reset your password.
         </p>

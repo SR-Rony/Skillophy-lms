@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import Link from "next/link";
 import { Clock } from "lucide-react";
 import type { UpcomingLiveClass } from "@/data/mock/student-dashboard.mock";
@@ -75,9 +76,9 @@ export function UpcomingLiveClassBanner({
 
           <div className="min-w-0 space-y-1.5">
             <p className="text-xs font-semibold text-primary">{label}</p>
-            <h3 className="text-base font-bold leading-snug text-[#1a1a1a] sm:text-[17px]">
+            <Heading as="h3" variant="dashboard-panel">
               {title}
-            </h3>
+            </Heading>
             <p className="flex items-center gap-1.5 text-[13px] text-[#9ca3af]">
               <Clock className="h-3.5 w-3.5 shrink-0" aria-hidden />
               {datetime}

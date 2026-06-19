@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import { affiliateSpecialMomentsData } from "@/components/public/affiliate/data/affiliate-special-moments.data";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
+import { Heading } from "@/components/shared/heading";
 import { cn } from "@/utils";
 import type { AffiliateMomentImage } from "@/components/public/affiliate/data/affiliate-special-moments.data";
 
@@ -105,9 +106,9 @@ export function AffiliateSpecialMomentsSection() {
           variants={sectionTitleFadeUpVariants}
           className="mx-auto max-w-[860px] text-center"
         >
-          <h2 className="text-[30px] font-bold leading-[1.2] tracking-normal text-[#24201f] sm:text-[34px] lg:text-[40px]">
+          <Heading as="h2" variant="section-md" className="text-[30px] sm:text-[34px]">
             {title}
-          </h2>
+          </Heading>
           <p className="mx-auto mt-5 max-w-[760px] text-[14px] leading-[1.75] text-[#6f6562] sm:text-[15px]">
             {description}
           </p>

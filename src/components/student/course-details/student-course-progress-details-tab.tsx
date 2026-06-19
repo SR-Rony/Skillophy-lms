@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Link from "next/link";
 import type {
   StudentCourseDetailsData,
@@ -78,9 +80,9 @@ function ProgressSummaryCard({ course }: { course: StudentCourseDetailsData }) {
         </div>
 
         <div className="min-w-0 flex-1 text-center sm:text-left">
-          <h2 className="text-lg font-extrabold leading-snug text-[#1a1a1a] sm:text-xl lg:text-[22px]">
+          <Heading as="h2" variant="dashboard-section-bold">
             {scoreMessage}
-          </h2>
+          </Heading>
           <p className="mt-2 text-[13px] leading-relaxed text-[#6b7280] sm:text-[14px]">
             {progressSubtext}
           </p>

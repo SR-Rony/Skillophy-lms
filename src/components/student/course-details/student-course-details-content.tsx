@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Link from "next/link";
 import { ChevronRight, Play } from "lucide-react";
 import { Facebook, MessageCircle } from "lucide-react";
@@ -123,7 +125,7 @@ function StudentCourseProgressCard({
 function StudentCourseJoinGroupCard() {
   return (
     <div className="rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)]">
-      <h3 className="text-[15px] font-bold text-[#1a1a1a]">Join Group</h3>
+      <Heading as="h3" variant="position-card">Join Group</Heading>
       <p className="mt-1.5 text-[13px] leading-relaxed text-[#9ca3af]">
         Please join our groups for any kind of support
       </p>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
+import { getHeadingClassName, Heading } from "@/components/shared/heading";
 import { getHelpArticleSlugByTopicId } from "@/components/public/help/help-details/data/help-details.data";
 import {
   getHelpTopics,
@@ -99,7 +100,7 @@ export function HelpTopicsSection({
 
         <motion.h2
           variants={sectionTitleFadeUpVariants}
-          className="mt-10 text-center text-[15px] font-medium text-[#6f6562] sm:text-[16px]"
+          className={getHeadingClassName("help-label", "mt-10 text-center")}
         >
           Select a Topic to Search for Help
         </motion.h2>
@@ -127,9 +128,9 @@ export function HelpTopicsSection({
                   <Icon className={cn("h-7 w-7", topic.iconColor)} strokeWidth={1.75} />
                 </span>
 
-                <h3 className="mt-5 text-[16px] font-bold text-[#24201f] sm:text-[17px]">
+                <Heading as="h3" variant="help-section" className="mt-5 text-[16px] sm:text-[17px]">
                   {topic.title}
-                </h3>
+                </Heading>
                 <p className="mt-2 text-[13px] leading-[1.6] text-[#6f6562] sm:text-[14px]">
                   {topic.description}
                 </p>

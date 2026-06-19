@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -87,9 +89,9 @@ export function TryCoursesSection() {
           </motion.div>
 
           <motion.div variants={sectionTitleFadeUpVariants} className="max-w-[560px] lg:pt-2">
-            <h2 className="text-[34px] font-black leading-[1.12] tracking-[-0.045em] text-[#24201f] sm:text-[40px] lg:text-[44px]">
+            <Heading as="h2" variant="display-dark">
               Try Our Courses
-            </h2>
+            </Heading>
             <p className="mt-4 max-w-[500px] text-sm font-medium leading-7 text-[#4f4747] sm:text-[15px]">
               Enter your email and we will send you some samples of our courses.
             </p>

@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -101,9 +103,9 @@ export function TeacherProfileHero({ profile }: TeacherProfileHeroProps) {
             variants={fadeUpVariants}
             className="flex flex-col justify-center pb-4 lg:min-h-[560px] lg:py-16 xl:py-20"
           >
-            <h1 className="text-[34px] font-bold leading-[1.12] tracking-[-0.03em] text-[#1a1a1a] sm:text-[42px] lg:text-[48px]">
+            <Heading as="h1" variant="display-bold">
               {name}
-            </h1>
+            </Heading>
 
             <div className="mt-5 space-y-1.5">
               {credentials.map((credential) => (

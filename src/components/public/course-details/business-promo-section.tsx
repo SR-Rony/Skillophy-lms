@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import Link from "next/link";
 import type { CourseDetailsBusinessPromo } from "@/components/public/course-details/types";
 import { Button } from "@/components/ui/button";
@@ -72,9 +73,9 @@ export function BusinessPromoSection({ data }: BusinessPromoSectionProps) {
     <section className="rounded-[12px] border border-[#e5e7eb] bg-white p-6 sm:p-8">
       <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
         <div className="max-w-2xl">
-          <h3 className="text-[18px] font-bold leading-[1.35] tracking-[-0.01em] text-[#1a1a1a] sm:text-[20px]">
+          <Heading as="h3" variant="course-detail-promo">
             {data.title}
-          </h3>
+          </Heading>
           <p className="mt-2 text-[14px] font-normal leading-[1.55] text-[#6b7280] sm:text-[15px]">
             {data.description}
           </p>

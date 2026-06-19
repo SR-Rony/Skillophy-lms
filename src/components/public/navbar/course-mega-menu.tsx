@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
@@ -82,9 +84,9 @@ export function CourseMegaMenu({ isOpen, onClose }: CourseMegaMenuProps) {
           >
             <Container className="pb-5 pt-0 sm:pb-7">
               <div className="w-full rounded-b-[18px] bg-white px-3 py-4 shadow-[0_18px_50px_rgba(35,25,22,0.08)] sm:px-5 sm:py-6">
-                <h2 className="mb-4 text-[19px] font-black tracking-[-0.03em] text-[#25201f]">
+                <Heading as="h2" variant="nav-menu">
                   Course Categories
-                </h2>
+                </Heading>
 
                 <div className="grid max-h-[calc(100vh-128px)] grid-cols-1 gap-5 overflow-y-auto pr-1 lg:grid-cols-[270px_minmax(0,1fr)] lg:gap-7 lg:overflow-hidden lg:pr-0">
                   <aside className="min-h-0">

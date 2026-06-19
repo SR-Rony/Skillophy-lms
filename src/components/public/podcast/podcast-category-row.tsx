@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Link from "next/link";
 import { PodcastEpisodeCard } from "@/components/public/podcast/podcast-episode-card";
 import { PODCAST_EPISODES_PER_ROW } from "@/components/public/podcast/data/podcast-episodes.data";
@@ -16,9 +18,9 @@ export function PodcastCategoryRow({ category }: PodcastCategoryRowProps) {
   return (
     <section className="scroll-mt-36">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-        <h2 className="text-[22px] font-black tracking-[-0.03em] text-[#1a1a1a] sm:text-[24px]">
+        <Heading as="h2" variant="section-sm-black">
           {category.title}
-        </h2>
+        </Heading>
 
         <Link
           href={`${ROUTES.podcast}?category=${category.slug}`}

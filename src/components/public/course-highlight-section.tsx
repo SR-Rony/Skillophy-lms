@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -104,10 +106,10 @@ export function CourseHighlightSection() {
 
           <motion.div variants={fadeUpVariants} className="max-w-[510px] lg:self-start lg:pt-1">
             <div className="flex items-start gap-4">
-              <h2 className="max-w-[440px] text-[32px] font-black leading-[1.15] tracking-[-0.045em] text-[#292323] sm:text-[38px] lg:text-[38px]">
+              <Heading as="h2" variant="section-md-black">
                 Foundations of User <br className="hidden lg:block" />
                 Experience (UX) Design
-              </h2>
+              </Heading>
               <span className="mt-0 hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#ffbd16]/15 text-[#ffbd16] sm:flex">
                 <Award className="h-10 w-10 fill-[#ffbd16]/15 stroke-[2.3]" />
               </span>

@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import type { CourseDetailsBenefitItem } from "@/components/public/course-details/types";
 
 const BENEFIT_THEMES = {
@@ -142,9 +143,9 @@ interface BenefitsSectionProps {
 export function BenefitsSection({ benefits }: BenefitsSectionProps) {
   return (
     <section id="what-youll-get" className="scroll-mt-28">
-      <h2 className="text-[22px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[24px]">
+      <Heading as="h2" variant="course-detail-section">
         What You&apos;ll Get
-      </h2>
+      </Heading>
 
       <div className="mt-8 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:mt-10 lg:grid-cols-3 lg:gap-y-12">
         {benefits.map((item) => {
@@ -156,9 +157,9 @@ export function BenefitsSection({ benefits }: BenefitsSectionProps) {
               <span style={{ color: theme.color }}>
                 <Icon className="h-12 w-12" />
               </span>
-              <h3 className="mt-5 text-[18px] font-bold leading-[1.3] tracking-[-0.01em] text-[#1a1a1a]">
+              <Heading as="h3" variant="podcast-share" className="mt-5 leading-[1.3] tracking-[-0.01em]">
                 {item.title}
-              </h3>
+              </Heading>
               <p className="mt-2 max-w-[320px] text-[14px] font-normal leading-[1.6] text-[#6b7280] sm:text-[15px]">
                 {item.description}
               </p>

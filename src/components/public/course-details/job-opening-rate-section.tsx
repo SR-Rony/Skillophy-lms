@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import type { CourseDetailsJobOpeningRate } from "@/components/public/course-details/types";
 import { cn } from "@/utils";
 
@@ -44,9 +45,9 @@ export function JobOpeningRateSection({ data }: JobOpeningRateSectionProps) {
       <div className="rounded-[18px] border border-[#ece6e3] bg-white p-5 shadow-[0_12px_32px_rgba(35,25,22,0.05)] sm:p-6 lg:p-7">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-10">
           <div>
-            <h2 className="text-[22px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[24px]">
+            <Heading as="h2" variant="course-detail-section">
               {data.title}
-            </h2>
+            </Heading>
             <p className="mt-2 max-w-md text-[14px] leading-[1.6] text-[#6f6562] sm:text-[15px]">
               {data.description}
             </p>

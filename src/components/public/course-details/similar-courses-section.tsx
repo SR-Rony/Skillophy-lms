@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { Container } from "@/components/shared";
 import {
   PublicCourseCard,
@@ -29,9 +31,9 @@ export function SimilarCoursesSection({
   return (
     <section className="bg-white py-10 lg:py-15">
       <Container>
-        <h2 className="text-[24px] font-bold tracking-[-0.02em] text-[#1a1a1a] sm:text-[28px]">
+        <Heading as="h2" variant="course-detail-section-lg">
           Similar Courses for You
-        </h2>
+        </Heading>
 
         <div className="mt-8 grid justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {visibleCourses.map((course) => (

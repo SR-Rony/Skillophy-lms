@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Container, Logo } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
+import { Heading } from "@/components/shared/heading";
 import { ROUTES } from "@/constants";
 
 export function BusinessCtaSection() {
@@ -45,10 +46,10 @@ export function BusinessCtaSection() {
               <span className="text-[16px] font-semibold text-primary-dark">business</span>
             </div>
 
-            <h2 className="text-[34px] font-black leading-[1.12] tracking-[-0.045em] text-[#24201f] sm:text-[42px] lg:text-[46px]">
+            <Heading as="h2" variant="display-dark" className="lg:text-[46px]">
               Best Deal for Your <br className="hidden sm:block" />
               Business Team
-            </h2>
+            </Heading>
 
             <p className="mt-5 max-w-[390px] text-sm font-medium leading-7 text-[#4f4747]">
               The essence of continuously nurturing one&apos;s passion for education. It

@@ -15,29 +15,8 @@ import { ReviewsSection } from "@/components/public/course-details/reviews-secti
 import { FaqSection } from "@/components/public/course-details/faq-section";
 import { CourseDetailsSidebarCard } from "@/components/public/course-details/course-details-sidebar";
 import type { CourseDetailsPageData } from "@/components/public/course-details/types";
+import { Heading } from "@/components/shared/heading";
 import { cn } from "@/utils";
-
-function SectionHeading({
-  children,
-  className,
-  dark,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  dark?: boolean;
-}) {
-  return (
-    <h2
-      className={cn(
-        "text-[22px] font-bold tracking-[-0.02em] sm:text-[24px]",
-        dark ? "text-[#1a1a1a]" : "text-primary",
-        className
-      )}
-    >
-      {children}
-    </h2>
-  );
-}
 
 interface CourseDetailsMainProps {
   data: CourseDetailsPageData;
@@ -81,7 +60,9 @@ export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
             <div className="mt-8 space-y-12 sm:mt-10 sm:space-y-14 lg:space-y-16">
               {/* Overview */}
               <section id="course-overview" className="scroll-mt-28">
-                <SectionHeading>Course Overview</SectionHeading>
+                <Heading as="h2" variant="course-detail-section" className="text-primary">
+                  Course Overview
+                </Heading>
                 <div className="relative mt-5">
                   <p
                     className={cn(
@@ -106,7 +87,9 @@ export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
 
               {/* Learn */}
               <section id="what-youll-learn" className="scroll-mt-28">
-                <SectionHeading>What You&apos;ll Learn</SectionHeading>
+                <Heading as="h2" variant="course-detail-section" className="text-primary">
+                  What You&apos;ll Learn
+                </Heading>
                 <ul className="mt-5 space-y-3.5">
                   {data.learnItems.map((item) => (
                     <li key={item} className="flex items-start gap-3">
@@ -121,7 +104,9 @@ export function CourseDetailsMain({ data }: CourseDetailsMainProps) {
 
               {/* Skills */}
               <section id="skills" className="scroll-mt-28">
-                <SectionHeading dark>Skills You Will Gain</SectionHeading>
+                <Heading as="h2" variant="course-detail-section">
+                  Skills You Will Gain
+                </Heading>
                 <div className="mt-5 flex flex-wrap gap-2.5">
                   {data.skills.map((skill) => (
                     <span

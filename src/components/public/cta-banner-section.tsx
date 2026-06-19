@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { motion } from "framer-motion";
 import { Container, PublicCtaLink } from "@/components/shared";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
@@ -84,9 +86,9 @@ export function CtaBannerSection({
           variants={sectionTitleFadeUpVariants}
           className="mx-auto max-w-[720px] text-center"
         >
-          <h2 className="text-[32px] font-bold leading-[1.2] tracking-normal text-[#1a1a1a] sm:text-[36px] lg:text-[40px]">
+          <Heading as="h2" variant="section-md-dark">
             {title}
-          </h2>
+          </Heading>
 
           <p className="mx-auto mt-5 max-w-[560px] text-[14px] leading-[1.75] text-[#6f6562] sm:text-[15px]">
             {description}

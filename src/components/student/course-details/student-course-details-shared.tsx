@@ -1,10 +1,11 @@
+import { Heading } from "@/components/shared/heading";
 import { Phone } from "lucide-react";
 import { cn } from "@/utils";
 
 export function StudentCourseRateCard() {
   return (
     <div className="rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)]">
-      <h3 className="text-[15px] font-bold text-[#1a1a1a]">Rate this Course</h3>
+      <Heading as="h3" variant="position-card">Rate this Course</Heading>
       <p className="mt-1.5 text-[13px] leading-relaxed text-[#9ca3af]">
         Your constructive feedback and insights will help other learners
       </p>

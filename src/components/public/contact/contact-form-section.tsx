@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
@@ -68,9 +70,9 @@ export function ContactFormSection() {
               <span className="h-px w-10 bg-primary/70 sm:w-14" aria-hidden />
             </div>
 
-            <h2 className="text-[32px] font-bold leading-[1.2] tracking-normal text-[#24201f] sm:text-[36px] lg:text-[40px]">
+            <Heading as="h2" variant="section-md">
               {title}
-            </h2>
+            </Heading>
 
             <p className="mt-5 max-w-[520px] text-[14px] leading-[1.75] text-[#6f6562] sm:text-[15px]">
               {description}

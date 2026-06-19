@@ -2,6 +2,12 @@
 
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import {
+  Heading,
+  heroHeadingClassName,
+  sectionHeadingClassName,
+  trustedClientsHeadingClassName,
+} from "@/components/shared/heading";
 import { cn } from "@/utils";
 
 export const sectionTitleFadeUpVariants = {
@@ -17,17 +23,11 @@ export const sectionTitleFadeUpVariants = {
 export const sectionLabelClassName =
   "font-normal text-base uppercase leading-[1.3] tracking-[0.06em]";
 
-/** Section heading — Outfit 700, 48px, 110% line-height */
-export const sectionHeadingClassName =
-  "text-[48px] font-bold leading-[1.1] tracking-normal text-[#24201f]";
-
-/** Hero heading — Outfit 800, 62px, 120% line-height, 2% letter-spacing */
-export const heroHeadingClassName =
-  "text-[40px] font-extrabold leading-[1.2] tracking-[0.02em] text-[#24201f] sm:text-[52px] lg:text-[62px]";
-
-/** Trusted clients heading — Outfit 700, 32px, 120% line-height */
-export const trustedClientsHeadingClassName =
-  "font-sans text-[32px] font-bold leading-[1.2] tracking-normal text-[#24201f]";
+export {
+  sectionHeadingClassName,
+  heroHeadingClassName,
+  trustedClientsHeadingClassName,
+};
 
 interface SectionTitleProps {
   label: string;
@@ -90,16 +90,17 @@ export function SectionTitle({
         {lines !== "none" && <span className={cn("h-px w-16", lineClassName)} />}
       </div>
 
-      <h2
+      <Heading
+        as="h2"
+        variant="section"
         className={cn(
-          sectionHeadingClassName,
           isCenter ? "text-center" : "text-left",
           isDark && "text-white",
           headingClassName
         )}
       >
         {title}
-      </h2>
+      </Heading>
 
       {description && (
         <p

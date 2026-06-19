@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import {
@@ -8,7 +10,6 @@ import {
 } from "@/components/public/about/about-mission-visuals";
 import { aboutMissionSectionData } from "@/components/public/about/data/about-mission-section.data";
 import {
-  sectionHeadingClassName,
   sectionLabelClassName,
   sectionTitleFadeUpVariants,
 } from "@/components/public/section-title";
@@ -46,14 +47,9 @@ export function AboutMissionSection() {
               <span className="h-px w-10 bg-primary/70 sm:w-14" aria-hidden />
             </div>
 
-            <h2
-              className={cn(
-                sectionHeadingClassName,
-                "max-w-[760px] pr-16 text-left text-[28px] sm:pr-20 sm:text-[32px] lg:text-[36px] lg:leading-[1.25]",
-              )}
-            >
+            <Heading as="h2" variant="section" className="max-w-[760px] pr-16 text-left text-[28px] sm:pr-20 sm:text-[32px] lg:text-[36px] lg:leading-[1.25]">
               {title}
-            </h2>
+            </Heading>
 
             <MissionRocketIcon className="pointer-events-none absolute bottom-6 right-6 h-14 w-14 sm:bottom-8 sm:right-8 sm:h-16 sm:w-16" />
           </motion.article>

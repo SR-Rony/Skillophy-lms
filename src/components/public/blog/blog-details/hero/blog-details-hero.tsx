@@ -7,6 +7,7 @@ import { ArrowLeft } from "lucide-react";
 import { Container } from "@/components/shared";
 import { BlogDetailsHeroBackground } from "@/components/public/blog/blog-details/hero/blog-details-hero-background";
 import { sectionTitleFadeUpVariants } from "@/components/public/section-title";
+import { Heading } from "@/components/shared/heading";
 import { ROUTES } from "@/constants";
 import type { BlogPost } from "@/types/blog.types";
 
@@ -41,9 +42,13 @@ export function BlogDetailsHero({ post }: BlogDetailsHeroProps) {
             variants={sectionTitleFadeUpVariants}
             className="mx-auto max-w-[920px] text-center"
           >
-            <h1 className="font-sans text-[32px] font-bold leading-[1.2] tracking-normal text-[#111827] sm:text-[40px] sm:leading-[1.2] lg:text-[46px]">
+            <Heading
+              as="h1"
+              variant="blog-section"
+              className="font-sans text-[#111827] sm:text-[40px] lg:text-[46px]"
+            >
               {post.title}
-            </h1>
+            </Heading>
 
             <p className="mt-4 text-[14px] font-medium text-[#6b7280] sm:text-[15px]">
               Last Update:{" "}

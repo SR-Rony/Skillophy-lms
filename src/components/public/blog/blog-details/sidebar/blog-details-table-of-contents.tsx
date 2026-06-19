@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { BlogTableOfContentsItem } from "@/types/blog-detail.types";
+import { Heading } from "@/components/shared/heading";
 import { cn } from "@/utils";
 
 interface BlogDetailsTableOfContentsProps {
@@ -42,9 +43,13 @@ export function BlogDetailsTableOfContents({ items }: BlogDetailsTableOfContents
       aria-label="Table of contents"
       className="overflow-hidden rounded-[12px] border border-[#E5E7EB] bg-white"
     >
-      <h3 className="border-b border-[#E5E7EB] px-5 py-4 font-sans text-[16px] font-bold text-[#111827]">
+      <Heading
+        as="h3"
+        variant="card-title-xs"
+        className="border-b border-[#E5E7EB] px-5 py-4 font-sans text-[16px] text-[#111827]"
+      >
         Table of Contents
-      </h3>
+      </Heading>
 
       <ul>
         {items.map((item) => (

@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -44,9 +46,9 @@ export function PositionJobDetailPanel({ job }: PositionJobDetailPanelProps) {
       <div className="border-b border-[#f3ebe8] bg-[linear-gradient(180deg,#fffdfa_0%,#ffffff_100%)] px-6 py-6 sm:px-8 sm:py-7">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
-            <h2 className="text-[28px] font-bold leading-[1.15] tracking-[-0.03em] text-[#24201f] sm:text-[34px]">
+            <Heading as="h2" variant="job-title">
               {job.title}
-            </h2>
+            </Heading>
             <p className="mt-3 text-[14px] font-medium text-[#6f6562] sm:text-[15px]">
               Category:{" "}
               <span className="text-[#24201f]">{job.categoryLabel}</span>
@@ -102,9 +104,9 @@ function SectionBlock({
 }) {
   return (
     <section className={cn(className)}>
-      <h3 className="text-[18px] font-bold tracking-[-0.01em] text-[#24201f] sm:text-[20px]">
+      <Heading as="h3" variant="card-title-sm">
         {title}
-      </h3>
+      </Heading>
       <div className="mt-4">{children}</div>
     </section>
   );

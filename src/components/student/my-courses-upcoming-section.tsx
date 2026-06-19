@@ -1,3 +1,4 @@
+import { Heading } from "@/components/shared/heading";
 import type { UpcomingCourse } from "@/types/student-course.types";
 import { UpcomingCourseCard } from "./upcoming-course-card";
 import { cn } from "@/utils";
@@ -28,7 +29,7 @@ export function MyCoursesUpcomingSection({
   return (
     <section className={cn("space-y-5", className)}>
       <div className="flex flex-wrap items-center gap-3">
-        <h2 className="text-lg font-bold text-[#1a1a1a] sm:text-xl">{title}</h2>
+        <Heading as="h2" variant="dashboard-section">{title}</Heading>
         <SectionCountBadge count={courses.length} />
       </div>
 

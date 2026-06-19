@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "@/components/shared/heading";
+
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared";
 import {
@@ -37,9 +39,9 @@ export function CourseDetailsHero({ hero }: CourseDetailsHeroProps) {
             <span className="h-px w-14 bg-[#a5655c] sm:w-16" aria-hidden />
           </div>
 
-          <h1 className="mx-auto max-w-[900px] text-[32px] font-bold leading-[1.12] tracking-normal text-[#1a1a1a] sm:text-[40px] lg:text-[48px]">
+          <Heading as="h1" variant="page-hero-centered">
             {hero.title}
-          </h1>
+          </Heading>
 
           <p className="mx-auto mt-5 max-w-[680px] text-base font-normal leading-[1.55] text-[#4a4a4a] sm:mt-6 sm:text-[17px]">
             {hero.description}

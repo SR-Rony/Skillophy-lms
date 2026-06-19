@@ -1,4 +1,5 @@
 import type { BreadcrumbItem } from "@/types";
+import { Heading } from "@/components/shared/heading";
 import { cn } from "@/utils";
 
 interface PageHeaderProps {
@@ -35,7 +36,7 @@ export function PageHeader({
             ))}
           </nav>
         )}
-        <h1 className="text-2xl font-bold tracking-tight md:text-3xl">{title}</h1>
+        <Heading as="h1" variant="page-header">{title}</Heading>
         {description && (
           <p className="text-muted-foreground">{description}</p>
         )}

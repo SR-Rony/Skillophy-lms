@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Container } from "@/components/shared";
+import { Heading } from "@/components/shared/heading";
 
 function NewsletterBackgroundPattern() {
   return (
@@ -72,9 +73,9 @@ export function BlogDetailsNewsletterSection() {
 
       <Container className="relative z-10">
         <div className="mx-auto max-w-[640px] text-center">
-          <h2 className="font-sans text-[28px] font-bold leading-[1.2] tracking-normal text-[#111827] sm:text-[32px]">
+          <Heading as="h2" variant="blog-section" className="font-sans text-[28px] text-[#111827] sm:text-[32px]">
             Subscribe to Our Newsletter
-          </h2>
+          </Heading>
           <p className="mx-auto mt-3 max-w-[520px] font-sans text-[15px] font-normal leading-[1.7] text-[#888888] sm:mt-4 sm:text-[16px]">
             Sign up with your email to receive all our latest blog posts directly in your inbox
           </p>
