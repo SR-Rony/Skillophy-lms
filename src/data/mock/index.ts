@@ -32,3 +32,12 @@ export {
   getBlogPostDetailBySlug,
 } from "./blog-post-detail.mock";
 export type { BlogPostDetail } from "@/types/blog.types";
+export {
+  studentLiveQuizAnswerReviews,
+} from "./student-live-quiz-answers.mock";
+export {
+  studentLiveQuizPlayDemo,
+  studentLiveQuizQuestionsById,
+  studentLiveQuizResults,
+  studentLiveQuizSessions,
+} from "./student-live-quiz.mock";

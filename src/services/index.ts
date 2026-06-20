@@ -7,3 +7,4 @@ export { paymentService } from "./payment.service";
 export type { Transaction } from "./payment.service";
 export { notificationService } from "./notification.service";
 export type { Notification } from "./notification.service";
+export { studentLiveQuizService } from "./student-live-quiz.service";

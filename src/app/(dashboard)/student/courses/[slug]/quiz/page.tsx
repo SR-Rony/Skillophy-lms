@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { StudentLiveQuizPage } from "@/components/student/live-quiz/student-live-quiz-page";
-import { getStudentLiveQuizSession } from "@/data/mock/student-live-quiz.mock";
+import { studentLiveQuizService } from "@/services/student-live-quiz.service";
 
 interface StudentLiveQuizRouteProps {
   params: Promise<{ slug: string }>;
@@ -10,7 +10,7 @@ interface StudentLiveQuizRouteProps {
 export async function generateMetadata({ params, searchParams }: StudentLiveQuizRouteProps) {
   const { slug } = await params;
   const { quiz } = await searchParams;
-  const data = getStudentLiveQuizSession(slug, quiz);
+  const data = await studentLiveQuizService.getSession(slug, quiz);
 
   return {
     title: data ? `${data.session.title} — Quiz` : "Course Quiz",
@@ -23,7 +23,7 @@ export default async function StudentLiveQuizRoute({
 }: StudentLiveQuizRouteProps) {
   const { slug } = await params;
   const { quiz: quizId } = await searchParams;
-  const data = getStudentLiveQuizSession(slug, quizId);
+  const data = await studentLiveQuizService.getSession(slug, quizId);
 
   if (!data) {
     notFound();

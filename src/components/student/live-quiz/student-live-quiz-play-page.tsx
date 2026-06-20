@@ -1,21 +1,23 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Check, Clock } from "lucide-react";
 import { Heading } from "@/components/shared/heading";
 import type {
-  StudentLiveQuizAttempt,
+  StudentLiveQuizAnswers,
+  StudentLiveQuizPlayData,
   StudentLiveQuizQuestion,
 } from "@/types/student-live-quiz.types";
 import { ROUTES } from "@/constants";
 import { cn } from "@/utils";
 
 interface StudentLiveQuizPlayPageProps {
-  attempt: StudentLiveQuizAttempt;
+  playData: StudentLiveQuizPlayData;
 }
 
-type QuizAnswers = Record<string, string | string[]>;
+type QuizAnswers = StudentLiveQuizAnswers;
 
 function formatTime(totalSeconds: number) {
   const minutes = Math.floor(totalSeconds / 60);
@@ -130,20 +132,22 @@ function QuizQuestionBlock({
   );
 }
 
-export function StudentLiveQuizPlayPage({ attempt }: StudentLiveQuizPlayPageProps) {
+export function StudentLiveQuizPlayPage({ playData }: StudentLiveQuizPlayPageProps) {
+  const router = useRouter();
+  const { attempt, playMeta } = playData;
   const { session, questions } = attempt;
-  const totalSeconds = session.totalTimeMinutes * 60;
 
-  const [answers, setAnswers] = useState<QuizAnswers>(() => ({
-    q1: questions[0]?.options[0] ?? "",
-    q2: questions[1]?.options[0] ?? "",
-    q3: questions[2]?.options[0] ? [questions[2].options[0]] : [],
-  }));
-  const [secondsLeft, setSecondsLeft] = useState(Math.min(totalSeconds, 8 * 60 + 43));
-  const [isFinished, setIsFinished] = useState(false);
+  const [answers, setAnswers] = useState<QuizAnswers>(playMeta.initialAnswers);
+  const [secondsLeft, setSecondsLeft] = useState(playMeta.remainingSeconds);
 
   useEffect(() => {
-    if (isFinished || secondsLeft <= 0) {
+    if (secondsLeft <= 0) {
+      router.push(ROUTES.student.courseQuizResult(session.slug, session.quizId));
+    }
+  }, [router, secondsLeft, session.quizId, session.slug]);
+
+  useEffect(() => {
+    if (secondsLeft <= 0) {
       return;
     }
 
@@ -152,7 +156,7 @@ export function StudentLiveQuizPlayPage({ attempt }: StudentLiveQuizPlayPageProp
     }, 1000);
 
     return () => window.clearInterval(timer);
-  }, [isFinished, secondsLeft]);
+  }, [secondsLeft]);
 
   const answeredCount = useMemo(
     () => questions.filter((question) => isQuestionAnswered(question, answers)).length,
@@ -180,32 +184,8 @@ export function StudentLiveQuizPlayPage({ attempt }: StudentLiveQuizPlayPageProp
   };
 
   const handleEndQuiz = () => {
-    setIsFinished(true);
+    router.push(ROUTES.student.courseQuizResult(session.slug, session.quizId));
   };
-
-  if (isFinished) {
-    return (
-      <div className="bg-white pb-10 pt-6 sm:pb-12 sm:pt-8">
-        <div className="mx-auto max-w-[900px] px-4 sm:px-6">
-          <div className="rounded-2xl border border-[#ebe8e6] bg-white p-6 text-center shadow-[0_8px_30px_rgba(35,25,22,0.06)] sm:p-10">
-            <Heading as="h1" variant="dashboard-section" className="text-[22px] sm:text-[24px]">
-              Quiz Completed
-            </Heading>
-            <p className="mt-3 text-[14px] text-[#6f6562] sm:text-[15px]">
-              You answered {answeredCount} of {session.totalQuestions} questions. Results will
-              appear in your progress details.
-            </p>
-            <Link
-              href={ROUTES.student.courseDetails(session.slug)}
-              className="mt-8 inline-flex items-center justify-center rounded-xl bg-primary px-8 py-3.5 text-[15px] font-bold text-white transition-opacity hover:opacity-90"
-            >
-              Back to Course
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="flex min-h-0 flex-1 flex-col bg-white pb-4 pt-4 sm:pb-6 sm:pt-6 lg:pb-8 lg:pt-8">

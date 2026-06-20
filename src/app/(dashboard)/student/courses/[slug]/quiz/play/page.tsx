@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { StudentLiveQuizPlayPage } from "@/components/student/live-quiz/student-live-quiz-play-page";
-import { getStudentLiveQuizAttempt } from "@/data/mock/student-live-quiz.mock";
+import { studentLiveQuizService } from "@/services/student-live-quiz.service";
 
 interface StudentLiveQuizPlayRouteProps {
   params: Promise<{ slug: string }>;
@@ -10,10 +10,10 @@ interface StudentLiveQuizPlayRouteProps {
 export async function generateMetadata({ params, searchParams }: StudentLiveQuizPlayRouteProps) {
   const { slug } = await params;
   const { quiz } = await searchParams;
-  const data = getStudentLiveQuizAttempt(slug, quiz);
+  const data = await studentLiveQuizService.getPlayData(slug, quiz);
 
   return {
-    title: data ? `${data.session.title} — In Progress` : "Quiz",
+    title: data ? `${data.attempt.session.title} — In Progress` : "Quiz",
   };
 }
 
@@ -23,11 +23,11 @@ export default async function StudentLiveQuizPlayRoute({
 }: StudentLiveQuizPlayRouteProps) {
   const { slug } = await params;
   const { quiz: quizId } = await searchParams;
-  const data = getStudentLiveQuizAttempt(slug, quizId);
+  const data = await studentLiveQuizService.getPlayData(slug, quizId);
 
   if (!data) {
     notFound();
   }
 
-  return <StudentLiveQuizPlayPage attempt={data} />;
+  return <StudentLiveQuizPlayPage playData={data} />;
 }

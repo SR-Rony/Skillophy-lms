@@ -1,16 +1,16 @@
 import type {
-  StudentLiveQuizAttempt,
+  StudentLiveQuizPlayMeta,
   StudentLiveQuizQuestion,
+  StudentLiveQuizResult,
   StudentLiveQuizSession,
 } from "@/types/student-live-quiz.types";
-import type { StudentCourseDetailsData } from "@/types/student-course-details.types";
-import { getStudentCourseDetails } from "@/data/mock/student-course-details.mock";
 import { ROUTES } from "@/constants";
 
 const defaultWarning =
   "Don't open the quiz just to see what happens. Once you start, you have to finish by answering all the questions. If you click start then you will not get a chance to participate later.";
 
-const quizQuestionsById: Record<string, StudentLiveQuizQuestion[]> = {
+/** Demo quiz questions keyed by quiz id — replace via API later. */
+export const studentLiveQuizQuestionsById: Record<string, StudentLiveQuizQuestion[]> = {
   "live-l14": [
     {
       id: "q1",
@@ -155,7 +155,22 @@ const quizQuestionsById: Record<string, StudentLiveQuizQuestion[]> = {
   ],
 };
 
-const quizSessions: Record<string, Record<string, StudentLiveQuizSession>> = {
+/** Demo in-progress quiz state (timer + saved answers) keyed by course slug → quiz id. */
+export const studentLiveQuizPlayDemo: Record<string, Record<string, StudentLiveQuizPlayMeta>> = {
+  "hsc-25-online-batch": {
+    "live-l14": {
+      remainingSeconds: 8 * 60 + 43,
+      initialAnswers: {},
+    },
+    "live-l6": {
+      remainingSeconds: 8 * 60,
+      initialAnswers: {},
+    },
+  },
+};
+
+/** Demo quiz intro sessions keyed by course slug → quiz id. */
+export const studentLiveQuizSessions: Record<string, Record<string, StudentLiveQuizSession>> = {
   "hsc-25-online-batch": {
     "live-l14": {
       quizId: "live-l14",
@@ -200,45 +215,84 @@ const quizSessions: Record<string, Record<string, StudentLiveQuizSession>> = {
   },
 };
 
-export function getStudentLiveQuizSession(
-  slug: string,
-  quizId = "live-l14"
-): { course: StudentCourseDetailsData; session: StudentLiveQuizSession } | null {
-  const course = getStudentCourseDetails(slug);
-
-  if (!course || course.courseType !== "live") {
-    return null;
-  }
-
-  const session = quizSessions[slug]?.[quizId] ?? quizSessions[slug]?.["live-l14"];
-
-  if (!session) {
-    return null;
-  }
-
-  return { course, session };
-}
-
-export function getStudentLiveQuizAttempt(
-  slug: string,
-  quizId = "live-l14"
-): StudentLiveQuizAttempt | null {
-  const data = getStudentLiveQuizSession(slug, quizId);
-
-  if (!data) {
-    return null;
-  }
-
-  const questions =
-    quizQuestionsById[quizId] ??
-    quizQuestionsById[data.session.quizId] ??
-    quizQuestionsById["live-l14"];
-
-  return {
-    session: {
-      ...data.session,
-      totalQuestions: questions.length,
+/** Demo quiz result summaries keyed by course slug → quiz id. */
+export const studentLiveQuizResults: Record<string, Record<string, StudentLiveQuizResult>> = {
+  "hsc-25-online-batch": {
+    "live-l14": {
+      quizId: "live-l14",
+      slug: "hsc-25-online-batch",
+      title: "Quiz 3",
+      resultTitle: "Result of Quiz 3",
+      participatedOn: "Sunday, May 11, 2024",
+      linkedLessonId: "live-l14",
+      passed: true,
+      correctAnswers: 7,
+      totalQuestions: 10,
+      gradePercent: 80,
+      timeTakenMinutes: 8,
+      allottedTimeMinutes: 10,
+      outcomeTitle: "Congratulations!!",
+      outcomeMessage: "You have passed on this quiz. Keep Shining",
+      previousResult: {
+        id: "live-l6",
+        title: "Quiz 1",
+        href: ROUTES.student.courseQuizResult("hsc-25-online-batch", "live-l6"),
+      },
+      nextResult: {
+        id: "live-l14-failed",
+        title: "Quiz 3 Failed",
+        href: ROUTES.student.courseQuizResult("hsc-25-online-batch", "live-l14-failed"),
+      },
+      checkAnswersHref: ROUTES.student.courseQuizAnswers("hsc-25-online-batch", "live-l14"),
     },
-    questions,
-  };
-}
+    "live-l6": {
+      quizId: "live-l6",
+      slug: "hsc-25-online-batch",
+      title: "Quiz 1",
+      resultTitle: "Result of Quiz 1",
+      participatedOn: "Sunday, May 11, 2024",
+      linkedLessonId: "live-l6",
+      passed: true,
+      correctAnswers: 6,
+      totalQuestions: 8,
+      gradePercent: 75,
+      timeTakenMinutes: 6,
+      allottedTimeMinutes: 8,
+      outcomeTitle: "Congratulations!!",
+      outcomeMessage: "You have passed on this quiz. Keep Shining",
+      nextResult: {
+        id: "live-l14",
+        title: "Quiz 3",
+        href: ROUTES.student.courseQuizResult("hsc-25-online-batch", "live-l14"),
+      },
+      checkAnswersHref: ROUTES.student.courseQuizAnswers("hsc-25-online-batch", "live-l6"),
+    },
+    "live-l14-failed": {
+      quizId: "live-l14-failed",
+      slug: "hsc-25-online-batch",
+      title: "Quiz 3",
+      resultTitle: "Result of Quiz 3",
+      participatedOn: "Sunday, May 11, 2024",
+      linkedLessonId: "live-l14",
+      passed: false,
+      correctAnswers: 7,
+      totalQuestions: 10,
+      gradePercent: 80,
+      timeTakenMinutes: 8,
+      allottedTimeMinutes: 10,
+      outcomeTitle: "Oppss.. That was close!",
+      outcomeMessage: "You have not passed on this quiz. Keep Trying",
+      previousResult: {
+        id: "live-l14",
+        title: "Quiz 3",
+        href: ROUTES.student.courseQuizResult("hsc-25-online-batch", "live-l14"),
+      },
+      nextResult: {
+        id: "live-l15",
+        title: "Research basics",
+        href: ROUTES.student.courseResources("hsc-25-online-batch", "live-l15"),
+      },
+      checkAnswersHref: ROUTES.student.courseQuizAnswers("hsc-25-online-batch", "live-l14-failed"),
+    },
+  },
+};
