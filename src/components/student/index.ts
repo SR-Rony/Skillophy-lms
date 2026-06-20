@@ -21,6 +21,7 @@ export { MyWorkshopPage } from "./my-workshop";
 export { StudentMessagesPage } from "./student-messages";
 export { PaymentHistoryPage } from "./payment-history";
 export { MyCertificatePage } from "./my-certificate";
+export { AccountSettingsPage } from "./account-settings";
 export { StudentUserMenu } from "./student-user-menu";
 export { StudentUserMenuNav } from "./student-user-menu-nav";
 export { StudentNavbarActions } from "./student-navbar-actions";

@@ -1,16 +1,12 @@
-import { Container } from "@/components/shared";
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { AccountSettingsPage } from "@/components/student/account-settings";
+import { studentAccountSettingsService } from "@/services/student-account-settings.service";
 
-export const metadata = { title: "Settings" };
+export async function generateMetadata() {
+  const data = await studentAccountSettingsService.getSettings();
+  return { title: data.title };
+}
 
-export default function StudentSettingsPage() {
-  return (
-    <Container className="py-8">
-      <ModulePlaceholder
-        title="Settings"
-        description="Account and notification preferences."
-        feature="settings"
-      />
-    </Container>
-  );
+export default async function StudentSettingsPage() {
+  const data = await studentAccountSettingsService.getSettings();
+  return <AccountSettingsPage data={data} />;
 }
