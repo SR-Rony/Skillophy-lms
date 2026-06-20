@@ -142,7 +142,7 @@ export function StudentLiveQuizPlayPage({ playData }: StudentLiveQuizPlayPagePro
 
   useEffect(() => {
     if (secondsLeft <= 0) {
-      router.push(ROUTES.student.courseQuizResult(session.slug, session.quizId));
+      router.push(ROUTES.student.courseQuizTimeOver(session.slug, session.quizId));
     }
   }, [router, secondsLeft, session.quizId, session.slug]);
 

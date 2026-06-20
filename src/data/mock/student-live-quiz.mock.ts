@@ -3,6 +3,7 @@ import type {
   StudentLiveQuizQuestion,
   StudentLiveQuizResult,
   StudentLiveQuizSession,
+  StudentLiveQuizTimeOver,
 } from "@/types/student-live-quiz.types";
 import { ROUTES } from "@/constants";
 
@@ -293,6 +294,65 @@ export const studentLiveQuizResults: Record<string, Record<string, StudentLiveQu
         href: ROUTES.student.courseResources("hsc-25-online-batch", "live-l15"),
       },
       checkAnswersHref: ROUTES.student.courseQuizAnswers("hsc-25-online-batch", "live-l14-failed"),
+    },
+  },
+};
+
+/** Demo quiz time-over / missed deadline states keyed by course slug → quiz id. */
+export const studentLiveQuizTimeOverDemo: Record<
+  string,
+  Record<string, StudentLiveQuizTimeOver>
+> = {
+  "hsc-25-online-batch": {
+    "live-l14": {
+      quizId: "live-l14",
+      slug: "hsc-25-online-batch",
+      title: "Quiz 3",
+      deadlineDate: "Sunday, May 11, 2024",
+      heading: "Time Over",
+      message: "Sorry! Your exam time has over. Keep remembering your quiz time",
+      linkedLessonId: "live-l14",
+      checkAnswersHref: ROUTES.student.courseQuizAnswers("hsc-25-online-batch", "live-l14"),
+      previousNav: {
+        id: "live-l6",
+        title: "Quiz 1",
+        href: ROUTES.student.courseQuizTimeOver("hsc-25-online-batch", "live-l6"),
+      },
+      nextNav: {
+        id: "live-l14-failed",
+        title: "Quiz 3",
+        href: ROUTES.student.courseQuizTimeOver("hsc-25-online-batch", "live-l14-failed"),
+      },
+    },
+    "live-l6": {
+      quizId: "live-l6",
+      slug: "hsc-25-online-batch",
+      title: "Quiz 1",
+      deadlineDate: "Sunday, May 11, 2024",
+      heading: "Time Over",
+      message: "Sorry! Your exam time has over. Keep remembering your quiz time",
+      linkedLessonId: "live-l6",
+      checkAnswersHref: ROUTES.student.courseQuizAnswers("hsc-25-online-batch", "live-l6"),
+      nextNav: {
+        id: "live-l14",
+        title: "Quiz 3",
+        href: ROUTES.student.courseQuizTimeOver("hsc-25-online-batch", "live-l14"),
+      },
+    },
+    "live-l14-failed": {
+      quizId: "live-l14-failed",
+      slug: "hsc-25-online-batch",
+      title: "Quiz 3",
+      deadlineDate: "Sunday, May 11, 2024",
+      heading: "Time Over",
+      message: "Sorry! Your exam time has over. Keep remembering your quiz time",
+      linkedLessonId: "live-l14",
+      checkAnswersHref: ROUTES.student.courseQuizAnswers("hsc-25-online-batch", "live-l14-failed"),
+      previousNav: {
+        id: "live-l14",
+        title: "Quiz 3",
+        href: ROUTES.student.courseQuizTimeOver("hsc-25-online-batch", "live-l14"),
+      },
     },
   },
 };

@@ -51,6 +51,8 @@ export const ROUTES = {
       `/student/courses/${slug}/quiz/play?quiz=${quizId}`,
     courseQuizResult: (slug: string, quizId = "live-l14") =>
       `/student/courses/${slug}/quiz/result?quiz=${quizId}`,
+    courseQuizTimeOver: (slug: string, quizId = "live-l14") =>
+      `/student/courses/${slug}/quiz/time-over?quiz=${quizId}`,
     courseQuizAnswers: (slug: string, quizId = "live-l14") =>
       `/student/courses/${slug}/quiz/answers?quiz=${quizId}`,
     live: "/student/live",

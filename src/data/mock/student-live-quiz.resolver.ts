@@ -4,6 +4,7 @@ import {
   studentLiveQuizQuestionsById,
   studentLiveQuizResults,
   studentLiveQuizSessions,
+  studentLiveQuizTimeOverDemo,
 } from "@/data/mock/student-live-quiz.mock";
 import { getStudentCourseDetails } from "@/data/mock/student-course-details.mock";
 import type {
@@ -13,6 +14,7 @@ import type {
   StudentLiveQuizPlayMeta,
   StudentLiveQuizResultPageData,
   StudentLiveQuizSessionPageData,
+  StudentLiveQuizTimeOverPageData,
 } from "@/types/student-live-quiz.types";
 
 const DEFAULT_QUIZ_ID = "live-l14";
@@ -157,4 +159,26 @@ export function resolveStudentLiveQuizAnswerReview(
   }
 
   return { course, review };
+}
+
+export function resolveStudentLiveQuizTimeOver(
+  slug: string,
+  quizId?: string
+): StudentLiveQuizTimeOverPageData | null {
+  const course = getLiveCourse(slug);
+
+  if (!course) {
+    return null;
+  }
+
+  const resolvedQuizId = resolveQuizId(quizId);
+  const timeOver =
+    studentLiveQuizTimeOverDemo[slug]?.[resolvedQuizId] ??
+    studentLiveQuizTimeOverDemo[slug]?.[DEFAULT_QUIZ_ID];
+
+  if (!timeOver) {
+    return null;
+  }
+
+  return { course, timeOver };
 }

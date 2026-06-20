@@ -22,6 +22,7 @@ export const queryKeys = {
     session: (slug: string, quizId: string) => ["quizzes", slug, quizId, "session"] as const,
     play: (slug: string, quizId: string) => ["quizzes", slug, quizId, "play"] as const,
     result: (slug: string, quizId: string) => ["quizzes", slug, quizId, "result"] as const,
+    timeOver: (slug: string, quizId: string) => ["quizzes", slug, quizId, "time-over"] as const,
     answers: (slug: string, quizId: string) => ["quizzes", slug, quizId, "answers"] as const,
   },
   assignments: {

@@ -4,12 +4,14 @@ import {
   resolveStudentLiveQuizPlayData,
   resolveStudentLiveQuizResult,
   resolveStudentLiveQuizSession,
+  resolveStudentLiveQuizTimeOver,
 } from "@/data/mock/student-live-quiz.resolver";
 import type {
   StudentLiveQuizAnswerReviewPageData,
   StudentLiveQuizPlayData,
   StudentLiveQuizResultPageData,
   StudentLiveQuizSessionPageData,
+  StudentLiveQuizTimeOverPageData,
 } from "@/types/student-live-quiz.types";
 import { sleep } from "@/utils";
 // import { apiClient } from "./api-client";
@@ -74,6 +76,23 @@ export const studentLiveQuizService = {
     // return apiClient
     //   .get<StudentLiveQuizAnswerReviewPageData>(
     //     `/student/courses/${slug}/quizzes/${quizId}/answers`
+    //   )
+    //   .then((response) => response.data);
+    return null;
+  },
+
+  async getTimeOver(
+    slug: string,
+    quizId?: string
+  ): Promise<StudentLiveQuizTimeOverPageData | null> {
+    if (env.useMockApi) {
+      await sleep(200);
+      return resolveStudentLiveQuizTimeOver(slug, quizId);
+    }
+
+    // return apiClient
+    //   .get<StudentLiveQuizTimeOverPageData>(
+    //     `/student/courses/${slug}/quizzes/${quizId}/time-over`
     //   )
     //   .then((response) => response.data);
     return null;

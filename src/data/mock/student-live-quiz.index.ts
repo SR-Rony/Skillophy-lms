@@ -10,6 +10,7 @@ export {
   studentLiveQuizQuestionsById,
   studentLiveQuizResults,
   studentLiveQuizSessions,
+  studentLiveQuizTimeOverDemo,
 } from "./student-live-quiz.mock";
 export {
   resolveStudentLiveQuizAnswerReview,
@@ -17,4 +18,5 @@ export {
   resolveStudentLiveQuizPlayData,
   resolveStudentLiveQuizResult,
   resolveStudentLiveQuizSession,
+  resolveStudentLiveQuizTimeOver,
 } from "./student-live-quiz.resolver";

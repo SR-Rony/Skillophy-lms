@@ -40,4 +40,5 @@ export {
   studentLiveQuizQuestionsById,
   studentLiveQuizResults,
   studentLiveQuizSessions,
+  studentLiveQuizTimeOverDemo,
 } from "./student-live-quiz.mock";

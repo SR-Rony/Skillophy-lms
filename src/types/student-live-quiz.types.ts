@@ -63,6 +63,24 @@ export interface StudentLiveQuizAnswerReviewPageData {
   review: StudentLiveQuizAnswerReview;
 }
 
+export interface StudentLiveQuizTimeOver {
+  quizId: string;
+  slug: string;
+  title: string;
+  deadlineDate: string;
+  heading: string;
+  message: string;
+  linkedLessonId: string;
+  checkAnswersHref: string;
+  previousNav?: StudentLiveQuizNav;
+  nextNav?: StudentLiveQuizNav;
+}
+
+export interface StudentLiveQuizTimeOverPageData {
+  course: StudentCourseDetailsData;
+  timeOver: StudentLiveQuizTimeOver;
+}
+
 export interface StudentLiveQuizResult {
   quizId: string;
   slug: string;
