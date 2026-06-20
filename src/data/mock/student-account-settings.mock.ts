@@ -251,4 +251,161 @@ export const studentAccountSettingsDemo: StudentAccountSettingsPageData = {
       pushNotification: true,
     },
   },
+  moreData: {
+    accountActions: [
+      {
+        id: "logout",
+        title: "Logout your account",
+        description: "Do you want to logout your account?",
+        actionLabel: "Log Out",
+      },
+      {
+        id: "deactivate",
+        title: "Deactivate your account",
+        description: "Do you want to deactivate your account?",
+        actionLabel: "Deactivate",
+      },
+      {
+        id: "delete",
+        title: "Delete your account",
+        description: "Do you want to delete your account?",
+        actionLabel: "Delete",
+      },
+    ],
+    currentDevice: {
+      id: "device-current",
+      name: "Chrome 123.0.0.0 • Intel Mac OS X 10_15_7",
+      meta: "April 23, 2024, Log out to remove this device",
+    },
+    otherDevices: [
+      {
+        id: "device-1",
+        name: "HONOR RMO-NX1 • Mobile",
+        meta: "Last use at April 21, 2024",
+      },
+      {
+        id: "device-2",
+        name: "Chrome 124.0.0.0 • Android 10",
+        meta: "Last use at April 11, 2024",
+      },
+    ],
+    deviceLimitNote:
+      "For security reasons a Skillophy account can login from a maximum of 6 devices. Apart from this, you need to remove at least one device from Device Manager to login to the new device.",
+  },
+  resumePreviewData: {
+    profileSummary:
+      "Product designer with 7+ years experience, focused on creating intuitive and engaging user experiences for web and mobile platforms. Skilled in user research, wireframing, prototyping, and visual design. Strong collaborator with cross-functional teams to deliver impactful products.",
+    experiences: [
+      {
+        id: "exp-uber",
+        company: "Uber",
+        role: "Product Designer",
+        dateRange: "Mar 2015 - Present",
+        highlights: [
+          "Designed and shipped features for the driver app, improving driver satisfaction by 15%.",
+          "Led the redesign of the onboarding flow, resulting in a 20% increase in driver sign-ups.",
+          "Collaborated with engineers and product managers to define product requirements and prioritize features.",
+        ],
+      },
+      {
+        id: "exp-ifttt",
+        company: "IFTTT",
+        role: "Product Designer",
+        dateRange: "Dec 2013 - Mar 2015",
+        highlights: [
+          "Designed and shipped features for the driver app, improving driver satisfaction by 15%.",
+          "Led the redesign of the onboarding flow, resulting in a 20% increase in driver sign-ups.",
+          "Collaborated with engineers and product managers to define product requirements and prioritize features.",
+        ],
+      },
+      {
+        id: "exp-facebook",
+        company: "Facebook",
+        role: "UX/UI Designer",
+        dateRange: "June 2013 - Sep 2013",
+        highlights: [
+          "Designed and shipped features for the driver app, improving driver satisfaction by 15%.",
+          "Led the redesign of the onboarding flow, resulting in a 20% increase in driver sign-ups.",
+          "Collaborated with engineers and product managers to define product requirements and prioritize features.",
+        ],
+      },
+      {
+        id: "exp-google",
+        company: "Google Maps",
+        role: "Product Designer",
+        dateRange: "June 2012 - June 2013",
+        highlights: [
+          "Designed and shipped features for the driver app, improving driver satisfaction by 15%.",
+          "Led the redesign of the onboarding flow, resulting in a 20% increase in driver sign-ups.",
+          "Collaborated with engineers and product managers to define product requirements and prioritize features.",
+        ],
+      },
+    ],
+    education: [
+      {
+        id: "edu-1",
+        title: "BSC in Computer Engineering at RUET",
+        dateRange: "February 2012 - February 2016",
+        description:
+          "Led outreach and recruitment efforts at university, built strong relationships with academic departments and student organizations, organized events and workshops to promote the program, and provided guidance to prospective students.",
+      },
+      {
+        id: "edu-2",
+        title: "BSC in Computer Engineering at RUET",
+        dateRange: "February 2012 - February 2016",
+        description:
+          "Led outreach and recruitment efforts at university, built strong relationships with academic departments and student organizations, organized events and workshops to promote the program, and provided guidance to prospective students.",
+      },
+    ],
+    details: {
+      address: "Dhaka, Bangladesh",
+      phone: "016254789546",
+      email: "nushrat5789@gmail.com",
+    },
+    links: [
+      { id: "resume-link-linkedin", platform: "linkedin", label: "LinkedIn", url: "#" },
+      { id: "resume-link-dribbble", platform: "dribbble", label: "Dribbble", url: "#" },
+      { id: "resume-link-facebook", platform: "facebook", label: "Facebook", url: "#" },
+    ],
+    skills: [
+      "Digital Marketing",
+      "SEO",
+      "UI/UX Design",
+      "Web Development",
+      "Adobe Photoshop",
+      "Adobe Illustrator",
+      "Adobe InDesign",
+      "Adobe After Effects",
+      "Adobe Photoshop Lightroom",
+    ],
+    interestedAreas: ["Photography", "Travelling", "Reading"],
+  },
+  shareResumeData: {
+    description:
+      "After finalising your resume, you can preview for polish. You can also download it as PDF for easy sharing and printing.",
+    resumeUrl: "https://skillophy/578290nushratresume.pdf",
+    copyLinkLabel: "Copy Link",
+    shareOptions: [
+      {
+        id: "email",
+        label: "Share via email",
+        href: "mailto:?subject=My%20Resume&body=https%3A%2F%2Fskillophy%2F578290nushratresume.pdf",
+      },
+      {
+        id: "facebook",
+        label: "Share on Facebook",
+        href: "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fskillophy%2F578290nushratresume.pdf",
+      },
+      {
+        id: "linkedin",
+        label: "Share on LinkedIn",
+        href: "https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fskillophy%2F578290nushratresume.pdf",
+      },
+      {
+        id: "x",
+        label: "Share on X",
+        href: "https://twitter.com/intent/tweet?url=https%3A%2F%2Fskillophy%2F578290nushratresume.pdf",
+      },
+    ],
+  },
 };

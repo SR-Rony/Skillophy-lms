@@ -6,6 +6,9 @@ export { AccountSettingsEducationView } from "./account-settings-education-view"
 export { AccountSettingsJobExperienceView } from "./account-settings-job-experience-view";
 export { AccountSettingsSettingsView } from "./account-settings-settings-view";
 export { AccountSettingsChangePasswordCard } from "./account-settings-change-password-card";
+export { AccountSettingsMoreView } from "./account-settings-more-view";
+export { AccountSettingsResumePreviewModal } from "./account-settings-resume-preview-modal";
+export { AccountSettingsShareResumeModal } from "./account-settings-share-resume-modal";
 export { AccountSettingsAddEducationModal } from "./account-settings-add-education-modal";
 export { AccountSettingsAddCourseModal } from "./account-settings-add-course-modal";
 export { AccountSettingsAddJobExperienceModal } from "./account-settings-add-job-experience-modal";

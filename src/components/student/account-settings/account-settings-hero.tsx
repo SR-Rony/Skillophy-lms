@@ -18,6 +18,8 @@ interface AccountSettingsHeroProps {
   activeTab: StudentAccountSettingsTabId;
   onTabChange: (tab: StudentAccountSettingsTabId) => void;
   isProfileEditing?: boolean;
+  onPreviewClick?: () => void;
+  onShareClick?: () => void;
   className?: string;
 }
 
@@ -27,6 +29,8 @@ export function AccountSettingsHero({
   activeTab,
   onTabChange,
   isProfileEditing = false,
+  onPreviewClick,
+  onShareClick,
   className,
 }: AccountSettingsHeroProps) {
   return (
@@ -76,18 +80,38 @@ export function AccountSettingsHero({
 
           {!isProfileEditing ? (
             <div className="flex shrink-0 flex-wrap items-center gap-3">
-              <Link
-                href={profile.previewUrl}
-                className="inline-flex min-w-[110px] items-center justify-center rounded-xl border border-[#1a1a1a] bg-white px-5 py-3 text-[13px] font-semibold text-[#1a1a1a] transition-colors hover:bg-[#fafafa] sm:min-w-[120px] sm:text-[14px]"
-              >
-                Preview
-              </Link>
-              <Link
-                href={profile.shareCvUrl}
-                className="inline-flex min-w-[110px] items-center justify-center rounded-xl bg-primary px-5 py-3 text-[13px] font-semibold text-white transition-opacity hover:opacity-90 sm:min-w-[120px] sm:text-[14px]"
-              >
-                Share CV
-              </Link>
+              {onPreviewClick ? (
+                <button
+                  type="button"
+                  onClick={onPreviewClick}
+                  className="inline-flex min-w-[110px] items-center justify-center rounded-xl border border-[#1a1a1a] bg-white px-5 py-3 text-[13px] font-semibold text-[#1a1a1a] transition-colors hover:bg-[#fafafa] sm:min-w-[120px] sm:text-[14px]"
+                >
+                  Preview
+                </button>
+              ) : (
+                <Link
+                  href={profile.previewUrl}
+                  className="inline-flex min-w-[110px] items-center justify-center rounded-xl border border-[#1a1a1a] bg-white px-5 py-3 text-[13px] font-semibold text-[#1a1a1a] transition-colors hover:bg-[#fafafa] sm:min-w-[120px] sm:text-[14px]"
+                >
+                  Preview
+                </Link>
+              )}
+              {onShareClick ? (
+                <button
+                  type="button"
+                  onClick={onShareClick}
+                  className="inline-flex min-w-[110px] items-center justify-center rounded-xl bg-primary px-5 py-3 text-[13px] font-semibold text-white transition-opacity hover:opacity-90 sm:min-w-[120px] sm:text-[14px]"
+                >
+                  Share CV
+                </button>
+              ) : (
+                <Link
+                  href={profile.shareCvUrl}
+                  className="inline-flex min-w-[110px] items-center justify-center rounded-xl bg-primary px-5 py-3 text-[13px] font-semibold text-white transition-opacity hover:opacity-90 sm:min-w-[120px] sm:text-[14px]"
+                >
+                  Share CV
+                </Link>
+              )}
             </div>
           ) : null}
         </div>

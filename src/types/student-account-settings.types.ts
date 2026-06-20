@@ -163,6 +163,77 @@ export interface StudentAccountSettingsPreferencesData {
   notification: StudentAccountSettingsNotificationData;
 }
 
+export interface StudentAccountSettingsAccountAction {
+  id: string;
+  title: string;
+  description: string;
+  actionLabel: string;
+}
+
+export interface StudentAccountSettingsDeviceItem {
+  id: string;
+  name: string;
+  meta: string;
+}
+
+export interface StudentAccountSettingsMoreData {
+  accountActions: StudentAccountSettingsAccountAction[];
+  currentDevice: StudentAccountSettingsDeviceItem;
+  otherDevices: StudentAccountSettingsDeviceItem[];
+  deviceLimitNote: string;
+}
+
+export interface StudentAccountSettingsResumeExperienceItem {
+  id: string;
+  company: string;
+  role: string;
+  dateRange: string;
+  highlights: string[];
+}
+
+export interface StudentAccountSettingsResumeEducationItem {
+  id: string;
+  title: string;
+  dateRange: string;
+  description: string;
+}
+
+export interface StudentAccountSettingsResumeLinkItem {
+  id: string;
+  platform: StudentAccountSettingsLinkPlatform;
+  label: string;
+  url: string;
+}
+
+export interface StudentAccountSettingsResumePreviewData {
+  profileSummary: string;
+  experiences: StudentAccountSettingsResumeExperienceItem[];
+  education: StudentAccountSettingsResumeEducationItem[];
+  details: {
+    address: string;
+    phone: string;
+    email: string;
+  };
+  links: StudentAccountSettingsResumeLinkItem[];
+  skills: string[];
+  interestedAreas: string[];
+}
+
+export type StudentAccountSettingsShareResumePlatform = "email" | "facebook" | "linkedin" | "x";
+
+export interface StudentAccountSettingsShareResumeOption {
+  id: StudentAccountSettingsShareResumePlatform;
+  label: string;
+  href: string;
+}
+
+export interface StudentAccountSettingsShareResumeData {
+  description: string;
+  resumeUrl: string;
+  copyLinkLabel: string;
+  shareOptions: StudentAccountSettingsShareResumeOption[];
+}
+
 export interface StudentAccountSettingsPageData {
   title: string;
   subtitle: string;
@@ -179,4 +250,7 @@ export interface StudentAccountSettingsPageData {
   jobExperienceData: StudentAccountSettingsJobExperienceData;
   jobExperienceFormOptions: StudentAccountSettingsJobExperienceFormOptions;
   preferencesData: StudentAccountSettingsPreferencesData;
+  moreData: StudentAccountSettingsMoreData;
+  resumePreviewData: StudentAccountSettingsResumePreviewData;
+  shareResumeData: StudentAccountSettingsShareResumeData;
 }
