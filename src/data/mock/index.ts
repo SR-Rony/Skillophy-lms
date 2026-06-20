@@ -45,3 +45,4 @@ export {
 export {
   studentClassScheduleDemo,
 } from "./student-class-schedule.mock";
+export { studentResourcesDemo } from "./student-resources.mock";

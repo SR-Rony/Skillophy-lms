@@ -47,6 +47,9 @@ export const queryKeys = {
   schedule: {
     list: () => ["schedule", "list"] as const,
   },
+  resources: {
+    list: () => ["resources", "list"] as const,
+  },
   users: {
     all: ["users"] as const,
     detail: (id: string) => ["users", "detail", id] as const,
