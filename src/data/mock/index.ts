@@ -42,3 +42,6 @@ export {
   studentLiveQuizSessions,
   studentLiveQuizTimeOverDemo,
 } from "./student-live-quiz.mock";
+export {
+  studentClassScheduleDemo,
+} from "./student-class-schedule.mock";

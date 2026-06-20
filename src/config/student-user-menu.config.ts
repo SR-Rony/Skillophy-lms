@@ -26,7 +26,7 @@ export interface StudentUserMenuItem {
 export const studentUserMenuItems: StudentUserMenuItem[] = [
   { label: "Dashboard", href: ROUTES.student.root, icon: LayoutGrid },
   { label: "My Courses", href: ROUTES.student.courses, icon: SquarePlay },
-  { label: "Class Schedule", href: ROUTES.student.live, icon: CalendarClock },
+  { label: "Class Schedule", href: ROUTES.student.schedule, icon: CalendarClock },
   { label: "My Resources", href: ROUTES.student.assignments, icon: FileText },
   { label: "Model Test", href: ROUTES.student.assignments, icon: ClipboardPenLine },
   { label: "Books", href: ROUTES.student.wishlist, icon: BookOpen },

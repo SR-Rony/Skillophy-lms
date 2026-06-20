@@ -44,6 +44,9 @@ export const queryKeys = {
     conversations: ["chat", "conversations"] as const,
     messages: (conversationId: string) => ["chat", "messages", conversationId] as const,
   },
+  schedule: {
+    list: () => ["schedule", "list"] as const,
+  },
   users: {
     all: ["users"] as const,
     detail: (id: string) => ["users", "detail", id] as const,
