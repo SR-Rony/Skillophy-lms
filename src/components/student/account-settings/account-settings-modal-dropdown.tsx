@@ -2,6 +2,11 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
+import {
+  accountSettingsModalListClassName,
+  accountSettingsModalListItemClassName,
+  getAccountSettingsModalListItemStateClassName,
+} from "./account-settings-modal-list-styles";
 import { cn } from "@/utils";
 
 export interface AccountSettingsModalDropdownOption {
@@ -113,7 +118,8 @@ export function AccountSettingsModalDropdown({
         <ul
           role="listbox"
           className={cn(
-            "absolute left-0 right-0 top-[calc(100%+8px)] z-[70] max-h-[220px] overflow-y-auto rounded-xl border border-[#ebe8e6] bg-white py-2 shadow-[0_10px_30px_rgba(35,25,22,0.1)]",
+            "absolute left-0 right-0 top-[calc(100%+6px)] z-[70] overflow-hidden rounded-xl border border-[#ebe8e6] bg-white py-1.5 shadow-[0_12px_32px_rgba(35,25,22,0.12)]",
+            accountSettingsModalListClassName,
             listClassName
           )}
         >
@@ -126,10 +132,8 @@ export function AccountSettingsModalDropdown({
                   type="button"
                   onClick={() => handleSelect(option.value)}
                   className={cn(
-                    "flex w-full px-4 py-2.5 text-left text-[14px] transition-colors sm:px-5 sm:py-3",
-                    isSelected
-                      ? "bg-[#fde7e3] font-semibold text-[#1a1a1a]"
-                      : "font-medium text-[#1a1a1a] hover:bg-[#fde7e3]/70"
+                    accountSettingsModalListItemClassName,
+                    getAccountSettingsModalListItemStateClassName(isSelected)
                   )}
                 >
                   {option.label}

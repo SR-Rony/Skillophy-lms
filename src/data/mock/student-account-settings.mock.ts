@@ -1,5 +1,25 @@
 import type { StudentAccountSettingsPageData } from "@/types/student-account-settings.types";
 
+const accountSettingsMonths = [
+  { value: "january", label: "January" },
+  { value: "february", label: "February" },
+  { value: "march", label: "March" },
+  { value: "april", label: "April" },
+  { value: "may", label: "May" },
+  { value: "june", label: "June" },
+  { value: "july", label: "July" },
+  { value: "august", label: "August" },
+  { value: "september", label: "September" },
+  { value: "october", label: "October" },
+  { value: "november", label: "November" },
+  { value: "december", label: "December" },
+];
+
+const accountSettingsYears = Array.from({ length: 31 }, (_, index) => {
+  const year = String(2000 + index);
+  return { value: year, label: year };
+});
+
 export const studentAccountSettingsDemo: StudentAccountSettingsPageData = {
   title: "Account Settings",
   subtitle: "Manage your profile, qualifications, and account preferences.",
@@ -104,23 +124,131 @@ export const studentAccountSettingsDemo: StudentAccountSettingsPageData = {
       { value: "msc", label: "Master of Science" },
       { value: "bsc-computer-engineering", label: "BSC in Computer Engineering" },
     ],
-    months: [
-      { value: "january", label: "January" },
-      { value: "february", label: "February" },
-      { value: "march", label: "March" },
-      { value: "april", label: "April" },
-      { value: "may", label: "May" },
-      { value: "june", label: "June" },
-      { value: "july", label: "July" },
-      { value: "august", label: "August" },
-      { value: "september", label: "September" },
-      { value: "october", label: "October" },
-      { value: "november", label: "November" },
-      { value: "december", label: "December" },
+    months: accountSettingsMonths,
+    years: accountSettingsYears,
+  },
+  courseFormOptions: {
+    courses: [
+      { value: "facebook-marketing", label: "Facebook Marketing" },
+      {
+        value: "foundations-ux-design",
+        label: "Foundations of User Experience (UX) Design",
+      },
+      { value: "ui-ux-guided-program", label: "UI-UX Guided Program" },
+      { value: "design-system", label: "Design System" },
+      { value: "negotiation-skills", label: "Negotiation Skills" },
+      { value: "digital-marketing", label: "Digital Marketing" },
     ],
-    years: Array.from({ length: 31 }, (_, index) => {
-      const year = String(2000 + index);
-      return { value: year, label: year };
-    }),
+    months: accountSettingsMonths,
+    years: accountSettingsYears,
+  },
+  skillsFormOptions: {
+    maxSkills: 10,
+    availableSkills: [
+      "Digital Marketing",
+      "SEO",
+      "UI/UX Design",
+      "Web Development",
+      "Adobe Photoshop",
+      "Adobe Illustrator",
+      "Adobe InDesign",
+      "Adobe After Effects",
+      "Adobe Photoshop Lightroom",
+      "Figma",
+      "Content Writing",
+      "Social Media Marketing",
+      "Google Analytics",
+      "Project Management",
+      "JavaScript",
+      "React",
+      "Node.js",
+      "Python",
+    ],
+  },
+  jobExperienceData: {
+    maxCustomLinks: 3,
+    experiences: [
+      {
+        id: "job-1",
+        title: "Product Designer at Design Monks",
+        dateRange: "February 2022 - Present",
+        description:
+          "Led outreach and recruitment efforts at university, built strong relationships with academic departments and student organizations, organized events and workshops to promote the program, and provided guidance to prospective students.",
+      },
+      {
+        id: "job-2",
+        title: "Product Designer at Design Monks",
+        dateRange: "February 2022 - February 2024",
+        description:
+          "Led outreach and recruitment efforts at university, built strong relationships with academic departments and student organizations, organized events and workshops to promote the program, and provided guidance to prospective students.",
+      },
+      {
+        id: "job-3",
+        title: "UI/UX Designer at Design Monks",
+        dateRange: "February 2022 - February 2024",
+        description:
+          "Led outreach and recruitment efforts at university, built strong relationships with academic departments and student organizations, organized events and workshops to promote the program, and provided guidance to prospective students.",
+      },
+    ],
+    links: [
+      {
+        id: "link-portfolio",
+        platform: "portfolio",
+        label: "Portfolio",
+        url: "https://dribbble.com/username",
+      },
+      {
+        id: "link-linkedin",
+        platform: "linkedin",
+        label: "LinkedIn",
+        url: "https://linkedin.com/in/username",
+      },
+      {
+        id: "link-facebook",
+        platform: "facebook",
+        label: "Facebook",
+        url: "https://facebook.com/username",
+      },
+      {
+        id: "link-dribbble",
+        platform: "dribbble",
+        label: "Dribbble",
+        url: "https://dribbble.com/username",
+      },
+      {
+        id: "link-instagram",
+        platform: "instagram",
+        label: "Instagram",
+        url: "https://instagram.com/username",
+      },
+    ],
+  },
+  jobExperienceFormOptions: {
+    jobTitles: [
+      { value: "product-designer", label: "Product Designer" },
+      { value: "ui-ux-designer", label: "UI/UX Designer" },
+      { value: "graphic-designer", label: "Graphic Designer" },
+      { value: "frontend-developer", label: "Frontend Developer" },
+    ],
+    companies: [
+      { value: "design-monks", label: "Design Monks" },
+      { value: "skillophy", label: "Skillophy" },
+      { value: "creative-studio", label: "Creative Studio" },
+      { value: "tech-solutions", label: "Tech Solutions Ltd." },
+    ],
+    months: accountSettingsMonths,
+    years: accountSettingsYears,
+  },
+  preferencesData: {
+    password: {
+      lastChangedLabel: "The password was last changed four months ago.",
+      changePasswordHref: "#",
+    },
+    notification: {
+      description:
+        "We'll always let you know about important updates, but you pick what else you want to hear about.",
+      emailNotification: false,
+      pushNotification: true,
+    },
   },
 };

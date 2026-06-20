@@ -8,7 +8,9 @@ import type {
 } from "@/types/student-account-settings.types";
 import { AccountSettingsHero } from "./account-settings-hero";
 import { AccountSettingsEducationView } from "./account-settings-education-view";
+import { AccountSettingsJobExperienceView } from "./account-settings-job-experience-view";
 import { AccountSettingsProfileView } from "./account-settings-profile-view";
+import { AccountSettingsSettingsView } from "./account-settings-settings-view";
 import { AccountSettingsTabPlaceholder } from "./account-settings-tab-placeholder";
 
 interface AccountSettingsContentProps {
@@ -55,15 +57,20 @@ export function AccountSettingsContent({ data }: AccountSettingsContentProps) {
           <AccountSettingsEducationView
             data={data.educationData}
             formOptions={data.educationFormOptions}
+            courseFormOptions={data.courseFormOptions}
+            skillsFormOptions={data.skillsFormOptions}
           />
         ) : null}
 
         {activeTab === "job-experience" ? (
-          <AccountSettingsTabPlaceholder title="Job Experience" />
+          <AccountSettingsJobExperienceView
+            data={data.jobExperienceData}
+            formOptions={data.jobExperienceFormOptions}
+          />
         ) : null}
 
         {activeTab === "settings" ? (
-          <AccountSettingsTabPlaceholder title="Settings" />
+          <AccountSettingsSettingsView data={data.preferencesData} />
         ) : null}
 
         {activeTab === "more" ? <AccountSettingsTabPlaceholder title="More" /> : null}

@@ -82,6 +82,87 @@ export interface StudentAccountSettingsAddEducationFormValues {
   description: string;
 }
 
+export interface StudentAccountSettingsCourseFormOptions {
+  courses: StudentAccountSettingsSelectOption[];
+  months: StudentAccountSettingsSelectOption[];
+  years: StudentAccountSettingsSelectOption[];
+}
+
+export interface StudentAccountSettingsAddCourseFormValues {
+  courseName: string;
+  startMonth: string;
+  startYear: string;
+  isOngoing: boolean;
+  description: string;
+}
+
+export interface StudentAccountSettingsSkillsFormOptions {
+  availableSkills: string[];
+  maxSkills: number;
+}
+
+export interface StudentAccountSettingsJobExperienceItem {
+  id: string;
+  title: string;
+  dateRange: string;
+  description: string;
+}
+
+export type StudentAccountSettingsLinkPlatform =
+  | "portfolio"
+  | "linkedin"
+  | "facebook"
+  | "dribbble"
+  | "instagram"
+  | "custom";
+
+export interface StudentAccountSettingsProfileLink {
+  id: string;
+  platform: StudentAccountSettingsLinkPlatform;
+  label: string;
+  url: string;
+}
+
+export interface StudentAccountSettingsJobExperienceData {
+  experiences: StudentAccountSettingsJobExperienceItem[];
+  links: StudentAccountSettingsProfileLink[];
+  maxCustomLinks: number;
+}
+
+export interface StudentAccountSettingsJobExperienceFormOptions {
+  jobTitles: StudentAccountSettingsSelectOption[];
+  companies: StudentAccountSettingsSelectOption[];
+  months: StudentAccountSettingsSelectOption[];
+  years: StudentAccountSettingsSelectOption[];
+}
+
+export interface StudentAccountSettingsAddJobExperienceFormValues {
+  jobTitle: string;
+  company: string;
+  startMonth: string;
+  startYear: string;
+  endMonth: string;
+  endYear: string;
+  currentlyWorking: boolean;
+  description: string;
+}
+
+export interface StudentAccountSettingsPasswordData {
+  lastChangedLabel: string;
+  changePasswordHref: string;
+}
+
+export interface StudentAccountSettingsNotificationData {
+  description: string;
+  emailNotification: boolean;
+  pushNotification: boolean;
+}
+
+export interface StudentAccountSettingsPreferencesData {
+  password: StudentAccountSettingsPasswordData;
+  notification: StudentAccountSettingsNotificationData;
+}
+
 export interface StudentAccountSettingsPageData {
   title: string;
   subtitle: string;
@@ -93,4 +174,9 @@ export interface StudentAccountSettingsPageData {
   countryOptions: StudentAccountSettingsSelectOption[];
   educationData: StudentAccountSettingsEducationData;
   educationFormOptions: StudentAccountSettingsEducationFormOptions;
+  courseFormOptions: StudentAccountSettingsCourseFormOptions;
+  skillsFormOptions: StudentAccountSettingsSkillsFormOptions;
+  jobExperienceData: StudentAccountSettingsJobExperienceData;
+  jobExperienceFormOptions: StudentAccountSettingsJobExperienceFormOptions;
+  preferencesData: StudentAccountSettingsPreferencesData;
 }

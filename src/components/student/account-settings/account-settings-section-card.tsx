@@ -3,14 +3,16 @@ import { cn } from "@/utils";
 
 interface AccountSettingsSectionCardProps {
   title: string;
-  onAddNew?: () => void;
+  actionLabel?: string;
+  onAction?: () => void;
   className?: string;
   children: ReactNode;
 }
 
 export function AccountSettingsSectionCard({
   title,
-  onAddNew,
+  actionLabel = "Add New",
+  onAction,
   className,
   children,
 }: AccountSettingsSectionCardProps) {
@@ -23,13 +25,15 @@ export function AccountSettingsSectionCard({
     >
       <div className="flex items-start justify-between gap-4">
         <h2 className="text-[18px] font-bold text-[#1a1a1a] sm:text-[20px]">{title}</h2>
-        <button
-          type="button"
-          onClick={onAddNew}
-          className="shrink-0 text-[13px] font-semibold text-[#1a1a1a] underline underline-offset-4 transition-opacity hover:opacity-70 sm:text-[14px]"
-        >
-          Add New
-        </button>
+        {onAction ? (
+          <button
+            type="button"
+            onClick={onAction}
+            className="shrink-0 text-[13px] font-semibold text-[#1a1a1a] underline underline-offset-4 transition-opacity hover:opacity-70 sm:text-[14px]"
+          >
+            {actionLabel}
+          </button>
+        ) : null}
       </div>
 
       <div className="mt-6">{children}</div>
