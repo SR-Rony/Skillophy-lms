@@ -37,11 +37,41 @@ export interface StudentResourcesEmptyState {
   actionHref: string;
 }
 
+export interface StudentSkillBookItem {
+  id: string;
+  courseSlug: string;
+  title: string;
+  author: string;
+  coverImage: string;
+  downloadUrl: string;
+}
+
+export interface StudentAcademicGuideItem {
+  id: string;
+  courseSlug: string;
+  title: string;
+  subtitle: string;
+  coverImage: string;
+  downloadUrl: string;
+}
+
+export interface StudentResourceNoteItem {
+  id: string;
+  courseSlug: string;
+  timestamp: string;
+  lessonTitle: string;
+  topicTitle: string;
+  content: string;
+}
+
 export interface StudentResourcesTab {
   id: StudentResourcesTabId;
   label: string;
   emptyState: StudentResourcesEmptyState;
   topics: StudentLearningMaterialTopic[];
+  skillBooks: StudentSkillBookItem[];
+  academicGuides: StudentAcademicGuideItem[];
+  notes: StudentResourceNoteItem[];
 }
 
 export interface StudentResourcesPageData {
