@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
+import { Camera } from "lucide-react";
 import { MyCoursesSeamBackground } from "@/components/student/my-courses-seam-background";
 import { Container } from "@/components/shared";
 import type {
@@ -15,6 +17,7 @@ interface AccountSettingsHeroProps {
   tabs: StudentAccountSettingsTab[];
   activeTab: StudentAccountSettingsTabId;
   onTabChange: (tab: StudentAccountSettingsTabId) => void;
+  isProfileEditing?: boolean;
   className?: string;
 }
 
@@ -23,6 +26,7 @@ export function AccountSettingsHero({
   tabs,
   activeTab,
   onTabChange,
+  isProfileEditing = false,
   className,
 }: AccountSettingsHeroProps) {
   return (
@@ -37,13 +41,27 @@ export function AccountSettingsHero({
       <Container className="relative z-10">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
           <div className="flex items-center gap-4 sm:gap-5">
-            <div
-              className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-full bg-[#fde7e3] sm:h-[80px] sm:w-[80px]"
-              aria-hidden
-            >
-              <span className="font-serif text-[22px] font-bold tracking-wide text-[#8b2942] sm:text-[24px]">
-                {profile.initials}
-              </span>
+            <div className="relative shrink-0">
+              <div className="relative h-[80px] w-[80px] overflow-hidden rounded-full ring-2 ring-white sm:h-[88px] sm:w-[88px]">
+                <Image
+                  src={profile.avatarUrl}
+                  alt={profile.fullName}
+                  fill
+                  unoptimized
+                  className="object-cover"
+                  sizes="88px"
+                />
+              </div>
+
+              {isProfileEditing ? (
+                <button
+                  type="button"
+                  aria-label="Change profile photo"
+                  className="absolute -bottom-0.5 -left-0.5 flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-[#1a1a1a] text-white shadow-sm transition-opacity hover:opacity-90 sm:h-9 sm:w-9"
+                >
+                  <Camera className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden />
+                </button>
+              ) : null}
             </div>
 
             <div className="min-w-0">
@@ -56,20 +74,22 @@ export function AccountSettingsHero({
             </div>
           </div>
 
-          <div className="flex shrink-0 flex-wrap items-center gap-3">
-            <Link
-              href={profile.previewUrl}
-              className="inline-flex min-w-[110px] items-center justify-center rounded-xl border border-[#1a1a1a] bg-white px-5 py-3 text-[13px] font-semibold text-[#1a1a1a] transition-colors hover:bg-[#fafafa] sm:min-w-[120px] sm:text-[14px]"
-            >
-              Preview
-            </Link>
-            <Link
-              href={profile.shareCvUrl}
-              className="inline-flex min-w-[110px] items-center justify-center rounded-xl bg-primary px-5 py-3 text-[13px] font-semibold text-white transition-opacity hover:opacity-90 sm:min-w-[120px] sm:text-[14px]"
-            >
-              Share CV
-            </Link>
-          </div>
+          {!isProfileEditing ? (
+            <div className="flex shrink-0 flex-wrap items-center gap-3">
+              <Link
+                href={profile.previewUrl}
+                className="inline-flex min-w-[110px] items-center justify-center rounded-xl border border-[#1a1a1a] bg-white px-5 py-3 text-[13px] font-semibold text-[#1a1a1a] transition-colors hover:bg-[#fafafa] sm:min-w-[120px] sm:text-[14px]"
+              >
+                Preview
+              </Link>
+              <Link
+                href={profile.shareCvUrl}
+                className="inline-flex min-w-[110px] items-center justify-center rounded-xl bg-primary px-5 py-3 text-[13px] font-semibold text-white transition-opacity hover:opacity-90 sm:min-w-[120px] sm:text-[14px]"
+              >
+                Share CV
+              </Link>
+            </div>
+          ) : null}
         </div>
 
         <nav

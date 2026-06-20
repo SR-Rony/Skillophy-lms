@@ -7,6 +7,7 @@ import type {
   StudentAccountSettingsTabId,
 } from "@/types/student-account-settings.types";
 import { AccountSettingsHero } from "./account-settings-hero";
+import { AccountSettingsEducationView } from "./account-settings-education-view";
 import { AccountSettingsProfileView } from "./account-settings-profile-view";
 import { AccountSettingsTabPlaceholder } from "./account-settings-tab-placeholder";
 
@@ -17,6 +18,14 @@ interface AccountSettingsContentProps {
 export function AccountSettingsContent({ data }: AccountSettingsContentProps) {
   const defaultTab = data.tabs[0]?.id ?? "my-profile";
   const [activeTab, setActiveTab] = useState<StudentAccountSettingsTabId>(defaultTab);
+  const [isProfileEditing, setIsProfileEditing] = useState(false);
+
+  function handleTabChange(tab: StudentAccountSettingsTabId) {
+    setActiveTab(tab);
+    if (tab !== "my-profile") {
+      setIsProfileEditing(false);
+    }
+  }
 
   return (
     <div className="bg-white">
@@ -24,7 +33,8 @@ export function AccountSettingsContent({ data }: AccountSettingsContentProps) {
         profile={data.profile}
         tabs={data.tabs}
         activeTab={activeTab}
-        onTabChange={setActiveTab}
+        onTabChange={handleTabChange}
+        isProfileEditing={isProfileEditing}
       />
 
       <Container className="bg-white py-6 md:py-8 lg:py-10">
@@ -36,11 +46,16 @@ export function AccountSettingsContent({ data }: AccountSettingsContentProps) {
               genderOptions: data.genderOptions,
               countryOptions: data.countryOptions,
             }}
+            isProfileEditing={isProfileEditing}
+            onProfileEditingChange={setIsProfileEditing}
           />
         ) : null}
 
         {activeTab === "education" ? (
-          <AccountSettingsTabPlaceholder title="Educational Qualification" />
+          <AccountSettingsEducationView
+            data={data.educationData}
+            formOptions={data.educationFormOptions}
+          />
         ) : null}
 
         {activeTab === "job-experience" ? (

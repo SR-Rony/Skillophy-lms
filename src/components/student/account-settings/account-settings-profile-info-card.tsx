@@ -10,6 +10,7 @@ import {
   AccountSettingsField,
   accountSettingsInputClassName,
   accountSettingsSelectClassName,
+  accountSettingsTextareaClassName,
 } from "./account-settings-field";
 import { cn } from "@/utils";
 
@@ -17,6 +18,8 @@ interface AccountSettingsProfileInfoCardProps {
   profileInfo: StudentAccountSettingsProfileInfo;
   genderOptions: StudentAccountSettingsSelectOption[];
   countryOptions: StudentAccountSettingsSelectOption[];
+  isEditing: boolean;
+  onEditingChange: (isEditing: boolean) => void;
   className?: string;
 }
 
@@ -24,13 +27,30 @@ export function AccountSettingsProfileInfoCard({
   profileInfo,
   genderOptions,
   countryOptions,
+  isEditing,
+  onEditingChange,
   className,
 }: AccountSettingsProfileInfoCardProps) {
-  const [isEditing, setIsEditing] = useState(false);
   const [form, setForm] = useState(profileInfo);
+  const [savedForm, setSavedForm] = useState(profileInfo);
 
   function handleChange(field: keyof StudentAccountSettingsProfileInfo, value: string) {
     setForm((current) => ({ ...current, [field]: value }));
+  }
+
+  function handleEdit() {
+    setForm(savedForm);
+    onEditingChange(true);
+  }
+
+  function handleCancel() {
+    setForm(savedForm);
+    onEditingChange(false);
+  }
+
+  function handleSave() {
+    setSavedForm(form);
+    onEditingChange(false);
   }
 
   return (
@@ -42,13 +62,33 @@ export function AccountSettingsProfileInfoCard({
     >
       <div className="flex items-start justify-between gap-4">
         <h2 className="text-[18px] font-bold text-[#1a1a1a] sm:text-[20px]">Profile Info</h2>
-        <button
-          type="button"
-          onClick={() => setIsEditing((current) => !current)}
-          className="shrink-0 text-[13px] font-semibold text-[#1a1a1a] underline underline-offset-4 transition-opacity hover:opacity-70 sm:text-[14px]"
-        >
-          {isEditing ? "Save Info" : "Edit Info"}
-        </button>
+
+        {isEditing ? (
+          <div className="flex shrink-0 flex-wrap items-center justify-end gap-2.5 sm:gap-3">
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="inline-flex min-w-[88px] items-center justify-center rounded-xl border border-[#1a1a1a] bg-white px-4 py-2.5 text-[13px] font-semibold text-[#1a1a1a] transition-colors hover:bg-[#fafafa] sm:min-w-[96px] sm:px-5 sm:text-[14px]"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleSave}
+              className="inline-flex min-w-[96px] items-center justify-center rounded-xl bg-primary px-4 py-2.5 text-[13px] font-semibold text-white transition-opacity hover:opacity-90 sm:min-w-[104px] sm:px-5 sm:text-[14px]"
+            >
+              Save Info
+            </button>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={handleEdit}
+            className="shrink-0 text-[13px] font-semibold text-[#1a1a1a] underline underline-offset-4 transition-opacity hover:opacity-70 sm:text-[14px]"
+          >
+            Edit Info
+          </button>
+        )}
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-5">
@@ -129,14 +169,17 @@ export function AccountSettingsProfileInfoCard({
           />
         </AccountSettingsField>
 
-        <AccountSettingsField label="Address">
-          <input
-            type="text"
+        <AccountSettingsField label="Address" className="sm:col-span-2">
+          <textarea
             value={form.address}
             onChange={(event) => handleChange("address", event.target.value)}
             placeholder="Write your address"
             disabled={!isEditing}
-            className={accountSettingsInputClassName}
+            rows={3}
+            className={cn(
+              accountSettingsTextareaClassName,
+              "min-h-[88px] sm:min-h-[96px]"
+            )}
           />
         </AccountSettingsField>
 
