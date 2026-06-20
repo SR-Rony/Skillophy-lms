@@ -54,6 +54,10 @@ function getLessonHref(lesson: StudentCourseCurriculumLesson, courseSlug?: strin
     return ROUTES.student.courseResources(courseSlug, lesson.id);
   }
 
+  if (lesson.type === "quiz") {
+    return ROUTES.student.courseQuiz(courseSlug, lesson.id);
+  }
+
   return undefined;
 }
 

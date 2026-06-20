@@ -101,6 +101,26 @@ const resourceSessions: Record<string, Record<string, StudentLiveResourceSession
         },
       ],
     },
+    "live-l15": {
+      resourceId: "live-l15",
+      slug: "hsc-25-online-batch",
+      title: "Research basics",
+      topicTitle: "Integrating research into the design",
+      linkedLessonId: "live-l15",
+      previousResource: {
+        id: "live-l14",
+        title: "Quiz on how UX designers think across platforms",
+        href: ROUTES.student.courseQuiz("hsc-25-online-batch", "live-l14"),
+      },
+      items: [
+        {
+          id: "res-pdf-4",
+          title: "Research basics handout.pdf",
+          fileType: "pdf",
+          downloadUrl: "#",
+        },
+      ],
+    },
   },
 };
 
