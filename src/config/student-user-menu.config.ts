@@ -30,7 +30,7 @@ export const studentUserMenuItems: StudentUserMenuItem[] = [
   { label: "My Resources", href: ROUTES.student.resources, icon: FileText },
   { label: "Model Test", href: ROUTES.student.assignments, icon: ClipboardPenLine },
   { label: "Books", href: ROUTES.student.wishlist, icon: BookOpen },
-  { label: "My Workshop", href: ROUTES.student.live, icon: FlaskConical },
+  { label: "My Workshop", href: ROUTES.student.workshop, icon: FlaskConical },
   { label: "Messages", href: ROUTES.student.chat, icon: MessageSquare },
   { label: "Payment History", href: ROUTES.student.payments, icon: Wallet },
   { label: "My Certificate", href: ROUTES.student.certificates, icon: Award },

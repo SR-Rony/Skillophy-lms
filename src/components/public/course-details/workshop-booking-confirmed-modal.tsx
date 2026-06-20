@@ -16,7 +16,7 @@ export function WorkshopBookingConfirmedModal({
   open,
   onOpenChange,
   scheduleLabel,
-  goToWorkshopHref = ROUTES.student.assignments,
+  goToWorkshopHref = ROUTES.student.workshop,
 }: WorkshopBookingConfirmedModalProps) {
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>

@@ -57,6 +57,7 @@ export const ROUTES = {
       `/student/courses/${slug}/quiz/answers?quiz=${quizId}`,
     schedule: "/student/schedule",
     resources: "/student/resources",
+    workshop: "/student/workshop",
     live: "/student/live",
     assignments: "/student/assignments",
     certificates: "/student/certificates",

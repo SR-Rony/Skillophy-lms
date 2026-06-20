@@ -17,6 +17,7 @@ export { StudentCourseDetailsPage } from "./course-details";
 export { MyCoursesSeamBackground } from "./my-courses-seam-background";
 export { ClassSchedulePage } from "./class-schedule";
 export { MyResourcesPage } from "./my-resources";
+export { MyWorkshopPage } from "./my-workshop";
 export { StudentUserMenu } from "./student-user-menu";
 export { StudentUserMenuNav } from "./student-user-menu-nav";
 export { StudentNavbarActions } from "./student-navbar-actions";

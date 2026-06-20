@@ -384,7 +384,7 @@ export const courseDetailsBySlug: Partial<
       date: { value: "Sep 24", label: "Date" },
       time: { value: "10:30 AM", label: "Time" },
       scheduleLabel: "Sep 24, 2024 at 10:30 AM",
-      goToWorkshopHref: "/student/assignments",
+      goToWorkshopHref: "/student/workshop",
       contact: {
         phone: "165387",
         hours: "10 am to 10 pm",
