@@ -1,16 +1,16 @@
-import { Container } from "@/components/shared";
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { StudentMessagesPage } from "@/components/student/student-messages";
+import { studentMessagesService } from "@/services/student-messages.service";
 
-export const metadata = { title: "Messages" };
+export async function generateMetadata() {
+  const data = await studentMessagesService.getMessages();
 
-export default function StudentChatPage() {
-  return (
-    <Container className="py-8">
-      <ModulePlaceholder
-        title="Messages"
-        description="Chat with instructors and peers."
-        feature="chat"
-      />
-    </Container>
-  );
+  return {
+    title: data.title,
+  };
+}
+
+export default async function StudentChatPage() {
+  const data = await studentMessagesService.getMessages();
+
+  return <StudentMessagesPage data={data} />;
 }

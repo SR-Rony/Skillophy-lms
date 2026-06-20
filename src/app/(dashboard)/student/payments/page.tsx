@@ -1,16 +1,16 @@
-import { Container } from "@/components/shared";
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { PaymentHistoryPage } from "@/components/student/payment-history";
+import { studentPaymentHistoryService } from "@/services/student-payment-history.service";
 
-export const metadata = { title: "Payments" };
+export async function generateMetadata() {
+  const data = await studentPaymentHistoryService.getPaymentHistory();
 
-export default function StudentPaymentsPage() {
-  return (
-    <Container className="py-8">
-      <ModulePlaceholder
-        title="Payments"
-        description="Billing history and payment methods."
-        feature="payments"
-      />
-    </Container>
-  );
+  return {
+    title: data.title,
+  };
+}
+
+export default async function StudentPaymentsPage() {
+  const data = await studentPaymentHistoryService.getPaymentHistory();
+
+  return <PaymentHistoryPage data={data} />;
 }
