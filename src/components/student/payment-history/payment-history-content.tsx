@@ -2,6 +2,7 @@ import { Container } from "@/components/shared";
 import type { StudentPaymentHistoryPageData } from "@/types/student-payment-history.types";
 import { PaymentHistoryEmptyState } from "./payment-history-empty-state";
 import { PaymentHistoryHero } from "./payment-history-hero";
+import { PaymentHistoryTable } from "./payment-history-table";
 
 interface PaymentHistoryContentProps {
   data: StudentPaymentHistoryPageData;
@@ -16,7 +17,7 @@ export function PaymentHistoryContent({ data }: PaymentHistoryContentProps) {
 
       <Container className="bg-white py-6 md:py-8 lg:py-10">
         {hasPayments ? (
-          <div>{/* Payment list — wire up when API is ready */}</div>
+          <PaymentHistoryTable payments={data.payments} />
         ) : (
           <PaymentHistoryEmptyState emptyState={data.emptyState} />
         )}
