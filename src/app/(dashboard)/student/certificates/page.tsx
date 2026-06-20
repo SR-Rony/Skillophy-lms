@@ -1,16 +1,16 @@
-import { Container } from "@/components/shared";
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { MyCertificatePage } from "@/components/student/my-certificate";
+import { studentCertificateService } from "@/services/student-certificate.service";
 
-export const metadata = { title: "Certificates" };
+export async function generateMetadata() {
+  const data = await studentCertificateService.getCertificates();
 
-export default function StudentCertificatesPage() {
-  return (
-    <Container className="py-8">
-      <ModulePlaceholder
-        title="Certificates"
-        description="Download and share your achievements."
-        feature="certificates"
-      />
-    </Container>
-  );
+  return {
+    title: data.title,
+  };
+}
+
+export default async function StudentCertificatesPage() {
+  const data = await studentCertificateService.getCertificates();
+
+  return <MyCertificatePage data={data} />;
 }

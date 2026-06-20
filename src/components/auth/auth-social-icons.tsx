@@ -33,4 +33,16 @@ function FacebookIcon({ className }: { className?: string }) {
   );
 }
 
-export { GoogleIcon, FacebookIcon };
+function LinkedInBrandIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 18 18" fill="none" aria-hidden>
+      <rect width="18" height="18" rx="2.5" fill="#0A66C2" />
+      <path
+        fill="#FFFFFF"
+        d="M4.98 7.5h1.76v6.76H4.98V7.5ZM5.86 4.86a1.02 1.02 0 1 1-.001 2.04 1.02 1.02 0 0 1 .001-2.04ZM13.02 14.26h-1.76V10.4c0-.66 0-1.51-.93-1.51-.94 0-1.08.73-1.08 1.57v3.8H7.74V7.5h1.69v.78h.02c.31-.58.95-1.2 1.95-1.2 2.08 0 2.46 1.37 2.46 3.15v4.03Z"
+      />
+    </svg>
+  );
+}
+
+export { GoogleIcon, FacebookIcon, LinkedInBrandIcon };
