@@ -1,13 +1,18 @@
 export type NavIconName =
   | "analytics"
   | "book"
+  | "calendar"
   | "card"
   | "dashboard"
   | "graduation"
   | "messages"
+  | "resources"
   | "settings"
+  | "support"
   | "users"
-  | "video";
+  | "video"
+  | "wallet"
+  | "workshop";
 
 export interface NavItem {
   title: string;

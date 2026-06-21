@@ -14,6 +14,7 @@ export function middleware() {
 export const config = {
   matcher: [
     "/student/:path*",
+    "/teacher",
     "/teacher/:path*",
     "/admin/:path*",
   ],

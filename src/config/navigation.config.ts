@@ -1,4 +1,5 @@
 import type { NavItem } from "@/types/navigation.types";
+import { ROUTES } from "@/constants";
 
 /** Public marketing site navigation */
 export const publicNav: NavItem[] = [
@@ -24,13 +25,18 @@ export const studentNav: NavItem[] = [
 
 /** Teacher dashboard sidebar */
 export const teacherNav: NavItem[] = [
-  { title: "Overview", href: "/teacher", iconName: "dashboard" },
-  { title: "Courses", href: "/teacher/courses", iconName: "book" },
-  { title: "Live Classes", href: "/teacher/live", iconName: "video" },
-  { title: "Students", href: "/teacher/students", iconName: "users" },
-  { title: "Analytics", href: "/teacher/analytics", iconName: "analytics" },
-  { title: "Messages", href: "/teacher/chat", iconName: "messages" },
-  { title: "Settings", href: "/teacher/settings", iconName: "settings" },
+  { title: "Dashboard", href: ROUTES.teacher.root, iconName: "dashboard" },
+  { title: "My Courses", href: ROUTES.teacher.courses, iconName: "book" },
+  { title: "Class Schedule", href: ROUTES.teacher.schedule, iconName: "calendar" },
+  { title: "Course Resources", href: ROUTES.teacher.resources, iconName: "resources" },
+  { title: "My Workshop", href: ROUTES.teacher.workshop, iconName: "workshop" },
+  { title: "Messages", href: ROUTES.teacher.chat, iconName: "messages" },
+  { title: "Payment History", href: ROUTES.teacher.payments, iconName: "card" },
+];
+
+export const teacherFooterNav: NavItem[] = [
+  { title: "Account Settings", href: ROUTES.teacher.settings, iconName: "settings" },
+  { title: "Support", href: ROUTES.teacher.support, iconName: "support" },
 ];
 
 /** Admin dashboard sidebar */

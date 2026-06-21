@@ -74,11 +74,16 @@ export const ROUTES = {
   teacher: {
     root: "/teacher",
     courses: "/teacher/courses",
+    schedule: "/teacher/schedule",
+    resources: "/teacher/resources",
+    workshop: "/teacher/workshop",
+    chat: "/teacher/chat",
+    payments: "/teacher/payments",
+    settings: "/teacher/settings",
+    support: "/teacher/support",
     live: "/teacher/live",
     students: "/teacher/students",
     analytics: "/teacher/analytics",
-    chat: "/teacher/chat",
-    settings: "/teacher/settings",
   },
   admin: {
     root: "/admin",
