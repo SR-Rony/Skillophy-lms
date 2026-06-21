@@ -2,7 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bell, MessageSquare, ShoppingCart } from "lucide-react";
+import { MessageSquare, ShoppingCart } from "lucide-react";
+import { StudentNotificationDropdown } from "@/components/student/notifications";
+import {
+  getStudentNotificationDropdownGroupsForNavbar,
+  getStudentNotificationDropdownUnreadCount,
+} from "@/data/mock/student-notifications.mock";
 import { ROUTES } from "@/constants";
 import { StudentUserMenu } from "@/components/student/student-user-menu";
 import { cn } from "@/utils";
@@ -47,9 +52,10 @@ export function StudentNavbarActions() {
         <MessageSquare className="h-5 w-5" strokeWidth={1.75} />
       </NavIconBadge>
 
-      <NavIconBadge href={ROUTES.student.root} label="Notifications" count={2}>
-        <Bell className="h-5 w-5" strokeWidth={1.75} />
-      </NavIconBadge>
+      <StudentNotificationDropdown
+        notifications={getStudentNotificationDropdownGroupsForNavbar()}
+        unreadCount={getStudentNotificationDropdownUnreadCount()}
+      />
 
       <Link
         href={ROUTES.student.courses}

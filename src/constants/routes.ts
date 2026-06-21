@@ -65,6 +65,7 @@ export const ROUTES = {
     assignments: "/student/assignments",
     certificates: "/student/certificates",
     wishlist: "/student/wishlist",
+    notifications: "/student/notifications",
     chat: "/student/chat",
     payments: "/student/payments",
     settings: "/student/settings",

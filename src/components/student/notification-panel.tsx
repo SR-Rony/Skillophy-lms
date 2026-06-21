@@ -1,7 +1,7 @@
 import { Heading } from "@/components/shared/heading";
 import Link from "next/link";
-import { Bell, FileText, MessageCircleQuestion, Radio } from "lucide-react";
-import { DashboardEmptyState } from "@/components/shared/dashboard-empty-state";
+import { FileText, MessageCircleQuestion, Radio } from "lucide-react";
+import { StudentNotificationEmptyState } from "@/components/student/notifications/student-notifications-shared";
 import type {
   DashboardNotification,
   DashboardNotificationType,
@@ -98,7 +98,7 @@ export function NotificationPanel({ notifications, className }: NotificationPane
         <Heading as="h2" variant="dashboard-panel">Notifications</Heading>
         {hasNotifications && (
           <Link
-            href={ROUTES.student.root}
+            href={ROUTES.student.notifications}
             className="text-[13px] font-semibold text-primary underline underline-offset-2 hover:text-primary/80"
           >
             View All
@@ -113,16 +113,7 @@ export function NotificationPanel({ notifications, className }: NotificationPane
           ))}
         </div>
       ) : (
-        <div className="flex flex-1 flex-col items-center justify-center px-6 py-12">
-          <DashboardEmptyState
-            icon={
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#fff8e6]">
-                <Bell className="h-8 w-8 fill-[#ffca18] text-[#ffca18]" strokeWidth={1.5} />
-              </div>
-            }
-            title="You have no notification at this time."
-          />
-        </div>
+        <StudentNotificationEmptyState compact />
       )}
     </aside>
   );

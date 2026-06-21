@@ -158,7 +158,7 @@ export function MobileNavbarDrawer({
                     My Courses
                   </Link>
                   <Link
-                    href={ROUTES.student.chat}
+                    href={ROUTES.student.notifications}
                     onClick={closeDrawer}
                     className="block text-[15px] font-medium text-[#25201f]"
                   >
