@@ -76,3 +76,57 @@
     @apply bg-background text-foreground antialiased;
   }
 }
+
+@keyframes teacher-drawer-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes teacher-drawer-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes teacher-drawer-slide-in {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes teacher-drawer-slide-out {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@layer utilities {
+  .teacher-side-drawer-overlay[data-state="open"] {
+    animation: teacher-drawer-fade-in 420ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .teacher-side-drawer-overlay[data-state="closed"] {
+    animation: teacher-drawer-fade-out 320ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .teacher-side-drawer-panel[data-state="open"] {
+    animation: teacher-drawer-slide-in 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .teacher-side-drawer-panel[data-state="closed"] {
+    animation: teacher-drawer-slide-out 380ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}

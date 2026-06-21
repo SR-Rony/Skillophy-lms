@@ -84,6 +84,68 @@ export interface TeacherCourseStudentProgressTabData {
   leaderboard: CourseLeaderboardData;
 }
 
+export type TeacherCourseRecordingSortId =
+  | "default"
+  | "class-date"
+  | "topic-asc"
+  | "topic-desc";
+
+export interface TeacherCourseRecordingSortOption {
+  id: TeacherCourseRecordingSortId;
+  label: string;
+}
+
+export interface TeacherCourseClassRecording {
+  id: string;
+  title: string;
+  classDate: string;
+  classDateIso: string;
+  classTime: string;
+  duration: string;
+  recordingUrl: string;
+}
+
+export interface TeacherCourseRecordingTopicGroup {
+  id: string;
+  topicLabel: string;
+  topicTitle: string;
+  recordings: TeacherCourseClassRecording[];
+}
+
+export interface TeacherCourseClassRecordingsTabData {
+  sortOptions: TeacherCourseRecordingSortOption[];
+  topicGroups: TeacherCourseRecordingTopicGroup[];
+}
+
+export type TeacherCourseResourceSortId = "default" | "topic-asc" | "topic-desc";
+
+export type TeacherCourseResourceFileType = "pdf" | "ppt" | "txt" | "zip";
+
+export interface TeacherCourseResourceSortOption {
+  id: TeacherCourseResourceSortId;
+  label: string;
+}
+
+export interface TeacherCourseResourceItem {
+  id: string;
+  title: string;
+  fileType: TeacherCourseResourceFileType;
+  downloadUrl?: string;
+}
+
+export interface TeacherCourseResourceTopicGroup {
+  id: string;
+  topicLabel: string;
+  topicTitle: string;
+  materials: TeacherCourseResourceItem[];
+}
+
+export interface TeacherCourseResourcesTabData {
+  sortOptions: TeacherCourseResourceSortOption[];
+  topicGroups: TeacherCourseResourceTopicGroup[];
+  addResourcesLabel: string;
+}
+
 export interface TeacherCourseDetailsData {
   id: string;
   slug: string;
@@ -97,6 +159,8 @@ export interface TeacherCourseDetailsData {
   assignmentsSummary: TeacherCourseAssignmentsSummary | null;
   studentProgress: TeacherCourseStudentProgressStats;
   studentProgressTab: TeacherCourseStudentProgressTabData;
+  classRecordings: TeacherCourseClassRecordingsTabData;
+  resources: TeacherCourseResourcesTabData;
   assignments: TeacherCourseAssignmentsTabData;
   curriculum: StudentCourseCurriculumModule[];
   supportPhone: string;

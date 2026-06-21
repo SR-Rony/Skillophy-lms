@@ -270,6 +270,159 @@ const teacherTopicAttendanceMock = [
   { topic: 12, attendancePercent: 68 },
 ];
 
+const teacherClassRecordingsMock = {
+  sortOptions: [
+    { id: "default" as const, label: "Default" },
+    { id: "class-date" as const, label: "Class Date" },
+    { id: "topic-asc" as const, label: "Topic in Ascending" },
+    { id: "topic-desc" as const, label: "Topic in Descending" },
+  ],
+  topicGroups: [
+    {
+      id: "recordings-topic-1",
+      topicLabel: "Topic 1",
+      topicTitle: "Introducing UX design",
+      recordings: [
+        {
+          id: "recording-1-1",
+          title: "Design for good user experience",
+          classDate: "May 13, 2024",
+          classDateIso: "2024-05-13",
+          classTime: "Sunday, 9:00 PM",
+          duration: "2hrs 32 mins",
+          recordingUrl: ROUTES.teacher.courseLive("hsc-25-online-batch", "tm1-l3"),
+        },
+        {
+          id: "recording-1-2",
+          title: "Work in a cross-functional team",
+          classDate: "May 13, 2024",
+          classDateIso: "2024-05-13",
+          classTime: "Sunday, 9:00 PM",
+          duration: "2hrs 32 mins",
+          recordingUrl: ROUTES.teacher.courseLive("hsc-25-online-batch", "tm1-l4"),
+        },
+      ],
+    },
+    {
+      id: "recordings-topic-2",
+      topicLabel: "Topic 2",
+      topicTitle: "Design across platforms",
+      recordings: [
+        {
+          id: "recording-2-1",
+          title: "Design for different platforms",
+          classDate: "May 13, 2024",
+          classDateIso: "2024-05-13",
+          classTime: "Sunday, 9:00 PM",
+          duration: "2hrs 32 mins",
+          recordingUrl: ROUTES.teacher.courseLive("hsc-25-online-batch", "tm2-l1"),
+        },
+        {
+          id: "recording-2-2",
+          title: "Designing cross-platform experiences & the Four Cs",
+          classDate: "May 13, 2024",
+          classDateIso: "2024-05-13",
+          classTime: "Sunday, 9:00 PM",
+          duration: "2hrs 32 mins",
+          recordingUrl: ROUTES.teacher.courseLive("hsc-25-online-batch", "tm2-l2"),
+        },
+      ],
+    },
+  ],
+};
+
+const teacherCourseResourcesMock = {
+  addResourcesLabel: "Add Resources",
+  sortOptions: [
+    { id: "default" as const, label: "Default" },
+    { id: "topic-asc" as const, label: "Topic in Ascending" },
+    { id: "topic-desc" as const, label: "Topic in Descending" },
+  ],
+  topicGroups: [
+    {
+      id: "resources-topic-1",
+      topicLabel: "Topic 1",
+      topicTitle: "Introducing UX design",
+      materials: [
+        {
+          id: "resource-1-1",
+          title: "Hand note of the basics of user experience design.pdf",
+          fileType: "pdf" as const,
+          downloadUrl: "#",
+        },
+        {
+          id: "resource-1-2",
+          title: "Hand note of the basics of user experience design.ppt",
+          fileType: "ppt" as const,
+          downloadUrl: "#",
+        },
+        {
+          id: "resource-1-3",
+          title: "Hand note of the basics of user experience design.txt",
+          fileType: "txt" as const,
+          downloadUrl: "#",
+        },
+        {
+          id: "resource-1-4",
+          title: "Hand note of the basics of user experience design.zip",
+          fileType: "zip" as const,
+          downloadUrl: "#",
+        },
+      ],
+    },
+    {
+      id: "resources-topic-2",
+      topicLabel: "Topic 2.",
+      topicTitle: "Talk like a UX designer",
+      materials: [
+        {
+          id: "resource-2-1",
+          title: "Hand note of the basics of user experience design.pdf",
+          fileType: "pdf" as const,
+          downloadUrl: "#",
+        },
+        {
+          id: "resource-2-2",
+          title: "Hand note of the basics of user experience design.ppt",
+          fileType: "ppt" as const,
+          downloadUrl: "#",
+        },
+        {
+          id: "resource-2-3",
+          title: "Hand note of the basics of user experience design.txt",
+          fileType: "txt" as const,
+          downloadUrl: "#",
+        },
+        {
+          id: "resource-2-4",
+          title: "Hand note of the basics of user experience design.zip",
+          fileType: "zip" as const,
+          downloadUrl: "#",
+        },
+      ],
+    },
+    {
+      id: "resources-topic-3",
+      topicLabel: "Topic 3",
+      topicTitle: "Design Across Platforms",
+      materials: [
+        {
+          id: "resource-3-1",
+          title: "Hand note of the basics of user experience design.pdf",
+          fileType: "pdf" as const,
+          downloadUrl: "#",
+        },
+        {
+          id: "resource-3-2",
+          title: "Hand note of the basics of user experience design.ppt",
+          fileType: "ppt" as const,
+          downloadUrl: "#",
+        },
+      ],
+    },
+  ],
+};
+
 const teacherCourseDetailsBySlug: Record<string, TeacherCourseDetailsData> = {
   // Set assignments.submissions to [] for empty assignment tab.
   "hsc-25-online-batch": {
@@ -302,6 +455,8 @@ const teacherCourseDetailsBySlug: Record<string, TeacherCourseDetailsData> = {
       topicAttendance: teacherTopicAttendanceMock,
       leaderboard: teacherCourseLeaderboardMock,
     },
+    classRecordings: teacherClassRecordingsMock,
+    resources: teacherCourseResourcesMock,
     assignments: {
       submissions: buildTeacherAssignmentSubmissions(),
       emptyState: teacherAssignmentEmptyState,

@@ -70,9 +70,11 @@ export function TeacherCourseDetailsPage({ course }: TeacherCourseDetailsPagePro
 
       {activeTab === "student-progress" && <TeacherCourseStudentProgressTab course={course} />}
 
-      {activeTab === "class-recordings" && <TeacherCourseClassRecordingsTab />}
+      {activeTab === "class-recordings" && (
+        <TeacherCourseClassRecordingsTab data={course.classRecordings} />
+      )}
 
-      {activeTab === "resources" && <TeacherCourseResourcesTab />}
+      {activeTab === "resources" && <TeacherCourseResourcesTab data={course.resources} />}
 
       {activeTab === "student-feedback" && <TeacherCourseStudentFeedbackTab />}
 
