@@ -241,7 +241,7 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
     progressTopics: ongoingProgressTopics,
     continueLesson: {
       title: "The basics of user experience design",
-      href: "#lesson-basics-ux",
+      href: ROUTES.student.courseLesson("foundations-user-experience-ux-design", "lesson-basics-ux"),
     },
     curriculum: [
       {
@@ -255,7 +255,10 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
             title: "The basics of user experience design",
             type: "video",
             status: "current",
-            href: "#lesson-basics-ux",
+            href: ROUTES.student.courseLesson(
+              "foundations-user-experience-ux-design",
+              "lesson-basics-ux"
+            ),
           },
           {
             id: "lesson-basics-ux-reading",

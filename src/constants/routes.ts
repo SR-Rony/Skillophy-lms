@@ -26,6 +26,7 @@ export const ROUTES = {
   comingSoon: "/coming-soon",
   terms: "/terms",
   privacy: "/privacy",
+  verifyCertificate: "/verify-certificate",
   auth: {
     login: "/login",
     register: "/register",
@@ -37,6 +38,8 @@ export const ROUTES = {
     root: "/student",
     courses: "/student/courses",
     courseDetails: (slug: string) => `/student/courses/${slug}`,
+    courseLesson: (slug: string, lessonId = "lesson-basics-ux") =>
+      `/student/courses/${slug}/lesson?lesson=${lessonId}`,
     courseLive: (slug: string, lessonId = "live-l10") =>
       `/student/courses/${slug}/live?lesson=${lessonId}`,
     courseAssignment: (slug: string, assignmentId = "live-assignment-platforms") =>

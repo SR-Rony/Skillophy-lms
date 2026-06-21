@@ -5,7 +5,7 @@ import { useState } from "react";
 import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
 import type { StudentCourseDetailsData } from "@/types/student-course-details.types";
 import type { StudentLiveVideoSession } from "@/types/student-live-video.types";
-import { StudentCourseLiveCurriculum } from "@/components/student/course-details/student-course-live-curriculum";
+import { StudentCourseRecordedCurriculum } from "@/components/student/course-video/student-course-recorded-curriculum";
 import { CourseVideoReportButton } from "@/components/student/course-video/student-course-video-report-button";
 import {
   CourseVideoPlayer,
@@ -16,12 +16,12 @@ import {
 import { ROUTES } from "@/constants";
 import { cn } from "@/utils";
 
-interface StudentLiveVideoPageProps {
+interface StudentRecordedVideoPageProps {
   course: StudentCourseDetailsData;
   session: StudentLiveVideoSession;
 }
 
-export function StudentLiveVideoPage({ course, session }: StudentLiveVideoPageProps) {
+export function StudentRecordedVideoPage({ course, session }: StudentRecordedVideoPageProps) {
   const [activeTab, setActiveTab] = useState<CourseVideoTab>("overview");
 
   return (
@@ -44,7 +44,7 @@ export function StudentLiveVideoPage({ course, session }: StudentLiveVideoPagePr
             <CourseVideoPlayer
               thumbnail={session.thumbnail}
               title={session.title}
-              playingLabel="Live video player placeholder"
+              playingLabel="Recorded video player placeholder"
             />
 
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
@@ -80,7 +80,7 @@ export function StudentLiveVideoPage({ course, session }: StudentLiveVideoPagePr
 
             <div>
               <nav
-                aria-label="Live class sections"
+                aria-label="Lesson sections"
                 className="flex gap-6 border-b border-[#ebe8e6] sm:gap-8"
               >
                 {courseVideoTabs.map((tab) => {
@@ -111,10 +111,13 @@ export function StudentLiveVideoPage({ course, session }: StudentLiveVideoPagePr
           </div>
 
           <aside className="lg:sticky lg:top-6 lg:self-start">
-            <StudentCourseLiveCurriculum
+            <StudentCourseRecordedCurriculum
               modules={course.curriculum}
               courseSlug={course.slug}
               activeLessonId={session.lessonId}
+              completedTopics={course.completedTopics}
+              totalTopics={course.totalTopics}
+              progressPercent={course.progressPercent}
             />
           </aside>
         </div>

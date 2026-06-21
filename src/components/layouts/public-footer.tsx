@@ -54,7 +54,7 @@ const footerColumns = [
       { label: "Privacy & Cookie Policy", href: ROUTES.privacy },
       { label: "Refund Policy", href: "/support" },
       { label: "Terms & Conditions", href: ROUTES.terms },
-      { label: "Verify Certificate", href: "/support" },
+      { label: "Verify Certificate", href: ROUTES.verifyCertificate },
     ],
   },
 ];

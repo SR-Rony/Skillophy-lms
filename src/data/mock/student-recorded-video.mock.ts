@@ -65,37 +65,58 @@ const defaultLessonNotes = [
   },
 ];
 
-const liveVideoSessions: Record<string, Record<string, Partial<StudentLiveVideoSession>>> = {
-  "hsc-25-online-batch": {
-    "live-l10": {
-      lessonId: "live-l10",
+const recordedVideoSessions: Record<string, Record<string, Partial<StudentLiveVideoSession>>> = {
+  "foundations-user-experience-ux-design": {
+    "lesson-basics-ux": {
+      lessonId: "lesson-basics-ux",
       title: "The Basics of User Experience Design",
       thumbnail: defaultThumbnail,
+      nextLesson: {
+        id: "lesson-basics-ux-reading",
+        title: "The basics of user experience design",
+        href: ROUTES.student.courseResources(
+          "foundations-user-experience-ux-design",
+          "lesson-basics-ux-reading"
+        ),
+      },
+    },
+    "lesson-ux-tools": {
+      lessonId: "lesson-ux-tools",
+      title: "Most common UX tools",
+      thumbnail: defaultThumbnail,
       previousLesson: {
-        id: "live-l4",
-        title: "Most common UX tools",
-        href: ROUTES.student.courseLive("hsc-25-online-batch", "live-l4"),
+        id: "lesson-basics-ux",
+        title: "The basics of user experience design",
+        href: ROUTES.student.courseLesson(
+          "foundations-user-experience-ux-design",
+          "lesson-basics-ux"
+        ),
       },
       nextLesson: {
-        id: "live-l5",
-        title: "Assignment on design across platforms",
-        href: ROUTES.student.courseLive("hsc-25-online-batch", "live-l5"),
+        id: "lesson-quiz-intro",
+        title: "Quiz on Introducing user experience design",
+        href: ROUTES.student.courseQuiz(
+          "foundations-user-experience-ux-design",
+          "lesson-quiz-intro"
+        ),
       },
     },
   },
 };
 
-export function getStudentLiveVideoSession(
+export function getStudentRecordedVideoSession(
   slug: string,
-  lessonId = "live-l10"
+  lessonId = "lesson-basics-ux"
 ): { course: StudentCourseDetailsData; session: StudentLiveVideoSession } | null {
   const course = getStudentCourseDetails(slug);
 
-  if (!course || course.courseType !== "live") {
+  if (!course || course.courseType !== "recorded") {
     return null;
   }
 
-  const overrides = liveVideoSessions[slug]?.[lessonId] ?? liveVideoSessions[slug]?.["live-l10"];
+  const overrides =
+    recordedVideoSessions[slug]?.[lessonId] ??
+    recordedVideoSessions[slug]?.["lesson-basics-ux"];
 
   const session: StudentLiveVideoSession = {
     slug,
