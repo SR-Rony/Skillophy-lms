@@ -41,6 +41,38 @@ export interface TeacherCourseAssignmentsSummary {
   checkHref: string;
 }
 
+export type TeacherCourseAssignmentStatus = "pending" | "submitted" | "approved";
+
+export interface TeacherCourseAssignmentSubmission {
+  id: string;
+  studentName: string;
+  studentAvatar: string;
+  topicLabel: string;
+  topicTitle: string;
+  submittedAt: string;
+  status: TeacherCourseAssignmentStatus;
+  checkHref?: string;
+  assignmentHref?: string;
+  assessment?: {
+    marks?: number;
+    feedback?: string;
+  };
+}
+
+export interface TeacherCourseAssignmentsEmptyState {
+  heading: string;
+  message: string;
+  actionLabel: string;
+  actionHref: string;
+}
+
+export interface TeacherCourseAssignmentsTabData {
+  submissions: TeacherCourseAssignmentSubmission[];
+  emptyState: TeacherCourseAssignmentsEmptyState;
+  courseFilterLabel: string;
+  sortLabel: string;
+}
+
 export interface TeacherCourseDetailsData {
   id: string;
   slug: string;
@@ -53,6 +85,7 @@ export interface TeacherCourseDetailsData {
   upcomingLiveClass: TeacherUpcomingLiveClass | null;
   assignmentsSummary: TeacherCourseAssignmentsSummary | null;
   studentProgress: TeacherCourseStudentProgressStats;
+  assignments: TeacherCourseAssignmentsTabData;
   curriculum: StudentCourseCurriculumModule[];
   supportPhone: string;
 }

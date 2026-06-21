@@ -4,3 +4,5 @@ export { TeacherCourseLiveOverviewTab } from "./teacher-course-live-overview-tab
 export { TeacherCourseLiveCurriculum } from "./teacher-course-live-curriculum";
 export { TeacherCourseUpcomingLiveClassCard } from "./teacher-course-upcoming-live-class-card";
 export { TeacherCourseAssignmentsCard } from "./teacher-course-assignments-card";
+export { TeacherCourseAssignmentTab } from "./teacher-course-assignment-tab";
+export { TeacherCourseAssignmentAssessmentDrawer } from "./teacher-course-assignment-assessment-drawer";

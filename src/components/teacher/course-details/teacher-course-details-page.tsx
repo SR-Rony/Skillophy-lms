@@ -6,6 +6,7 @@ import {
   TeacherCourseLiveCurriculumMobileButton,
   TeacherCourseLiveOverviewTab,
 } from "@/components/teacher/course-details/teacher-course-live-overview-tab";
+import { TeacherCourseAssignmentTab } from "@/components/teacher/course-details/teacher-course-assignment-tab";
 import { TeacherCourseDetailsTabPlaceholder } from "@/components/teacher/course-details/teacher-course-details-tab-placeholder";
 import type {
   TeacherCourseDetailsData,
@@ -61,11 +62,7 @@ export function TeacherCourseDetailsPage({ course }: TeacherCourseDetailsPagePro
       </section>
 
       {activeTab === "assignment" && (
-        <TeacherCourseDetailsTabPlaceholder
-          feature="teacher-course-assignments"
-          title="Assignments"
-          description="Review and manage assignments for this live batch."
-        />
+        <TeacherCourseAssignmentTab assignmentsTab={course.assignments} />
       )}
 
       {activeTab === "student-progress" && (
