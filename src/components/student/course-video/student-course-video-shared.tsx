@@ -8,15 +8,17 @@ import type {
   StudentLiveVideoResourceFileType,
   StudentLiveVideoSession,
 } from "@/types/student-live-video.types";
+import { CourseVideoDiscussionSection } from "@/components/student/course-video/student-course-video-discussion-section";
 import { CourseVideoNotesSection } from "@/components/student/course-video/student-course-video-notes-section";
 import { cn } from "@/utils";
 
-export type CourseVideoTab = "overview" | "resource" | "notes";
+export type CourseVideoTab = "overview" | "resource" | "notes" | "discussion";
 
 export const courseVideoTabs: { id: CourseVideoTab; label: string }[] = [
   { id: "overview", label: "Overview" },
   { id: "resource", label: "Resource" },
   { id: "notes", label: "Notes" },
+  { id: "discussion", label: "Discussion" },
 ];
 
 export function CourseVideoPlayer({
@@ -230,6 +232,15 @@ export function CourseVideoTabPanel({
         moduleTitle={session.moduleTitle}
         currentTimestamp={session.currentTimestamp}
         initialNotes={session.lessonNotes}
+      />
+    );
+  }
+
+  if (activeTab === "discussion") {
+    return (
+      <CourseVideoDiscussionSection
+        initialMessages={session.discussionMessages}
+        currentUser={session.currentUser}
       />
     );
   }

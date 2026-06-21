@@ -31,6 +31,27 @@ export interface StudentLiveVideoNote {
   content: string;
 }
 
+export interface StudentLiveVideoDiscussionAttachment {
+  id: string;
+  type: "image" | "pdf";
+  name: string;
+  previewUrl: string;
+}
+
+export interface StudentLiveVideoDiscussionMessage {
+  id: string;
+  authorName: string;
+  avatar: string;
+  content: string;
+  isCurrentUser?: boolean;
+  attachments?: StudentLiveVideoDiscussionAttachment[];
+}
+
+export interface StudentLiveVideoDiscussionUser {
+  name: string;
+  avatar: string;
+}
+
 export interface StudentLiveVideoSession {
   slug: string;
   lessonId: string;
@@ -45,4 +66,6 @@ export interface StudentLiveVideoSession {
   resources: StudentLiveVideoResource[];
   currentTimestamp: string;
   lessonNotes: StudentLiveVideoNote[];
+  discussionMessages: StudentLiveVideoDiscussionMessage[];
+  currentUser: StudentLiveVideoDiscussionUser;
 }

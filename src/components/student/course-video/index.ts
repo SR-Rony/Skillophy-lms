@@ -2,6 +2,7 @@ export { StudentRecordedVideoPage } from "./student-recorded-video-page";
 export { CourseVideoReportButton } from "./student-course-video-report-button";
 export { StudentCourseVideoReportModal } from "./student-course-video-report-modal";
 export { CourseVideoNotesSection } from "./student-course-video-notes-section";
+export { CourseVideoDiscussionSection } from "./student-course-video-discussion-section";
 export {
   CourseVideoPlayer,
   CourseVideoAboutSection,
