@@ -3,6 +3,7 @@ import type {
   StudentCourseLessonStatus,
   StudentCourseLessonType,
 } from "@/types/student-course-details.types";
+import type { CourseLeaderboardData } from "@/types/course-leaderboard.types";
 import type { TeacherUpcomingLiveClass } from "@/types/teacher-dashboard.types";
 
 export type TeacherCourseDetailsTab =
@@ -73,6 +74,16 @@ export interface TeacherCourseAssignmentsTabData {
   sortLabel: string;
 }
 
+export interface TeacherCourseTopicAttendance {
+  topic: number;
+  attendancePercent: number;
+}
+
+export interface TeacherCourseStudentProgressTabData {
+  topicAttendance: TeacherCourseTopicAttendance[];
+  leaderboard: CourseLeaderboardData;
+}
+
 export interface TeacherCourseDetailsData {
   id: string;
   slug: string;
@@ -85,6 +96,7 @@ export interface TeacherCourseDetailsData {
   upcomingLiveClass: TeacherUpcomingLiveClass | null;
   assignmentsSummary: TeacherCourseAssignmentsSummary | null;
   studentProgress: TeacherCourseStudentProgressStats;
+  studentProgressTab: TeacherCourseStudentProgressTabData;
   assignments: TeacherCourseAssignmentsTabData;
   curriculum: StudentCourseCurriculumModule[];
   supportPhone: string;

@@ -1,13 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { TeacherCourseAssignmentTab } from "@/components/teacher/course-details/assignment";
+import { TeacherCourseClassRecordingsTab } from "@/components/teacher/course-details/class-recordings";
 import { TeacherCourseDetailsHero } from "@/components/teacher/course-details/teacher-course-details-hero";
 import {
   TeacherCourseLiveCurriculumMobileButton,
   TeacherCourseLiveOverviewTab,
-} from "@/components/teacher/course-details/teacher-course-live-overview-tab";
-import { TeacherCourseAssignmentTab } from "@/components/teacher/course-details/teacher-course-assignment-tab";
-import { TeacherCourseDetailsTabPlaceholder } from "@/components/teacher/course-details/teacher-course-details-tab-placeholder";
+} from "@/components/teacher/course-details/overview";
+import { TeacherCourseResourcesTab } from "@/components/teacher/course-details/resources";
+import { TeacherCourseStudentFeedbackTab } from "@/components/teacher/course-details/student-feedback";
+import { TeacherCourseStudentProgressTab } from "@/components/teacher/course-details/student-progress";
 import type {
   TeacherCourseDetailsData,
   TeacherCourseDetailsTab,
@@ -65,37 +68,13 @@ export function TeacherCourseDetailsPage({ course }: TeacherCourseDetailsPagePro
         <TeacherCourseAssignmentTab assignmentsTab={course.assignments} />
       )}
 
-      {activeTab === "student-progress" && (
-        <TeacherCourseDetailsTabPlaceholder
-          feature="teacher-course-student-progress"
-          title="Student Progress"
-          description="See detailed progress for every learner in this batch."
-        />
-      )}
+      {activeTab === "student-progress" && <TeacherCourseStudentProgressTab course={course} />}
 
-      {activeTab === "class-recordings" && (
-        <TeacherCourseDetailsTabPlaceholder
-          feature="teacher-course-class-recordings"
-          title="Class Recordings"
-          description="Access and manage recordings from live sessions."
-        />
-      )}
+      {activeTab === "class-recordings" && <TeacherCourseClassRecordingsTab />}
 
-      {activeTab === "resources" && (
-        <TeacherCourseDetailsTabPlaceholder
-          feature="teacher-course-resources"
-          title="Resources"
-          description="Upload and organize course resources for your learners."
-        />
-      )}
+      {activeTab === "resources" && <TeacherCourseResourcesTab />}
 
-      {activeTab === "student-feedback" && (
-        <TeacherCourseDetailsTabPlaceholder
-          feature="teacher-course-student-feedback"
-          title="Student Feedback"
-          description="Read feedback submitted by learners for this course."
-        />
-      )}
+      {activeTab === "student-feedback" && <TeacherCourseStudentFeedbackTab />}
 
       {showCurriculumButton && (
         <TeacherCourseLiveCurriculumMobileButton onClick={() => setShowMobileCurriculum(true)} />

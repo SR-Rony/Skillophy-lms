@@ -1,13 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { TeacherCourseAssignmentAssessmentDrawer } from "@/components/teacher/course-details/teacher-course-assignment-assessment-drawer";
-import { TeacherCourseAssignmentEmptyState } from "@/components/teacher/course-details/teacher-course-assignment-empty-state";
+import { TeacherCourseAssignmentAssessmentDrawer } from "./teacher-course-assignment-assessment-drawer";
+import { TeacherCourseAssignmentEmptyState } from "./teacher-course-assignment-empty-state";
 import {
   getTeacherCourseAssignmentPaginationMeta,
   TeacherCourseAssignmentPagination,
-} from "@/components/teacher/course-details/teacher-course-assignment-pagination";
-import { TeacherCourseAssignmentTable } from "@/components/teacher/course-details/teacher-course-assignment-table";
+} from "./teacher-course-assignment-pagination";
+import { TeacherCourseAssignmentTable } from "./teacher-course-assignment-table";
 import type {
   TeacherCourseAssignmentSubmission,
   TeacherCourseAssignmentsTabData,

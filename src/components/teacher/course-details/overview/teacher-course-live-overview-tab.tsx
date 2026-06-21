@@ -1,13 +1,13 @@
 "use client";
 
 import { StudentCourseSupportContact } from "@/components/student/course-details/student-course-details-shared";
-import { TeacherCourseAssignmentsCard } from "@/components/teacher/course-details/teacher-course-assignments-card";
-import { TeacherCourseAssignmentsEmptyCard } from "@/components/teacher/course-details/teacher-course-assignments-empty-card";
-import { TeacherCourseJoinGroupCard } from "@/components/teacher/course-details/teacher-course-join-group-card";
-import { TeacherCourseLiveCurriculum } from "@/components/teacher/course-details/teacher-course-live-curriculum";
-import { TeacherCourseScheduleEmptyCard } from "@/components/teacher/course-details/teacher-course-schedule-empty-card";
-import { TeacherCourseStudentProgressCard } from "@/components/teacher/course-details/teacher-course-student-progress-card";
-import { TeacherCourseUpcomingLiveClassCard } from "@/components/teacher/course-details/teacher-course-upcoming-live-class-card";
+import { TeacherCourseAssignmentsCard } from "./teacher-course-assignments-card";
+import { TeacherCourseAssignmentsEmptyCard } from "./teacher-course-assignments-empty-card";
+import { TeacherCourseJoinGroupCard } from "./teacher-course-join-group-card";
+import { TeacherCourseLiveCurriculum } from "./teacher-course-live-curriculum";
+import { TeacherCourseScheduleEmptyCard } from "./teacher-course-schedule-empty-card";
+import { TeacherCourseStudentProgressCard } from "./teacher-course-student-progress-card";
+import { TeacherCourseUpcomingLiveClassCard } from "./teacher-course-upcoming-live-class-card";
 import type { TeacherCourseDetailsData } from "@/types/teacher-course-details.types";
 import { cn } from "@/utils";
 

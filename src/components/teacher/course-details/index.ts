@@ -1,8 +1,10 @@
 export { TeacherCourseDetailsPage } from "./teacher-course-details-page";
 export { TeacherCourseDetailsHero } from "./teacher-course-details-hero";
-export { TeacherCourseLiveOverviewTab } from "./teacher-course-live-overview-tab";
-export { TeacherCourseLiveCurriculum } from "./teacher-course-live-curriculum";
-export { TeacherCourseUpcomingLiveClassCard } from "./teacher-course-upcoming-live-class-card";
-export { TeacherCourseAssignmentsCard } from "./teacher-course-assignments-card";
-export { TeacherCourseAssignmentTab } from "./teacher-course-assignment-tab";
-export { TeacherCourseAssignmentAssessmentDrawer } from "./teacher-course-assignment-assessment-drawer";
+
+export * from "./shared";
+export * from "./overview";
+export * from "./assignment";
+export * from "./student-progress";
+export * from "./class-recordings";
+export * from "./resources";
+export * from "./student-feedback";

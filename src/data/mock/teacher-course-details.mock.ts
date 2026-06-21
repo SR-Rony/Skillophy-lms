@@ -4,6 +4,7 @@ import type {
   StudentCourseCurriculumLesson,
   StudentCourseCurriculumModule,
 } from "@/types/student-course-details.types";
+import type { CourseLeaderboardData } from "@/types/course-leaderboard.types";
 
 export const teacherCourseDetailsBackHref = ROUTES.teacher.courses;
 
@@ -214,6 +215,61 @@ function buildTeacherAssignmentSubmissions() {
   ).flat();
 }
 
+const leaderboardAvatar = (seed: string) =>
+  `https://api.dicebear.com/9.x/avataaars/png?seed=${encodeURIComponent(seed)}`;
+
+const teacherCourseLeaderboardMock: CourseLeaderboardData = {
+  topThree: [
+    {
+      id: "teacher-leader-1",
+      place: 1,
+      name: "Dianne Russell",
+      avatar: leaderboardAvatar("DianneRussell"),
+      score: 98.8,
+    },
+    {
+      id: "teacher-leader-2",
+      place: 2,
+      name: "Jenny Wilson",
+      avatar: leaderboardAvatar("JennyWilson"),
+      score: 95.8,
+    },
+    {
+      id: "teacher-leader-3",
+      place: 3,
+      name: "Jacob Jones",
+      avatar: leaderboardAvatar("JacobJones"),
+      score: 90.8,
+    },
+  ],
+  others: [
+    { id: "teacher-leader-4", rank: 4, name: "Kathryn Murphy", avatar: leaderboardAvatar("KathrynMurphy"), score: 89.1 },
+    { id: "teacher-leader-5", rank: 5, name: "Leslie Alexander", avatar: leaderboardAvatar("LeslieAlexander"), score: 87.1 },
+    { id: "teacher-leader-6", rank: 6, name: "Jacob Jones", avatar: leaderboardAvatar("JacobJones2"), score: 85.1 },
+    { id: "teacher-leader-7", rank: 7, name: "Guy Hawkins", avatar: leaderboardAvatar("GuyHawkins"), score: 84.1 },
+    { id: "teacher-leader-8", rank: 8, name: "Jane Cooper", avatar: leaderboardAvatar("JaneCooper"), score: 80.8 },
+    { id: "teacher-leader-9", rank: 9, name: "Esther Howard", avatar: leaderboardAvatar("EstherHoward"), score: 54.0 },
+    { id: "teacher-leader-10", rank: 10, name: "Brooklyn Simmons", avatar: leaderboardAvatar("BrooklynSimmons"), score: 52.4 },
+    { id: "teacher-leader-11", rank: 11, name: "Eleanor Pena", avatar: leaderboardAvatar("EleanorPena"), score: 51.2 },
+    { id: "teacher-leader-12", rank: 12, name: "Darrell Steward", avatar: leaderboardAvatar("DarrellSteward"), score: 49.8 },
+  ],
+};
+
+const teacherTopicAttendanceMock = [
+  { topic: 1, attendancePercent: 98 },
+  { topic: 2, attendancePercent: 72 },
+  { topic: 3, attendancePercent: 76 },
+  { topic: 4, attendancePercent: 68 },
+  { topic: 5, attendancePercent: 94 },
+  { topic: 6, attendancePercent: 70 },
+  { topic: 7, attendancePercent: 74 },
+  { topic: 8, attendancePercent: 52 },
+  { topic: 9, attendancePercent: 78 },
+  { topic: 10, attendancePercent: 42 },
+  { topic: 11, attendancePercent: 96 },
+  { topic: 12, attendancePercent: 68 },
+];
+
 const teacherCourseDetailsBySlug: Record<string, TeacherCourseDetailsData> = {
   // Set assignments.submissions to [] for empty assignment tab.
   "hsc-25-online-batch": {
@@ -241,6 +297,10 @@ const teacherCourseDetailsBySlug: Record<string, TeacherCourseDetailsData> = {
       attendancePercent: 90,
       learnersPassedPercent: 60,
       assignmentPercent: 45,
+    },
+    studentProgressTab: {
+      topicAttendance: teacherTopicAttendanceMock,
+      leaderboard: teacherCourseLeaderboardMock,
     },
     assignments: {
       submissions: buildTeacherAssignmentSubmissions(),

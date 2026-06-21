@@ -1,7 +1,7 @@
 "use client";
 
 import { Heading } from "@/components/shared/heading";
-import { TeacherCourseStatRing } from "@/components/teacher/course-details/teacher-course-stat-ring";
+import { TeacherCourseStatRing } from "@/components/teacher/course-details/shared";
 import type { TeacherCourseStudentProgressStats } from "@/types/teacher-course-details.types";
 
 const PROGRESS_STATS = [

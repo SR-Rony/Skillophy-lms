@@ -8,7 +8,7 @@ import {
   CourseVideoTabPanel,
 } from "@/components/student/course-video/student-course-video-shared";
 import { CourseVideoReportButton } from "@/components/student/course-video/student-course-video-report-button";
-import { TeacherCourseLiveCurriculum } from "@/components/teacher/course-details/teacher-course-live-curriculum";
+import { TeacherCourseLiveCurriculum } from "@/components/teacher/course-details/overview";
 import { ROUTES } from "@/constants";
 import type { TeacherCourseDetailsData } from "@/types/teacher-course-details.types";
 import type { StudentLiveVideoSession } from "@/types/student-live-video.types";
