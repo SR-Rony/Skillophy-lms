@@ -35,8 +35,12 @@ export function StudentCourseDetailsPage({ course }: StudentCourseDetailsPagePro
 
   const showCurriculumButton = activeTab === "overview" && !showMobileCurriculum;
 
+  const isRecordedCourse = course.courseType === "recorded";
+  const showCompletedRecordedOverview =
+    course.status === "completed" && isRecordedCourse;
+
   const renderOverview = () => {
-    if (course.status === "completed") {
+    if (showCompletedRecordedOverview) {
       return (
         <StudentCourseCompletedOverview
           course={course}

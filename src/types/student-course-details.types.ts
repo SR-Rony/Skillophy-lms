@@ -73,6 +73,26 @@ export interface StudentCourseCertificateInfo {
   verificationId?: string;
 }
 
+export type StudentCourseCertificateSharePlatform =
+  | "facebook"
+  | "linkedin"
+  | "whatsapp"
+  | "x"
+  | "email";
+
+export interface StudentCourseCertificateShareOption {
+  id: StudentCourseCertificateSharePlatform;
+  label: string;
+  href: string;
+}
+
+export interface StudentCourseCertificateShareData {
+  description: string;
+  shareUrl: string;
+  copyLinkLabel: string;
+  shareOptions: StudentCourseCertificateShareOption[];
+}
+
 export interface StudentCourseDetailsData {
   id: string;
   slug: string;
@@ -100,5 +120,6 @@ export interface StudentCourseDetailsData {
   curriculum: StudentCourseCurriculumModule[];
   certificateHref?: string;
   certificateInfo?: StudentCourseCertificateInfo;
+  certificateShareData?: StudentCourseCertificateShareData;
   supportPhone: string;
 }

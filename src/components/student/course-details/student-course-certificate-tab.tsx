@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BadgeCheck, Download, Linkedin, Lock, Share2 } from "lucide-react";
@@ -9,6 +10,11 @@ import type {
 } from "@/types/student-course-details.types";
 import { Container } from "@/components/shared";
 import { Heading } from "@/components/shared/heading";
+import { StudentCourseCertificateDownloadModal } from "@/components/student/course-details/student-course-certificate-download-modal";
+import {
+  DEFAULT_CERTIFICATE_SHARE_DATA,
+  StudentCourseCertificateShareModal,
+} from "@/components/student/course-details/student-course-certificate-share-modal";
 import { cn } from "@/utils";
 
 const CERTIFICATE_IMAGE = "/images/certificate.png";
@@ -134,17 +140,23 @@ function CertificateSummaryCard({
   );
 }
 
-function CertificateActionButtons() {
+function CertificateActionButtons({
+  onDownloadClick,
+  onShareClick,
+}: {
+  onDownloadClick: () => void;
+  onShareClick: () => void;
+}) {
   return (
     <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-      <a
-        href={CERTIFICATE_IMAGE}
-        download
+      <button
+        type="button"
+        onClick={onDownloadClick}
         className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[#ebe8e6] bg-white text-[#1a1a1a] shadow-sm transition-colors hover:bg-[#fafafa]"
         aria-label="Download certificate"
       >
         <Download className="h-5 w-5" aria-hidden />
-      </a>
+      </button>
       <a
         href="https://linkedin.com"
         target="_blank"
@@ -156,6 +168,7 @@ function CertificateActionButtons() {
       </a>
       <button
         type="button"
+        onClick={onShareClick}
         className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-primary/90"
       >
         <Share2 className="h-4 w-4" aria-hidden />
@@ -167,27 +180,48 @@ function CertificateActionButtons() {
 
 function CertificateUnlockedView({ course }: { course: StudentCourseDetailsData }) {
   const certificateInfo = course.certificateInfo ?? DEFAULT_CERTIFICATE_INFO;
+  const shareData = course.certificateShareData ?? DEFAULT_CERTIFICATE_SHARE_DATA;
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   return (
-    <div className="space-y-6 sm:space-y-8">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-        <div className="max-w-2xl">
-          <Heading as="h2" variant="dashboard-certificate">Completion Certificate</Heading>
-          <p className="mt-2 text-[14px] leading-relaxed text-[#6b7280] sm:text-[15px]">
-            You successfully completed this course. Your certificate is ready to download and share.
-          </p>
+    <>
+      <div className="space-y-6 sm:space-y-8">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div className="max-w-2xl">
+            <Heading as="h2" variant="dashboard-certificate">Completion Certificate</Heading>
+            <p className="mt-2 text-[14px] leading-relaxed text-[#6b7280] sm:text-[15px]">
+              You successfully completed this course. Your certificate is ready to download and share.
+            </p>
+          </div>
+          <CertificateActionButtons
+            onDownloadClick={() => setIsDownloadModalOpen(true)}
+            onShareClick={() => setIsShareModalOpen(true)}
+          />
         </div>
-        <CertificateActionButtons />
+
+        <div className="grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-8">
+          <CertificatePreview
+            isLocked={false}
+            alt={`${course.title} completion certificate`}
+          />
+          <CertificateSummaryCard course={course} certificateInfo={certificateInfo} />
+        </div>
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-8">
-        <CertificatePreview
-          isLocked={false}
-          alt={`${course.title} completion certificate`}
-        />
-        <CertificateSummaryCard course={course} certificateInfo={certificateInfo} />
-      </div>
-    </div>
+      <StudentCourseCertificateDownloadModal
+        open={isDownloadModalOpen}
+        onOpenChange={setIsDownloadModalOpen}
+        certificateDownloadUrl={CERTIFICATE_IMAGE}
+        defaultCertificateName={certificateInfo.studentName}
+      />
+
+      <StudentCourseCertificateShareModal
+        open={isShareModalOpen}
+        onOpenChange={setIsShareModalOpen}
+        data={shareData}
+      />
+    </>
   );
 }
 
