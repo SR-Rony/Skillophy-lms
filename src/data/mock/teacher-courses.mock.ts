@@ -15,9 +15,6 @@ const phpCourseImage =
 const negotiationCourseImage =
   "https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&auto=format&fit=crop";
 
-const liveBatchImage =
-  "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop";
-
 const ongoingRecordedCourses = [
   {
     id: "teacher-recorded-1",
@@ -78,12 +75,12 @@ const ongoingRecordedCourses = [
 const ongoingLiveCourses = [
   {
     id: "teacher-live-1",
-    title: "HSC 25 Online Batch",
+    title: "Foundations of User Experience (UX) Design",
     slug: "hsc-25-online-batch",
-    image: liveBatchImage,
+    image: uxCourseImage,
     type: "live" as const,
     learners: 564,
-    detailsHref: ROUTES.teacher.live,
+    detailsHref: ROUTES.teacher.courseDetails("hsc-25-online-batch"),
   },
 ];
 

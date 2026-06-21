@@ -26,6 +26,10 @@ function getTeacherPageTitle(pathname: string) {
     return teacherPageTitles[pathname];
   }
 
+  if (pathname.startsWith(`${ROUTES.teacher.courses}/`)) {
+    return "My Courses";
+  }
+
   const matchedEntry = Object.entries(teacherPageTitles).find(([path]) =>
     pathname.startsWith(`${path}/`)
   );

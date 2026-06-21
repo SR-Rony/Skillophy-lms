@@ -74,6 +74,9 @@ export const ROUTES = {
   teacher: {
     root: "/teacher",
     courses: "/teacher/courses",
+    courseDetails: (slug: string) => `/teacher/courses/${slug}`,
+    courseLive: (slug: string, lessonId = "tm1-l1") =>
+      `/teacher/courses/${slug}/live?lesson=${lessonId}`,
     schedule: "/teacher/schedule",
     resources: "/teacher/resources",
     workshop: "/teacher/workshop",
