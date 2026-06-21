@@ -146,6 +146,41 @@ export interface TeacherCourseResourcesTabData {
   addResourcesLabel: string;
 }
 
+export type TeacherCourseFeedbackRatingFilterId = "all" | "5" | "4" | "3" | "2" | "1";
+
+export interface TeacherCourseFeedbackRatingFilterOption {
+  id: TeacherCourseFeedbackRatingFilterId;
+  label: string;
+}
+
+export interface TeacherCourseStudentReview {
+  id: string;
+  name: string;
+  role: string;
+  avatar: string;
+  rating: number;
+  reviewedAt: string;
+  comment: string;
+}
+
+export interface TeacherCourseRatingBreakdown {
+  stars: 5 | 4 | 3 | 2 | 1;
+  percent: number;
+}
+
+export interface TeacherCourseStudentFeedbackEmptyState {
+  heading: string;
+  message: string;
+}
+
+export interface TeacherCourseStudentFeedbackTabData {
+  averageRating: number;
+  ratingBreakdown: TeacherCourseRatingBreakdown[];
+  ratingFilterOptions: TeacherCourseFeedbackRatingFilterOption[];
+  reviews: TeacherCourseStudentReview[];
+  emptyState: TeacherCourseStudentFeedbackEmptyState;
+}
+
 export interface TeacherCourseDetailsData {
   id: string;
   slug: string;
@@ -161,6 +196,7 @@ export interface TeacherCourseDetailsData {
   studentProgressTab: TeacherCourseStudentProgressTabData;
   classRecordings: TeacherCourseClassRecordingsTabData;
   resources: TeacherCourseResourcesTabData;
+  studentFeedbackTab: TeacherCourseStudentFeedbackTabData;
   assignments: TeacherCourseAssignmentsTabData;
   curriculum: StudentCourseCurriculumModule[];
   supportPhone: string;

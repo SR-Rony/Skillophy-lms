@@ -5,6 +5,7 @@ import {
   TeacherCourseAddResourcesDrawer,
   type TeacherCourseResourcesDrawerMode,
 } from "./teacher-course-add-resources-drawer";
+import { TeacherCourseDeleteResourceModal } from "./teacher-course-delete-resource-modal";
 import {
   addResourcesToTopic,
   deleteResourceFromTopics,
@@ -32,6 +33,8 @@ export function TeacherCourseResourcesTab({ data }: TeacherCourseResourcesTabPro
   const [drawerMode, setDrawerMode] = useState<TeacherCourseResourcesDrawerMode>("add");
   const [editingMaterial, setEditingMaterial] = useState<TeacherCourseResourceItem | null>(null);
   const [editingTopicId, setEditingTopicId] = useState<string | null>(null);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deletingMaterial, setDeletingMaterial] = useState<TeacherCourseResourceItem | null>(null);
 
   useEffect(() => {
     setTopicGroups(data.topicGroups);
@@ -57,7 +60,13 @@ export function TeacherCourseResourcesTab({ data }: TeacherCourseResourcesTabPro
   }
 
   function handleDeleteMaterial(material: TeacherCourseResourceItem) {
+    setDeletingMaterial(material);
+    setDeleteModalOpen(true);
+  }
+
+  function confirmDeleteMaterial(material: TeacherCourseResourceItem) {
     setTopicGroups((current) => deleteResourceFromTopics(current, material.id));
+    setDeletingMaterial(null);
   }
 
   function handleSaveAdd({
@@ -134,6 +143,13 @@ export function TeacherCourseResourcesTab({ data }: TeacherCourseResourcesTabPro
         editingTopicId={editingTopicId}
         onSaveAdd={handleSaveAdd}
         onSaveEdit={handleSaveEdit}
+      />
+
+      <TeacherCourseDeleteResourceModal
+        open={deleteModalOpen}
+        onOpenChange={setDeleteModalOpen}
+        material={deletingMaterial}
+        onConfirm={confirmDeleteMaterial}
       />
     </>
   );

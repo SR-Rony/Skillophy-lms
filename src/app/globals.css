@@ -113,6 +113,28 @@
   }
 }
 
+@keyframes teacher-modal-scale-in {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes teacher-modal-scale-out {
+  from {
+    opacity: 1;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
 @layer utilities {
   .teacher-side-drawer-overlay[data-state="open"] {
     animation: teacher-drawer-fade-in 420ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -128,5 +150,21 @@
 
   .teacher-side-drawer-panel[data-state="closed"] {
     animation: teacher-drawer-slide-out 380ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .teacher-center-modal-overlay[data-state="open"] {
+    animation: teacher-drawer-fade-in 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .teacher-center-modal-overlay[data-state="closed"] {
+    animation: teacher-drawer-fade-out 240ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .teacher-center-modal-panel[data-state="open"] {
+    animation: teacher-modal-scale-in 380ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .teacher-center-modal-panel[data-state="closed"] {
+    animation: teacher-modal-scale-out 260ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 }

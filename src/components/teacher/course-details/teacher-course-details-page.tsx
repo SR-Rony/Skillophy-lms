@@ -76,7 +76,9 @@ export function TeacherCourseDetailsPage({ course }: TeacherCourseDetailsPagePro
 
       {activeTab === "resources" && <TeacherCourseResourcesTab data={course.resources} />}
 
-      {activeTab === "student-feedback" && <TeacherCourseStudentFeedbackTab />}
+      {activeTab === "student-feedback" && (
+        <TeacherCourseStudentFeedbackTab data={course.studentFeedbackTab} />
+      )}
 
       {showCurriculumButton && (
         <TeacherCourseLiveCurriculumMobileButton onClick={() => setShowMobileCurriculum(true)} />

@@ -423,6 +423,83 @@ const teacherCourseResourcesMock = {
   ],
 };
 
+const feedbackAvatar = (seed: string) =>
+  `https://api.dicebear.com/9.x/avataaars/png?seed=${encodeURIComponent(seed)}`;
+
+const teacherStudentFeedbackReviewComment =
+  "Skillophy helped me gain on-the-job confidence, build a portfolio, and earn a microcredential to share with prospective employers.";
+
+const teacherStudentFeedbackMock = {
+  averageRating: 4.2,
+  ratingBreakdown: [
+    { stars: 5 as const, percent: 52 },
+    { stars: 4 as const, percent: 35 },
+    { stars: 3 as const, percent: 20 },
+    { stars: 2 as const, percent: 12 },
+    { stars: 1 as const, percent: 1 },
+  ],
+  ratingFilterOptions: [
+    { id: "all" as const, label: "All Ratings" },
+    { id: "5" as const, label: "Five Star Ratings" },
+    { id: "4" as const, label: "Four Star Ratings" },
+    { id: "3" as const, label: "Three Star Ratings" },
+    { id: "2" as const, label: "Two Star Ratings" },
+    { id: "1" as const, label: "One Star Ratings" },
+  ],
+  emptyState: {
+    heading: "No Reviews!",
+    message: "There is no feedback on this course yet",
+  },
+  // Set reviews to [] for empty student feedback tab.
+  reviews: [
+    {
+      id: "feedback-1",
+      name: "Maisha Ferdous",
+      role: "Online business owner",
+      avatar: feedbackAvatar("MaishaFerdous"),
+      rating: 4,
+      reviewedAt: "3 days ago",
+      comment: teacherStudentFeedbackReviewComment,
+    },
+    {
+      id: "feedback-2",
+      name: "Kathryn Murphy",
+      role: "Product designer",
+      avatar: feedbackAvatar("KathrynMurphyFeedback"),
+      rating: 5,
+      reviewedAt: "5 days ago",
+      comment: teacherStudentFeedbackReviewComment,
+    },
+    {
+      id: "feedback-3",
+      name: "Leslie Alexander",
+      role: "Startup founder",
+      avatar: feedbackAvatar("LeslieAlexanderFeedback"),
+      rating: 4,
+      reviewedAt: "1 week ago",
+      comment: teacherStudentFeedbackReviewComment,
+    },
+    {
+      id: "feedback-4",
+      name: "Guy Hawkins",
+      role: "Marketing specialist",
+      avatar: feedbackAvatar("GuyHawkinsFeedback"),
+      rating: 3,
+      reviewedAt: "2 weeks ago",
+      comment: teacherStudentFeedbackReviewComment,
+    },
+    {
+      id: "feedback-5",
+      name: "Jane Cooper",
+      role: "Freelance UX designer",
+      avatar: feedbackAvatar("JaneCooperFeedback"),
+      rating: 5,
+      reviewedAt: "2 weeks ago",
+      comment: teacherStudentFeedbackReviewComment,
+    },
+  ],
+};
+
 const teacherCourseDetailsBySlug: Record<string, TeacherCourseDetailsData> = {
   // Set assignments.submissions to [] for empty assignment tab.
   "hsc-25-online-batch": {
@@ -457,6 +534,7 @@ const teacherCourseDetailsBySlug: Record<string, TeacherCourseDetailsData> = {
     },
     classRecordings: teacherClassRecordingsMock,
     resources: teacherCourseResourcesMock,
+    studentFeedbackTab: teacherStudentFeedbackMock,
     assignments: {
       submissions: buildTeacherAssignmentSubmissions(),
       emptyState: teacherAssignmentEmptyState,

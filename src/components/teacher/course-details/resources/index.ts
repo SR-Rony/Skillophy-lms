@@ -1,3 +1,4 @@
+export { TeacherCourseDeleteResourceModal } from "./teacher-course-delete-resource-modal";
 export { TeacherCourseResourcesTab } from "./teacher-course-resources-tab";
 export {
   TeacherCourseAddResourcesDrawer,
