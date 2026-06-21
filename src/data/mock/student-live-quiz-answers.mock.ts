@@ -317,4 +317,51 @@ export const studentLiveQuizAnswerReviews: Record<
       ],
     },
   },
+  "foundations-user-experience-ux-design": {
+    "lesson-quiz-intro": {
+      quizId: "lesson-quiz-intro",
+      slug: "foundations-user-experience-ux-design",
+      title: "Quiz on Introducing user experience design",
+      answersTitle: "Answers of Quiz on Introducing user experience design",
+      participatedOn: "Sunday, May 11, 2024",
+      linkedLessonId: "lesson-quiz-intro",
+      questions: [
+        {
+          id: "q1",
+          number: 1,
+          question: "What does UX stand for?",
+          type: "single",
+          pointsEarned: 1,
+          pointsTotal: 1,
+          options: [
+            {
+              id: "q1-o1",
+              text: "User Experience",
+              state: "selected-correct",
+              feedback: {
+                type: "correct",
+                title: "Your answer is correct!",
+                explanation: "UX stands for User Experience — how people feel when using a product.",
+              },
+            },
+            {
+              id: "q1-o2",
+              text: "Universal Extension",
+              state: "default",
+            },
+            {
+              id: "q1-o3",
+              text: "Unified Export",
+              state: "default",
+            },
+            {
+              id: "q1-o4",
+              text: "User Exchange",
+              state: "default",
+            },
+          ],
+        },
+      ],
+    },
+  },
 };

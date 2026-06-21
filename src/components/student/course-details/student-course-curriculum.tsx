@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Heading } from "@/components/shared/heading";
 
 import { useState } from "react";
@@ -16,6 +17,7 @@ import type {
   StudentCourseCurriculumLesson,
   StudentCourseCurriculumModule,
 } from "@/types/student-course-details.types";
+import { getRecordedCourseLessonHref } from "@/utils/course-lesson-href";
 import { cn } from "@/utils";
 
 const LESSON_ICONS = {
@@ -29,23 +31,28 @@ const LESSON_ICONS = {
 interface StudentCourseCurriculumProps {
   modules: StudentCourseCurriculumModule[];
   isCourseCompleted?: boolean;
+  courseSlug?: string;
 }
 
-function LessonRow({ lesson }: { lesson: StudentCourseCurriculumLesson }) {
+function LessonRow({
+  lesson,
+  courseSlug,
+}: {
+  lesson: StudentCourseCurriculumLesson;
+  courseSlug?: string;
+}) {
   const isCompleted = lesson.status === "completed";
   const isCurrent = lesson.status === "current";
   const LessonIcon = isCompleted ? CheckCircle2 : LESSON_ICONS[lesson.type].icon;
   const iconClassName = isCompleted
     ? "text-[#22c55e]"
-    : LESSON_ICONS[lesson.type].className;
+    : isCurrent
+      ? "text-primary"
+      : LESSON_ICONS[lesson.type].className;
+  const href = courseSlug ? getRecordedCourseLessonHref(lesson, courseSlug) : undefined;
 
-  return (
-    <li
-      className={cn(
-        "flex items-center gap-3 border-t border-[#f0ebe8] py-3.5 first:border-t-0",
-        isCurrent && "rounded-lg bg-[#fff5f3] px-2 -mx-2"
-      )}
-    >
+  const content = (
+    <>
       <LessonIcon className={cn("h-[18px] w-[18px] shrink-0", iconClassName)} aria-hidden />
       <span
         className={cn(
@@ -55,6 +62,26 @@ function LessonRow({ lesson }: { lesson: StudentCourseCurriculumLesson }) {
       >
         {lesson.title}
       </span>
+    </>
+  );
+
+  return (
+    <li
+      className={cn(
+        "border-t border-[#f0ebe8] first:border-t-0",
+        isCurrent && "-mx-2 rounded-lg bg-[#fff5f3] px-2"
+      )}
+    >
+      {href ? (
+        <Link
+          href={href}
+          className="flex items-center gap-3 py-3.5 transition-colors hover:text-primary"
+        >
+          {content}
+        </Link>
+      ) : (
+        <div className="flex items-center gap-3 py-3.5">{content}</div>
+      )}
     </li>
   );
 }
@@ -62,6 +89,7 @@ function LessonRow({ lesson }: { lesson: StudentCourseCurriculumLesson }) {
 export function StudentCourseCurriculum({
   modules,
   isCourseCompleted = false,
+  courseSlug,
 }: StudentCourseCurriculumProps) {
   const [openModules, setOpenModules] = useState<string[]>(
     isCourseCompleted
@@ -130,7 +158,7 @@ export function StudentCourseCurriculum({
               {isOpen && (
                 <ul className="bg-white px-4 pb-2 sm:px-5">
                   {module.lessons.map((lesson) => (
-                    <LessonRow key={lesson.id} lesson={lesson} />
+                    <LessonRow key={lesson.id} lesson={lesson} courseSlug={courseSlug} />
                   ))}
                 </ul>
               )}

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ArrowLeft, ChevronLeft, ChevronRight, Download, FileCode, FileText } from "lucide-react";
 import { Heading } from "@/components/shared/heading";
-import { StudentCourseLiveCurriculum } from "@/components/student/course-details/student-course-live-curriculum";
+import { StudentCourseLearningCurriculum } from "@/components/student/course-details/student-course-learning-curriculum";
 import { StudentCourseLiveCurriculumMobileButton } from "@/components/student/course-details/student-course-live-overview";
 import type { StudentCourseDetailsData } from "@/types/student-course-details.types";
 import type {
@@ -120,9 +120,8 @@ export function StudentLiveResourcesPage({ course, session }: StudentLiveResourc
             >
               ← Back to Resources
             </button>
-            <StudentCourseLiveCurriculum
-              modules={course.curriculum}
-              courseSlug={course.slug}
+            <StudentCourseLearningCurriculum
+              course={course}
               activeLessonId={session.linkedLessonId}
             />
           </div>
@@ -139,9 +138,8 @@ export function StudentLiveResourcesPage({ course, session }: StudentLiveResourc
           </div>
 
           <aside className="hidden lg:sticky lg:block lg:top-6 lg:self-start">
-            <StudentCourseLiveCurriculum
-              modules={course.curriculum}
-              courseSlug={course.slug}
+            <StudentCourseLearningCurriculum
+              course={course}
               activeLessonId={session.linkedLessonId}
             />
           </aside>

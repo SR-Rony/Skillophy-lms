@@ -95,7 +95,7 @@ export function StudentCourseDetailsPage({ course }: StudentCourseDetailsPagePro
       </section>
 
       {activeTab === "assignment" &&
-        (isLiveCourse ? (
+        ((course.assignments?.length ?? 0) > 0 || isLiveCourse ? (
           <StudentCourseAssignmentTab course={course} />
         ) : (
           <StudentCourseDetailsTabPlaceholder

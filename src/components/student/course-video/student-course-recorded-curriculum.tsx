@@ -12,11 +12,11 @@ import {
   PlayCircle,
 } from "lucide-react";
 import { Heading } from "@/components/shared/heading";
-import { ROUTES } from "@/constants";
 import type {
   StudentCourseCurriculumLesson,
   StudentCourseCurriculumModule,
 } from "@/types/student-course-details.types";
+import { getRecordedCourseLessonHref } from "@/utils/course-lesson-href";
 import { cn } from "@/utils";
 
 const RECORDED_LESSON_ICONS = {
@@ -36,26 +36,6 @@ interface StudentCourseRecordedCurriculumProps {
   progressPercent: number;
 }
 
-function getRecordedLessonHref(lesson: StudentCourseCurriculumLesson, courseSlug: string) {
-  if (lesson.href && !lesson.href.startsWith("#")) {
-    return lesson.href;
-  }
-
-  if (lesson.type === "video") {
-    return ROUTES.student.courseLesson(courseSlug, lesson.id);
-  }
-
-  if (lesson.type === "reading") {
-    return ROUTES.student.courseResources(courseSlug, lesson.id);
-  }
-
-  if (lesson.type === "quiz") {
-    return ROUTES.student.courseQuiz(courseSlug, lesson.id);
-  }
-
-  return undefined;
-}
-
 function RecordedLessonRow({
   lesson,
   courseSlug,
@@ -73,7 +53,7 @@ function RecordedLessonRow({
     : isCurrent
       ? "text-primary"
       : RECORDED_LESSON_ICONS[lesson.type].className;
-  const href = getRecordedLessonHref(lesson, courseSlug);
+  const href = getRecordedCourseLessonHref(lesson, courseSlug);
 
   const content = (
     <>

@@ -243,6 +243,38 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
       title: "The basics of user experience design",
       href: ROUTES.student.courseLesson("foundations-user-experience-ux-design", "lesson-basics-ux"),
     },
+    assignments: [
+      {
+        id: "recorded-assignment-1",
+        topicLabel: "Topic 1",
+        topicTitle: "Introducing UX design",
+        lastSubmissionDate: "May 11, 2024",
+        status: "pending",
+        action: {
+          label: "Submit Assignment",
+          variant: "submit",
+          href: ROUTES.student.courseAssignment(
+            "foundations-user-experience-ux-design",
+            "lesson-assignment-platforms"
+          ),
+        },
+      },
+      {
+        id: "recorded-assignment-2",
+        topicLabel: "Topic 2",
+        topicTitle: "Thinking like a UX designer",
+        lastSubmissionDate: "May 11, 2024",
+        status: "submitted",
+        action: {
+          label: "Check Assignment",
+          variant: "check",
+          href: ROUTES.student.courseAssignmentFeedback(
+            "foundations-user-experience-ux-design",
+            "lesson-assignment-platforms"
+          ),
+        },
+      },
+    ],
     curriculum: [
       {
         id: "module-1",
@@ -283,11 +315,21 @@ export const studentCourseDetailsBySlug: Record<string, StudentCourseDetailsData
             title: "Most common UX tools",
             type: "video",
             status: "available",
+            href: ROUTES.student.courseLesson(
+              "foundations-user-experience-ux-design",
+              "lesson-ux-tools"
+            ),
           },
           {
             id: "lesson-quiz-intro",
             title: "Quiz on Introducing user experience design",
             type: "quiz",
+            status: "available",
+          },
+          {
+            id: "lesson-assignment-platforms",
+            title: "Assignment on design across platforms",
+            type: "assignment",
             status: "available",
           },
         ],

@@ -154,6 +154,73 @@ export const studentLiveQuizQuestionsById: Record<string, StudentLiveQuizQuestio
       ],
     },
   ],
+  "lesson-quiz-intro": [
+    {
+      id: "q1",
+      number: 1,
+      question: "What does UX stand for?",
+      type: "single",
+      points: 1,
+      options: [
+        "User Experience",
+        "Universal Extension",
+        "Unified Export",
+        "User Exchange",
+      ],
+    },
+    {
+      id: "q2",
+      number: 2,
+      question: "Who is an end user in UX design?",
+      type: "single",
+      points: 1,
+      options: [
+        "The person who will use the product or service",
+        "The project manager only",
+        "The software developer building the backend",
+        "The marketing team writing ad copy",
+      ],
+    },
+    {
+      id: "q3",
+      number: 3,
+      question: "Which activities are part of a UX designer's role? Select all that apply.",
+      type: "multiple",
+      points: 1,
+      options: [
+        "Empathizing with users",
+        "Creating wireframes and prototypes",
+        "Ignoring user feedback",
+        "Testing designs with users",
+      ],
+    },
+    {
+      id: "q4",
+      number: 4,
+      question: "Why is user research important in UX?",
+      type: "single",
+      points: 1,
+      options: [
+        "It helps teams understand user needs before designing solutions",
+        "It replaces the need for any visual design",
+        "It guarantees a product will go viral",
+        "It eliminates the need for developer collaboration",
+      ],
+    },
+    {
+      id: "q5",
+      number: 5,
+      question: "What makes an interaction usable?",
+      type: "single",
+      points: 1,
+      options: [
+        "It is easy to understand, efficient, and accessible for the user",
+        "It uses as many animations as possible",
+        "It hides all navigation options",
+        "It requires expert training before first use",
+      ],
+    },
+  ],
 };
 
 /** Demo in-progress quiz state (timer + saved answers) keyed by course slug → quiz id. */
@@ -165,6 +232,12 @@ export const studentLiveQuizPlayDemo: Record<string, Record<string, StudentLiveQ
     },
     "live-l6": {
       remainingSeconds: 8 * 60,
+      initialAnswers: {},
+    },
+  },
+  "foundations-user-experience-ux-design": {
+    "lesson-quiz-intro": {
+      remainingSeconds: 10 * 60,
       initialAnswers: {},
     },
   },
@@ -211,6 +284,27 @@ export const studentLiveQuizSessions: Record<string, Record<string, StudentLiveQ
         id: "live-l14",
         title: "Quiz on how UX designers think across platforms",
         href: ROUTES.student.courseQuiz("hsc-25-online-batch", "live-l14"),
+      },
+    },
+  },
+  "foundations-user-experience-ux-design": {
+    "lesson-quiz-intro": {
+      quizId: "lesson-quiz-intro",
+      slug: "foundations-user-experience-ux-design",
+      title: "Quiz on Introducing user experience design",
+      submissionDate: "Sunday, May 11, 2024",
+      linkedLessonId: "lesson-quiz-intro",
+      totalQuestions: 5,
+      passMarkPercent: 40,
+      totalTimeMinutes: 10,
+      warningMessage: defaultWarning,
+      previousQuiz: {
+        id: "lesson-ux-tools",
+        title: "Most common UX tools",
+        href: ROUTES.student.courseLesson(
+          "foundations-user-experience-ux-design",
+          "lesson-ux-tools"
+        ),
       },
     },
   },
@@ -296,6 +390,28 @@ export const studentLiveQuizResults: Record<string, Record<string, StudentLiveQu
       checkAnswersHref: ROUTES.student.courseQuizAnswers("hsc-25-online-batch", "live-l14-failed"),
     },
   },
+  "foundations-user-experience-ux-design": {
+    "lesson-quiz-intro": {
+      quizId: "lesson-quiz-intro",
+      slug: "foundations-user-experience-ux-design",
+      title: "Quiz on Introducing user experience design",
+      resultTitle: "Result of Quiz on Introducing user experience design",
+      participatedOn: "Sunday, May 11, 2024",
+      linkedLessonId: "lesson-quiz-intro",
+      passed: true,
+      correctAnswers: 4,
+      totalQuestions: 5,
+      gradePercent: 80,
+      timeTakenMinutes: 7,
+      allottedTimeMinutes: 10,
+      outcomeTitle: "Congratulations!!",
+      outcomeMessage: "You have passed on this quiz. Keep Shining",
+      checkAnswersHref: ROUTES.student.courseQuizAnswers(
+        "foundations-user-experience-ux-design",
+        "lesson-quiz-intro"
+      ),
+    },
+  },
 };
 
 /** Demo quiz time-over / missed deadline states keyed by course slug → quiz id. */
@@ -353,6 +469,21 @@ export const studentLiveQuizTimeOverDemo: Record<
         title: "Quiz 3",
         href: ROUTES.student.courseQuizTimeOver("hsc-25-online-batch", "live-l14"),
       },
+    },
+  },
+  "foundations-user-experience-ux-design": {
+    "lesson-quiz-intro": {
+      quizId: "lesson-quiz-intro",
+      slug: "foundations-user-experience-ux-design",
+      title: "Quiz on Introducing user experience design",
+      deadlineDate: "Sunday, May 11, 2024",
+      heading: "Time Over",
+      message: "Sorry! Your exam time has over. Keep remembering your quiz time",
+      linkedLessonId: "lesson-quiz-intro",
+      checkAnswersHref: ROUTES.student.courseQuizAnswers(
+        "foundations-user-experience-ux-design",
+        "lesson-quiz-intro"
+      ),
     },
   },
 };

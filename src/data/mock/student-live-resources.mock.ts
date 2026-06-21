@@ -3,6 +3,24 @@ import type { StudentCourseDetailsData } from "@/types/student-course-details.ty
 import { getStudentCourseDetails } from "@/data/mock/student-course-details.mock";
 import { ROUTES } from "@/constants";
 
+const RECORDED_COURSE_SLUG = "foundations-user-experience-ux-design";
+const RECORDED_DEFAULT_RESOURCE = "lesson-basics-ux-reading";
+
+const recordedResourceItems = [
+  {
+    id: "res-pdf-1",
+    title: "Hand note of the basics of user experience design.pdf",
+    fileType: "pdf" as const,
+    downloadUrl: "#",
+  },
+  {
+    id: "res-svg-1",
+    title: "Video slide of the basics of user experience design.jpg",
+    fileType: "svg" as const,
+    downloadUrl: "#",
+  },
+];
+
 const resourceSessions: Record<string, Record<string, StudentLiveResourceSession>> = {
   "hsc-25-online-batch": {
     "live-l11": {
@@ -122,20 +140,109 @@ const resourceSessions: Record<string, Record<string, StudentLiveResourceSession
       ],
     },
   },
+  [RECORDED_COURSE_SLUG]: {
+    "lesson-basics-ux-reading": {
+      resourceId: "lesson-basics-ux-reading",
+      slug: RECORDED_COURSE_SLUG,
+      title: "The basics of user experience design",
+      topicTitle: "Introducing UX design",
+      linkedLessonId: "lesson-basics-ux-reading",
+      previousResource: {
+        id: "lesson-basics-ux",
+        title: "The basics of user experience design",
+        href: ROUTES.student.courseLesson(RECORDED_COURSE_SLUG, "lesson-basics-ux"),
+      },
+      nextResource: {
+        id: "lesson-design-good-ux",
+        title: "Design for good user experience",
+        href: ROUTES.student.courseResources(RECORDED_COURSE_SLUG, "lesson-design-good-ux"),
+      },
+      items: recordedResourceItems,
+    },
+    "lesson-design-good-ux": {
+      resourceId: "lesson-design-good-ux",
+      slug: RECORDED_COURSE_SLUG,
+      title: "Design for good user experience",
+      topicTitle: "Introducing UX design",
+      linkedLessonId: "lesson-design-good-ux",
+      previousResource: {
+        id: "lesson-basics-ux-reading",
+        title: "The basics of user experience design",
+        href: ROUTES.student.courseResources(RECORDED_COURSE_SLUG, "lesson-basics-ux-reading"),
+      },
+      nextResource: {
+        id: "lesson-cross-functional",
+        title: "Work in a cross-functional team",
+        href: ROUTES.student.courseResources(RECORDED_COURSE_SLUG, "lesson-cross-functional"),
+      },
+      items: [
+        {
+          id: "res-pdf-2",
+          title: "Design for good user experience handout.pdf",
+          fileType: "pdf",
+          downloadUrl: "#",
+        },
+      ],
+    },
+    "lesson-cross-functional": {
+      resourceId: "lesson-cross-functional",
+      slug: RECORDED_COURSE_SLUG,
+      title: "Work in a cross-functional team",
+      topicTitle: "Introducing UX design",
+      linkedLessonId: "lesson-cross-functional",
+      previousResource: {
+        id: "lesson-design-good-ux",
+        title: "Design for good user experience",
+        href: ROUTES.student.courseResources(RECORDED_COURSE_SLUG, "lesson-design-good-ux"),
+      },
+      nextResource: {
+        id: "lesson-ux-tools",
+        title: "Most common UX tools",
+        href: ROUTES.student.courseLesson(RECORDED_COURSE_SLUG, "lesson-ux-tools"),
+      },
+      items: [
+        {
+          id: "res-svg-2",
+          title: "Cross-functional teamwork guide",
+          fileType: "svg",
+          downloadUrl: "#",
+        },
+      ],
+    },
+    "lesson-problem-framing": {
+      resourceId: "lesson-problem-framing",
+      slug: RECORDED_COURSE_SLUG,
+      title: "Problem framing",
+      topicTitle: "Thinking like a UX designer",
+      linkedLessonId: "lesson-problem-framing",
+      items: [
+        {
+          id: "res-pdf-3",
+          title: "Problem framing worksheet.pdf",
+          fileType: "pdf",
+          downloadUrl: "#",
+        },
+      ],
+    },
+  },
 };
 
 export function getStudentLiveResourceSession(
   slug: string,
-  resourceId = "live-l11"
+  resourceId?: string
 ): { course: StudentCourseDetailsData; session: StudentLiveResourceSession } | null {
   const course = getStudentCourseDetails(slug);
 
-  if (!course || course.courseType !== "live") {
+  if (!course || (course.courseType !== "live" && course.courseType !== "recorded")) {
     return null;
   }
 
+  const defaultResourceId =
+    course.courseType === "recorded" ? RECORDED_DEFAULT_RESOURCE : "live-l11";
+  const resolvedResourceId = resourceId ?? defaultResourceId;
   const session =
-    resourceSessions[slug]?.[resourceId] ?? resourceSessions[slug]?.["live-l11"];
+    resourceSessions[slug]?.[resolvedResourceId] ??
+    resourceSessions[slug]?.[defaultResourceId];
 
   if (!session) {
     return null;

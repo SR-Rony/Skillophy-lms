@@ -153,7 +153,10 @@ export function StudentCourseDetailsOverview({
           >
             ← Back to Overview
           </button>
-          <StudentCourseCurriculum modules={course.curriculum} />
+          <StudentCourseCurriculum
+            modules={course.curriculum}
+            courseSlug={course.courseType === "recorded" ? course.slug : undefined}
+          />
         </div>
       )}
 
@@ -185,7 +188,10 @@ export function StudentCourseDetailsOverview({
         </aside>
 
         <div className="hidden lg:block">
-          <StudentCourseCurriculum modules={course.curriculum} />
+          <StudentCourseCurriculum
+            modules={course.curriculum}
+            courseSlug={course.courseType === "recorded" ? course.slug : undefined}
+          />
         </div>
       </div>
     </>

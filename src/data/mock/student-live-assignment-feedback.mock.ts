@@ -66,6 +66,19 @@ const assignmentFeedback: Record<string, Record<string, Partial<StudentLiveAssig
       },
     },
   },
+  "foundations-user-experience-ux-design": {
+    "lesson-assignment-platforms": {
+      marks: 84,
+      maxMarks: 100,
+      instructorFeedback: defaultInstructorFeedback,
+      submissionUrl:
+        "https://www.figma.com/file/bTSILrCuHiTjIfcRm2vmIF/Design-Audit?type=design&node-id=0%3A1",
+      assignmentHref: ROUTES.student.courseAssignment(
+        "foundations-user-experience-ux-design",
+        "lesson-assignment-platforms"
+      ),
+    },
+  },
 };
 
 export function getStudentLiveAssignmentFeedback(
@@ -78,9 +91,13 @@ export function getStudentLiveAssignmentFeedback(
     return null;
   }
 
+  const defaultAssignmentId =
+    base.course.courseType === "recorded"
+      ? "lesson-assignment-platforms"
+      : "live-assignment-platforms";
   const overrides =
     assignmentFeedback[slug]?.[assignmentId] ??
-    assignmentFeedback[slug]?.["live-assignment-platforms"];
+    assignmentFeedback[slug]?.[defaultAssignmentId];
 
   if (!overrides?.marks || !overrides.maxMarks || !overrides.instructorFeedback) {
     return null;

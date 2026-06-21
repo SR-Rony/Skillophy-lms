@@ -7,3 +7,4 @@ export { StudentCourseLeaderboardTab } from "./student-course-leaderboard-tab";
 export { StudentCourseAssignmentTab } from "./student-course-assignment-tab";
 export { StudentCourseLiveOverview } from "./student-course-live-overview";
 export { StudentCourseLiveCurriculum } from "./student-course-live-curriculum";
+export { StudentCourseLearningCurriculum } from "./student-course-learning-curriculum";

@@ -1,16 +1,8 @@
-import { Container } from "@/components/shared";
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { StudentWishlistPage } from "@/components/student/student-wishlist-page";
+import { wishlistCourses } from "@/data/mock/my-courses.mock";
 
 export const metadata = { title: "Wishlist" };
 
-export default function StudentWishlistPage() {
-  return (
-    <Container className="py-8">
-      <ModulePlaceholder
-        title="Wishlist"
-        description="Courses you saved for later."
-        feature="wishlist"
-      />
-    </Container>
-  );
+export default function StudentWishlistRoute() {
+  return <StudentWishlistPage courses={wishlistCourses} />;
 }

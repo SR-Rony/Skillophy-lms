@@ -1,16 +1,10 @@
-import { Container } from "@/components/shared";
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { StudentAssignmentsPage } from "@/components/student/student-assignments-page";
+import { getStudentAssignmentsPageData } from "@/data/mock/student-assignments.mock";
 
 export const metadata = { title: "Assignments" };
 
-export default function StudentAssignmentsPage() {
-  return (
-    <Container className="py-8">
-      <ModulePlaceholder
-        title="Assignments"
-        description="View and submit your assignments."
-        feature="assignments"
-      />
-    </Container>
-  );
+export default function StudentAssignmentsRoute() {
+  const courseGroups = getStudentAssignmentsPageData();
+
+  return <StudentAssignmentsPage courseGroups={courseGroups} />;
 }

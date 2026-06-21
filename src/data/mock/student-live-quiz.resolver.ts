@@ -7,6 +7,7 @@ import {
   studentLiveQuizTimeOverDemo,
 } from "@/data/mock/student-live-quiz.mock";
 import { getStudentCourseDetails } from "@/data/mock/student-course-details.mock";
+import type { StudentCourseDetailsData } from "@/types/student-course-details.types";
 import type {
   StudentLiveQuizAnswerReviewPageData,
   StudentLiveQuizAttempt,
@@ -19,18 +20,22 @@ import type {
 
 const DEFAULT_QUIZ_ID = "live-l14";
 
-function resolveQuizId(quizId?: string) {
-  return quizId ?? DEFAULT_QUIZ_ID;
-}
-
-function getLiveCourse(slug: string) {
+function getLearningCourse(slug: string) {
   const course = getStudentCourseDetails(slug);
 
-  if (!course || course.courseType !== "live") {
+  if (!course || (course.courseType !== "live" && course.courseType !== "recorded")) {
     return null;
   }
 
   return course;
+}
+
+function getDefaultQuizId(course: StudentCourseDetailsData) {
+  return course.courseType === "recorded" ? "lesson-quiz-intro" : DEFAULT_QUIZ_ID;
+}
+
+function resolveQuizId(quizId: string | undefined, course: StudentCourseDetailsData) {
+  return quizId ?? getDefaultQuizId(course);
 }
 
 function resolveQuestions(quizId: string, fallbackQuizId: string) {
@@ -58,16 +63,17 @@ export function resolveStudentLiveQuizSession(
   slug: string,
   quizId?: string
 ): StudentLiveQuizSessionPageData | null {
-  const course = getLiveCourse(slug);
+  const course = getLearningCourse(slug);
 
   if (!course) {
     return null;
   }
 
-  const resolvedQuizId = resolveQuizId(quizId);
+  const defaultQuizId = getDefaultQuizId(course);
+  const resolvedQuizId = resolveQuizId(quizId, course);
   const session =
     studentLiveQuizSessions[slug]?.[resolvedQuizId] ??
-    studentLiveQuizSessions[slug]?.[DEFAULT_QUIZ_ID];
+    studentLiveQuizSessions[slug]?.[defaultQuizId];
 
   if (!session) {
     return null;
@@ -121,16 +127,17 @@ export function resolveStudentLiveQuizResult(
   slug: string,
   quizId?: string
 ): StudentLiveQuizResultPageData | null {
-  const course = getLiveCourse(slug);
+  const course = getLearningCourse(slug);
 
   if (!course) {
     return null;
   }
 
-  const resolvedQuizId = resolveQuizId(quizId);
+  const defaultQuizId = getDefaultQuizId(course);
+  const resolvedQuizId = resolveQuizId(quizId, course);
   const result =
     studentLiveQuizResults[slug]?.[resolvedQuizId] ??
-    studentLiveQuizResults[slug]?.[DEFAULT_QUIZ_ID];
+    studentLiveQuizResults[slug]?.[defaultQuizId];
 
   if (!result) {
     return null;
@@ -143,16 +150,17 @@ export function resolveStudentLiveQuizAnswerReview(
   slug: string,
   quizId?: string
 ): StudentLiveQuizAnswerReviewPageData | null {
-  const course = getLiveCourse(slug);
+  const course = getLearningCourse(slug);
 
   if (!course) {
     return null;
   }
 
-  const resolvedQuizId = resolveQuizId(quizId);
+  const defaultQuizId = getDefaultQuizId(course);
+  const resolvedQuizId = resolveQuizId(quizId, course);
   const review =
     studentLiveQuizAnswerReviews[slug]?.[resolvedQuizId] ??
-    studentLiveQuizAnswerReviews[slug]?.[DEFAULT_QUIZ_ID];
+    studentLiveQuizAnswerReviews[slug]?.[defaultQuizId];
 
   if (!review) {
     return null;
@@ -165,16 +173,17 @@ export function resolveStudentLiveQuizTimeOver(
   slug: string,
   quizId?: string
 ): StudentLiveQuizTimeOverPageData | null {
-  const course = getLiveCourse(slug);
+  const course = getLearningCourse(slug);
 
   if (!course) {
     return null;
   }
 
-  const resolvedQuizId = resolveQuizId(quizId);
+  const defaultQuizId = getDefaultQuizId(course);
+  const resolvedQuizId = resolveQuizId(quizId, course);
   const timeOver =
     studentLiveQuizTimeOverDemo[slug]?.[resolvedQuizId] ??
-    studentLiveQuizTimeOverDemo[slug]?.[DEFAULT_QUIZ_ID];
+    studentLiveQuizTimeOverDemo[slug]?.[defaultQuizId];
 
   if (!timeOver) {
     return null;

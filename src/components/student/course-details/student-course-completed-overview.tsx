@@ -109,7 +109,11 @@ export function StudentCourseCompletedOverview({
           >
             ← Back to Overview
           </button>
-          <StudentCourseCurriculum modules={course.curriculum} isCourseCompleted />
+          <StudentCourseCurriculum
+            modules={course.curriculum}
+            isCourseCompleted
+            courseSlug={course.courseType === "recorded" ? course.slug : undefined}
+          />
         </div>
       )}
 
@@ -132,7 +136,11 @@ export function StudentCourseCompletedOverview({
         </aside>
 
         <div className="hidden lg:block">
-          <StudentCourseCurriculum modules={course.curriculum} isCourseCompleted />
+          <StudentCourseCurriculum
+            modules={course.curriculum}
+            isCourseCompleted
+            courseSlug={course.courseType === "recorded" ? course.slug : undefined}
+          />
         </div>
       </div>
     </>

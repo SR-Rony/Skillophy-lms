@@ -145,6 +145,52 @@ const assignmentTasks: Record<string, Record<string, StudentLiveAssignmentTask>>
       ],
     },
   },
+  "foundations-user-experience-ux-design": {
+    "lesson-assignment-platforms": {
+      assignmentId: "lesson-assignment-platforms",
+      slug: "foundations-user-experience-ux-design",
+      title: "Assignment on design across platforms",
+      submissionDate: "Sunday, May 11, 2024",
+      lastSubmissionDate: "Sunday, May 11, 2024",
+      linkedLessonId: "lesson-assignment-platforms",
+      placeholderUrl:
+        "https://www.figma.com/file/bTSILrCuHiTjIfcRm2vmIF/Design-Audit?type=design&node-id=0%3A1",
+      previousAssignment: {
+        id: "lesson-quiz-intro",
+        title: "Quiz on Introducing user experience design",
+        href: ROUTES.student.courseQuiz(
+          "foundations-user-experience-ux-design",
+          "lesson-quiz-intro"
+        ),
+      },
+      sections: [
+        {
+          title: "Design Proposal",
+          items: [
+            "Develop a comprehensive design proposal outlining the approach, goals, and deliverables for the project.",
+            "Create wireframes, mockups, or prototypes to visualize the proposed design solutions.",
+            "Present the design proposal to stakeholders for feedback and approval.",
+          ],
+        },
+        {
+          title: "Iterative Design",
+          items: [
+            "Refine the design based on feedback from stakeholders and user testing.",
+            "Ensure consistency across all deliverables and maintain alignment with brand guidelines.",
+          ],
+        },
+        {
+          title: "Deliverables",
+          items: [
+            "Research and analysis report",
+            "Design proposal document",
+            "Wireframes/mockups",
+            "Final presentation slides",
+          ],
+        },
+      ],
+    },
+  },
 };
 
 export function getStudentLiveAssignment(
@@ -153,12 +199,16 @@ export function getStudentLiveAssignment(
 ): { course: StudentCourseDetailsData; assignment: StudentLiveAssignmentTask } | null {
   const course = getStudentCourseDetails(slug);
 
-  if (!course || course.courseType !== "live") {
+  if (!course || (course.courseType !== "live" && course.courseType !== "recorded")) {
     return null;
   }
 
+  const defaultAssignmentId =
+    course.courseType === "recorded" ? "lesson-assignment-platforms" : "live-assignment-platforms";
+  const resolvedAssignmentId = assignmentId ?? defaultAssignmentId;
   const assignment =
-    assignmentTasks[slug]?.[assignmentId] ?? assignmentTasks[slug]?.["live-assignment-platforms"];
+    assignmentTasks[slug]?.[resolvedAssignmentId] ??
+    assignmentTasks[slug]?.[defaultAssignmentId];
 
   if (!assignment) {
     return null;
