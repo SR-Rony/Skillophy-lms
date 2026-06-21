@@ -1,13 +1,10 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { TeacherMyCoursesPage } from "@/components/teacher/courses";
+import { getTeacherCoursesPageData } from "@/data/mock/teacher-courses.mock";
 
-export const metadata = { title: "Courses" };
+export const metadata = { title: "My Courses" };
 
 export default function TeacherCoursesPage() {
-  return (
-    <ModulePlaceholder
-      title="My Courses"
-      description="Create and manage your courses."
-      feature="courses"
-    />
-  );
+  const data = getTeacherCoursesPageData();
+
+  return <TeacherMyCoursesPage data={data} />;
 }

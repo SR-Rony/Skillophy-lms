@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { TeacherDashboardEmptyState } from "@/components/teacher/dashboard/teacher-dashboard-empty-state";
+import { TeacherEmptyIllustration } from "@/components/teacher/shared/teacher-empty-illustration";
 import type { TeacherDashboardEmptyState as TeacherDashboardEmptyStateData } from "@/types/teacher-dashboard.types";
 import { cn } from "@/utils";
 
@@ -22,15 +22,7 @@ export function TeacherClassScheduleCard({ emptyState, className }: TeacherClass
       />
 
       <TeacherDashboardEmptyState
-        icon={
-          <Image
-            src="/images/clander.png"
-            alt=""
-            width={128}
-            height={128}
-            className="relative h-auto w-[104px] object-contain sm:w-[118px]"
-          />
-        }
+        icon={<TeacherEmptyIllustration size="lg" className="relative" />}
         message={emptyState.message}
         className="relative py-10 sm:py-11"
       />

@@ -3,38 +3,13 @@ import Link from "next/link";
 import { TeacherCourseFilter } from "@/components/teacher/dashboard/teacher-course-filter";
 import { TeacherDashboardEmptyState } from "@/components/teacher/dashboard/teacher-dashboard-empty-state";
 import { TeacherDashboardPanel } from "@/components/teacher/dashboard/teacher-dashboard-panel";
+import { TeacherEmptyIllustration } from "@/components/teacher/shared/teacher-empty-illustration";
 import type {
   TeacherDashboardCourseFilter,
   TeacherDashboardEmptyState as TeacherDashboardEmptyStateData,
   TeacherSubmittedAssignment,
 } from "@/types/teacher-dashboard.types";
 import { cn } from "@/utils";
-
-function SubmittedAssignmentsEmptyIllustration() {
-  return (
-    <svg
-      viewBox="0 0 120 110"
-      className="mx-auto h-[96px] w-[108px] sm:h-[104px] sm:w-[116px]"
-      aria-hidden
-    >
-      <rect x="24" y="18" width="52" height="66" rx="10" fill="#fff8e8" stroke="#fde68a" strokeWidth="2" />
-      <path
-        d="M34 36H66M34 46H60M34 56H62M34 66H54"
-        stroke="#d1d5db"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      <circle cx="78" cy="72" r="18" fill="#ff4747" />
-      <path
-        d="M72 72L76 76L84 68"
-        stroke="white"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 interface TeacherSubmittedAssignmentsCardProps {
   assignments: TeacherSubmittedAssignment[];
@@ -127,7 +102,7 @@ export function TeacherSubmittedAssignmentsCard({
         </div>
       ) : (
         <TeacherDashboardEmptyState
-          icon={<SubmittedAssignmentsEmptyIllustration />}
+          icon={<TeacherEmptyIllustration size="md" />}
           message={emptyState.message}
           className="py-14 sm:py-16"
         />

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { TeacherCourseFilter } from "@/components/teacher/dashboard/teacher-course-filter";
 import { TeacherDashboardEmptyState } from "@/components/teacher/dashboard/teacher-dashboard-empty-state";
 import { TeacherDashboardPanel } from "@/components/teacher/dashboard/teacher-dashboard-panel";
+import { TeacherEmptyIllustration } from "@/components/teacher/shared/teacher-empty-illustration";
 import type {
   TeacherDashboardCourseFilter,
   TeacherDashboardEmptyState as TeacherDashboardEmptyStateData,
@@ -20,20 +21,6 @@ const medalStyles: Record<number, string> = {
   2: "bg-[#94a3b8] text-white",
   3: "bg-[#d97706] text-white",
 };
-
-function LearnersPerformanceEmptyIllustration() {
-  return (
-    <svg
-      viewBox="0 0 140 110"
-      className="mx-auto h-[92px] w-[120px] sm:h-[100px] sm:w-[132px]"
-      aria-hidden
-    >
-      <rect x="24" y="24" width="92" height="58" rx="8" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="2" />
-      <rect x="24" y="78" width="92" height="8" rx="2" fill="#e2e8f0" />
-      <rect x="58" y="86" width="24" height="4" rx="1" fill="#cbd5e1" />
-    </svg>
-  );
-}
 
 function TeacherLearnerPerformanceRow({ entry }: { entry: TeacherLearnerPerformanceEntry }) {
   const rowBg = rankStyles[entry.rank] ?? "bg-white";
@@ -124,7 +111,7 @@ export function TeacherLearnersPerformanceCard({
         </div>
       ) : (
         <TeacherDashboardEmptyState
-          icon={<LearnersPerformanceEmptyIllustration />}
+          icon={<TeacherEmptyIllustration size="sm" />}
           message={emptyState.message}
           className="py-8 sm:py-10"
         />

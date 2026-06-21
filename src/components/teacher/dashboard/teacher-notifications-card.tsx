@@ -1,16 +1,14 @@
-import Image from "next/image";
 import Link from "next/link";
 import { FileText, MessageCircle, Radio } from "lucide-react";
 import { TeacherDashboardEmptyState } from "@/components/teacher/dashboard/teacher-dashboard-empty-state";
 import { TeacherDashboardPanel } from "@/components/teacher/dashboard/teacher-dashboard-panel";
+import { TeacherEmptyIllustration } from "@/components/teacher/shared/teacher-empty-illustration";
 import type {
   TeacherDashboardEmptyState as TeacherDashboardEmptyStateData,
   TeacherDashboardNotification,
   TeacherDashboardNotificationType,
 } from "@/types/teacher-dashboard.types";
 import { cn } from "@/utils";
-
-const notificationEmptyImage = "/images/notification 1.png";
 
 const notificationIconConfig: Record<
   TeacherDashboardNotificationType,
@@ -111,15 +109,7 @@ export function TeacherNotificationsCard({
         </div>
       ) : (
         <TeacherDashboardEmptyState
-          icon={
-            <Image
-              src={notificationEmptyImage}
-              alt=""
-              width={96}
-              height={96}
-              className="h-[88px] w-[88px] object-contain sm:h-24 sm:w-24"
-            />
-          }
+          icon={<TeacherEmptyIllustration size="sm" />}
           message={emptyState.message}
           className="py-8 sm:py-10"
         />
