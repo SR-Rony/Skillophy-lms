@@ -20,4 +20,4 @@ export {
   teacherPaymentHistoryService,
   teacherWorkshopService,
 } from "./teacher";
-export { adminDashboardService } from "./admin";
+export { adminDashboardService, adminEmployeeManagementService } from "./admin";

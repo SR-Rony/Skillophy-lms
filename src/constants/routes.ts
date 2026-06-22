@@ -91,6 +91,7 @@ export const ROUTES = {
   admin: {
     root: "/admin",
     users: "/admin/users",
+    learners: "/admin/users/learners",
     students: "/admin/users/students",
     teachers: "/admin/users/teachers",
     admins: "/admin/users/admins",

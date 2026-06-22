@@ -46,10 +46,8 @@ export const adminNav: NavItem[] = [
     title: "User Management",
     iconName: "userCog",
     children: [
-      { title: "All Users", href: ROUTES.admin.users },
-      { title: "Students", href: ROUTES.admin.students },
-      { title: "Teachers", href: ROUTES.admin.teachers },
-      { title: "Admins", href: ROUTES.admin.admins },
+      { title: "Employee Management", href: ROUTES.admin.users },
+      { title: "Learner Management", href: ROUTES.admin.learners },
     ],
   },
   { title: "Course Management", href: ROUTES.admin.courses, iconName: "clapperboard" },

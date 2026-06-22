@@ -7,8 +7,9 @@ import { ROUTES } from "@/constants";
 
 const adminPageTitles: Record<string, string> = {
   [ROUTES.admin.root]: "Dashboard",
-  [ROUTES.admin.users]: "User Management",
-  [ROUTES.admin.students]: "Students",
+  [ROUTES.admin.users]: "Employee Management",
+  [ROUTES.admin.learners]: "Learner Management",
+  [ROUTES.admin.students]: "Learner Management",
   [ROUTES.admin.teachers]: "Teachers",
   [ROUTES.admin.admins]: "Admins",
   [ROUTES.admin.courses]: "Course Management",
@@ -45,6 +46,8 @@ interface AdminLayoutShellProps {
 
 export function AdminLayoutShell({ children, headerBadges }: AdminLayoutShellProps) {
   const pathname = usePathname();
+  const showHeaderBackButton =
+    pathname === ROUTES.admin.users || pathname === ROUTES.admin.learners;
 
   return (
     <DashboardShell
@@ -52,6 +55,7 @@ export function AdminLayoutShell({ children, headerBadges }: AdminLayoutShellPro
       footerNavItems={adminFooterNav}
       roleLabel="Admin"
       headerTitle={getAdminPageTitle(pathname)}
+      showHeaderBackButton={showHeaderBackButton}
       headerMessageCount={headerBadges.messages}
       headerNotificationCount={headerBadges.notifications}
     >

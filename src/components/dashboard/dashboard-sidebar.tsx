@@ -142,7 +142,8 @@ function SidebarLink({
       onClick={onNavigate}
       className={cn(
         navLinkClassName(isActive, sidebarCollapsed && !nested),
-        nested && !sidebarCollapsed && "ml-3 rounded-lg py-2 pl-4 text-[13px]"
+        nested && !sidebarCollapsed && "ml-1 border-l-[3px] py-2 pl-5 text-[13px]",
+        nested && isActive && !sidebarCollapsed && "border-l-primary bg-[#fff0f0] font-semibold text-primary"
       )}
       title={sidebarCollapsed && !nested ? item.title : undefined}
     >

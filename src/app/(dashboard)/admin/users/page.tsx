@@ -1,13 +1,10 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { AdminEmployeeManagementPage } from "@/components/admin/employee-management";
+import { adminEmployeeManagementService } from "@/services/admin";
 
-export const metadata = { title: "Users" };
+export const metadata = { title: "Employee Management" };
 
-export default function AdminUsersPage() {
-  return (
-    <ModulePlaceholder
-      title="User Management"
-      description="Manage students, teachers, and admins."
-      feature="users"
-    />
-  );
+export default async function AdminUsersPage() {
+  const data = await adminEmployeeManagementService.getEmployees();
+
+  return <AdminEmployeeManagementPage data={data} />;
 }

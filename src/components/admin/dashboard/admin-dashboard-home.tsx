@@ -60,7 +60,7 @@ export function AdminDashboardHome({ data }: AdminDashboardHomeProps) {
         />
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start xl:gap-6">
+      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(300px,360px)] lg:items-stretch xl:gap-6">
         <AdminSalesRevenueCard
           salesRevenue={data.salesRevenue}
           highlightedMonth={data.highlightedRevenueMonth}
