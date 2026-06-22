@@ -1,6 +1,8 @@
 import { getAdminDashboard } from "./admin-dashboard.mock";
 import { getAdminEmployeeManagement } from "./admin-employee-management.mock";
 import { getAdminEmployeeProfile } from "./admin-employee-profile.mock";
+import { getAdminLearnerManagement } from "./admin-learner-management.mock";
+import { getAdminLearnerProfile } from "./admin-learner-profile.mock";
 import { getAdminTeacherProfile } from "./admin-teacher-profile.mock";
 
 export function resolveAdminDashboard() {
@@ -17,4 +19,12 @@ export function resolveAdminTeacherProfile(employeeId: string) {
 
 export function resolveAdminEmployeeProfile(employeeId: string) {
   return getAdminEmployeeProfile(employeeId);
+}
+
+export function resolveAdminLearnerManagement() {
+  return getAdminLearnerManagement();
+}
+
+export function resolveAdminLearnerProfile(learnerId: string) {
+  return getAdminLearnerProfile(learnerId);
 }

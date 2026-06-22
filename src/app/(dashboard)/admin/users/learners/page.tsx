@@ -1,13 +1,15 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { Suspense } from "react";
+import { AdminLearnerManagementPage } from "@/components/admin/learner-management";
+import { adminLearnerManagementService } from "@/services/admin";
 
 export const metadata = { title: "Learner Management" };
 
-export default function AdminLearnersPage() {
+export default async function AdminLearnersPage() {
+  const data = await adminLearnerManagementService.getLearners();
+
   return (
-    <ModulePlaceholder
-      title="Learner Management"
-      description="Manage learners, enrollments, and access."
-      feature="admin/learners"
-    />
+    <Suspense fallback={<div className="min-h-[320px] rounded-2xl bg-white" />}>
+      <AdminLearnerManagementPage data={data} />
+    </Suspense>
   );
 }

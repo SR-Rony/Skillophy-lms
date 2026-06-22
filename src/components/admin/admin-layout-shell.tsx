@@ -48,6 +48,10 @@ function isEmployeeProfileRoute(pathname: string) {
   return /^\/admin\/users\/[^/]+$/.test(pathname) && !staticUserSubroutes.includes(pathname);
 }
 
+function isLearnerProfileRoute(pathname: string) {
+  return /^\/admin\/users\/learners\/[^/]+$/.test(pathname);
+}
+
 interface AdminLayoutShellProps {
   children: React.ReactNode;
   headerBadges: {
@@ -60,12 +64,18 @@ export function AdminLayoutShell({ children, headerBadges }: AdminLayoutShellPro
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const isProfileRoute = isEmployeeProfileRoute(pathname);
+  const isLearnerProfile = isLearnerProfileRoute(pathname);
   const fromTab = parseAdminEmployeeTab(searchParams.get("fromTab"));
   const showHeaderBackButton =
     pathname === ROUTES.admin.users ||
     pathname === ROUTES.admin.learners ||
-    isProfileRoute;
-  const headerBackHref = isProfileRoute ? getAdminEmployeeManagementHref(fromTab) : undefined;
+    isProfileRoute ||
+    isLearnerProfile;
+  const headerBackHref = isProfileRoute
+    ? getAdminEmployeeManagementHref(fromTab)
+    : isLearnerProfile
+      ? ROUTES.admin.learners
+      : undefined;
 
   return (
     <DashboardShell

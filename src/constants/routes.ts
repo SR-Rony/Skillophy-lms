@@ -92,6 +92,7 @@ export const ROUTES = {
     root: "/admin",
     users: "/admin/users",
     learners: "/admin/users/learners",
+    learnerDetail: (learnerId: string) => `/admin/users/learners/${learnerId}`,
     students: "/admin/users/students",
     teachers: "/admin/users/teachers",
     admins: "/admin/users/admins",
