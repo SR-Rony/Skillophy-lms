@@ -7,7 +7,7 @@ import type {
 } from "@/types/teacher-account-settings.types";
 import { TeacherAccountSettingsEducationSection } from "./teacher-account-settings-education-section";
 import { TeacherAccountSettingsHero } from "./teacher-account-settings-hero";
-import { TeacherAccountSettingsMorePlaceholder } from "./teacher-account-settings-more-placeholder";
+import { TeacherAccountSettingsMoreView } from "./teacher-account-settings-more-view";
 import { TeacherAccountSettingsProfileView } from "./teacher-account-settings-profile-view";
 
 interface TeacherAccountSettingsPageProps {
@@ -60,7 +60,7 @@ export function TeacherAccountSettingsPage({ data }: TeacherAccountSettingsPageP
             />
           </div>
         ) : (
-          <TeacherAccountSettingsMorePlaceholder />
+          <TeacherAccountSettingsMoreView data={data.moreData} />
         )}
       </div>
     </div>

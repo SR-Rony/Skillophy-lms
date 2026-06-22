@@ -98,5 +98,31 @@ export function getTeacherAccountSettingsPageData(): TeacherAccountSettingsPageD
         "Grammar",
       ],
     },
+    moreData: {
+      accountActions: [
+        {
+          id: "reset-password",
+          title: "Reset user password",
+          description:
+            "By resetting password, user will get a link in his email to set his new password from the portal.",
+          actionLabel: "Reset Now",
+        },
+        {
+          id: "deactivate",
+          title: "Deactivate account",
+          description: "Do you want to deactivate this account?",
+          actionLabel: "Deactivate",
+        },
+        {
+          id: "delete",
+          title: "Delete account",
+          description: "Do you want to delete this account?",
+          actionLabel: "Delete",
+        },
+      ],
+      currentDevice: studentAccountSettingsDemo.moreData.currentDevice,
+      otherDevices: studentAccountSettingsDemo.moreData.otherDevices,
+      deviceLimitNote: studentAccountSettingsDemo.moreData.deviceLimitNote,
+    },
   };
 }

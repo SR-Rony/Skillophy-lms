@@ -2,6 +2,7 @@ import type {
   StudentAccountSettingsCourseFormOptions,
   StudentAccountSettingsEducationData,
   StudentAccountSettingsEducationFormOptions,
+  StudentAccountSettingsMoreData,
   StudentAccountSettingsSkillsFormOptions,
 } from "./student-account-settings.types";
 
@@ -61,4 +62,5 @@ export interface TeacherAccountSettingsPageData {
   educationFormOptions: StudentAccountSettingsEducationFormOptions;
   courseFormOptions: StudentAccountSettingsCourseFormOptions;
   skillsFormOptions: StudentAccountSettingsSkillsFormOptions;
+  moreData: StudentAccountSettingsMoreData;
 }
