@@ -11,7 +11,7 @@ export function StudentMessagesChatHeader({ course, className }: StudentMessages
   return (
     <div
       className={cn(
-        "flex items-center gap-3 border-b border-[#f3f4f6] bg-[#fafafa] px-4 py-4 sm:gap-4 sm:px-5 sm:py-5",
+        "flex items-center gap-3 border-b border-[#f0f0f0] bg-white px-4 py-4 sm:gap-4 sm:px-6 sm:py-5",
         className
       )}
     >

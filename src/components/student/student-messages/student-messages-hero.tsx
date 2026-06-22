@@ -13,7 +13,7 @@ export function StudentMessagesHero({ title, subtitle, className }: StudentMessa
   return (
     <section
       className={cn(
-        "relative overflow-hidden border-b border-[#f3f4f6] py-8 md:py-10 lg:py-12",
+        "relative overflow-hidden border-b border-[#f3f4f6] py-6 md:py-7 lg:py-8",
         className
       )}
     >

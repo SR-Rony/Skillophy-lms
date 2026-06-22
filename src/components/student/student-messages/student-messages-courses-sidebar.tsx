@@ -4,10 +4,9 @@ import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import type { StudentMessageCourse } from "@/types/student-messages.types";
 import { StudentMessagesCourseItem } from "./student-messages-course-item";
+import { MessagesScrollArea } from "./messages-scroll-area";
+import { messagesPanelClassName } from "./messages-layout";
 import { cn } from "@/utils";
-
-const messagesScrollAreaClassName =
-  "min-h-0 flex-1 overflow-y-auto overscroll-contain [scrollbar-color:#9ca3af_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#9ca3af] [&::-webkit-scrollbar-track]:bg-transparent";
 
 interface StudentMessagesCoursesSidebarProps {
   courses: StudentMessageCourse[];
@@ -35,10 +34,7 @@ export function StudentMessagesCoursesSidebar({
 
   return (
     <section
-      className={cn(
-        "flex h-[520px] max-h-[calc(100vh-220px)] flex-col overflow-hidden rounded-2xl border border-[#ebe8e6] bg-white shadow-[0_8px_30px_rgba(35,25,22,0.04)] lg:h-[620px]",
-        className
-      )}
+      className={cn(messagesPanelClassName, className)}
     >
       <div className="shrink-0 border-b border-[#f3f4f6] px-4 py-4 sm:px-5">
         <div className="flex items-center justify-between gap-3">
@@ -65,7 +61,7 @@ export function StudentMessagesCoursesSidebar({
         </label>
       </div>
 
-      <div className={messagesScrollAreaClassName}>
+      <MessagesScrollArea>
         {filteredCourses.length > 0 ? (
           filteredCourses.map((course) => (
             <StudentMessagesCourseItem
@@ -78,7 +74,7 @@ export function StudentMessagesCoursesSidebar({
         ) : (
           <p className="px-5 py-8 text-center text-[13px] text-[#9ca3af]">No courses found</p>
         )}
-      </div>
+      </MessagesScrollArea>
     </section>
   );
 }

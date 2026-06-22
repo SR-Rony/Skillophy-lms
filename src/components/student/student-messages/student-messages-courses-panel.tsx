@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { StudentMessagesCoursesEmptyState } from "@/types/student-messages.types";
+import { messagesPanelClassName } from "./messages-layout";
 import { cn } from "@/utils";
 
 function StudentMessagesCoursesIllustration() {
@@ -44,12 +45,7 @@ export function StudentMessagesCoursesPanel({
   className,
 }: StudentMessagesCoursesPanelProps) {
   return (
-    <section
-      className={cn(
-        "flex min-h-[420px] flex-col rounded-2xl border border-[#ebe8e6] bg-white shadow-[0_8px_30px_rgba(35,25,22,0.04)] sm:min-h-[460px]",
-        className
-      )}
-    >
+    <section className={cn(messagesPanelClassName, "min-h-[28rem]", className)}>
       <div className="border-b border-[#f3f4f6] px-5 py-4 sm:px-6">
         <h2 className="text-[15px] font-bold text-[#1a1a1a] sm:text-[16px]">
           {emptyState.sectionLabel}

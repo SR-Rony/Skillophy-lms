@@ -18,10 +18,10 @@ export function StudentMessagesCourseItem({
       type="button"
       onClick={() => onSelect(course.id)}
       className={cn(
-        "relative flex w-full items-start gap-3 border-b px-4 py-4 text-left transition-colors sm:px-5",
+        "relative flex w-full items-start gap-3 border-b border-b-[#f0f0f0] border-l-[3px] px-4 py-4 text-left transition-colors sm:px-5",
         isActive
-          ? "border-b-2 border-primary bg-[#FDE7E3]"
-          : "border-[#f0f0f0] bg-white hover:bg-[#fafafa]"
+          ? "border-l-primary bg-[#FDE7E3]"
+          : "border-l-transparent bg-white hover:bg-[#fafafa]"
       )}
     >
       <div className="relative shrink-0">

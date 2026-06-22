@@ -10,3 +10,4 @@ export { StudentMessagesChatHeader } from "./student-messages-chat-header";
 export { StudentMessagesChatThread } from "./student-messages-chat-thread";
 export { StudentMessagesChatBubble } from "./student-messages-chat-bubble";
 export { StudentMessagesChatComposer } from "./student-messages-chat-composer";
+export { MessagesScrollArea } from "./messages-scroll-area";

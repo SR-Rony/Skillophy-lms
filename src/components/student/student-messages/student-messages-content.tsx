@@ -8,10 +8,22 @@ import { StudentMessagesCoursesPanel } from "./student-messages-courses-panel";
 import { StudentMessagesCoursesSidebar } from "./student-messages-courses-sidebar";
 import { StudentMessagesHero } from "./student-messages-hero";
 import { StudentMessagesPanel } from "./student-messages-panel";
+import {
+  messagesGridClassName,
+  messagesPanelEmbeddedClassName,
+  messagesShellClassName,
+  studentMessagesViewportClassName,
+} from "./messages-layout";
+import { cn } from "@/utils";
 
 interface StudentMessagesContentProps {
   data: StudentMessagesPageData;
 }
+
+const embeddedPanelClassName = cn(
+  messagesPanelEmbeddedClassName,
+  "border-[#f0f0f0] lg:border-r"
+);
 
 export function StudentMessagesContent({ data }: StudentMessagesContentProps) {
   const hasCourses = data.courses.length > 0;
@@ -31,30 +43,40 @@ export function StudentMessagesContent({ data }: StudentMessagesContentProps) {
   }, [data.courses, selectedCourseId]);
 
   return (
-    <div className="bg-white">
-      <StudentMessagesHero title={data.title} subtitle={data.subtitle} />
+    <div className={studentMessagesViewportClassName}>
+      <StudentMessagesHero title={data.title} subtitle={data.subtitle} className="shrink-0" />
 
-      <Container className="py-6 md:py-8 lg:py-10">
-        {hasCourses ? (
-          <div className="grid gap-5 lg:grid-cols-[minmax(300px,360px)_minmax(0,1fr)] lg:gap-6">
-            <StudentMessagesCoursesSidebar
-              courses={data.courses}
-              totalUnreadCount={data.totalUnreadCount}
-              selectedCourseId={selectedCourseId}
-              onSelectCourse={setSelectedCourseId}
-            />
-            <StudentMessagesChatPanel
-              key={selectedCourse?.id ?? "empty-chat"}
-              course={selectedCourse}
-              emptyState={data.emptyState}
-            />
-          </div>
-        ) : (
-          <div className="grid gap-5 lg:grid-cols-2 lg:gap-6">
-            <StudentMessagesCoursesPanel emptyState={data.coursesEmptyState} />
-            <StudentMessagesPanel emptyState={data.emptyState} />
-          </div>
-        )}
+      <Container className="flex min-h-0 flex-1 flex-col overflow-hidden py-4 md:py-5 lg:py-6">
+        <div className={cn(messagesShellClassName, "h-full min-h-0 flex-1")}>
+          {hasCourses ? (
+            <div className={messagesGridClassName}>
+              <StudentMessagesCoursesSidebar
+                courses={data.courses}
+                totalUnreadCount={data.totalUnreadCount}
+                selectedCourseId={selectedCourseId}
+                onSelectCourse={setSelectedCourseId}
+                className={embeddedPanelClassName}
+              />
+              <StudentMessagesChatPanel
+                key={selectedCourse?.id ?? "empty-chat"}
+                course={selectedCourse}
+                emptyState={data.emptyState}
+                className={messagesPanelEmbeddedClassName}
+              />
+            </div>
+          ) : (
+            <div className={cn(messagesGridClassName, "lg:grid-cols-2")}>
+              <StudentMessagesCoursesPanel
+                emptyState={data.coursesEmptyState}
+                className={embeddedPanelClassName}
+              />
+              <StudentMessagesPanel
+                emptyState={data.emptyState}
+                className={cn(messagesPanelEmbeddedClassName, "min-h-0")}
+              />
+            </div>
+          )}
+        </div>
       </Container>
     </div>
   );

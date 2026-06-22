@@ -1,4 +1,5 @@
 import type { StudentMessagesEmptyState } from "@/types/student-messages.types";
+import { messagesPanelClassName } from "./messages-layout";
 import { cn } from "@/utils";
 
 function StudentMessagesEmptyIllustration() {
@@ -35,12 +36,7 @@ interface StudentMessagesPanelProps {
 
 export function StudentMessagesPanel({ emptyState, className }: StudentMessagesPanelProps) {
   return (
-    <section
-      className={cn(
-        "flex min-h-[420px] flex-col rounded-2xl border border-[#ebe8e6] bg-white shadow-[0_8px_30px_rgba(35,25,22,0.04)] sm:min-h-[460px]",
-        className
-      )}
-    >
+    <section className={cn(messagesPanelClassName, "min-h-[28rem]", className)}>
       <div className="flex flex-1 flex-col items-center justify-center px-5 py-10 text-center sm:px-6 sm:py-12">
         <StudentMessagesEmptyIllustration />
         <h3 className="mt-8 text-[22px] font-bold text-[#1a1a1a] sm:text-[24px]">
