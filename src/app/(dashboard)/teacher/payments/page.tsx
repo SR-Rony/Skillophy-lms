@@ -1,12 +1,10 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { TeacherPaymentHistoryPage } from "@/components/teacher/payment-history";
+import { getTeacherPaymentHistoryPageData } from "@/data/mock/teacher-payment-history.mock";
 
 export const metadata = { title: "Payment History" };
 
 export default function TeacherPaymentsPage() {
-  return (
-    <ModulePlaceholder
-      title="Payment History"
-      description="Track your earnings and payout history."
-    />
-  );
+  const data = getTeacherPaymentHistoryPageData();
+
+  return <TeacherPaymentHistoryPage data={data} />;
 }

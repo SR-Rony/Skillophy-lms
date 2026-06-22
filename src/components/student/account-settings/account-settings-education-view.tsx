@@ -43,9 +43,11 @@ export function AccountSettingsEducationView({
   );
   const [courseItems, setCourseItems] = useState<StudentAccountSettingsCourseItem[]>(data.courses);
   const [skillItems, setSkillItems] = useState<string[]>(data.skills);
+  const [interestedAreaItems, setInterestedAreaItems] = useState<string[]>(data.interestedAreas);
   const [isEducationModalOpen, setIsEducationModalOpen] = useState(false);
   const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
   const [isSkillsModalOpen, setIsSkillsModalOpen] = useState(false);
+  const [isInterestedAreasModalOpen, setIsInterestedAreasModalOpen] = useState(false);
 
   function handleSaveEducation(values: StudentAccountSettingsAddEducationFormValues) {
     const newItem = buildEducationItemFromForm(values, formOptions);
@@ -59,6 +61,10 @@ export function AccountSettingsEducationView({
 
   function handleSaveSkills(skills: string[]) {
     setSkillItems(skills);
+  }
+
+  function handleSaveInterestedAreas(areas: string[]) {
+    setInterestedAreaItems(areas);
   }
 
   return (
@@ -82,8 +88,11 @@ export function AccountSettingsEducationView({
             <AccountSettingsTagList items={skillItems} />
           </AccountSettingsSectionCard>
 
-          <AccountSettingsSectionCard title="Interested Area">
-            <AccountSettingsTagList items={data.interestedAreas} />
+          <AccountSettingsSectionCard
+            title="Interested Area"
+            onAction={() => setIsInterestedAreasModalOpen(true)}
+          >
+            <AccountSettingsTagList items={interestedAreaItems} />
           </AccountSettingsSectionCard>
         </div>
       </div>
@@ -108,6 +117,14 @@ export function AccountSettingsEducationView({
         initialSkills={skillItems}
         formOptions={skillsFormOptions}
         onSave={handleSaveSkills}
+      />
+
+      <AccountSettingsAddSkillsModal
+        open={isInterestedAreasModalOpen}
+        onOpenChange={setIsInterestedAreasModalOpen}
+        initialSkills={interestedAreaItems}
+        formOptions={skillsFormOptions}
+        onSave={handleSaveInterestedAreas}
       />
     </>
   );

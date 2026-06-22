@@ -1,13 +1,10 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { TeacherAccountSettingsPage } from "@/components/teacher/account-settings";
+import { getTeacherAccountSettingsPageData } from "@/data/mock/teacher-account-settings.mock";
 
-export const metadata = { title: "Settings" };
+export const metadata = { title: "Account Settings" };
 
 export default function TeacherSettingsPage() {
-  return (
-    <ModulePlaceholder
-      title="Settings"
-      description="Account and teaching preferences."
-      feature="settings"
-    />
-  );
+  const data = getTeacherAccountSettingsPageData();
+
+  return <TeacherAccountSettingsPage data={data} />;
 }
