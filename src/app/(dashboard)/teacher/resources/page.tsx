@@ -1,12 +1,10 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { TeacherCourseResourcesPage } from "@/components/teacher/course-resources";
+import { getTeacherCourseResourcesPageData } from "@/data/mock/teacher-course-resources.mock";
 
 export const metadata = { title: "Course Resources" };
 
 export default function TeacherResourcesPage() {
-  return (
-    <ModulePlaceholder
-      title="Course Resources"
-      description="Upload and organize resources for your courses."
-    />
-  );
+  const data = getTeacherCourseResourcesPageData();
+
+  return <TeacherCourseResourcesPage data={data} />;
 }
