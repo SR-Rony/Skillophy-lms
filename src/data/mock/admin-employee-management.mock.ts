@@ -5,6 +5,8 @@ import type {
   AdminEmployeeStatus,
 } from "@/types/admin-employee-management.types";
 
+export const ADMIN_TEACHER_PROFILE_MAISHA_ID = "teacher-maisha-afrose";
+
 const employeeRoles: AdminEmployeeRole[] = [
   "Admin",
   "Super Admin",
@@ -79,15 +81,18 @@ function buildEmployees(): AdminEmployee[] {
   for (let index = 0; index < 16; index += 1) {
     const person = teacherNames[index % teacherNames.length];
     const status: AdminEmployeeStatus = index % 6 === 0 ? "inactive" : "active";
+    const isFeaturedTeacher = index === 0;
 
     employees.push({
-      id: `teacher-${index + 1}`,
-      name: person.name,
-      email: person.email,
-      avatar: `https://api.dicebear.com/9.x/avataaars/svg?seed=${encodeURIComponent(person.name)}-teacher-${index}`,
+      id: isFeaturedTeacher ? ADMIN_TEACHER_PROFILE_MAISHA_ID : `teacher-${index + 1}`,
+      name: isFeaturedTeacher ? "Maisha Afrose" : person.name,
+      email: isFeaturedTeacher ? "maisha@gmail.com" : person.email,
+      avatar: `https://api.dicebear.com/9.x/avataaars/svg?seed=${encodeURIComponent(
+        isFeaturedTeacher ? "Maisha Afrose" : `${person.name}-teacher-${index}`
+      )}`,
       role: "Teacher",
-      phone: formatPhone(index + 100),
-      status,
+      phone: isFeaturedTeacher ? "(209) 555-0104" : formatPhone(index + 100),
+      status: isFeaturedTeacher ? "active" : status,
       category: "teacher",
     });
   }

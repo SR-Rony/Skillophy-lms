@@ -1,17 +1,24 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { StudentNotificationsPagination } from "@/components/student/notifications/student-notifications-pagination";
 import { AdminAddNewMemberDrawer } from "@/components/admin/employee-management/admin-add-new-member-drawer";
+import { AdminDeleteMemberModal } from "@/components/admin/employee-management/admin-delete-member-modal";
 import { AdminEmployeeManagementTable } from "@/components/admin/employee-management/admin-employee-management-table";
 import { AdminEmployeeManagementTabs } from "@/components/admin/employee-management/admin-employee-management-tabs";
 import { AdminEmployeeManagementToolbar } from "@/components/admin/employee-management/admin-employee-management-toolbar";
+import { AdminUpdateMemberDrawer } from "@/components/admin/employee-management/admin-update-member-drawer";
 import {
+  adminEmployeeIdToRole,
   filterAdminEmployees,
+  getAdminEmployeeManagementHref,
   paginateAdminEmployees,
+  parseAdminEmployeeTab,
   sortAdminEmployees,
 } from "@/components/admin/employee-management/admin-employee-management.utils";
 import type {
+  AdminEmployee,
   AdminEmployeeManagementData,
   AdminEmployeeSortId,
   AdminEmployeeTab,
@@ -22,7 +29,12 @@ interface AdminEmployeeManagementPageProps {
 }
 
 export function AdminEmployeeManagementPage({ data }: AdminEmployeeManagementPageProps) {
-  const [activeTab, setActiveTab] = useState<AdminEmployeeTab>("all");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const tabFromUrl = parseAdminEmployeeTab(searchParams.get("tab"));
+
+  const [employees, setEmployees] = useState(data.employees);
+  const [activeTab, setActiveTab] = useState<AdminEmployeeTab>(tabFromUrl);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRoleId, setSelectedRoleId] = useState(data.defaultRoleId);
   const [selectedSortId, setSelectedSortId] = useState<AdminEmployeeSortId>(data.defaultSortId);
@@ -31,10 +43,13 @@ export function AdminEmployeeManagementPage({ data }: AdminEmployeeManagementPag
     () => new Set(data.defaultSelectedIds)
   );
   const [isAddMemberOpen, setIsAddMemberOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isUpdateDrawerOpen, setIsUpdateDrawerOpen] = useState(false);
+  const [activeEmployee, setActiveEmployee] = useState<AdminEmployee | null>(null);
 
   const filteredEmployees = useMemo(
-    () => filterAdminEmployees(data.employees, activeTab, selectedRoleId, searchQuery),
-    [data.employees, activeTab, selectedRoleId, searchQuery]
+    () => filterAdminEmployees(employees, activeTab, selectedRoleId, searchQuery),
+    [employees, activeTab, selectedRoleId, searchQuery]
   );
 
   const sortedEmployees = useMemo(
@@ -46,6 +61,15 @@ export function AdminEmployeeManagementPage({ data }: AdminEmployeeManagementPag
     () => paginateAdminEmployees(sortedEmployees, currentPage, data.pageSize),
     [sortedEmployees, currentPage, data.pageSize]
   );
+
+  useEffect(() => {
+    setActiveTab(tabFromUrl);
+  }, [tabFromUrl]);
+
+  function handleTabChange(tab: AdminEmployeeTab) {
+    setActiveTab(tab);
+    router.replace(getAdminEmployeeManagementHref(tab), { scroll: false });
+  }
 
   useEffect(() => {
     setCurrentPage(1);
@@ -94,10 +118,45 @@ export function AdminEmployeeManagementPage({ data }: AdminEmployeeManagementPag
     });
   }
 
+  function handleDeleteClick(employee: AdminEmployee) {
+    setActiveEmployee(employee);
+    setIsDeleteModalOpen(true);
+  }
+
+  function handleEditClick(employee: AdminEmployee) {
+    setActiveEmployee(employee);
+    setIsUpdateDrawerOpen(true);
+  }
+
+  function handleConfirmDelete(employee: AdminEmployee) {
+    setEmployees((current) => current.filter((item) => item.id !== employee.id));
+    setSelectedIds((current) => {
+      const next = new Set(current);
+      next.delete(employee.id);
+      return next;
+    });
+    setActiveEmployee(null);
+  }
+
+  function handleSaveUpdate(payload: { employeeId: string; email: string; roleId: string }) {
+    setEmployees((current) =>
+      current.map((employee) =>
+        employee.id === payload.employeeId
+          ? {
+              ...employee,
+              email: payload.email,
+              role: adminEmployeeIdToRole(payload.roleId),
+            }
+          : employee
+      )
+    );
+    setActiveEmployee(null);
+  }
+
   return (
     <>
       <div className="overflow-hidden rounded-2xl border border-[#ebe8e6] bg-white shadow-[0_8px_30px_rgba(35,25,22,0.04)]">
-      <AdminEmployeeManagementTabs activeTab={activeTab} onTabChange={setActiveTab} />
+      <AdminEmployeeManagementTabs activeTab={activeTab} onTabChange={handleTabChange} />
 
       <AdminEmployeeManagementToolbar
         searchQuery={searchQuery}
@@ -119,8 +178,11 @@ export function AdminEmployeeManagementPage({ data }: AdminEmployeeManagementPag
         <AdminEmployeeManagementTable
           employees={visibleEmployees}
           selectedIds={selectedIds}
+          activeTab={activeTab}
           onToggleRow={handleToggleRow}
           onToggleAll={handleToggleAll}
+          onDelete={handleDeleteClick}
+          onEdit={handleEditClick}
         />
       ) : (
         <div className="px-6 py-16 text-center">
@@ -146,6 +208,21 @@ export function AdminEmployeeManagementPage({ data }: AdminEmployeeManagementPag
         defaultEmail={data.addMemberDefaults.email}
         defaultRoleId={data.addMemberDefaults.roleId}
         onSendRequest={() => undefined}
+      />
+
+      <AdminDeleteMemberModal
+        open={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
+        employee={activeEmployee}
+        onConfirm={handleConfirmDelete}
+      />
+
+      <AdminUpdateMemberDrawer
+        open={isUpdateDrawerOpen}
+        onOpenChange={setIsUpdateDrawerOpen}
+        employee={activeEmployee}
+        roleOptions={data.inviteRoleOptions}
+        onSave={handleSaveUpdate}
       />
     </>
   );

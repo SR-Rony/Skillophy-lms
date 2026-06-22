@@ -13,6 +13,7 @@ interface DashboardShellProps {
   roleLabel: string;
   headerTitle?: string;
   showHeaderBackButton?: boolean;
+  headerBackHref?: string;
   headerMessageCount?: number;
   headerNotificationCount?: number;
 }
@@ -28,6 +29,7 @@ export function DashboardShell({
   roleLabel,
   headerTitle = "Dashboard",
   showHeaderBackButton = false,
+  headerBackHref,
   headerMessageCount = 0,
   headerNotificationCount = 0,
 }: DashboardShellProps) {
@@ -46,6 +48,7 @@ export function DashboardShell({
         <DashboardHeader
           title={headerTitle}
           showBackButton={showHeaderBackButton}
+          backHref={headerBackHref}
           messageCount={headerMessageCount}
           notificationCount={headerNotificationCount}
         />

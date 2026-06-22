@@ -95,6 +95,7 @@ export const ROUTES = {
     students: "/admin/users/students",
     teachers: "/admin/users/teachers",
     admins: "/admin/users/admins",
+    userDetail: (employeeId: string) => `/admin/users/${employeeId}`,
     courses: "/admin/courses",
     categories: "/admin/categories",
     promos: "/admin/promos",

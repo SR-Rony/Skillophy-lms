@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { MoreHorizontal } from "lucide-react";
-import type { AdminEmployee } from "@/types/admin-employee-management.types";
+import { useRouter } from "next/navigation";
+import { Pencil, Trash2 } from "lucide-react";
+import { ROUTES } from "@/constants";
+import type { AdminEmployee, AdminEmployeeTab } from "@/types/admin-employee-management.types";
 import { AdminEmployeeStatusBadge } from "./admin-employee-status-badge";
 import { cn } from "@/utils";
 
@@ -12,27 +14,53 @@ const checkboxClassName =
 interface AdminEmployeeManagementTableProps {
   employees: AdminEmployee[];
   selectedIds: Set<string>;
+  activeTab: AdminEmployeeTab;
   onToggleRow: (employeeId: string) => void;
   onToggleAll: (employeeIds: string[]) => void;
+  onDelete?: (employee: AdminEmployee) => void;
+  onEdit?: (employee: AdminEmployee) => void;
 }
 
 function AdminEmployeeManagementTableRow({
   employee,
   isSelected,
+  activeTab,
   onToggle,
+  onDelete,
+  onEdit,
 }: {
   employee: AdminEmployee;
   isSelected: boolean;
+  activeTab: AdminEmployeeTab;
   onToggle: () => void;
+  onDelete?: () => void;
+  onEdit?: () => void;
 }) {
+  const router = useRouter();
+  const isTeacher = employee.category === "teacher";
+
+  function handleRowClick() {
+    if (!isTeacher) {
+      return;
+    }
+
+    router.push(`${ROUTES.admin.userDetail(employee.id)}?fromTab=${activeTab}`);
+  }
+
+  function stopRowNavigation(event: React.MouseEvent) {
+    event.stopPropagation();
+  }
+
   return (
     <tr
+      onClick={handleRowClick}
       className={cn(
         "border-b border-[#f3f4f6] last:border-b-0 transition-colors",
-        isSelected ? "bg-[#fff5f5]" : "bg-white hover:bg-[#fafafa]"
+        isSelected ? "bg-[#fff5f5]" : "bg-white hover:bg-[#fafafa]",
+        isTeacher && "cursor-pointer"
       )}
     >
-      <td className="w-11 px-4 py-3 sm:px-5">
+      <td className="w-11 px-4 py-3 sm:px-5" onClick={stopRowNavigation}>
         <input
           type="checkbox"
           checked={isSelected}
@@ -70,14 +98,25 @@ function AdminEmployeeManagementTableRow({
       <td className="px-4 py-3 sm:px-5">
         <AdminEmployeeStatusBadge status={employee.status} />
       </td>
-      <td className="w-12 px-4 py-3 text-right sm:px-5">
-        <button
-          type="button"
-          className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-[#6b7280] transition-colors hover:bg-[#f3f4f6] hover:text-[#1a1a1a]"
-          aria-label={`Actions for ${employee.name}`}
-        >
-          <MoreHorizontal className="h-4 w-4" strokeWidth={2} />
-        </button>
+      <td className="px-4 py-3 sm:px-5" onClick={stopRowNavigation}>
+        <div className="flex items-center justify-end gap-1">
+          <button
+            type="button"
+            onClick={onDelete}
+            className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-[#9ca3af] transition-colors hover:bg-[#f3f4f6] hover:text-[#6b7280]"
+            aria-label={`Delete ${employee.name}`}
+          >
+            <Trash2 className="h-4 w-4" strokeWidth={2} aria-hidden />
+          </button>
+          <button
+            type="button"
+            onClick={onEdit}
+            className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-primary transition-colors hover:bg-[#fff5f5]"
+            aria-label={`Update ${employee.name}`}
+          >
+            <Pencil className="h-4 w-4" strokeWidth={2} aria-hidden />
+          </button>
+        </div>
       </td>
     </tr>
   );
@@ -86,8 +125,11 @@ function AdminEmployeeManagementTableRow({
 export function AdminEmployeeManagementTable({
   employees,
   selectedIds,
+  activeTab,
   onToggleRow,
   onToggleAll,
+  onDelete,
+  onEdit,
 }: AdminEmployeeManagementTableProps) {
   const employeeIds = employees.map((employee) => employee.id);
   const allSelected = employeeIds.length > 0 && employeeIds.every((id) => selectedIds.has(id));
@@ -124,7 +166,9 @@ export function AdminEmployeeManagementTable({
             <th className="px-4 py-3.5 text-[13px] font-bold text-[#1a1a1a] sm:px-5 sm:text-[14px]">
               Status
             </th>
-            <th className="w-12 px-4 py-3.5 sm:px-5" aria-label="Actions" />
+            <th className="px-4 py-3.5 text-right text-[13px] font-bold text-[#1a1a1a] sm:px-5 sm:text-[14px]">
+              Action
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -133,7 +177,10 @@ export function AdminEmployeeManagementTable({
               key={employee.id}
               employee={employee}
               isSelected={selectedIds.has(employee.id)}
+              activeTab={activeTab}
               onToggle={() => onToggleRow(employee.id)}
+              onDelete={() => onDelete?.(employee)}
+              onEdit={() => onEdit?.(employee)}
             />
           ))}
         </tbody>

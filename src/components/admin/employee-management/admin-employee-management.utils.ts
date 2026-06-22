@@ -15,6 +15,19 @@ const roleFilterMap: Record<string, AdminEmployeeRole | "all"> = {
   teacher: "Teacher",
 };
 
+const roleIdMap = Object.fromEntries(
+  Object.entries(roleFilterMap).filter(([id]) => id !== "all")
+) as Record<string, AdminEmployeeRole>;
+
+export function adminEmployeeRoleToId(role: AdminEmployeeRole): string {
+  const entry = Object.entries(roleIdMap).find(([, label]) => label === role);
+  return entry?.[0] ?? "admin";
+}
+
+export function adminEmployeeIdToRole(roleId: string): AdminEmployeeRole {
+  return roleIdMap[roleId] ?? "Admin";
+}
+
 export function filterAdminEmployees(
   employees: AdminEmployee[],
   tab: AdminEmployeeTab,
@@ -72,4 +85,20 @@ export function paginateAdminEmployees(
     totalPages,
     currentPage: safePage,
   };
+}
+
+export function parseAdminEmployeeTab(value: string | null | undefined): AdminEmployeeTab {
+  if (value === "employee" || value === "teacher" || value === "all") {
+    return value;
+  }
+
+  return "all";
+}
+
+export function getAdminEmployeeManagementHref(tab: AdminEmployeeTab = "all") {
+  if (tab === "all") {
+    return "/admin/users";
+  }
+
+  return `/admin/users?tab=${tab}`;
 }

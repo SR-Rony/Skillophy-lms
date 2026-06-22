@@ -10,6 +10,7 @@ import { getInitials } from "@/utils";
 interface DashboardHeaderProps {
   title?: string;
   showBackButton?: boolean;
+  backHref?: string;
   messageCount?: number;
   notificationCount?: number;
 }
@@ -17,6 +18,7 @@ interface DashboardHeaderProps {
 export function DashboardHeader({
   title,
   showBackButton = false,
+  backHref,
   messageCount = 0,
   notificationCount = 0,
 }: DashboardHeaderProps) {
@@ -41,7 +43,7 @@ export function DashboardHeader({
           variant="ghost"
           size="icon"
           className="hidden h-9 w-9 rounded-lg border border-[#ebe8e6] text-[#1a1a1a] hover:bg-[#fafafa] lg:inline-flex"
-          onClick={() => router.back()}
+          onClick={() => (backHref ? router.push(backHref) : router.back())}
           aria-label="Go back"
         >
           <ArrowLeft className="h-4 w-4" />

@@ -1,7 +1,8 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { DashboardShell } from "@/components/dashboard";
+import { getAdminEmployeeManagementHref, parseAdminEmployeeTab } from "@/components/admin/employee-management/admin-employee-management.utils";
 import { adminFooterNav, adminNav } from "@/config";
 import { ROUTES } from "@/constants";
 
@@ -36,6 +37,17 @@ function getAdminPageTitle(pathname: string) {
   return matchedEntry?.[1] ?? "Dashboard";
 }
 
+const staticUserSubroutes: string[] = [
+  ROUTES.admin.learners,
+  ROUTES.admin.students,
+  ROUTES.admin.teachers,
+  ROUTES.admin.admins,
+];
+
+function isEmployeeProfileRoute(pathname: string) {
+  return /^\/admin\/users\/[^/]+$/.test(pathname) && !staticUserSubroutes.includes(pathname);
+}
+
 interface AdminLayoutShellProps {
   children: React.ReactNode;
   headerBadges: {
@@ -46,8 +58,14 @@ interface AdminLayoutShellProps {
 
 export function AdminLayoutShell({ children, headerBadges }: AdminLayoutShellProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const isProfileRoute = isEmployeeProfileRoute(pathname);
+  const fromTab = parseAdminEmployeeTab(searchParams.get("fromTab"));
   const showHeaderBackButton =
-    pathname === ROUTES.admin.users || pathname === ROUTES.admin.learners;
+    pathname === ROUTES.admin.users ||
+    pathname === ROUTES.admin.learners ||
+    isProfileRoute;
+  const headerBackHref = isProfileRoute ? getAdminEmployeeManagementHref(fromTab) : undefined;
 
   return (
     <DashboardShell
@@ -56,6 +74,7 @@ export function AdminLayoutShell({ children, headerBadges }: AdminLayoutShellPro
       roleLabel="Admin"
       headerTitle={getAdminPageTitle(pathname)}
       showHeaderBackButton={showHeaderBackButton}
+      headerBackHref={headerBackHref}
       headerMessageCount={headerBadges.messages}
       headerNotificationCount={headerBadges.notifications}
     >
