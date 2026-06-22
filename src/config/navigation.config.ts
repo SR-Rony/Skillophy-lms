@@ -41,11 +41,34 @@ export const teacherFooterNav: NavItem[] = [
 
 /** Admin dashboard sidebar */
 export const adminNav: NavItem[] = [
-  { title: "Overview", href: "/admin", iconName: "dashboard" },
-  { title: "Users", href: "/admin/users", iconName: "users" },
-  { title: "Courses", href: "/admin/courses", iconName: "book" },
-  { title: "Payments", href: "/admin/payments", iconName: "card" },
-  { title: "Analytics", href: "/admin/analytics", iconName: "analytics" },
-  { title: "Support", href: "/admin/support", iconName: "messages" },
-  { title: "Settings", href: "/admin/settings", iconName: "settings" },
+  { title: "Dashboard", href: ROUTES.admin.root, iconName: "dashboard" },
+  {
+    title: "User Management",
+    iconName: "userCog",
+    children: [
+      { title: "All Users", href: ROUTES.admin.users },
+      { title: "Students", href: ROUTES.admin.students },
+      { title: "Teachers", href: ROUTES.admin.teachers },
+      { title: "Admins", href: ROUTES.admin.admins },
+    ],
+  },
+  { title: "Course Management", href: ROUTES.admin.courses, iconName: "clapperboard" },
+  { title: "Categories", href: ROUTES.admin.categories, iconName: "categories" },
+  { title: "Promo & Discounts", href: ROUTES.admin.promos, iconName: "promo" },
+  { title: "Workshop", href: ROUTES.admin.workshop, iconName: "workshop" },
+  { title: "Transaction", href: ROUTES.admin.transactions, iconName: "transaction" },
+  { title: "Today's Quiz", href: ROUTES.admin.quiz, iconName: "quiz" },
+  {
+    title: "Others",
+    iconName: "grid",
+    children: [
+      { title: "Analytics", href: ROUTES.admin.analytics },
+      { title: "Blog", href: ROUTES.admin.blog },
+    ],
+  },
+];
+
+export const adminFooterNav: NavItem[] = [
+  { title: "Account Settings", href: ROUTES.admin.settings, iconName: "account" },
+  { title: "Support", href: ROUTES.admin.support, iconName: "support" },
 ];

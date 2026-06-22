@@ -1,10 +1,10 @@
 import { TeacherAccountSettingsPage } from "@/components/teacher/account-settings";
-import { getTeacherAccountSettingsPageData } from "@/data/mock/teacher-account-settings.mock";
+import { teacherAccountSettingsService } from "@/services/teacher";
 
 export const metadata = { title: "Account Settings" };
 
-export default function TeacherSettingsPage() {
-  const data = getTeacherAccountSettingsPageData();
+export default async function TeacherSettingsPage() {
+  const data = await teacherAccountSettingsService.getSettings();
 
   return <TeacherAccountSettingsPage data={data} />;
 }

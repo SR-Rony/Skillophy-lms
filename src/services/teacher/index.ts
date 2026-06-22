@@ -1,0 +1,10 @@
+export { teacherDashboardService } from "./teacher-dashboard.service";
+export { teacherCoursesService } from "./teacher-courses.service";
+export { teacherCourseDetailsService } from "./teacher-course-details.service";
+export { teacherClassScheduleService } from "./teacher-class-schedule.service";
+export { teacherCourseResourcesService } from "./teacher-course-resources.service";
+export { teacherWorkshopService } from "./teacher-workshop.service";
+export { teacherMessagesService } from "./teacher-messages.service";
+export { teacherPaymentHistoryService } from "./teacher-payment-history.service";
+export { teacherAccountSettingsService } from "./teacher-account-settings.service";
+export { teacherLiveVideoService } from "./teacher-live-video.service";

@@ -1,10 +1,5 @@
-import { adminNav } from "@/config";
-import { DashboardShell } from "@/components/dashboard";
+import { AdminLayoutShell } from "@/components/admin/admin-layout-shell";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <DashboardShell navItems={adminNav} roleLabel="Admin">
-      {children}
-    </DashboardShell>
-  );
+  return <AdminLayoutShell>{children}</AdminLayoutShell>;
 }

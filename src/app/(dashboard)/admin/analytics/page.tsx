@@ -5,7 +5,7 @@ export const metadata = { title: "Analytics" };
 export default function AdminAnalyticsPage() {
   return (
     <ModulePlaceholder
-      title="Platform analytics"
+      title="Analytics"
       description="Growth, revenue, and engagement overview."
       feature="analytics"
     />

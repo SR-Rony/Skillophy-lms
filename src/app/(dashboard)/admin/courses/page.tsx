@@ -5,7 +5,7 @@ export const metadata = { title: "Courses" };
 export default function AdminCoursesPage() {
   return (
     <ModulePlaceholder
-      title="Course management"
+      title="Course Management"
       description="Review and moderate platform courses."
       feature="courses"
     />

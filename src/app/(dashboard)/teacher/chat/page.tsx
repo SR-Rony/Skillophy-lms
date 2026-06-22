@@ -1,10 +1,10 @@
 import { TeacherMessagesPage } from "@/components/teacher/messages";
-import { getTeacherMessagesPageData } from "@/data/mock/teacher-messages.mock";
+import { teacherMessagesService } from "@/services/teacher";
 
 export const metadata = { title: "Messages" };
 
-export default function TeacherChatPage() {
-  const data = getTeacherMessagesPageData();
+export default async function TeacherChatPage() {
+  const data = await teacherMessagesService.getMessages();
 
   return <TeacherMessagesPage data={data} />;
 }

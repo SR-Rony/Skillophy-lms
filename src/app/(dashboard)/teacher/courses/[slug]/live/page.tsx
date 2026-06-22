@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { TeacherLiveVideoPage } from "@/components/teacher/live-video";
-import { getTeacherLiveVideoSession } from "@/data/mock/teacher-live-video.mock";
+import { teacherLiveVideoService } from "@/services/teacher";
 
 interface TeacherLiveVideoRouteProps {
   params: Promise<{ slug: string }>;
@@ -10,7 +10,7 @@ interface TeacherLiveVideoRouteProps {
 export async function generateMetadata({ params, searchParams }: TeacherLiveVideoRouteProps) {
   const { slug } = await params;
   const { lesson } = await searchParams;
-  const data = getTeacherLiveVideoSession(slug, lesson);
+  const data = await teacherLiveVideoService.getSession(slug, lesson);
 
   return {
     title: data ? `${data.session.title} — Live Class` : "Live Class",
@@ -23,7 +23,7 @@ export default async function TeacherLiveVideoRoute({
 }: TeacherLiveVideoRouteProps) {
   const { slug } = await params;
   const { lesson } = await searchParams;
-  const data = getTeacherLiveVideoSession(slug, lesson);
+  const data = await teacherLiveVideoService.getSession(slug, lesson);
 
   if (!data) {
     notFound();

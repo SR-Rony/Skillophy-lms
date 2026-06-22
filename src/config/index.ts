@@ -1,6 +1,13 @@
 export { siteConfig } from "./site.config";
 export { env } from "./env.config";
-export { publicNav, studentNav, teacherNav, teacherFooterNav, adminNav } from "./navigation.config";
+export {
+  publicNav,
+  studentNav,
+  teacherNav,
+  teacherFooterNav,
+  adminNav,
+  adminFooterNav,
+} from "./navigation.config";
 export {
   studentUserMenuItems,
   studentUserMenuAccountItems,

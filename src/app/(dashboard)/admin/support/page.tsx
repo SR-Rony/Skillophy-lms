@@ -5,7 +5,7 @@ export const metadata = { title: "Support" };
 export default function AdminSupportPage() {
   return (
     <ModulePlaceholder
-      title="Support tickets"
+      title="Support"
       description="Handle user support requests."
       feature="support"
     />

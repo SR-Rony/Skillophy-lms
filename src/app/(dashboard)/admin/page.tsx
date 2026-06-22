@@ -8,7 +8,7 @@ export default function AdminDashboardPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        title="Admin overview"
+        title="Dashboard"
         description="Platform metrics and management tools."
       />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

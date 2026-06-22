@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { DashboardShell } from "@/components/dashboard";
 import { teacherFooterNav, teacherNav } from "@/config";
 import { ROUTES } from "@/constants";
-import { getTeacherDashboardData } from "@/data/mock/teacher-dashboard.mock";
+import type { TeacherDashboardData } from "@/types/teacher-dashboard.types";
 
 const teacherPageTitles: Record<string, string> = {
   [ROUTES.teacher.root]: "Dashboard",
@@ -39,11 +39,11 @@ function getTeacherPageTitle(pathname: string) {
 
 interface TeacherLayoutShellProps {
   children: React.ReactNode;
+  headerBadges: TeacherDashboardData["headerBadges"];
 }
 
-export function TeacherLayoutShell({ children }: TeacherLayoutShellProps) {
+export function TeacherLayoutShell({ children, headerBadges }: TeacherLayoutShellProps) {
   const pathname = usePathname();
-  const { headerBadges } = getTeacherDashboardData();
 
   return (
     <DashboardShell

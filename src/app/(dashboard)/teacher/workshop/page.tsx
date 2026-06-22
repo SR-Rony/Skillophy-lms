@@ -1,10 +1,10 @@
 import { TeacherMyWorkshopPage } from "@/components/teacher/my-workshop";
-import { getTeacherWorkshopPageData } from "@/data/mock/teacher-workshop.mock";
+import { teacherWorkshopService } from "@/services/teacher";
 
 export const metadata = { title: "My Workshop" };
 
-export default function TeacherWorkshopPage() {
-  const data = getTeacherWorkshopPageData();
+export default async function TeacherWorkshopPage() {
+  const data = await teacherWorkshopService.getWorkshops();
 
   return <TeacherMyWorkshopPage data={data} />;
 }

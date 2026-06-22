@@ -1,10 +1,10 @@
 import { TeacherDashboardHome } from "@/components/teacher";
-import { getTeacherDashboardData } from "@/data/mock/teacher-dashboard.mock";
+import { teacherDashboardService } from "@/services/teacher";
 
 export const metadata = { title: "Teacher Dashboard" };
 
-export default function TeacherDashboardPage() {
-  const data = getTeacherDashboardData();
+export default async function TeacherDashboardPage() {
+  const data = await teacherDashboardService.getDashboard();
 
   return <TeacherDashboardHome data={data} />;
 }

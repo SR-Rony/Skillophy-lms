@@ -1,10 +1,10 @@
 import { TeacherClassSchedulePage } from "@/components/teacher/class-schedule";
-import { getTeacherClassSchedulePageData } from "@/data/mock/teacher-class-schedule.mock";
+import { teacherClassScheduleService } from "@/services/teacher";
 
 export const metadata = { title: "Class Schedule" };
 
-export default function TeacherSchedulePage() {
-  const data = getTeacherClassSchedulePageData();
+export default async function TeacherSchedulePage() {
+  const data = await teacherClassScheduleService.getSchedule();
 
   return <TeacherClassSchedulePage data={data} />;
 }

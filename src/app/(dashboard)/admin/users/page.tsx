@@ -5,7 +5,7 @@ export const metadata = { title: "Users" };
 export default function AdminUsersPage() {
   return (
     <ModulePlaceholder
-      title="User management"
+      title="User Management"
       description="Manage students, teachers, and admins."
       feature="users"
     />

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { TeacherCourseDetailsPage } from "@/components/teacher/course-details";
-import { getTeacherCourseDetails } from "@/data/mock/teacher-course-details.mock";
+import { teacherCourseDetailsService } from "@/services/teacher";
 
 interface TeacherCourseDetailsRouteProps {
   params: Promise<{ slug: string }>;
@@ -8,7 +8,7 @@ interface TeacherCourseDetailsRouteProps {
 
 export async function generateMetadata({ params }: TeacherCourseDetailsRouteProps) {
   const { slug } = await params;
-  const course = getTeacherCourseDetails(slug);
+  const course = await teacherCourseDetailsService.getCourseDetails(slug);
 
   return {
     title: course ? course.title : "Course Details",
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: TeacherCourseDetailsRouteProp
 
 export default async function TeacherCourseDetailsRoute({ params }: TeacherCourseDetailsRouteProps) {
   const { slug } = await params;
-  const course = getTeacherCourseDetails(slug);
+  const course = await teacherCourseDetailsService.getCourseDetails(slug);
 
   if (!course) {
     notFound();

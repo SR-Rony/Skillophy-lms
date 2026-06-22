@@ -1,10 +1,10 @@
 import { TeacherCourseResourcesPage } from "@/components/teacher/course-resources";
-import { getTeacherCourseResourcesPageData } from "@/data/mock/teacher-course-resources.mock";
+import { teacherCourseResourcesService } from "@/services/teacher";
 
 export const metadata = { title: "Course Resources" };
 
-export default function TeacherResourcesPage() {
-  const data = getTeacherCourseResourcesPageData();
+export default async function TeacherResourcesPage() {
+  const data = await teacherCourseResourcesService.getResourcesPage();
 
   return <TeacherCourseResourcesPage data={data} />;
 }
