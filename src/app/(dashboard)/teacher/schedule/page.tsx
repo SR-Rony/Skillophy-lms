@@ -1,12 +1,10 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { TeacherClassSchedulePage } from "@/components/teacher/class-schedule";
+import { getTeacherClassSchedulePageData } from "@/data/mock/teacher-class-schedule.mock";
 
 export const metadata = { title: "Class Schedule" };
 
 export default function TeacherSchedulePage() {
-  return (
-    <ModulePlaceholder
-      title="Class Schedule"
-      description="View and manage your upcoming live classes."
-    />
-  );
+  const data = getTeacherClassSchedulePageData();
+
+  return <TeacherClassSchedulePage data={data} />;
 }

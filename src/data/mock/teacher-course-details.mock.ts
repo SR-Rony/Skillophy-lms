@@ -577,6 +577,45 @@ const teacherRecordedCurriculum: StudentCourseCurriculumModule[] = [
   },
 ];
 
+const teacherDiscussionCurrentUser = {
+  name: "Walid Bin Sayed",
+  avatar: "/images/teacher-cta.png",
+};
+
+const teacherRecordedDiscussionMessages = [
+  {
+    id: "discussion-1",
+    authorName: "Mahmudul Hasan",
+    avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=MahmudulHasan",
+    content:
+      "End user is a term of UX designers make those everyday interactions usable, enjoyable, and accessible. The role of an entry-level UX designer might include empathizing.",
+  },
+  {
+    id: "discussion-2",
+    authorName: "Nushrat Jahan",
+    avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=NushratJahan",
+    content: "Can you please explain about end user? I can't understand",
+  },
+  {
+    id: "discussion-3",
+    authorName: "Shaown Islam",
+    avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=ShaownIslam",
+    content: "Mobile devices have limited space, yet they still need",
+  },
+  {
+    id: "discussion-4",
+    authorName: "Tabassum",
+    avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=Tabassum",
+    content:
+      "It's a good idea to keep the design relatively minimal and simple. Placing call-to-action buttons front and center, simplifying navigation, and employing commonly used gestures are a few other best practices to consider when designing for mobile users.",
+  },
+];
+
+const teacherRecordedDiscussionMock = {
+  messages: teacherRecordedDiscussionMessages,
+  currentUser: teacherDiscussionCurrentUser,
+};
+
 const teacherCourseDetailsBySlug: Record<string, TeacherCourseDetailsData> = {
   // Set assignments.submissions to [] for empty assignment tab.
   "hsc-25-online-batch": {
@@ -640,6 +679,7 @@ const teacherCourseDetailsBySlug: Record<string, TeacherCourseDetailsData> = {
     },
     resources: teacherCourseResourcesMock,
     studentFeedbackTab: teacherStudentFeedbackMock,
+    discussionTab: teacherRecordedDiscussionMock,
     curriculum: teacherRecordedCurriculum,
     supportPhone: "165387",
   },

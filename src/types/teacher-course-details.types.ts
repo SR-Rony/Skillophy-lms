@@ -3,6 +3,10 @@ import type {
   StudentCourseLessonStatus,
   StudentCourseLessonType,
 } from "@/types/student-course-details.types";
+import type {
+  StudentLiveVideoDiscussionMessage,
+  StudentLiveVideoDiscussionUser,
+} from "@/types/student-live-video.types";
 import type { CourseLeaderboardData } from "@/types/course-leaderboard.types";
 import type { TeacherUpcomingLiveClass } from "@/types/teacher-dashboard.types";
 
@@ -207,6 +211,11 @@ export interface TeacherCourseRecordedOverviewData {
   monthlyEnrollment: TeacherCourseEnrollmentMonth[];
 }
 
+export interface TeacherCourseDiscussionTabData {
+  messages: StudentLiveVideoDiscussionMessage[];
+  currentUser: StudentLiveVideoDiscussionUser;
+}
+
 interface TeacherCourseDetailsSharedData {
   id: string;
   slug: string;
@@ -234,6 +243,7 @@ export interface TeacherCourseLiveDetailsData extends TeacherCourseDetailsShared
 export interface TeacherCourseRecordedDetailsData extends TeacherCourseDetailsSharedData {
   courseType: "recorded";
   recordedOverview: TeacherCourseRecordedOverviewData;
+  discussionTab: TeacherCourseDiscussionTabData;
 }
 
 export type TeacherCourseDetailsData =

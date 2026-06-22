@@ -10,8 +10,8 @@ import {
   TeacherCourseRecordedCurriculumMobileButton,
   TeacherCourseRecordedOverviewTab,
 } from "@/components/teacher/course-details/overview";
+import { TeacherCourseDiscussionTab } from "@/components/teacher/course-details/discussion";
 import { TeacherCourseResourcesTab } from "@/components/teacher/course-details/resources";
-import { TeacherCourseDetailsTabPlaceholder } from "@/components/teacher/course-details/shared";
 import { TeacherCourseStudentFeedbackTab } from "@/components/teacher/course-details/student-feedback";
 import { TeacherCourseStudentProgressTab } from "@/components/teacher/course-details/student-progress";
 import type {
@@ -95,11 +95,7 @@ export function TeacherCourseDetailsPage({ course }: TeacherCourseDetailsPagePro
       )}
 
       {isRecorded && activeTab === "discussion" && (
-        <TeacherCourseDetailsTabPlaceholder
-          feature="teacher-course-discussion"
-          title="Discussion"
-          description="Course discussion threads for recorded classes will appear here."
-        />
+        <TeacherCourseDiscussionTab data={course.discussionTab} />
       )}
 
       {showCurriculumButton && isRecorded && (

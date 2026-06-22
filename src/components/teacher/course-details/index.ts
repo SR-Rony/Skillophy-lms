@@ -8,3 +8,4 @@ export * from "./student-progress";
 export * from "./class-recordings";
 export * from "./resources";
 export * from "./student-feedback";
+export * from "./discussion";

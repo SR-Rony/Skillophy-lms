@@ -15,6 +15,8 @@ interface CourseVideoDiscussionSectionProps {
     name: string;
     avatar: string;
   };
+  className?: string;
+  messagesClassName?: string;
 }
 
 interface PendingAttachment extends StudentLiveVideoDiscussionAttachment {
@@ -153,6 +155,8 @@ function DiscussionMessageBubble({
 export function CourseVideoDiscussionSection({
   initialMessages,
   currentUser,
+  className,
+  messagesClassName,
 }: CourseVideoDiscussionSectionProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const pendingAttachmentsRef = useRef<PendingAttachment[]>([]);
@@ -239,8 +243,18 @@ export function CourseVideoDiscussionSection({
   const canSend = Boolean(draftMessage.trim()) || pendingAttachments.length > 0;
 
   return (
-    <section className="overflow-hidden rounded-2xl border border-[#ebe8e6] bg-white shadow-[0_8px_30px_rgba(35,25,22,0.04)]">
-      <div className="scrollbar-hide max-h-[520px] space-y-5 overflow-y-auto px-4 py-5 sm:space-y-6 sm:px-5 sm:py-6 lg:max-h-[560px]">
+    <section
+      className={cn(
+        "overflow-hidden rounded-2xl border border-[#ebe8e6] bg-white shadow-[0_8px_30px_rgba(35,25,22,0.04)]",
+        className
+      )}
+    >
+      <div
+        className={cn(
+          "scrollbar-hide max-h-[520px] space-y-5 overflow-y-auto px-4 py-5 sm:space-y-6 sm:px-5 sm:py-6 lg:max-h-[560px]",
+          messagesClassName
+        )}
+      >
         {messages.map((message) => (
           <DiscussionMessageBubble key={message.id} message={message} />
         ))}
