@@ -1,7 +1,7 @@
 import type { StudentAccountSettingsMoreData } from "@/types/student-account-settings.types";
 
 interface TeacherAccountSettingsMoreViewProps {
-  data: StudentAccountSettingsMoreData;
+  data: Pick<StudentAccountSettingsMoreData, "accountActions">;
 }
 
 export function TeacherAccountSettingsMoreView({ data }: TeacherAccountSettingsMoreViewProps) {

@@ -4,9 +4,9 @@ import { useState } from "react";
 import { AdminTeacherProfileHero } from "@/components/admin/teacher-profile/admin-teacher-profile-hero";
 import { AdminTeacherProfileInfoTab } from "@/components/admin/teacher-profile/admin-teacher-profile-info-tab";
 import { AdminTeacherProfileLiveCoursesTab } from "@/components/admin/teacher-profile/admin-teacher-profile-live-courses-tab";
+import { AdminTeacherProfileMoreTab } from "@/components/admin/teacher-profile/admin-teacher-profile-more-tab";
 import { AdminTeacherProfilePaymentTab } from "@/components/admin/teacher-profile/admin-teacher-profile-payment-tab";
 import { AdminTeacherProfileRecordedCoursesTab } from "@/components/admin/teacher-profile/admin-teacher-profile-recorded-courses-tab";
-import { AdminTeacherProfileTabPlaceholder } from "@/components/admin/teacher-profile/admin-teacher-profile-tab-placeholder";
 import type {
   AdminTeacherProfilePageData,
   AdminTeacherProfileTabId,
@@ -43,7 +43,7 @@ export function AdminTeacherProfilePage({ data }: AdminTeacherProfilePageProps) 
         <AdminTeacherProfileInfoTab data={data.profileInfo} />
       )}
 
-      {activeTab === "more" && <AdminTeacherProfileTabPlaceholder title="More" />}
+      {activeTab === "more" && <AdminTeacherProfileMoreTab data={data.moreData} />}
     </div>
   );
 }

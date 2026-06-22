@@ -3,6 +3,7 @@ import type {
   StudentAccountSettingsCourseFormOptions,
   StudentAccountSettingsEducationData,
   StudentAccountSettingsEducationFormOptions,
+  StudentAccountSettingsMoreData,
   StudentAccountSettingsSkillsFormOptions,
 } from "./student-account-settings.types";
 import type {
@@ -77,7 +78,10 @@ export interface AdminTeacherProfilePageData {
   liveCourses: AdminTeacherLiveCoursesData;
   payments: AdminTeacherPaymentsData;
   profileInfo: AdminTeacherProfileInfoData;
+  moreData: AdminTeacherProfileMoreData;
 }
+
+export type AdminTeacherProfileMoreData = Pick<StudentAccountSettingsMoreData, "accountActions">;
 
 export interface AdminTeacherProfileInfoData {
   generalInfo: TeacherAccountSettingsGeneralInfo;

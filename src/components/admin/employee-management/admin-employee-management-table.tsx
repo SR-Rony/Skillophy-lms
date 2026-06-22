@@ -37,10 +37,10 @@ function AdminEmployeeManagementTableRow({
   onEdit?: () => void;
 }) {
   const router = useRouter();
-  const isTeacher = employee.category === "teacher";
+  const isNavigableProfile = employee.category === "teacher" || employee.category === "employee";
 
   function handleRowClick() {
-    if (!isTeacher) {
+    if (!isNavigableProfile) {
       return;
     }
 
@@ -57,7 +57,7 @@ function AdminEmployeeManagementTableRow({
       className={cn(
         "border-b border-[#f3f4f6] last:border-b-0 transition-colors",
         isSelected ? "bg-[#fff5f5]" : "bg-white hover:bg-[#fafafa]",
-        isTeacher && "cursor-pointer"
+        isNavigableProfile && "cursor-pointer"
       )}
     >
       <td className="w-11 px-4 py-3 sm:px-5" onClick={stopRowNavigation}>

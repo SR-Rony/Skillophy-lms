@@ -6,6 +6,7 @@ import type {
 } from "@/types/admin-employee-management.types";
 
 export const ADMIN_TEACHER_PROFILE_MAISHA_ID = "teacher-maisha-afrose";
+export const ADMIN_EMPLOYEE_PROFILE_ABDULLAH_ID = "employee-abdullah-mamun";
 
 const employeeRoles: AdminEmployeeRole[] = [
   "Admin",
@@ -47,6 +48,12 @@ const featuredEmployees = [
     email: "brooklyn.simmons@skillophy.com",
     role: "Super Admin" as const,
   },
+  {
+    id: ADMIN_EMPLOYEE_PROFILE_ABDULLAH_ID,
+    name: "Abdullah Mamun",
+    email: "mamun@gmail.com",
+    role: "Moderator" as const,
+  },
 ];
 
 function buildEmployees(): AdminEmployee[] {
@@ -56,7 +63,8 @@ function buildEmployees(): AdminEmployee[] {
     email: person.email,
     avatar: `https://api.dicebear.com/9.x/avataaars/svg?seed=${encodeURIComponent(person.name)}`,
     role: person.role,
-    phone: formatPhone(index),
+    phone:
+      person.id === ADMIN_EMPLOYEE_PROFILE_ABDULLAH_ID ? "(209) 555-0104" : formatPhone(index),
     status: "active" as const,
     category: "employee" as const,
   }));

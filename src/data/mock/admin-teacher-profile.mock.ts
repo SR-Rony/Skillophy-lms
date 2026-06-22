@@ -406,6 +406,36 @@ function buildProfileInfoData(employee: AdminEmployee): AdminTeacherProfileInfoD
   };
 }
 
+const adminTeacherProfileMoreData = {
+  accountActions: [
+    {
+      id: "reset-password",
+      title: "Reset user password",
+      description:
+        "By resetting password, user will get a link in his email to set his new password from the portal.",
+      actionLabel: "Reset Now",
+    },
+    {
+      id: "deactivate",
+      title: "Deactivate account",
+      description: "Do you want to deactivate this account?",
+      actionLabel: "Deactivate",
+    },
+    {
+      id: "delete",
+      title: "Delete account",
+      description: "Do you want to delete this account?",
+      actionLabel: "Delete",
+    },
+  ],
+} as const;
+
+function buildMoreData() {
+  return {
+    accountActions: [...adminTeacherProfileMoreData.accountActions],
+  };
+}
+
 function hashEmployeeId(employeeId: string) {
   return employeeId.split("").reduce((total, character) => total + character.charCodeAt(0), 0);
 }
@@ -463,6 +493,7 @@ function buildTeacherProfileFromEmployee(employee: AdminEmployee): AdminTeacherP
     liveCourses: buildLiveCoursesData(employee.id),
     payments: buildPaymentsData(employee.id),
     profileInfo: buildProfileInfoData(employee),
+    moreData: buildMoreData(),
   };
 }
 
@@ -491,6 +522,7 @@ const maishaAfroseProfile: AdminTeacherProfilePageData = {
   liveCourses: buildLiveCoursesData(ADMIN_TEACHER_PROFILE_MAISHA_ID),
   payments: buildPaymentsData(ADMIN_TEACHER_PROFILE_MAISHA_ID),
   profileInfo: buildMaishaProfileInfo(),
+  moreData: buildMoreData(),
 };
 
 export function getAdminTeacherProfile(employeeId: string): AdminTeacherProfilePageData | null {

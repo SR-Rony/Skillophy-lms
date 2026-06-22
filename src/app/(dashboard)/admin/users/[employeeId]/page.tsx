@@ -1,20 +1,28 @@
 import { notFound } from "next/navigation";
+import { AdminEmployeeProfilePage } from "@/components/admin/employee-profile";
 import { AdminTeacherProfilePage } from "@/components/admin/teacher-profile";
-import { adminTeacherProfileService } from "@/services/admin";
+import { adminEmployeeProfileService, adminTeacherProfileService } from "@/services/admin";
 
-export const metadata = { title: "Teacher Profile" };
+export const metadata = { title: "Employee Profile" };
 
-interface AdminTeacherProfileRouteProps {
+interface AdminEmployeeProfileRouteProps {
   params: Promise<{ employeeId: string }>;
 }
 
-export default async function AdminTeacherProfileRoute({ params }: AdminTeacherProfileRouteProps) {
+export default async function AdminEmployeeProfileRoute({
+  params,
+}: AdminEmployeeProfileRouteProps) {
   const { employeeId } = await params;
-  const data = await adminTeacherProfileService.getTeacherProfile(employeeId);
 
-  if (!data) {
-    notFound();
+  const teacherData = await adminTeacherProfileService.getTeacherProfile(employeeId);
+  if (teacherData) {
+    return <AdminTeacherProfilePage data={teacherData} />;
   }
 
-  return <AdminTeacherProfilePage data={data} />;
+  const employeeData = await adminEmployeeProfileService.getEmployeeProfile(employeeId);
+  if (employeeData) {
+    return <AdminEmployeeProfilePage data={employeeData} />;
+  }
+
+  notFound();
 }
