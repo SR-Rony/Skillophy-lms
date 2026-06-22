@@ -3,10 +3,10 @@
 import { TeacherCourseClassAttendanceChart } from "./teacher-course-class-attendance-chart";
 import { TeacherCourseLeaderboardPanel } from "./teacher-course-leaderboard-panel";
 import { TeacherCourseStudentProgressSummary } from "./teacher-course-student-progress-summary";
-import type { TeacherCourseDetailsData } from "@/types/teacher-course-details.types";
+import type { TeacherCourseLiveDetailsData } from "@/types/teacher-course-details.types";
 
 interface TeacherCourseStudentProgressTabProps {
-  course: TeacherCourseDetailsData;
+  course: TeacherCourseLiveDetailsData;
 }
 
 export function TeacherCourseStudentProgressTab({ course }: TeacherCourseStudentProgressTabProps) {

@@ -500,6 +500,83 @@ const teacherStudentFeedbackMock = {
   ],
 };
 
+const teacherRecordedMonthlyEnrollment = [
+  { month: "Jan", enrolledStudents: 380 },
+  { month: "Feb", enrolledStudents: 450 },
+  { month: "Mar", enrolledStudents: 520 },
+  { month: "Apr", enrolledStudents: 610 },
+  { month: "May", enrolledStudents: 720 },
+  { month: "Jun", enrolledStudents: 680 },
+  { month: "Jul", enrolledStudents: 750 },
+  { month: "Aug", enrolledStudents: 820 },
+  { month: "Sep", enrolledStudents: 900 },
+  { month: "Oct", enrolledStudents: 860 },
+  { month: "Nov", enrolledStudents: 780 },
+  { month: "Dec", enrolledStudents: 690 },
+];
+
+const teacherRecordedCurriculum: StudentCourseCurriculumModule[] = [
+  {
+    id: "trm-1",
+    title: "1. Introducing UX design",
+    duration: "1hr 35mins",
+    defaultOpen: true,
+    lessons: createPlaceholderLessons(6, "trm1", [
+      "The basics of user experience design",
+      "Design for good user experience",
+      "Work in a cross-functional team",
+      "Most common UX tools",
+      "Quiz on Introducing user experience design",
+      "Assignment on design across platforms",
+    ]).map((lesson, index) => ({
+      ...lesson,
+      type: index === 0 ? "video" : lesson.type,
+    })),
+  },
+  {
+    id: "trm-2",
+    title: "2. Thinking like a UX designer",
+    duration: "1hr 20mins",
+    lessons: createPlaceholderLessons(6, "trm2"),
+  },
+  {
+    id: "trm-3",
+    title: "3. Joining design sprints",
+    duration: "2hr 15mins",
+    lessons: createPlaceholderLessons(6, "trm3"),
+  },
+  {
+    id: "trm-4",
+    title: "4. Integrating research into the design",
+    duration: "1hr 02mins",
+    lessons: createPlaceholderLessons(6, "trm4"),
+  },
+  {
+    id: "trm-5",
+    title: "5. Jobs in the field of user experience",
+    duration: "1hr 02mins",
+    lessons: createPlaceholderLessons(6, "trm5"),
+  },
+  {
+    id: "trm-6",
+    title: "6. User experience careers",
+    duration: "1hr 02mins",
+    lessons: createPlaceholderLessons(6, "trm6"),
+  },
+  {
+    id: "trm-7",
+    title: "7. The product development life cycle",
+    duration: "1hr 02mins",
+    lessons: createPlaceholderLessons(6, "trm7"),
+  },
+  {
+    id: "trm-8",
+    title: "8. Design for a good user experience",
+    duration: "1hr 02mins",
+    lessons: createPlaceholderLessons(6, "trm8"),
+  },
+];
+
 const teacherCourseDetailsBySlug: Record<string, TeacherCourseDetailsData> = {
   // Set assignments.submissions to [] for empty assignment tab.
   "hsc-25-online-batch": {
@@ -542,6 +619,28 @@ const teacherCourseDetailsBySlug: Record<string, TeacherCourseDetailsData> = {
       sortLabel: "Sort: Default",
     },
     curriculum: teacherLiveCurriculum,
+    supportPhone: "165387",
+  },
+  "foundations-user-experience-ux-design": {
+    id: "teacher-recorded-ux-foundations",
+    slug: "foundations-user-experience-ux-design",
+    title: "Foundations of User Experience (UX) Design",
+    image: uxCourseImage,
+    courseType: "recorded",
+    completedTopics: 3,
+    totalTopics: 13,
+    progressPercent: 10,
+    recordedOverview: {
+      statistics: {
+        completionPercent: 60,
+        enrolledLearners: 5723,
+        completedLearners: 500,
+      },
+      monthlyEnrollment: teacherRecordedMonthlyEnrollment,
+    },
+    resources: teacherCourseResourcesMock,
+    studentFeedbackTab: teacherStudentFeedbackMock,
+    curriculum: teacherRecordedCurriculum,
     supportPhone: "165387",
   },
 };

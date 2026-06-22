@@ -23,7 +23,7 @@ const ongoingRecordedCourses = [
     image: uxCourseImage,
     type: "recorded" as const,
     learners: 564,
-    detailsHref: ROUTES.teacher.courses,
+    detailsHref: ROUTES.teacher.courseDetails("foundations-user-experience-ux-design"),
   },
   {
     id: "teacher-recorded-2",

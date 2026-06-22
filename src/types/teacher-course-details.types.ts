@@ -6,13 +6,23 @@ import type {
 import type { CourseLeaderboardData } from "@/types/course-leaderboard.types";
 import type { TeacherUpcomingLiveClass } from "@/types/teacher-dashboard.types";
 
-export type TeacherCourseDetailsTab =
+export type TeacherCourseDetailsTabLive =
   | "overview"
   | "assignment"
   | "student-progress"
   | "class-recordings"
   | "resources"
   | "student-feedback";
+
+export type TeacherCourseDetailsTabRecorded =
+  | "overview"
+  | "discussion"
+  | "resources"
+  | "student-feedback";
+
+export type TeacherCourseDetailsTab =
+  | TeacherCourseDetailsTabLive
+  | TeacherCourseDetailsTabRecorded;
 
 export interface TeacherCourseCurriculumLesson {
   id: string;
@@ -181,23 +191,51 @@ export interface TeacherCourseStudentFeedbackTabData {
   emptyState: TeacherCourseStudentFeedbackEmptyState;
 }
 
-export interface TeacherCourseDetailsData {
+export interface TeacherCourseStatisticsData {
+  completionPercent: number;
+  enrolledLearners: number;
+  completedLearners: number;
+}
+
+export interface TeacherCourseEnrollmentMonth {
+  month: string;
+  enrolledStudents: number;
+}
+
+export interface TeacherCourseRecordedOverviewData {
+  statistics: TeacherCourseStatisticsData;
+  monthlyEnrollment: TeacherCourseEnrollmentMonth[];
+}
+
+interface TeacherCourseDetailsSharedData {
   id: string;
   slug: string;
   title: string;
   image: string;
-  courseType: "live";
   completedTopics: number;
   totalTopics: number;
   progressPercent: number;
+  curriculum: StudentCourseCurriculumModule[];
+  supportPhone: string;
+  resources: TeacherCourseResourcesTabData;
+  studentFeedbackTab: TeacherCourseStudentFeedbackTabData;
+}
+
+export interface TeacherCourseLiveDetailsData extends TeacherCourseDetailsSharedData {
+  courseType: "live";
   upcomingLiveClass: TeacherUpcomingLiveClass | null;
   assignmentsSummary: TeacherCourseAssignmentsSummary | null;
   studentProgress: TeacherCourseStudentProgressStats;
   studentProgressTab: TeacherCourseStudentProgressTabData;
   classRecordings: TeacherCourseClassRecordingsTabData;
-  resources: TeacherCourseResourcesTabData;
-  studentFeedbackTab: TeacherCourseStudentFeedbackTabData;
   assignments: TeacherCourseAssignmentsTabData;
-  curriculum: StudentCourseCurriculumModule[];
-  supportPhone: string;
 }
+
+export interface TeacherCourseRecordedDetailsData extends TeacherCourseDetailsSharedData {
+  courseType: "recorded";
+  recordedOverview: TeacherCourseRecordedOverviewData;
+}
+
+export type TeacherCourseDetailsData =
+  | TeacherCourseLiveDetailsData
+  | TeacherCourseRecordedDetailsData;

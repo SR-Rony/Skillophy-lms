@@ -7,8 +7,11 @@ import { TeacherCourseDetailsHero } from "@/components/teacher/course-details/te
 import {
   TeacherCourseLiveCurriculumMobileButton,
   TeacherCourseLiveOverviewTab,
+  TeacherCourseRecordedCurriculumMobileButton,
+  TeacherCourseRecordedOverviewTab,
 } from "@/components/teacher/course-details/overview";
 import { TeacherCourseResourcesTab } from "@/components/teacher/course-details/resources";
+import { TeacherCourseDetailsTabPlaceholder } from "@/components/teacher/course-details/shared";
 import { TeacherCourseStudentFeedbackTab } from "@/components/teacher/course-details/student-feedback";
 import { TeacherCourseStudentProgressTab } from "@/components/teacher/course-details/student-progress";
 import type {
@@ -29,6 +32,7 @@ export function TeacherCourseDetailsPage({ course }: TeacherCourseDetailsPagePro
     setShowMobileCurriculum(false);
   }, [activeTab]);
 
+  const isRecorded = course.courseType === "recorded";
   const showCurriculumButton = activeTab === "overview" && !showMobileCurriculum;
 
   return (
@@ -52,7 +56,15 @@ export function TeacherCourseDetailsPage({ course }: TeacherCourseDetailsPagePro
             activeTab === "overview" && "pt-4 sm:pt-6 md:pt-8"
           )}
         >
-          {activeTab === "overview" && (
+          {activeTab === "overview" && isRecorded && (
+            <TeacherCourseRecordedOverviewTab
+              course={course}
+              showMobileCurriculum={showMobileCurriculum}
+              onHideMobileCurriculum={() => setShowMobileCurriculum(false)}
+            />
+          )}
+
+          {activeTab === "overview" && !isRecorded && (
             <TeacherCourseLiveOverviewTab
               course={course}
               onViewProgressDetails={() => setActiveTab("student-progress")}
@@ -64,13 +76,15 @@ export function TeacherCourseDetailsPage({ course }: TeacherCourseDetailsPagePro
         </div>
       </section>
 
-      {activeTab === "assignment" && (
+      {!isRecorded && activeTab === "assignment" && (
         <TeacherCourseAssignmentTab assignmentsTab={course.assignments} />
       )}
 
-      {activeTab === "student-progress" && <TeacherCourseStudentProgressTab course={course} />}
+      {!isRecorded && activeTab === "student-progress" && (
+        <TeacherCourseStudentProgressTab course={course} />
+      )}
 
-      {activeTab === "class-recordings" && (
+      {!isRecorded && activeTab === "class-recordings" && (
         <TeacherCourseClassRecordingsTab data={course.classRecordings} />
       )}
 
@@ -80,7 +94,19 @@ export function TeacherCourseDetailsPage({ course }: TeacherCourseDetailsPagePro
         <TeacherCourseStudentFeedbackTab data={course.studentFeedbackTab} />
       )}
 
-      {showCurriculumButton && (
+      {isRecorded && activeTab === "discussion" && (
+        <TeacherCourseDetailsTabPlaceholder
+          feature="teacher-course-discussion"
+          title="Discussion"
+          description="Course discussion threads for recorded classes will appear here."
+        />
+      )}
+
+      {showCurriculumButton && isRecorded && (
+        <TeacherCourseRecordedCurriculumMobileButton onClick={() => setShowMobileCurriculum(true)} />
+      )}
+
+      {showCurriculumButton && !isRecorded && (
         <TeacherCourseLiveCurriculumMobileButton onClick={() => setShowMobileCurriculum(true)} />
       )}
     </div>

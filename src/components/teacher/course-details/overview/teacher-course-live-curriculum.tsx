@@ -33,6 +33,7 @@ interface TeacherCourseLiveCurriculumProps {
   courseSlug?: string;
   activeLessonId?: string;
   variant?: "overview" | "video";
+  className?: string;
 }
 
 function getLessonHref(lesson: StudentCourseCurriculumLesson, courseSlug?: string) {
@@ -110,6 +111,7 @@ export function TeacherCourseLiveCurriculum({
   courseSlug,
   activeLessonId,
   variant = "overview",
+  className,
 }: TeacherCourseLiveCurriculumProps) {
   const [openModules, setOpenModules] = useState<string[]>(() => {
     const defaults = modules.filter((module) => module.defaultOpen).map((module) => module.id);
@@ -138,12 +140,17 @@ export function TeacherCourseLiveCurriculum({
   const isVideoVariant = variant === "video";
 
   return (
-    <div className="rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)] sm:p-6">
+    <div
+      className={cn(
+        "flex h-full w-full flex-col rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.06)] sm:p-6",
+        className
+      )}
+    >
       <Heading as="h2" variant="dashboard-section">
         Course Curriculum
       </Heading>
 
-      <div className="mt-5 max-h-none space-y-3 overflow-visible pr-1 lg:max-h-[640px] lg:overflow-y-auto lg:[scrollbar-color:#1a1a1a_#ececec] lg:[scrollbar-width:thin]">
+      <div className="mt-5 min-h-0 flex-1 space-y-3 overflow-visible pr-1 lg:max-h-[min(720px,calc(100vh-280px))] lg:overflow-y-auto lg:[scrollbar-color:#1a1a1a_#ececec] lg:[scrollbar-width:thin]">
         {modules.map((module) => {
           const isOpen = openModules.includes(module.id);
           const isLiveModule = module.liveClassCount != null || module.assignmentCount != null;

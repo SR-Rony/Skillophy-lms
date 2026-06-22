@@ -52,22 +52,35 @@ const navIcons = {
   workshop: Presentation,
 };
 
+function resolveActiveNavHref(
+  pathname: string,
+  items: NavItem[],
+  footerItems: NavItem[] = []
+): string | null {
+  const candidates = [...items, ...footerItems].sort((a, b) => b.href.length - a.href.length);
+
+  for (const item of candidates) {
+    if (pathname === item.href || pathname.startsWith(`${item.href}/`)) {
+      return item.href;
+    }
+  }
+
+  return null;
+}
+
 function SidebarLink({
   item,
-  pathname,
+  activeHref,
   sidebarCollapsed,
   onNavigate,
 }: {
   item: NavItem;
-  pathname: string;
+  activeHref: string | null;
   sidebarCollapsed: boolean;
   onNavigate?: () => void;
 }) {
   const Icon = item.iconName ? navIcons[item.iconName] : undefined;
-  const isActive =
-    pathname === item.href ||
-    (item.href !== "/" && pathname.startsWith(item.href + "/")) ||
-    (item.href !== "/" && pathname.startsWith(item.href));
+  const isActive = item.href === activeHref;
 
   return (
     <Link
@@ -111,6 +124,8 @@ function SidebarNav({
   sidebarCollapsed: boolean;
   onNavigate?: () => void;
 }) {
+  const activeHref = resolveActiveNavHref(pathname, items, footerItems);
+
   return (
     <>
       <ScrollArea className="min-h-0 flex-1 px-3 py-4">
@@ -119,7 +134,7 @@ function SidebarNav({
             <SidebarLink
               key={item.href}
               item={item}
-              pathname={pathname}
+              activeHref={activeHref}
               sidebarCollapsed={sidebarCollapsed}
               onNavigate={onNavigate}
             />
@@ -134,7 +149,7 @@ function SidebarNav({
               <SidebarLink
                 key={item.href}
                 item={item}
-                pathname={pathname}
+                activeHref={activeHref}
                 sidebarCollapsed={sidebarCollapsed}
                 onNavigate={onNavigate}
               />

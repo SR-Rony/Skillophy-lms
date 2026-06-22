@@ -9,14 +9,26 @@ import { teacherCourseDetailsBackHref } from "@/data/mock/teacher-course-details
 import type {
   TeacherCourseDetailsData,
   TeacherCourseDetailsTab,
+  TeacherCourseDetailsTabLive,
+  TeacherCourseDetailsTabRecorded,
 } from "@/types/teacher-course-details.types";
 import { cn } from "@/utils";
 
-const teacherLiveCourseDetailsTabs: { id: TeacherCourseDetailsTab; label: string }[] = [
+const teacherLiveCourseDetailsTabs: { id: TeacherCourseDetailsTabLive; label: string }[] = [
   { id: "overview", label: "Overview" },
   { id: "assignment", label: "Assignment" },
   { id: "student-progress", label: "Student Progress" },
   { id: "class-recordings", label: "Class Recordings" },
+  { id: "resources", label: "Resources" },
+  { id: "student-feedback", label: "Student Feedback" },
+];
+
+const teacherRecordedCourseDetailsTabs: {
+  id: TeacherCourseDetailsTabRecorded;
+  label: string;
+}[] = [
+  { id: "overview", label: "Overview" },
+  { id: "discussion", label: "Discussion" },
   { id: "resources", label: "Resources" },
   { id: "student-feedback", label: "Student Feedback" },
 ];
@@ -32,6 +44,11 @@ export function TeacherCourseDetailsHero({
   activeTab,
   onTabChange,
 }: TeacherCourseDetailsHeroProps) {
+  const tabs =
+    course.courseType === "recorded"
+      ? teacherRecordedCourseDetailsTabs
+      : teacherLiveCourseDetailsTabs;
+
   return (
     <section className="relative overflow-hidden border-b border-[#f3f4f6] bg-white">
       <MyCoursesSeamBackground />
@@ -87,7 +104,7 @@ export function TeacherCourseDetailsHero({
           aria-label="Course sections"
           className="scrollbar-hide -mx-1 mt-6 flex w-full gap-0 overflow-x-auto sm:mt-8 lg:mt-10"
         >
-          {teacherLiveCourseDetailsTabs.map((tab) => {
+          {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
 
             return (

@@ -10,7 +10,7 @@ import {
 import { CourseVideoReportButton } from "@/components/student/course-video/student-course-video-report-button";
 import { TeacherCourseLiveCurriculum } from "@/components/teacher/course-details/overview";
 import { ROUTES } from "@/constants";
-import type { TeacherCourseDetailsData } from "@/types/teacher-course-details.types";
+import type { TeacherCourseLiveDetailsData } from "@/types/teacher-course-details.types";
 import type { StudentLiveVideoSession } from "@/types/student-live-video.types";
 import type { CourseVideoTab } from "@/components/student/course-video/student-course-video-shared";
 import { cn } from "@/utils";
@@ -21,7 +21,7 @@ const teacherCourseVideoTabs: { id: CourseVideoTab; label: string }[] = [
 ];
 
 interface TeacherLiveVideoPageProps {
-  course: TeacherCourseDetailsData;
+  course: TeacherCourseLiveDetailsData;
   session: StudentLiveVideoSession;
 }
 

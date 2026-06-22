@@ -8,11 +8,11 @@ import { TeacherCourseLiveCurriculum } from "./teacher-course-live-curriculum";
 import { TeacherCourseScheduleEmptyCard } from "./teacher-course-schedule-empty-card";
 import { TeacherCourseStudentProgressCard } from "./teacher-course-student-progress-card";
 import { TeacherCourseUpcomingLiveClassCard } from "./teacher-course-upcoming-live-class-card";
-import type { TeacherCourseDetailsData } from "@/types/teacher-course-details.types";
+import type { TeacherCourseLiveDetailsData } from "@/types/teacher-course-details.types";
 import { cn } from "@/utils";
 
 interface TeacherCourseLiveOverviewTabProps {
-  course: TeacherCourseDetailsData;
+  course: TeacherCourseLiveDetailsData;
   onViewProgressDetails: () => void;
   onCheckAssignment: () => void;
   showMobileCurriculum: boolean;
@@ -37,17 +37,17 @@ export function TeacherCourseLiveOverviewTab({
           >
             ← Back to Overview
           </button>
-          <TeacherCourseLiveCurriculum modules={course.curriculum} />
+          <TeacherCourseLiveCurriculum modules={course.curriculum} courseSlug={course.slug} />
         </div>
       )}
 
       <div
         className={cn(
-          "grid gap-4 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)] lg:items-start lg:gap-6 xl:gap-8",
+          "grid w-full grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start lg:gap-6 xl:gap-8",
           showMobileCurriculum && "hidden lg:grid"
         )}
       >
-        <aside className="space-y-3">
+        <aside className="w-full min-w-0 space-y-4 sm:space-y-5">
           {course.upcomingLiveClass ? (
             <TeacherCourseUpcomingLiveClassCard liveClass={course.upcomingLiveClass} />
           ) : (
@@ -69,12 +69,19 @@ export function TeacherCourseLiveOverviewTab({
           />
 
           <TeacherCourseJoinGroupCard />
-          <StudentCourseSupportContact phone={course.supportPhone} />
         </aside>
 
-        <div className="hidden lg:block">
-          <TeacherCourseLiveCurriculum modules={course.curriculum} />
+        <div className="hidden w-full min-w-0 lg:sticky lg:top-6 lg:block lg:self-start">
+          <TeacherCourseLiveCurriculum
+            modules={course.curriculum}
+            courseSlug={course.slug}
+            className="w-full"
+          />
         </div>
+      </div>
+
+      <div className={cn("mt-6 sm:mt-8", showMobileCurriculum && "hidden lg:block")}>
+        <StudentCourseSupportContact phone={course.supportPhone} />
       </div>
     </>
   );

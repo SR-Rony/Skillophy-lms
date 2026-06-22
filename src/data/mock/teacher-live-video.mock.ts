@@ -1,3 +1,4 @@
+import type { TeacherCourseLiveDetailsData } from "@/types/teacher-course-details.types";
 import type { StudentLiveVideoSession } from "@/types/student-live-video.types";
 import { getTeacherCourseDetails } from "@/data/mock/teacher-course-details.mock";
 import { ROUTES } from "@/constants";
@@ -69,10 +70,10 @@ const teacherLiveVideoSessions: Record<string, Record<string, Partial<StudentLiv
 export function getTeacherLiveVideoSession(
   slug: string,
   lessonId = "tm1-l1",
-): { course: NonNullable<ReturnType<typeof getTeacherCourseDetails>>; session: StudentLiveVideoSession } | null {
+): { course: TeacherCourseLiveDetailsData; session: StudentLiveVideoSession } | null {
   const course = getTeacherCourseDetails(slug);
 
-  if (!course) {
+  if (!course || course.courseType !== "live") {
     return null;
   }
 
