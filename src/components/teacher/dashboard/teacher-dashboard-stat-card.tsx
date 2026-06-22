@@ -1,10 +1,10 @@
-import type { LucideIcon } from "lucide-react";
+import type { LucideIcon, LucideProps } from "lucide-react";
 import { cn } from "@/utils";
 
 interface TeacherDashboardStatCardProps {
   label: string;
   count: number;
-  icon: LucideIcon;
+  icon: LucideIcon | React.ComponentType<LucideProps>;
   iconBg: string;
   bgColor: string;
   borderColor: string;

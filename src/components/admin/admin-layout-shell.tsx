@@ -37,9 +37,13 @@ function getAdminPageTitle(pathname: string) {
 
 interface AdminLayoutShellProps {
   children: React.ReactNode;
+  headerBadges: {
+    messages: number;
+    notifications: number;
+  };
 }
 
-export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
+export function AdminLayoutShell({ children, headerBadges }: AdminLayoutShellProps) {
   const pathname = usePathname();
 
   return (
@@ -48,6 +52,8 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
       footerNavItems={adminFooterNav}
       roleLabel="Admin"
       headerTitle={getAdminPageTitle(pathname)}
+      headerMessageCount={headerBadges.messages}
+      headerNotificationCount={headerBadges.notifications}
     >
       {children}
     </DashboardShell>
