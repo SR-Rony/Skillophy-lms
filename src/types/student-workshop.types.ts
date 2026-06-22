@@ -15,6 +15,8 @@ export interface StudentWorkshopItem {
   category: string;
   schedule: string;
   startsInLabel?: string;
+  /** Overrides join-window detection from `startsInLabel`. */
+  canJoin?: boolean;
   joinUrl: string;
   buttonLabel: string;
 }

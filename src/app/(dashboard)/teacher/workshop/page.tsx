@@ -1,12 +1,10 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { TeacherMyWorkshopPage } from "@/components/teacher/my-workshop";
+import { getTeacherWorkshopPageData } from "@/data/mock/teacher-workshop.mock";
 
 export const metadata = { title: "My Workshop" };
 
 export default function TeacherWorkshopPage() {
-  return (
-    <ModulePlaceholder
-      title="My Workshop"
-      description="Manage workshop sessions and materials."
-    />
-  );
+  const data = getTeacherWorkshopPageData();
+
+  return <TeacherMyWorkshopPage data={data} />;
 }

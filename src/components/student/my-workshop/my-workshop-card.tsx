@@ -10,7 +10,18 @@ interface MyWorkshopCardProps {
   className?: string;
 }
 
+function canJoinWorkshop(workshop: StudentWorkshopItem) {
+  if (workshop.canJoin !== undefined) {
+    return workshop.canJoin;
+  }
+
+  // Upcoming workshops open for join when the session is within the join window.
+  return Boolean(workshop.startsInLabel);
+}
+
 export function MyWorkshopCard({ workshop, isCompleted = false, className }: MyWorkshopCardProps) {
+  const isJoinActive = isCompleted || canJoinWorkshop(workshop);
+
   return (
     <article
       className={cn(
@@ -51,17 +62,18 @@ export function MyWorkshopCard({ workshop, isCompleted = false, className }: MyW
           ) : null}
         </div>
 
-        <Link
-          href={workshop.joinUrl}
-          className={cn(
-            "mt-4 inline-flex w-full items-center justify-center rounded-xl px-6 py-3.5 text-[14px] font-semibold transition-colors sm:mt-5",
-            isCompleted
-              ? "bg-primary text-white hover:opacity-90"
-              : "bg-[#f0f0f0] text-[#757575] hover:bg-primary hover:text-white"
-          )}
-        >
-          {workshop.buttonLabel}
-        </Link>
+        {isJoinActive ? (
+          <Link
+            href={workshop.joinUrl}
+            className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3.5 text-[14px] font-semibold text-white transition-opacity hover:opacity-90 sm:mt-5"
+          >
+            {workshop.buttonLabel}
+          </Link>
+        ) : (
+          <span className="mt-4 inline-flex w-full cursor-not-allowed items-center justify-center rounded-xl bg-[#f0f0f0] px-6 py-3.5 text-[14px] font-semibold text-[#757575] sm:mt-5">
+            {workshop.buttonLabel}
+          </span>
+        )}
       </div>
     </article>
   );
