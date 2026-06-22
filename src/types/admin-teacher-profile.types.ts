@@ -1,4 +1,15 @@
 import type { AdminEmployeeStatus } from "./admin-employee-management.types";
+import type {
+  StudentAccountSettingsCourseFormOptions,
+  StudentAccountSettingsEducationData,
+  StudentAccountSettingsEducationFormOptions,
+  StudentAccountSettingsSkillsFormOptions,
+} from "./student-account-settings.types";
+import type {
+  TeacherAccountSettingsBiography,
+  TeacherAccountSettingsGeneralInfo,
+  TeacherAccountSettingsSelectOption,
+} from "./teacher-account-settings.types";
 
 export type AdminTeacherProfileTabId =
   | "recorded-courses"
@@ -64,6 +75,65 @@ export interface AdminTeacherProfilePageData {
   profile: AdminTeacherProfile;
   recordedCourses: AdminTeacherRecordedCoursesData;
   liveCourses: AdminTeacherLiveCoursesData;
+  payments: AdminTeacherPaymentsData;
+  profileInfo: AdminTeacherProfileInfoData;
+}
+
+export interface AdminTeacherProfileInfoData {
+  generalInfo: TeacherAccountSettingsGeneralInfo;
+  biography: TeacherAccountSettingsBiography;
+  roleOptions: TeacherAccountSettingsSelectOption[];
+  statusOptions: TeacherAccountSettingsSelectOption[];
+  genderOptions: TeacherAccountSettingsSelectOption[];
+  countryOptions: TeacherAccountSettingsSelectOption[];
+  educationData: StudentAccountSettingsEducationData;
+  educationFormOptions: StudentAccountSettingsEducationFormOptions;
+  courseFormOptions: StudentAccountSettingsCourseFormOptions;
+  skillsFormOptions: StudentAccountSettingsSkillsFormOptions;
+}
+
+export type AdminTeacherPaymentStatus = "paid" | "due";
+
+export type AdminTeacherPaymentSortId =
+  | "default"
+  | "name-asc"
+  | "name-desc"
+  | "date-desc"
+  | "date-asc"
+  | "amount-desc"
+  | "amount-asc"
+  | "status-asc";
+
+export type AdminTeacherPaymentExportId = "csv" | "xsl";
+
+export interface AdminTeacherPaymentSortOption {
+  id: AdminTeacherPaymentSortId;
+  label: string;
+}
+
+export interface AdminTeacherPaymentExportOption {
+  id: AdminTeacherPaymentExportId;
+  label: string;
+}
+
+export interface AdminTeacherPayment {
+  id: string;
+  title: string;
+  thumbnail: string;
+  paymentDate: string;
+  amount: number;
+  status: AdminTeacherPaymentStatus;
+}
+
+export interface AdminTeacherPaymentsData {
+  payments: AdminTeacherPayment[];
+  sortOptions: AdminTeacherPaymentSortOption[];
+  exportOptions: AdminTeacherPaymentExportOption[];
+  defaultSortId: AdminTeacherPaymentSortId;
+  defaultSelectedIds: string[];
+  pageSize: number;
+  exportLabel: string;
+  markAsPaidLabel: string;
 }
 
 export type AdminTeacherLiveCourseStatus = "completed" | "ongoing" | "upcoming";

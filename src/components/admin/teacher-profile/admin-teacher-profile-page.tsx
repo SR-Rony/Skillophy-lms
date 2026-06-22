@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { AdminTeacherProfileHero } from "@/components/admin/teacher-profile/admin-teacher-profile-hero";
+import { AdminTeacherProfileInfoTab } from "@/components/admin/teacher-profile/admin-teacher-profile-info-tab";
 import { AdminTeacherProfileLiveCoursesTab } from "@/components/admin/teacher-profile/admin-teacher-profile-live-courses-tab";
+import { AdminTeacherProfilePaymentTab } from "@/components/admin/teacher-profile/admin-teacher-profile-payment-tab";
 import { AdminTeacherProfileRecordedCoursesTab } from "@/components/admin/teacher-profile/admin-teacher-profile-recorded-courses-tab";
 import { AdminTeacherProfileTabPlaceholder } from "@/components/admin/teacher-profile/admin-teacher-profile-tab-placeholder";
 import type {
@@ -35,10 +37,10 @@ export function AdminTeacherProfilePage({ data }: AdminTeacherProfilePageProps) 
         <AdminTeacherProfileLiveCoursesTab data={data.liveCourses} />
       )}
 
-      {activeTab === "payment" && <AdminTeacherProfileTabPlaceholder title="Payment" />}
+      {activeTab === "payment" && <AdminTeacherProfilePaymentTab data={data.payments} />}
 
       {activeTab === "profile-info" && (
-        <AdminTeacherProfileTabPlaceholder title="Profile Info" />
+        <AdminTeacherProfileInfoTab data={data.profileInfo} />
       )}
 
       {activeTab === "more" && <AdminTeacherProfileTabPlaceholder title="More" />}

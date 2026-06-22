@@ -1,6 +1,8 @@
 import type {
   AdminTeacherLiveCourse,
   AdminTeacherLiveCourseSortId,
+  AdminTeacherPayment,
+  AdminTeacherPaymentSortId,
   AdminTeacherRecordedCourse,
   AdminTeacherRecordedCourseSortId,
 } from "@/types/admin-teacher-profile.types";
@@ -137,4 +139,56 @@ export function paginateAdminTeacherLiveCourses(
   pageSize: number
 ) {
   return paginateItems(courses, currentPage, pageSize);
+}
+
+const paymentStatusOrder: Record<AdminTeacherPayment["status"], number> = {
+  paid: 0,
+  due: 1,
+};
+
+export function filterAdminTeacherPayments(
+  payments: AdminTeacherPayment[],
+  searchQuery: string
+) {
+  const normalizedSearch = searchQuery.trim().toLowerCase();
+
+  if (!normalizedSearch) {
+    return payments;
+  }
+
+  return payments.filter((payment) => payment.title.toLowerCase().includes(normalizedSearch));
+}
+
+export function sortAdminTeacherPayments(
+  payments: AdminTeacherPayment[],
+  sortId: AdminTeacherPaymentSortId
+) {
+  const sorted = [...payments];
+
+  switch (sortId) {
+    case "name-asc":
+      return sorted.sort((a, b) => a.title.localeCompare(b.title));
+    case "name-desc":
+      return sorted.sort((a, b) => b.title.localeCompare(a.title));
+    case "date-desc":
+      return sorted.sort((a, b) => b.paymentDate.localeCompare(a.paymentDate));
+    case "date-asc":
+      return sorted.sort((a, b) => a.paymentDate.localeCompare(b.paymentDate));
+    case "amount-desc":
+      return sorted.sort((a, b) => b.amount - a.amount);
+    case "amount-asc":
+      return sorted.sort((a, b) => a.amount - b.amount);
+    case "status-asc":
+      return sorted.sort((a, b) => paymentStatusOrder[a.status] - paymentStatusOrder[b.status]);
+    default:
+      return sorted;
+  }
+}
+
+export function paginateAdminTeacherPayments(
+  payments: AdminTeacherPayment[],
+  currentPage: number,
+  pageSize: number
+) {
+  return paginateItems(payments, currentPage, pageSize);
 }
