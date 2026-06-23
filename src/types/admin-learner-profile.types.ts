@@ -1,10 +1,17 @@
 import type { AdminLearnerStatus } from "./admin-learner-management.types";
-import type { AdminTeacherProfileMoreData } from "./admin-teacher-profile.types";
 import type {
-  TeacherAccountSettingsBiography,
-  TeacherAccountSettingsGeneralInfo,
-  TeacherAccountSettingsSelectOption,
-} from "./teacher-account-settings.types";
+  StudentAccountSettingsAccountAction,
+  StudentAccountSettingsCourseFormOptions,
+  StudentAccountSettingsEducationData,
+  StudentAccountSettingsEducationFormOptions,
+  StudentAccountSettingsJobExperienceData,
+  StudentAccountSettingsJobExperienceFormOptions,
+  StudentAccountSettingsProfile,
+  StudentAccountSettingsResumePreviewData,
+  StudentAccountSettingsSelectOption,
+  StudentAccountSettingsShareResumeData,
+  StudentAccountSettingsSkillsFormOptions,
+} from "./student-account-settings.types";
 
 export type AdminLearnerProfileTabId =
   | "recorded-courses"
@@ -86,13 +93,32 @@ export interface AdminLearnerRecordedCoursesData {
   pageSize: number;
 }
 
+export interface AdminLearnerProfileGeneralInfo {
+  fullName: string;
+  certificateName: string;
+  email: string;
+  phone: string;
+  gender: string;
+  age: string;
+  address: string;
+  country: string;
+}
+
+export interface AdminLearnerProfileBiography {
+  description: string;
+}
+
 export interface AdminLearnerProfileInfoData {
-  generalInfo: TeacherAccountSettingsGeneralInfo;
-  biography: TeacherAccountSettingsBiography;
-  roleOptions: TeacherAccountSettingsSelectOption[];
-  statusOptions: TeacherAccountSettingsSelectOption[];
-  genderOptions: TeacherAccountSettingsSelectOption[];
-  countryOptions: TeacherAccountSettingsSelectOption[];
+  generalInfo: AdminLearnerProfileGeneralInfo;
+  biography: AdminLearnerProfileBiography;
+  genderOptions: StudentAccountSettingsSelectOption[];
+  countryOptions: StudentAccountSettingsSelectOption[];
+  educationData: StudentAccountSettingsEducationData;
+  educationFormOptions: StudentAccountSettingsEducationFormOptions;
+  courseFormOptions: StudentAccountSettingsCourseFormOptions;
+  skillsFormOptions: StudentAccountSettingsSkillsFormOptions;
+  jobExperienceData: StudentAccountSettingsJobExperienceData;
+  jobExperienceFormOptions: StudentAccountSettingsJobExperienceFormOptions;
 }
 
 export type AdminLearnerLiveCourseStatus = "completed" | "ongoing" | "upcoming";
@@ -172,10 +198,17 @@ export interface AdminLearnerLiveCoursesData {
   pageSize: number;
 }
 
+export interface AdminLearnerProfileMoreData {
+  resumeProfile: StudentAccountSettingsProfile;
+  resumePreviewData: StudentAccountSettingsResumePreviewData;
+  shareResumeData: StudentAccountSettingsShareResumeData;
+  accountActions: StudentAccountSettingsAccountAction[];
+}
+
 export interface AdminLearnerProfilePageData {
   profile: AdminLearnerProfile;
   recordedCourses: AdminLearnerRecordedCoursesData;
   liveCourses: AdminLearnerLiveCoursesData;
   profileInfo: AdminLearnerProfileInfoData;
-  moreData: AdminTeacherProfileMoreData;
+  moreData: AdminLearnerProfileMoreData;
 }

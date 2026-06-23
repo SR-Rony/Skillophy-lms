@@ -2,6 +2,7 @@ import {
   ADMIN_LEARNER_PROFILE_NUSHRAT_ID,
   getAdminLearnerManagement,
 } from "@/data/mock/admin-learner-management.mock";
+import { studentAccountSettingsDemo } from "@/data/mock/student-account-settings.mock";
 import type { AdminLearner } from "@/types/admin-learner-management.types";
 import type {
   AdminLearnerLiveCourse,
@@ -9,6 +10,7 @@ import type {
   AdminLearnerLiveCourseStatus,
   AdminLearnerLiveCourseTopicRecordings,
   AdminLearnerProfileInfoData,
+  AdminLearnerProfileMoreData,
   AdminLearnerProfilePageData,
   AdminLearnerRecordedCourse,
   AdminLearnerRecordedCourseProgressTopic,
@@ -453,47 +455,252 @@ const recordedCourseSeeds: RecordedCourseSeed[] = [
 ];
 
 const profileInfoFormOptions = {
-  roleOptions: [{ value: "Learner", label: "Learner" }],
-  statusOptions: [
-    { value: "Active", label: "Active" },
-    { value: "Inactive", label: "Inactive" },
+  genderOptions: studentAccountSettingsDemo.genderOptions,
+  countryOptions: studentAccountSettingsDemo.countryOptions,
+  educationFormOptions: studentAccountSettingsDemo.educationFormOptions,
+  courseFormOptions: studentAccountSettingsDemo.courseFormOptions,
+  skillsFormOptions: studentAccountSettingsDemo.skillsFormOptions,
+  jobExperienceFormOptions: studentAccountSettingsDemo.jobExperienceFormOptions,
+};
+
+const accountActions = [
+  {
+    id: "reset-password",
+    title: "Reset user password",
+    description:
+      "By resetting password, user will get a link in his email to set his new password from the portal.",
+    actionLabel: "Reset Now",
+  },
+  {
+    id: "deactivate",
+    title: "Deactivate account",
+    description: "Do you want to deactivate this account?",
+    actionLabel: "Deactivate",
+  },
+  {
+    id: "delete",
+    title: "Delete account",
+    description: "Do you want to delete this account?",
+    actionLabel: "Delete",
+  },
+] as const;
+
+const nushratResumePreviewData = {
+  profileSummary:
+    "I'm a product designer focused on ensuring great user experience and meeting business needs of designed products. I'm also experienced in implementing marketing strategies and developing both on and offline campaigns. My philosophy is to make products understandable, useful and long-lasting at the same time recognizing they're never finished and constantly changing. I'm always excited to face new challenges and problems.",
+  experiences: [
+    {
+      id: "exp-uber",
+      company: "Uber",
+      role: "Product Designer",
+      dateRange: "Mar 2015 - Present",
+      highlights: [
+        "Designing safety-focused experiences for Riders and Drivers on Uber",
+        "Solving problems to address physical space limitations in driver-partners' cars",
+        "Generating ideas to improve user experience and solve problems related to navigation, driving, directions, etc.",
+        "Generating and developing ideas to improve customer experience such as the car selection process and enhancing in-cab experiences",
+        "Working with operations teams to develop ideas that can improve operational issues such as airport pickups",
+      ],
+    },
+    {
+      id: "exp-ifttt",
+      company: "IFTTT",
+      role: "Product Designer",
+      dateRange: "Dec 2013 - Mar 2015",
+      highlights: [
+        "Worked on complex product design involving consumer facing changes and developer dashboard",
+        "Led the design of IFTTT's first true onboarding flow",
+        "Maintaining and redesigning internal tools to help keep the lights on",
+      ],
+    },
+    {
+      id: "exp-facebook",
+      company: "Facebook",
+      role: "Product Designer",
+      dateRange: "June 2013 - Sep 2013",
+      highlights: [
+        "Worked on internal tools and privacy features for Facebook",
+        "Led the design of Newsfeed's first user personas and user research study",
+        "Core designer on a project aimed at improving engagement and time spent on Facebook by users in developing countries",
+      ],
+    },
+    {
+      id: "exp-google",
+      company: "Google Maps",
+      role: "UX/UI Design Intern",
+      dateRange: "June 2012 - Sep 2013",
+      highlights: [
+        "Wireframing the Android app and web tools",
+        "Rigorous usability testing for redesigned consumer-facing Maps features",
+        "Designed Android feature to allow mobile users to send directions from their computer to their phone",
+        "Designed custom map widgets for company websites using the Google Maps API",
+      ],
+    },
   ],
-  genderOptions: [
-    { value: "Female", label: "Female" },
-    { value: "Male", label: "Male" },
-    { value: "Other", label: "Other" },
+  education: [
+    {
+      id: "edu-bsc",
+      title: "BSC in Computer Engineering at RUET",
+      dateRange: "Interdisciplinary studies, Sep 2010 - May 2013",
+      description:
+        "1st in class throughout. Minored in visual communications. Thesis on the role of product design in building brand loyalty.",
+    },
+    {
+      id: "edu-msc",
+      title: "MSC in Computer Engineering at BUET",
+      dateRange: "Interdisciplinary studies, Sep 2010 - May 2013",
+      description:
+        "Graduated with a first class marks. Minored in visual communications. Thesis on the role of product design in building brand loyalty. 2:1 grade.",
+    },
   ],
-  countryOptions: [
-    { value: "Bangladesh", label: "Bangladesh" },
-    { value: "India", label: "India" },
-    { value: "United States", label: "United States" },
-    { value: "United Kingdom", label: "United Kingdom" },
+  details: {
+    address: "Dhaka, Bangladesh",
+    phone: "(315) 802-8179",
+    email: "nushratahan@gmail.com",
+  },
+  links: [
+    {
+      id: "resume-link-linkedin",
+      platform: "linkedin" as const,
+      label: "LinkedIn",
+      url: "https://linkedin.com/in/nushratahan",
+    },
+    {
+      id: "resume-link-dribbble",
+      platform: "dribbble" as const,
+      label: "Dribbble",
+      url: "https://dribbble.com/nushratahan",
+    },
+    {
+      id: "resume-link-facebook",
+      platform: "facebook" as const,
+      label: "Facebook",
+      url: "https://facebook.com/nushratahan",
+    },
+  ],
+  skills: ["Digital Marketing", "Adobe Photoshop", "Web Development"],
+  interestedAreas: ["Photography", "Travelling", "Reading"],
+};
+
+const nushratShareResumeData = {
+  description:
+    "After finalising the resume, you can preview for polish. You can also download it as PDF for easy sharing and printing.",
+  resumeUrl: "https://skillophy/578290nushratresume.pdf",
+  copyLinkLabel: "Copy Link",
+  shareOptions: [
+    {
+      id: "email" as const,
+      label: "Share via email",
+      href: "mailto:?subject=Nushrat%20Jahan%20Resume&body=https%3A%2F%2Fskillophy%2F578290nushratresume.pdf",
+    },
+    {
+      id: "facebook" as const,
+      label: "Share on Facebook",
+      href: "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fskillophy%2F578290nushratresume.pdf",
+    },
+    {
+      id: "linkedin" as const,
+      label: "Share on LinkedIn",
+      href: "https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fskillophy%2F578290nushratresume.pdf",
+    },
+    {
+      id: "x" as const,
+      label: "Share on X",
+      href: "https://twitter.com/intent/tweet?url=https%3A%2F%2Fskillophy%2F578290nushratresume.pdf",
+    },
   ],
 };
 
-const moreData = {
-  accountActions: [
-    {
-      id: "reset-password",
-      title: "Reset user password",
+function buildNushratMoreData(): AdminLearnerProfileMoreData {
+  return {
+    resumeProfile: {
+      initials: "NJ",
+      fullName: "Nushrat Jahan",
+      jobTitle: "Product Designer",
+      avatarUrl:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=240&h=240&fit=crop",
+      previewUrl: "#",
+      shareCvUrl: "#",
+    },
+    resumePreviewData: nushratResumePreviewData,
+    shareResumeData: nushratShareResumeData,
+    accountActions: [...accountActions],
+  };
+}
+
+function buildMoreData(learner: AdminLearner): AdminLearnerProfileMoreData {
+  if (learner.id === ADMIN_LEARNER_PROFILE_NUSHRAT_ID) {
+    return buildNushratMoreData();
+  }
+
+  return {
+    resumeProfile: {
+      initials: learner.name
+        .split(" ")
+        .map((part) => part[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase(),
+      fullName: learner.name,
+      jobTitle: "Learner",
+      avatarUrl: learner.avatar,
+      previewUrl: "#",
+      shareCvUrl: "#",
+    },
+    resumePreviewData: {
+      profileSummary: `${learner.name} is an active learner at Skillophy building skills across design, technology, and professional development.`,
+      experiences: [
+        {
+          id: `${learner.id}-exp-1`,
+          company: "Design Monks",
+          role: "Product Designer",
+          dateRange: "February 2022 - Present",
+          highlights: [
+            "Collaborates on product design tasks, user research, and interface prototyping for client projects.",
+          ],
+        },
+      ],
+      education: [
+        {
+          id: `${learner.id}-edu-1`,
+          title: "BSC in Computer Engineering at RUET",
+          dateRange: "February 2012 - February 2016",
+          description:
+            "Completed undergraduate studies with a focus on software engineering and collaborative project work.",
+        },
+      ],
+      details: {
+        address: "Dhaka, Bangladesh",
+        phone: learner.phone,
+        email: learner.email,
+      },
+      links: [
+        {
+          id: `${learner.id}-link-linkedin`,
+          platform: "linkedin",
+          label: "LinkedIn",
+          url: "#",
+        },
+      ],
+      skills: ["UI/UX Design", "Web Development"],
+      interestedAreas: ["Reading", "Travelling"],
+    },
+    shareResumeData: {
       description:
-        "By resetting password, user will get a link in his email to set his new password from the portal.",
-      actionLabel: "Reset Now",
+        "You can preview, download and share this learner's resume as a PDF for easy sharing and printing.",
+      resumeUrl: `https://skillophy/${learner.id}-resume.pdf`,
+      copyLinkLabel: "Copy Link",
+      shareOptions: nushratShareResumeData.shareOptions.map((option) => ({
+        ...option,
+        href: option.href.replace(
+          "https%3A%2F%2Fskillophy%2F578290nushratresume.pdf",
+          encodeURIComponent(`https://skillophy/${learner.id}-resume.pdf`)
+        ),
+      })),
     },
-    {
-      id: "deactivate",
-      title: "Deactivate account",
-      description: "Do you want to deactivate this account?",
-      actionLabel: "Deactivate",
-    },
-    {
-      id: "delete",
-      title: "Delete account",
-      description: "Do you want to delete this account?",
-      actionLabel: "Delete",
-    },
-  ],
-};
+    accountActions: [...accountActions],
+  };
+}
 
 function buildRecordedCourses(): AdminLearnerRecordedCourse[] {
   return recordedCourseSeeds.map((course, index) => ({
@@ -504,11 +711,12 @@ function buildRecordedCourses(): AdminLearnerRecordedCourse[] {
 }
 
 function buildNushratProfileInfo(): AdminLearnerProfileInfoData {
+  const demo = studentAccountSettingsDemo;
+
   return {
     generalInfo: {
       fullName: "Nushrat Jahan",
-      role: "Learner",
-      status: "Active",
+      certificateName: "Nushrat Jahan",
       email: "nushrat@gmail.com",
       phone: "(209) 555-0104",
       gender: "Female",
@@ -520,6 +728,8 @@ function buildNushratProfileInfo(): AdminLearnerProfileInfoData {
       description:
         "Nushrat Jahan is an active learner at Skillophy focused on UX design and product thinking. She consistently participates in recorded courses and applies practical assignments to build portfolio-ready work.",
     },
+    educationData: demo.educationData,
+    jobExperienceData: demo.jobExperienceData,
     ...profileInfoFormOptions,
   };
 }
@@ -534,13 +744,11 @@ function buildProfileInfoData(learner: AdminLearner): AdminLearnerProfileInfoDat
   }
 
   const hash = hashLearnerId(learner.id);
-  const statusLabel = learner.status === "active" ? "Active" : "Inactive";
 
   return {
     generalInfo: {
       fullName: learner.name,
-      role: "Learner",
-      status: statusLabel,
+      certificateName: learner.name,
       email: learner.email,
       phone: learner.phone,
       gender: hash % 2 === 0 ? "Female" : "Male",
@@ -550,6 +758,53 @@ function buildProfileInfoData(learner: AdminLearner): AdminLearnerProfileInfoDat
     },
     biography: {
       description: `${learner.name} is a learner at Skillophy exploring courses across design, technology, and professional skills.`,
+    },
+    educationData: {
+      education: [
+        {
+          id: `${learner.id}-education-1`,
+          title: "BSC in Computer Engineering at RUET",
+          dateRange: "February 2012 - February 2016",
+          description:
+            "Completed undergraduate studies with a focus on software engineering, data structures, and collaborative project work.",
+        },
+      ],
+      courses: [
+        {
+          id: `${learner.id}-course-1`,
+          title: "Foundations of User Experience (UX) Design",
+          dateRange: "March 2024 - Present",
+          status: "ongoing",
+        },
+      ],
+      skills: ["UI/UX Design", "Web Development"],
+      interestedAreas: ["Reading", "Travelling"],
+    },
+    jobExperienceData: {
+      maxCustomLinks: 3,
+      experiences: [
+        {
+          id: `${learner.id}-job-1`,
+          title: `Product Designer at Design Monks`,
+          dateRange: "February 2022 - Present",
+          description:
+            "Collaborates on product design tasks, user research, and interface prototyping for client projects.",
+        },
+      ],
+      links: [
+        {
+          id: `${learner.id}-link-portfolio`,
+          platform: "portfolio",
+          label: "Portfolio",
+          url: "https://dribbble.com/username",
+        },
+        {
+          id: `${learner.id}-link-linkedin`,
+          platform: "linkedin",
+          label: "LinkedIn",
+          url: "https://linkedin.com/in/username",
+        },
+      ],
     },
     ...profileInfoFormOptions,
   };
@@ -586,7 +841,7 @@ function buildLearnerProfileFromLearner(learner: AdminLearner): AdminLearnerProf
       pageSize: 6,
     },
     profileInfo,
-    moreData,
+    moreData: buildMoreData(learner),
   };
 }
 

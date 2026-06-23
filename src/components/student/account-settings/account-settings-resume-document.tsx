@@ -109,10 +109,8 @@ export function AccountSettingsResumeDocument({
                     {experience.company}
                   </p>
                   <p className="mt-0.5 text-[12px] font-medium text-[#1a1a1a] sm:text-[13px]">
-                    {experience.role}
-                  </p>
-                  <p className="mt-0.5 text-[11px] text-[#757575] sm:text-[12px]">
-                    {experience.dateRange}
+                    {experience.role}{" "}
+                    <span className="font-medium text-[#757575]">({experience.dateRange})</span>
                   </p>
                   <ul className="mt-2.5 list-disc space-y-1.5 pl-4 text-[11px] leading-relaxed text-[#757575] sm:text-[12px]">
                     {experience.highlights.map((highlight) => (
@@ -131,9 +129,11 @@ export function AccountSettingsResumeDocument({
                 <div key={item.id}>
                   <p className="text-[13px] font-bold text-[#1a1a1a] sm:text-[14px]">{item.title}</p>
                   <p className="mt-0.5 text-[11px] text-[#757575] sm:text-[12px]">{item.dateRange}</p>
-                  <p className="mt-2 text-[11px] leading-relaxed text-[#757575] sm:text-[12px]">
-                    {item.description}
-                  </p>
+                  {item.description ? (
+                    <p className="mt-2 text-[11px] leading-relaxed text-[#757575] sm:text-[12px]">
+                      {item.description}
+                    </p>
+                  ) : null}
                 </div>
               ))}
             </div>
