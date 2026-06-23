@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { AdminLearnerProfileCourseStatusBadge } from "@/components/admin/learner-profile/admin-learner-profile-course-status-badge";
 import {
   formatAdminLearnerEnrolledDate,
@@ -11,10 +10,12 @@ import type { AdminLearnerRecordedCourse } from "@/types/admin-learner-profile.t
 
 interface AdminLearnerProfileRecordedCoursesTableProps {
   courses: AdminLearnerRecordedCourse[];
+  onViewDetails?: (course: AdminLearnerRecordedCourse) => void;
 }
 
 export function AdminLearnerProfileRecordedCoursesTable({
   courses,
+  onViewDetails,
 }: AdminLearnerProfileRecordedCoursesTableProps) {
   return (
     <div className="overflow-x-auto">
@@ -91,12 +92,13 @@ export function AdminLearnerProfileRecordedCoursesTable({
                 <AdminLearnerProfileCourseStatusBadge status={course.status} />
               </td>
               <td className="px-4 py-3.5 text-right sm:px-6">
-                <Link
-                  href={course.detailsHref}
+                <button
+                  type="button"
+                  onClick={() => onViewDetails?.(course)}
                   className="text-[13px] font-semibold text-primary transition-opacity hover:opacity-80 sm:text-[14px]"
                 >
                   View Details
-                </Link>
+                </button>
               </td>
             </tr>
           ))}

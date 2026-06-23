@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { StudentNotificationsPagination } from "@/components/student/notifications/student-notifications-pagination";
 import { AdminTeacherProfileRecordedCoursesToolbar } from "@/components/admin/teacher-profile/admin-teacher-profile-recorded-courses-toolbar";
+import { AdminLearnerProfileRecordedCourseProgressDrawer } from "@/components/admin/learner-profile/admin-learner-profile-recorded-course-progress-drawer";
 import { AdminLearnerProfileRecordedCoursesTable } from "@/components/admin/learner-profile/admin-learner-profile-recorded-courses-table";
 import {
   filterAdminLearnerRecordedCourses,
@@ -10,6 +11,7 @@ import {
   sortAdminLearnerRecordedCourses,
 } from "@/components/admin/learner-profile/admin-learner-profile.utils";
 import type {
+  AdminLearnerRecordedCourse,
   AdminLearnerRecordedCourseSortId,
   AdminLearnerRecordedCoursesData,
 } from "@/types/admin-learner-profile.types";
@@ -26,6 +28,13 @@ export function AdminLearnerProfileRecordedCoursesTab({
     data.defaultSortId
   );
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCourse, setSelectedCourse] = useState<AdminLearnerRecordedCourse | null>(null);
+  const [isProgressDrawerOpen, setIsProgressDrawerOpen] = useState(false);
+
+  function handleViewDetails(course: AdminLearnerRecordedCourse) {
+    setSelectedCourse(course);
+    setIsProgressDrawerOpen(true);
+  }
 
   const filteredCourses = useMemo(
     () => filterAdminLearnerRecordedCourses(data.courses, searchQuery),
@@ -63,7 +72,10 @@ export function AdminLearnerProfileRecordedCoursesTab({
       />
 
       {visibleCourses.length > 0 ? (
-        <AdminLearnerProfileRecordedCoursesTable courses={visibleCourses} />
+        <AdminLearnerProfileRecordedCoursesTable
+          courses={visibleCourses}
+          onViewDetails={handleViewDetails}
+        />
       ) : (
         <div className="px-6 py-16 text-center">
           <p className="text-[14px] font-medium text-[#9ca3af]">No recorded courses found.</p>
@@ -79,6 +91,12 @@ export function AdminLearnerProfileRecordedCoursesTab({
           />
         </div>
       )}
+
+      <AdminLearnerProfileRecordedCourseProgressDrawer
+        open={isProgressDrawerOpen}
+        onOpenChange={setIsProgressDrawerOpen}
+        course={selectedCourse}
+      />
     </>
   );
 }

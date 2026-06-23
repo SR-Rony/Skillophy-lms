@@ -2,8 +2,8 @@ import type { AdminLearnerRecordedCourseStatus } from "@/types/admin-learner-pro
 import { cn } from "@/utils";
 
 const statusStyles: Record<AdminLearnerRecordedCourseStatus, string> = {
-  completed: "bg-[#ecfdf3] text-[#16a34a]",
-  ongoing: "bg-[#fff7ed] text-[#ea580c]",
+  completed: "border border-[#86efac] bg-[#dcfce7] text-[#15803d]",
+  ongoing: "border border-[#fdba74] bg-[#ffedd5] text-[#9a3412]",
 };
 
 const statusLabels: Record<AdminLearnerRecordedCourseStatus, string> = {
@@ -21,7 +21,7 @@ export function AdminLearnerProfileCourseStatusBadge({
   return (
     <span
       className={cn(
-        "inline-flex rounded-full px-3 py-1 text-[12px] font-semibold sm:text-[13px]",
+        "inline-flex rounded-full px-3 py-1 text-[12px] font-semibold leading-none sm:text-[13px]",
         statusStyles[status]
       )}
     >

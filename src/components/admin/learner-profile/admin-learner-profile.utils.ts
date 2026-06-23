@@ -84,3 +84,19 @@ export function paginateAdminLearnerRecordedCourses(
     currentPage: safePage,
   };
 }
+
+export function paginateAdminLearnerProgressTopics<T>(
+  topics: T[],
+  currentPage: number,
+  pageSize: number
+) {
+  const totalPages = Math.max(1, Math.ceil(topics.length / pageSize));
+  const safePage = Math.min(Math.max(currentPage, 1), totalPages);
+  const start = (safePage - 1) * pageSize;
+
+  return {
+    items: topics.slice(start, start + pageSize),
+    totalPages,
+    currentPage: safePage,
+  };
+}

@@ -59,6 +59,24 @@ export interface AdminLearnerRecordedCourse {
   totalScore: number | null;
   status: AdminLearnerRecordedCourseStatus;
   detailsHref: string;
+  progressTopics: AdminLearnerRecordedCourseProgressTopic[];
+}
+
+export type AdminLearnerCourseTopicStatus = "completed" | "ongoing";
+
+export interface AdminLearnerRecordedCourseProgressTopic {
+  id: string;
+  label: string;
+  title: string;
+  status: AdminLearnerCourseTopicStatus;
+  quizScore: number | null;
+  progressPercent: number;
+}
+
+export interface AdminLearnerRecordedCourseProgressData {
+  courseTitle: string;
+  topics: AdminLearnerRecordedCourseProgressTopic[];
+  pageSize: number;
 }
 
 export interface AdminLearnerRecordedCoursesData {

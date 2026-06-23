@@ -7,6 +7,8 @@ import type {
   AdminLearnerProfileInfoData,
   AdminLearnerProfilePageData,
   AdminLearnerRecordedCourse,
+  AdminLearnerRecordedCourseProgressTopic,
+  AdminLearnerRecordedCourseStatus,
 } from "@/types/admin-learner-profile.types";
 
 export { ADMIN_LEARNER_PROFILE_NUSHRAT_ID };
@@ -33,7 +35,98 @@ const teacherMaisha = {
   avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Maisha%20Afrose",
 };
 
-const recordedCourseSeeds: Omit<AdminLearnerRecordedCourse, "id">[] = [
+const progressTopicTitles = [
+  "Introducing UX design",
+  "Thinking like a UX designer",
+  "Identifying pain points in user journeys",
+  "Conducting user interviews",
+  "Creating empathy maps and personas",
+  "Defining problem statements and goals",
+  "Ideating design solutions",
+  "Building wireframes and user flows",
+  "Applying visual design principles",
+  "Prototyping interactive experiences",
+  "Running usability tests",
+  "Presenting design recommendations",
+  "Evaluating accessibility in product design",
+  "Preparing a UX portfolio case study",
+  "UX metrics and product analytics",
+  "Design systems fundamentals",
+  "Mobile-first responsive design",
+  "Collaboration with developers",
+  "Portfolio presentation skills",
+  "Course recap and next steps",
+];
+
+function buildFeaturedUxProgressTopics(): AdminLearnerRecordedCourseProgressTopic[] {
+  return progressTopicTitles.map((title, index) => {
+    const topicNumber = index + 1;
+
+    if (index <= 3) {
+      return {
+        id: `topic-${topicNumber}`,
+        label: `Topic ${topicNumber}`,
+        title,
+        status: "completed",
+        quizScore: index === 0 ? 87 : null,
+        progressPercent: 100,
+      };
+    }
+
+    if (index === 4) {
+      return {
+        id: `topic-${topicNumber}`,
+        label: `Topic ${topicNumber}`,
+        title,
+        status: "ongoing",
+        quizScore: null,
+        progressPercent: 20,
+      };
+    }
+
+    return {
+      id: `topic-${topicNumber}`,
+      label: `Topic ${topicNumber}`,
+      title,
+      status: "ongoing",
+      quizScore: null,
+      progressPercent: 0,
+    };
+  });
+}
+
+function buildProgressTopics(
+  courseStatus: AdminLearnerRecordedCourseStatus,
+  courseIndex: number
+): AdminLearnerRecordedCourseProgressTopic[] {
+  if (courseIndex === 0) {
+    return buildFeaturedUxProgressTopics();
+  }
+
+  const completedTopicCount =
+    courseStatus === "completed"
+      ? progressTopicTitles.length - 1
+      : Math.max(1, (courseIndex % 4) + 1);
+
+  return progressTopicTitles.map((title, index) => {
+    const topicNumber = index + 1;
+    const isCompleted = index < completedTopicCount;
+    const isCurrent = !isCompleted && index === completedTopicCount;
+
+    return {
+      id: `topic-${courseIndex + 1}-${topicNumber}`,
+      label: `Topic ${topicNumber}`,
+      title,
+      status: isCompleted ? "completed" : "ongoing",
+      quizScore: isCompleted ? 70 + ((index * 7 + courseIndex) % 25) : null,
+      progressPercent: isCompleted ? 100 : isCurrent ? 15 + (index % 4) * 5 : 0,
+    };
+  });
+}
+
+type RecordedCourseSeed = Omit<AdminLearnerRecordedCourse, "id" | "progressTopics">;
+
+const recordedCourseSeeds: RecordedCourseSeed[] = [
   {
     title: "Foundations of User Experience (UX) Design",
     thumbnail: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=120&h=120&fit=crop",
@@ -203,6 +296,7 @@ function buildRecordedCourses(): AdminLearnerRecordedCourse[] {
   return recordedCourseSeeds.map((course, index) => ({
     id: `learner-recorded-course-${index + 1}`,
     ...course,
+    progressTopics: buildProgressTopics(course.status, index),
   }));
 }
 
