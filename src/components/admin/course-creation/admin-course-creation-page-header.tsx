@@ -7,22 +7,28 @@ import { cn } from "@/utils";
 
 interface AdminCourseCreationPageHeaderProps {
   isEditing: boolean;
+  isMetaInfoStep: boolean;
   showBack: boolean;
   showNext: boolean;
   onEdit: () => void;
   onSave: () => void;
   onBack: () => void;
   onNext: () => void;
+  onPublish?: () => void;
+  onSaveDraft?: () => void;
 }
 
 export function AdminCourseCreationPageHeader({
   isEditing,
+  isMetaInfoStep,
   showBack,
   showNext,
   onEdit,
   onSave,
   onBack,
   onNext,
+  onPublish,
+  onSaveDraft,
 }: AdminCourseCreationPageHeaderProps) {
   return (
     <div className="space-y-5">
@@ -44,8 +50,25 @@ export function AdminCourseCreationPageHeader({
           </p>
         </div>
 
-        <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
-          {isEditing ? (
+        <div className="flex shrink-0 flex-wrap items-center gap-2.5 sm:gap-3">
+          {isMetaInfoStep ? (
+            <>
+              <button
+                type="button"
+                onClick={onPublish}
+                className="inline-flex min-w-[132px] items-center justify-center rounded-xl bg-primary px-5 py-2.5 text-[13px] font-semibold text-white transition-colors hover:bg-[#e63e3e] active:bg-[#d93636] sm:text-[14px]"
+              >
+                Publish Course
+              </button>
+              <button
+                type="button"
+                onClick={onSaveDraft}
+                className="inline-flex min-w-[132px] items-center justify-center rounded-xl border border-[#1a1a1a] bg-white px-5 py-2.5 text-[13px] font-semibold text-[#1a1a1a] transition-colors hover:bg-[#fafafa] active:bg-[#f3f3f3] sm:text-[14px]"
+              >
+                Save as Draft
+              </button>
+            </>
+          ) : isEditing ? (
             <button
               type="button"
               onClick={onSave}

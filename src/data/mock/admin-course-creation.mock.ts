@@ -123,6 +123,75 @@ export const adminCourseCreationData: AdminCourseCreationData = {
       },
     ],
   },
+  metaInfo: {
+    jobStats: {
+      jobOpening: "13000",
+      remoteJobs: "5400",
+      hiringInBd: "21",
+    },
+    skillBooks: [
+      {
+        id: "skill-book-1",
+        title: "Don't Make Me Think",
+        subtitle: "By Steve Krug",
+        isFreeDownloadable: true,
+      },
+    ],
+    academicGuides: [
+      {
+        id: "academic-guide-1",
+        title: "Class 9-10 English Guide",
+        subtitle: "By NCTB",
+        isFreeDownloadable: false,
+      },
+    ],
+    skills: [
+      "User Experience Design (UXD)",
+      "Prototype",
+      "Wireframe",
+      "UX Research",
+      "Adobe",
+    ],
+    requirements: [
+      {
+        id: "requirement-1",
+        title: "Good Internet Connection",
+      },
+    ],
+    benefits: [
+      {
+        id: "benefit-1",
+        title: "Life Time Access",
+        subtitle:
+          "You will get life time access typically refers to a purchasing model where a customer pays once for a product or service and can use it indefinitely.",
+      },
+      {
+        id: "benefit-2",
+        title: "Money Back Guarantee",
+        subtitle:
+          "You will get life time access typically refers to a purchasing model where a customer pays once for a product or service and can use it indefinitely.",
+      },
+      {
+        id: "benefit-3",
+        title: "",
+        subtitle: "",
+      },
+    ],
+    faqs: [
+      {
+        id: "faq-1",
+        question: "How can we buy this course?",
+        answer:
+          "You can buy this course directly from our platform. After purchase, you will receive a certificate upon successful completion of all lessons and assessments.",
+      },
+      {
+        id: "faq-2",
+        question: "How can we buy this course?",
+        answer:
+          "You can buy this course directly from our platform. After purchase, you will receive a certificate upon successful completion of all lessons and assessments.",
+      },
+    ],
+  },
 };
 
 export function getAdminCourseCreation(): AdminCourseCreationData {

@@ -65,6 +65,47 @@ export interface AdminCourseCreationData {
   generalInfo: AdminCourseCreationGeneralInfo;
   formOptions: AdminCourseCreationFormOptions;
   curriculum: AdminCourseCurriculumData;
+  metaInfo: AdminCourseMetaInfo;
+}
+
+export interface AdminCourseMetaJobStats {
+  jobOpening: string;
+  remoteJobs: string;
+  hiringInBd: string;
+}
+
+export interface AdminCourseMetaBookItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  isFreeDownloadable: boolean;
+}
+
+export interface AdminCourseMetaRequirement {
+  id: string;
+  title: string;
+}
+
+export interface AdminCourseMetaBenefit {
+  id: string;
+  title: string;
+  subtitle: string;
+}
+
+export interface AdminCourseMetaFaq {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface AdminCourseMetaInfo {
+  jobStats: AdminCourseMetaJobStats;
+  skillBooks: AdminCourseMetaBookItem[];
+  academicGuides: AdminCourseMetaBookItem[];
+  skills: string[];
+  requirements: AdminCourseMetaRequirement[];
+  benefits: AdminCourseMetaBenefit[];
+  faqs: AdminCourseMetaFaq[];
 }
 
 export type AdminCourseAddLessonTabId = "overview" | "lesson-video" | "resource";
@@ -103,11 +144,23 @@ export interface AdminCourseAddResourceForm {
   resources: AdminCourseResourceFile[];
 }
 
+export interface AdminCourseQuizAnswerOption {
+  id: string;
+  text: string;
+}
+
 export interface AdminCourseQuizQuestion {
   id: string;
   prompt: string;
+  isExpanded: boolean;
+  isEditing: boolean;
+  options: AdminCourseQuizAnswerOption[];
+  correctOptionId: string | null;
+  correctAnswerDescription: string;
+  points: string;
 }
 
 export interface AdminCourseAddQuizForm {
+  durationMinutes: string;
   questions: AdminCourseQuizQuestion[];
 }
