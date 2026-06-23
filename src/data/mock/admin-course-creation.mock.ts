@@ -4,45 +4,45 @@ const teachers = [
   {
     id: "teacher-abdullah",
     name: "Abdullah Mamun",
-    email: "abdullah.mamun@gmail.com",
+    email: "mamun@gmail.com",
     avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Abdullah%20Mamun",
   },
   {
     id: "teacher-guy",
     name: "Guy Hawkins",
-    email: "guy.hawkins@gmail.com",
+    email: "guy@gmail.com",
     avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Guy%20Hawkins",
-  },
-  {
-    id: "teacher-darrell",
-    name: "Darrell Steward",
-    email: "darrell.steward@gmail.com",
-    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Darrell%20Steward",
   },
   {
     id: "teacher-maisha",
     name: "Maisha Afrose",
-    email: "maisha@gmail.com",
+    email: "pena@gmail.com",
     avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Maisha%20Afrose",
-  },
-  {
-    id: "teacher-kathryn",
-    name: "Kathryn Murphy",
-    email: "kathryn@gmail.com",
-    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Kathryn%20Murphy",
   },
   {
     id: "teacher-brooklyn",
     name: "Brooklyn Simmons",
-    email: "brooklyn.simmons@gmail.com",
+    email: "brooklyn68@gmail.com",
     avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Brooklyn%20Simmons",
+  },
+  {
+    id: "teacher-darrell",
+    name: "Darrell Steward",
+    email: "guy@gmail.com",
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Darrell%20Steward",
+  },
+  {
+    id: "teacher-eleanor",
+    name: "Eleanor Pena",
+    email: "bessie@gmail.com",
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Eleanor%20Pena",
   },
 ];
 
 export const adminCourseCreationData: AdminCourseCreationData = {
   steps: [
     { id: "general-info", label: "General Info" },
-    { id: "curriculum", label: "Curriculum" },
+    { id: "curriculum", label: "Course Curriculum" },
     { id: "meta-info", label: "Meta Info" },
   ],
   generalInfo: {
@@ -83,6 +83,45 @@ export const adminCourseCreationData: AdminCourseCreationData = {
     ],
     teachers,
     maxTeachersPerRole: 5,
+  },
+  curriculum: {
+    topics: [
+      {
+        id: "topic-1",
+        title: "Introducing UX design",
+        isExpanded: true,
+        items: [
+          {
+            id: "topic-1-lesson-1",
+            type: "lesson",
+            title: "The basics of user experience design",
+            resourceLabel: "1 resource",
+          },
+          {
+            id: "topic-1-lesson-2",
+            type: "lesson",
+            title: "Design for good user experience",
+            resourceLabel: "No resource",
+          },
+          {
+            id: "topic-1-resource-1",
+            type: "resource",
+            title: "Hand note of the Introducing UX design",
+          },
+          {
+            id: "topic-1-quiz-1",
+            type: "quiz",
+            title: "Quiz on Introducing user experience design",
+          },
+        ],
+      },
+      {
+        id: "topic-2",
+        title: "Design for good user experience",
+        isExpanded: false,
+        items: [],
+      },
+    ],
   },
 };
 

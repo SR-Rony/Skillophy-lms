@@ -1,4 +1,5 @@
 import type { AdminCourseCreationStep, AdminCourseCreationStepId } from "@/types/admin-course-creation.types";
+import { Check } from "lucide-react";
 import { cn } from "@/utils";
 
 interface AdminCourseCreationStepperProps {
@@ -28,12 +29,16 @@ export function AdminCourseCreationStepper({ steps, activeStepId }: AdminCourseC
                       : "border-[#d1d5db] bg-white"
                   )}
                 >
-                  <span
-                    className={cn(
-                      "h-2 w-2 rounded-full",
-                      isActive || isCompleted ? "bg-white" : "bg-[#d1d5db]"
-                    )}
-                  />
+                  {isCompleted ? (
+                    <Check className="h-3 w-3 text-white" strokeWidth={3} aria-hidden />
+                  ) : (
+                    <span
+                      className={cn(
+                        "h-2 w-2 rounded-full",
+                        isActive ? "bg-white" : "bg-[#d1d5db]"
+                      )}
+                    />
+                  )}
                 </span>
                 <span
                   className={cn(

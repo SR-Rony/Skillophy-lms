@@ -234,7 +234,12 @@ export function AdminCourseCreationGeneralInfoSection({
       </section>
 
       <section>
-        <h2 className="text-[16px] font-bold text-[#1a1a1a] sm:text-[18px]">Course Teacher</h2>
+        <div className="flex items-center gap-4">
+          <h2 className="shrink-0 text-[16px] font-bold text-[#1a1a1a] sm:text-[18px]">
+            Course Teacher
+          </h2>
+          <div className="h-px flex-1 bg-[#ebe8e6]" aria-hidden />
+        </div>
 
         <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
           <AdminCourseCreationTeacherSelect

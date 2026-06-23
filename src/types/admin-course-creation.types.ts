@@ -40,8 +40,29 @@ export interface AdminCourseCreationFormOptions {
   maxTeachersPerRole: number;
 }
 
+export type AdminCourseCurriculumItemType = "lesson" | "resource" | "quiz";
+
+export interface AdminCourseCurriculumItem {
+  id: string;
+  type: AdminCourseCurriculumItemType;
+  title: string;
+  resourceLabel?: string;
+}
+
+export interface AdminCourseCurriculumTopic {
+  id: string;
+  title: string;
+  isExpanded: boolean;
+  items: AdminCourseCurriculumItem[];
+}
+
+export interface AdminCourseCurriculumData {
+  topics: AdminCourseCurriculumTopic[];
+}
+
 export interface AdminCourseCreationData {
   steps: AdminCourseCreationStep[];
   generalInfo: AdminCourseCreationGeneralInfo;
   formOptions: AdminCourseCreationFormOptions;
+  curriculum: AdminCourseCurriculumData;
 }
