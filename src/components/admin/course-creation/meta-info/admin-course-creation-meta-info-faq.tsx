@@ -3,6 +3,7 @@
 import { Minus } from "lucide-react";
 import { AdminCourseCreationMetaInfoSectionHeader } from "@/components/admin/course-creation/meta-info/admin-course-creation-meta-info-section-header";
 import { AdminCourseCreationMetaInfoTemplateActions } from "@/components/admin/course-creation/meta-info/admin-course-creation-meta-info-template-actions";
+import { ADMIN_COURSE_FAQ_TEMPLATES } from "@/components/admin/course-creation/meta-info/admin-course-creation-meta-info-templates";
 import {
   adminCourseMetaInfoInputClassName,
   adminCourseMetaInfoRemoveButtonClassName,
@@ -35,6 +36,33 @@ export function AdminCourseCreationMetaInfoFaq({
       { id: createAdminCourseMetaId("faq"), question: "", answer: "" },
     ]);
   }
+
+  function handleToggleTemplate(templateId: string, selected: boolean) {
+    if (selected) {
+      const template = ADMIN_COURSE_FAQ_TEMPLATES.find((item) => item.id === templateId);
+
+      if (!template || faqs.some((item) => item.templateId === templateId)) {
+        return;
+      }
+
+      onChange([
+        ...faqs,
+        {
+          id: createAdminCourseMetaId("faq"),
+          question: template.question,
+          answer: template.answer,
+          templateId: template.id,
+        },
+      ]);
+      return;
+    }
+
+    onChange(faqs.filter((item) => item.templateId !== templateId));
+  }
+
+  const selectedTemplateIds = faqs
+    .map((item) => item.templateId)
+    .filter((templateId): templateId is string => Boolean(templateId));
 
   return (
     <section className="space-y-4 border-t border-[#f0f0f0] pt-8">
@@ -78,7 +106,12 @@ export function AdminCourseCreationMetaInfoFaq({
         ))}
       </div>
 
-      <AdminCourseCreationMetaInfoTemplateActions onCreateFromBlank={handleAddBlank} />
+      <AdminCourseCreationMetaInfoTemplateActions
+        templates={ADMIN_COURSE_FAQ_TEMPLATES}
+        selectedTemplateIds={selectedTemplateIds}
+        onToggleTemplate={handleToggleTemplate}
+        onCreateFromBlank={handleAddBlank}
+      />
     </section>
   );
 }

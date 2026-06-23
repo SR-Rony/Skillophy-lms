@@ -4,6 +4,7 @@ import { Minus } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { AdminCourseCreationMetaInfoSectionHeader } from "@/components/admin/course-creation/meta-info/admin-course-creation-meta-info-section-header";
 import { AdminCourseCreationMetaInfoTemplateActions } from "@/components/admin/course-creation/meta-info/admin-course-creation-meta-info-template-actions";
+import type { AdminCourseCreationMetaInfoTemplateMenuItem } from "@/components/admin/course-creation/meta-info/admin-course-creation-meta-info-template-menu";
 import {
   adminCourseMetaInfoInputClassName,
   adminCourseMetaInfoRemoveButtonClassName,
@@ -16,6 +17,13 @@ export interface AdminCourseCreationMetaInfoIconCardItem {
   id: string;
   title: string;
   subtitle: string;
+  templateId?: string;
+}
+
+interface AdminCourseCreationMetaInfoIconCardsSectionTemplateConfig {
+  templates: AdminCourseCreationMetaInfoTemplateMenuItem[];
+  selectedTemplateIds: string[];
+  onToggleTemplate: (templateId: string, selected: boolean) => void;
 }
 
 interface AdminCourseCreationMetaInfoIconCardsSectionProps {
@@ -31,6 +39,7 @@ interface AdminCourseCreationMetaInfoIconCardsSectionProps {
   emptyTitlePlaceholder?: string;
   emptySubtitlePlaceholder?: string;
   titleMaxLength?: number;
+  templateConfig?: AdminCourseCreationMetaInfoIconCardsSectionTemplateConfig;
 }
 
 function getIconForIndex(icons: LucideIcon[], index: number) {
@@ -50,6 +59,7 @@ export function AdminCourseCreationMetaInfoIconCardsSection({
   emptyTitlePlaceholder = "Enter title here",
   emptySubtitlePlaceholder = "Enter subtitle here",
   titleMaxLength,
+  templateConfig,
 }: AdminCourseCreationMetaInfoIconCardsSectionProps) {
   function handleUpdate(id: string, updates: Partial<AdminCourseCreationMetaInfoIconCardItem>) {
     onChange(items.map((item) => (item.id === id ? { ...item, ...updates } : item)));
@@ -124,7 +134,12 @@ export function AdminCourseCreationMetaInfoIconCardsSection({
         })}
       </div>
 
-      <AdminCourseCreationMetaInfoTemplateActions onCreateFromBlank={handleAddBlank} />
+      <AdminCourseCreationMetaInfoTemplateActions
+        templates={templateConfig?.templates ?? []}
+        selectedTemplateIds={templateConfig?.selectedTemplateIds ?? []}
+        onToggleTemplate={templateConfig?.onToggleTemplate ?? (() => undefined)}
+        onCreateFromBlank={handleAddBlank}
+      />
     </section>
   );
 }

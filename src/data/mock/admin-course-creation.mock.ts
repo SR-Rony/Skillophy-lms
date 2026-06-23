@@ -156,6 +156,7 @@ export const adminCourseCreationData: AdminCourseCreationData = {
       {
         id: "requirement-1",
         title: "Good Internet Connection",
+        templateId: "req-internet",
       },
     ],
     benefits: [
@@ -164,12 +165,14 @@ export const adminCourseCreationData: AdminCourseCreationData = {
         title: "Life Time Access",
         subtitle:
           "You will get life time access typically refers to a purchasing model where a customer pays once for a product or service and can use it indefinitely.",
+        templateId: "benefit-lifetime-access",
       },
       {
         id: "benefit-2",
         title: "Money Back Guarantee",
         subtitle:
           "You will get life time access typically refers to a purchasing model where a customer pays once for a product or service and can use it indefinitely.",
+        templateId: "benefit-money-back",
       },
       {
         id: "benefit-3",
@@ -183,6 +186,7 @@ export const adminCourseCreationData: AdminCourseCreationData = {
         question: "How can we buy this course?",
         answer:
           "You can buy this course directly from our platform. After purchase, you will receive a certificate upon successful completion of all lessons and assessments.",
+        templateId: "faq-purchase",
       },
       {
         id: "faq-2",

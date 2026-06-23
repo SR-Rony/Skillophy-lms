@@ -4,6 +4,7 @@ import { Check, Globe, Minus } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { AdminCourseCreationMetaInfoSectionHeader } from "@/components/admin/course-creation/meta-info/admin-course-creation-meta-info-section-header";
 import { AdminCourseCreationMetaInfoTemplateActions } from "@/components/admin/course-creation/meta-info/admin-course-creation-meta-info-template-actions";
+import { ADMIN_COURSE_REQUIREMENT_TEMPLATES } from "@/components/admin/course-creation/meta-info/admin-course-creation-meta-info-templates";
 import {
   adminCourseMetaInfoInputClassName,
   adminCourseMetaInfoRemoveButtonClassName,
@@ -60,6 +61,32 @@ export function AdminCourseCreationMetaInfoRequirements({
     ]);
   }
 
+  function handleToggleTemplate(templateId: string, selected: boolean) {
+    if (selected) {
+      const template = ADMIN_COURSE_REQUIREMENT_TEMPLATES.find((item) => item.id === templateId);
+
+      if (!template || requirements.some((item) => item.templateId === templateId)) {
+        return;
+      }
+
+      onChange([
+        ...requirements,
+        {
+          id: createAdminCourseMetaId("requirement"),
+          title: template.title,
+          templateId: template.id,
+        },
+      ]);
+      return;
+    }
+
+    onChange(requirements.filter((item) => item.templateId !== templateId));
+  }
+
+  const selectedTemplateIds = requirements
+    .map((item) => item.templateId)
+    .filter((templateId): templateId is string => Boolean(templateId));
+
   return (
     <section className="space-y-4 border-t border-[#f0f0f0] pt-8">
       <AdminCourseCreationMetaInfoSectionHeader title="Requirements" />
@@ -101,7 +128,12 @@ export function AdminCourseCreationMetaInfoRequirements({
         })}
       </div>
 
-      <AdminCourseCreationMetaInfoTemplateActions onCreateFromBlank={handleAddBlank} />
+      <AdminCourseCreationMetaInfoTemplateActions
+        templates={ADMIN_COURSE_REQUIREMENT_TEMPLATES}
+        selectedTemplateIds={selectedTemplateIds}
+        onToggleTemplate={handleToggleTemplate}
+        onCreateFromBlank={handleAddBlank}
+      />
     </section>
   );
 }

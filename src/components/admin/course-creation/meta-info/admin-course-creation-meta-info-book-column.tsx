@@ -11,6 +11,7 @@ interface AdminCourseCreationMetaInfoBookColumnProps {
   addLabel: string;
   items: AdminCourseMetaBookItem[];
   onChange: (items: AdminCourseMetaBookItem[]) => void;
+  onAddClick?: () => void;
 }
 
 export function AdminCourseCreationMetaInfoBookColumn({
@@ -18,6 +19,7 @@ export function AdminCourseCreationMetaInfoBookColumn({
   addLabel,
   items,
   onChange,
+  onAddClick,
 }: AdminCourseCreationMetaInfoBookColumnProps) {
   function handleToggleFree(id: string, isFreeDownloadable: boolean) {
     onChange(
@@ -76,7 +78,9 @@ export function AdminCourseCreationMetaInfoBookColumn({
         ))}
       </div>
 
-      <AdminCourseCreationMetaInfoAddButton onClick={handleAdd}>{addLabel}</AdminCourseCreationMetaInfoAddButton>
+      <AdminCourseCreationMetaInfoAddButton onClick={onAddClick ?? handleAdd}>
+        {addLabel}
+      </AdminCourseCreationMetaInfoAddButton>
     </div>
   );
 }

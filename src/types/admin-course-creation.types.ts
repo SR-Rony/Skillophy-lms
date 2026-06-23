@@ -84,18 +84,21 @@ export interface AdminCourseMetaBookItem {
 export interface AdminCourseMetaRequirement {
   id: string;
   title: string;
+  templateId?: string;
 }
 
 export interface AdminCourseMetaBenefit {
   id: string;
   title: string;
   subtitle: string;
+  templateId?: string;
 }
 
 export interface AdminCourseMetaFaq {
   id: string;
   question: string;
   answer: string;
+  templateId?: string;
 }
 
 export interface AdminCourseMetaInfo {
