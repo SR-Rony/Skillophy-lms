@@ -98,6 +98,7 @@ export const ROUTES = {
     admins: "/admin/users/admins",
     userDetail: (employeeId: string) => `/admin/users/${employeeId}`,
     courses: "/admin/courses",
+    courseCreate: "/admin/courses/create",
     categories: "/admin/categories",
     promos: "/admin/promos",
     workshop: "/admin/workshop",

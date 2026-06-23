@@ -14,6 +14,7 @@ const adminPageTitles: Record<string, string> = {
   [ROUTES.admin.teachers]: "Teachers",
   [ROUTES.admin.admins]: "Admins",
   [ROUTES.admin.courses]: "Course Management",
+  [ROUTES.admin.courseCreate]: "Course Management",
   [ROUTES.admin.categories]: "Categories",
   [ROUTES.admin.promos]: "Promo & Discounts",
   [ROUTES.admin.workshop]: "Workshop",
