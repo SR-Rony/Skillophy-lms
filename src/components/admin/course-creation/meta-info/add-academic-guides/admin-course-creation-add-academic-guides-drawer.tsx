@@ -3,33 +3,33 @@
 import { AdminCourseCreationAddBookResourceDrawer } from "@/components/admin/course-creation/meta-info/shared/admin-course-creation-add-book-resource-drawer";
 import type { AdminCourseAddBookResourceForm } from "@/components/admin/course-creation/meta-info/shared/admin-course-creation-add-book-resource.utils";
 
-const SKILL_BOOKS_DRAWER_COPY = {
-  title: "Add Skill Books",
-  description: "Add relevant skill books here to ensure comprehensive content.",
-  closeAriaLabel: "Close add skill books drawer",
-  nameLabel: "Book Name",
-  namePlaceholder: "Don't Make Me Think",
-  publisherLabel: "Author Name",
-  publisherPlaceholder: "Steve Krug",
+const ACADEMIC_GUIDES_DRAWER_COPY = {
+  title: "Add Academic Guides",
+  description: "Add relevant academic guides here to support structured learning.",
+  closeAriaLabel: "Close add academic guides drawer",
+  nameLabel: "Guide Name",
+  namePlaceholder: "Class 9-10 English Guide",
+  publisherLabel: "Publisher Name",
+  publisherPlaceholder: "NCTB",
 } as const;
 
-interface AdminCourseCreationAddSkillBooksDrawerProps {
+interface AdminCourseCreationAddAcademicGuidesDrawerProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onSave: (form: AdminCourseAddBookResourceForm) => void;
 }
 
-export function AdminCourseCreationAddSkillBooksDrawer({
+export function AdminCourseCreationAddAcademicGuidesDrawer({
   open,
   onOpenChange,
   onSave,
-}: AdminCourseCreationAddSkillBooksDrawerProps) {
+}: AdminCourseCreationAddAcademicGuidesDrawerProps) {
   return (
     <AdminCourseCreationAddBookResourceDrawer
       open={open}
       onOpenChange={onOpenChange}
       onSave={onSave}
-      copy={SKILL_BOOKS_DRAWER_COPY}
+      copy={ACADEMIC_GUIDES_DRAWER_COPY}
     />
   );
 }

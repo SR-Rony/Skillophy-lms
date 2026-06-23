@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { AdminCourseCreationAddAcademicGuidesDrawer } from "@/components/admin/course-creation/meta-info/add-academic-guides/admin-course-creation-add-academic-guides-drawer";
 import { AdminCourseCreationAddSkillBooksDrawer } from "@/components/admin/course-creation/meta-info/add-skill-books/admin-course-creation-add-skill-books-drawer";
-import type { AdminCourseAddSkillBookForm } from "@/components/admin/course-creation/meta-info/add-skill-books/admin-course-creation-add-skill-books.utils";
+import type { AdminCourseAddBookResourceForm } from "@/components/admin/course-creation/meta-info/shared/admin-course-creation-add-book-resource.utils";
 import { AdminCourseCreationMetaInfoBenefits } from "@/components/admin/course-creation/meta-info/admin-course-creation-meta-info-benefits";
 import { AdminCourseCreationMetaInfoBookColumn } from "@/components/admin/course-creation/meta-info/admin-course-creation-meta-info-book-column";
 import { AdminCourseCreationMetaInfoFaq } from "@/components/admin/course-creation/meta-info/admin-course-creation-meta-info-faq";
@@ -24,16 +25,32 @@ export function AdminCourseCreationMetaInfoSection({
 }: AdminCourseCreationMetaInfoSectionProps) {
   const [metaInfo, setMetaInfo] = useState<AdminCourseMetaInfo>(initialData);
   const [isSkillBooksDrawerOpen, setIsSkillBooksDrawerOpen] = useState(false);
+  const [isAcademicGuidesDrawerOpen, setIsAcademicGuidesDrawerOpen] = useState(false);
 
-  function handleSaveSkillBook(form: AdminCourseAddSkillBookForm) {
+  function handleSaveSkillBook(form: AdminCourseAddBookResourceForm) {
     setMetaInfo((current) => ({
       ...current,
       skillBooks: [
         ...current.skillBooks,
         {
           id: createAdminCourseMetaId("skill-book"),
-          title: form.bookName,
-          subtitle: `By ${form.authorName}`,
+          title: form.name,
+          subtitle: `By ${form.publisherName}`,
+          isFreeDownloadable: false,
+        },
+      ],
+    }));
+  }
+
+  function handleSaveAcademicGuide(form: AdminCourseAddBookResourceForm) {
+    setMetaInfo((current) => ({
+      ...current,
+      academicGuides: [
+        ...current.academicGuides,
+        {
+          id: createAdminCourseMetaId("academic-guide"),
+          title: form.name,
+          subtitle: `By ${form.publisherName}`,
           isFreeDownloadable: false,
         },
       ],
@@ -110,6 +127,7 @@ export function AdminCourseCreationMetaInfoSection({
           addLabel="Add Academic Guides"
           items={metaInfo.academicGuides}
           onChange={(academicGuides) => setMetaInfo((current) => ({ ...current, academicGuides }))}
+          onAddClick={() => setIsAcademicGuidesDrawerOpen(true)}
         />
       </section>
 
@@ -140,6 +158,12 @@ export function AdminCourseCreationMetaInfoSection({
         open={isSkillBooksDrawerOpen}
         onOpenChange={setIsSkillBooksDrawerOpen}
         onSave={handleSaveSkillBook}
+      />
+
+      <AdminCourseCreationAddAcademicGuidesDrawer
+        open={isAcademicGuidesDrawerOpen}
+        onOpenChange={setIsAcademicGuidesDrawerOpen}
+        onSave={handleSaveAcademicGuide}
       />
     </>
   );
