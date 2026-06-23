@@ -30,7 +30,9 @@ interface AdminCourseCreationCurriculumTopicCardProps {
   onRenameTopic: (title: string) => void;
   onCopyTopic: () => void;
   onDeleteTopic: () => void;
-  onAddItem: (type: AdminCourseCurriculumItemType) => void;
+  onAddLesson: () => void;
+  onAddResource: () => void;
+  onAddQuiz: () => void;
   onRenameItem: (itemId: string, title: string) => void;
   onCopyItem: (itemId: string) => void;
   onDeleteItem: (itemId: string) => void;
@@ -53,7 +55,9 @@ export function AdminCourseCreationCurriculumTopicCard({
   onRenameTopic,
   onCopyTopic,
   onDeleteTopic,
-  onAddItem,
+  onAddLesson,
+  onAddResource,
+  onAddQuiz,
   onRenameItem,
   onCopyItem,
   onDeleteItem,
@@ -174,7 +178,7 @@ export function AdminCourseCreationCurriculumTopicCard({
       <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-t border-[#f0f0f0] px-4 py-3.5 sm:px-5">
         <button
           type="button"
-          onClick={() => onAddItem("lesson")}
+          onClick={onAddLesson}
           className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-primary transition-colors hover:text-[#e63e3e]"
         >
           <Play className="h-3.5 w-3.5" aria-hidden />
@@ -182,7 +186,7 @@ export function AdminCourseCreationCurriculumTopicCard({
         </button>
         <button
           type="button"
-          onClick={() => onAddItem("resource")}
+          onClick={onAddResource}
           className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-primary transition-colors hover:text-[#e63e3e]"
         >
           <BookOpen className="h-3.5 w-3.5" aria-hidden />
@@ -190,7 +194,7 @@ export function AdminCourseCreationCurriculumTopicCard({
         </button>
         <button
           type="button"
-          onClick={() => onAddItem("quiz")}
+          onClick={onAddQuiz}
           className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-primary transition-colors hover:text-[#e63e3e]"
         >
           <MessageCircleQuestion className="h-3.5 w-3.5" aria-hidden />

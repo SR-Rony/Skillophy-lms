@@ -66,3 +66,48 @@ export interface AdminCourseCreationData {
   formOptions: AdminCourseCreationFormOptions;
   curriculum: AdminCourseCurriculumData;
 }
+
+export type AdminCourseAddLessonTabId = "overview" | "lesson-video" | "resource";
+
+export type AdminCourseLessonResourceFileType = "pdf" | "txt" | "doc" | "rtf";
+
+export interface AdminCourseLessonResourceFile {
+  id: string;
+  name: string;
+  sizeLabel: string;
+  type: AdminCourseLessonResourceFileType;
+  progress: number;
+}
+
+export interface AdminCourseAddLessonForm {
+  title: string;
+  description: string;
+  teacherIds: string[];
+  videoUrl: string;
+  isFree: boolean;
+  resources: AdminCourseLessonResourceFile[];
+}
+
+export type AdminCourseAddResourceTabId = "overview" | "upload";
+
+export interface AdminCourseResourceFile {
+  id: string;
+  name: string;
+  sizeLabel: string;
+  type: AdminCourseLessonResourceFileType;
+  progress: number;
+  isFreeDownloadable: boolean;
+}
+
+export interface AdminCourseAddResourceForm {
+  resources: AdminCourseResourceFile[];
+}
+
+export interface AdminCourseQuizQuestion {
+  id: string;
+  prompt: string;
+}
+
+export interface AdminCourseAddQuizForm {
+  questions: AdminCourseQuizQuestion[];
+}

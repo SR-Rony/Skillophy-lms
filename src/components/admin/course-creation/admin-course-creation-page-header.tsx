@@ -7,15 +7,21 @@ import { cn } from "@/utils";
 
 interface AdminCourseCreationPageHeaderProps {
   isEditing: boolean;
+  showBack: boolean;
+  showNext: boolean;
   onEdit: () => void;
   onSave: () => void;
+  onBack: () => void;
   onNext: () => void;
 }
 
 export function AdminCourseCreationPageHeader({
   isEditing,
+  showBack,
+  showNext,
   onEdit,
   onSave,
+  onBack,
   onNext,
 }: AdminCourseCreationPageHeaderProps) {
   return (
@@ -57,15 +63,28 @@ export function AdminCourseCreationPageHeader({
             </button>
           )}
 
-          <button
-            type="button"
-            onClick={onNext}
-            className={cn(
-              "inline-flex min-w-[96px] items-center justify-center rounded-xl border border-[#1a1a1a] bg-white px-5 py-2.5 text-[13px] font-semibold text-[#1a1a1a] transition-colors hover:bg-[#fafafa] active:bg-[#f3f3f3] sm:text-[14px]"
-            )}
-          >
-            Next
-          </button>
+          {showBack ? (
+            <button
+              type="button"
+              onClick={onBack}
+              className="inline-flex min-w-[96px] items-center justify-center gap-1.5 rounded-xl border border-[#1a1a1a] bg-white px-5 py-2.5 text-[13px] font-semibold text-[#1a1a1a] transition-colors hover:bg-[#fafafa] active:bg-[#f3f3f3] sm:text-[14px]"
+            >
+              <ArrowLeft className="h-4 w-4" aria-hidden />
+              Back
+            </button>
+          ) : null}
+
+          {showNext ? (
+            <button
+              type="button"
+              onClick={onNext}
+              className={cn(
+                "inline-flex min-w-[96px] items-center justify-center rounded-xl border border-[#1a1a1a] bg-white px-5 py-2.5 text-[13px] font-semibold text-[#1a1a1a] transition-colors hover:bg-[#fafafa] active:bg-[#f3f3f3] sm:text-[14px]"
+              )}
+            >
+              Next
+            </button>
+          ) : null}
         </div>
       </div>
     </div>

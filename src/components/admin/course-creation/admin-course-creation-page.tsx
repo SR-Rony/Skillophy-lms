@@ -23,9 +23,12 @@ export function AdminCourseCreationPage({ data }: AdminCourseCreationPageProps) 
   const [form, setForm] = useState<AdminCourseCreationGeneralInfo>(data.generalInfo);
   const [savedForm, setSavedForm] = useState<AdminCourseCreationGeneralInfo>(data.generalInfo);
 
+  const isGeneralInfoStep = activeStepId === "general-info";
   const isCurriculumStep = activeStepId === "curriculum";
   const isMetaInfoStep = activeStepId === "meta-info";
   const showEditingActions = isEditing || isCurriculumStep;
+  const showBack = !isGeneralInfoStep;
+  const showNext = !isMetaInfoStep;
 
   function handleChange<K extends keyof AdminCourseCreationGeneralInfo>(
     field: K,
@@ -46,6 +49,21 @@ export function AdminCourseCreationPage({ data }: AdminCourseCreationPageProps) 
     }
   }
 
+  function handleBack() {
+    const currentIndex = STEP_ORDER.indexOf(activeStepId);
+    if (currentIndex <= 0) {
+      return;
+    }
+
+    const previousStepId = STEP_ORDER[currentIndex - 1];
+
+    if (previousStepId === "general-info") {
+      setIsEditing(false);
+    }
+
+    setActiveStepId(previousStepId);
+  }
+
   function handleNext() {
     const currentIndex = STEP_ORDER.indexOf(activeStepId);
     if (currentIndex === -1 || currentIndex >= STEP_ORDER.length - 1) {
@@ -64,8 +82,11 @@ export function AdminCourseCreationPage({ data }: AdminCourseCreationPageProps) 
     <div className="space-y-6">
       <AdminCourseCreationPageHeader
         isEditing={showEditingActions}
+        showBack={showBack}
+        showNext={showNext}
         onEdit={handleEdit}
         onSave={handleSave}
+        onBack={handleBack}
         onNext={handleNext}
       />
 
@@ -83,7 +104,11 @@ export function AdminCourseCreationPage({ data }: AdminCourseCreationPageProps) 
           ) : null}
 
           {activeStepId === "curriculum" ? (
-            <AdminCourseCreationCurriculumSection initialData={data.curriculum} />
+            <AdminCourseCreationCurriculumSection
+              initialData={data.curriculum}
+              teachers={data.formOptions.teachers}
+              maxTeachersPerRole={data.formOptions.maxTeachersPerRole}
+            />
           ) : null}
 
           {activeStepId === "meta-info" ? (
