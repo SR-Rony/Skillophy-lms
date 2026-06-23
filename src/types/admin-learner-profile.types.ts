@@ -95,9 +95,87 @@ export interface AdminLearnerProfileInfoData {
   countryOptions: TeacherAccountSettingsSelectOption[];
 }
 
+export type AdminLearnerLiveCourseStatus = "completed" | "ongoing" | "upcoming";
+
+export type AdminLearnerLiveCourseSortId =
+  | "default"
+  | "name-asc"
+  | "name-desc"
+  | "date-desc"
+  | "date-asc"
+  | "progress-desc"
+  | "status-asc";
+
+export interface AdminLearnerLiveCourseSortOption {
+  id: AdminLearnerLiveCourseSortId;
+  label: string;
+}
+
+export interface AdminLearnerLiveCourse {
+  id: string;
+  title: string;
+  thumbnail: string;
+  teacherName: string;
+  teacherAvatar: string;
+  startDate: string;
+  progress: number;
+  totalScore: number | null;
+  status: AdminLearnerLiveCourseStatus;
+  progressTopics: AdminLearnerLiveCourseProgressTopic[];
+  topicRecordings: AdminLearnerLiveCourseTopicRecordings[];
+}
+
+export type AdminLearnerLiveCourseTopicStatus = "completed" | "ongoing" | "upcoming";
+
+export interface AdminLearnerLiveCourseProgressTopic {
+  id: string;
+  label: string;
+  title: string;
+  status: AdminLearnerLiveCourseTopicStatus;
+  attendance: number | null;
+  assignment: number | null;
+  quizScore: number | null;
+  totalScore: number | null;
+}
+
+export interface AdminLearnerLiveCourseRecording {
+  id: string;
+  title: string;
+  classDate: string;
+  dayTime: string;
+  duration: string;
+  recordingHref: string;
+}
+
+export interface AdminLearnerLiveCourseTopicRecordings {
+  id: string;
+  label: string;
+  title: string;
+  recordings: AdminLearnerLiveCourseRecording[];
+}
+
+export type AdminLearnerLiveCourseRecordingSortId =
+  | "default"
+  | "class-date"
+  | "topic-asc"
+  | "topic-desc";
+
+export interface AdminLearnerLiveCourseRecordingSortOption {
+  id: AdminLearnerLiveCourseRecordingSortId;
+  label: string;
+}
+
+export interface AdminLearnerLiveCoursesData {
+  courses: AdminLearnerLiveCourse[];
+  sortOptions: AdminLearnerLiveCourseSortOption[];
+  defaultSortId: AdminLearnerLiveCourseSortId;
+  pageSize: number;
+}
+
 export interface AdminLearnerProfilePageData {
   profile: AdminLearnerProfile;
   recordedCourses: AdminLearnerRecordedCoursesData;
+  liveCourses: AdminLearnerLiveCoursesData;
   profileInfo: AdminLearnerProfileInfoData;
   moreData: AdminTeacherProfileMoreData;
 }

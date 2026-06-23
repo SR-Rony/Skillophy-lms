@@ -4,7 +4,8 @@ import { useState } from "react";
 import { AdminLearnerProfileHero } from "@/components/admin/learner-profile/admin-learner-profile-hero";
 import { AdminLearnerProfileInfoTab } from "@/components/admin/learner-profile/admin-learner-profile-info-tab";
 import { AdminLearnerProfileMoreTab } from "@/components/admin/learner-profile/admin-learner-profile-more-tab";
-import { AdminLearnerProfileRecordedCoursesTab } from "@/components/admin/learner-profile/admin-learner-profile-recorded-courses-tab";
+import { AdminLearnerProfileLiveCoursesTab } from "@/components/admin/learner-profile/live-courses/admin-learner-profile-live-courses-tab";
+import { AdminLearnerProfileRecordedCoursesTab } from "@/components/admin/learner-profile/recorded-courses/admin-learner-profile-recorded-courses-tab";
 import type {
   AdminLearnerProfilePageData,
   AdminLearnerProfileTabId,
@@ -32,9 +33,7 @@ export function AdminLearnerProfilePage({ data }: AdminLearnerProfilePageProps) 
       )}
 
       {activeTab === "live-courses" && (
-        <div className="px-6 py-16 text-center">
-          <p className="text-[14px] font-medium text-[#9ca3af]">LIVE courses will appear here.</p>
-        </div>
+        <AdminLearnerProfileLiveCoursesTab data={data.liveCourses} />
       )}
 
       {activeTab === "learner-profile" && <AdminLearnerProfileInfoTab data={data.profileInfo} />}

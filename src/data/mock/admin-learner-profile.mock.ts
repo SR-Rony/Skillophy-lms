@@ -4,6 +4,10 @@ import {
 } from "@/data/mock/admin-learner-management.mock";
 import type { AdminLearner } from "@/types/admin-learner-management.types";
 import type {
+  AdminLearnerLiveCourse,
+  AdminLearnerLiveCourseProgressTopic,
+  AdminLearnerLiveCourseStatus,
+  AdminLearnerLiveCourseTopicRecordings,
   AdminLearnerProfileInfoData,
   AdminLearnerProfilePageData,
   AdminLearnerRecordedCourse,
@@ -18,16 +22,6 @@ const profileTabs = [
   { id: "live-courses" as const, label: "LIVE Courses" },
   { id: "learner-profile" as const, label: "Learner Profile" },
   { id: "more" as const, label: "More" },
-];
-
-const recordedCourseSortOptions = [
-  { id: "default" as const, label: "Default" },
-  { id: "name-asc" as const, label: "Name (A-Z)" },
-  { id: "name-desc" as const, label: "Name (Z-A)" },
-  { id: "date-desc" as const, label: "Newest First" },
-  { id: "date-asc" as const, label: "Oldest First" },
-  { id: "score-desc" as const, label: "Highest Score" },
-  { id: "status-asc" as const, label: "Status" },
 ];
 
 const teacherMaisha = {
@@ -57,6 +51,215 @@ const progressTopicTitles = [
   "Portfolio presentation skills",
   "Course recap and next steps",
 ];
+
+const recordedCourseSortOptions = [
+  { id: "default" as const, label: "Default" },
+  { id: "name-asc" as const, label: "Name (A-Z)" },
+  { id: "name-desc" as const, label: "Name (Z-A)" },
+  { id: "date-desc" as const, label: "Newest First" },
+  { id: "date-asc" as const, label: "Oldest First" },
+  { id: "score-desc" as const, label: "Highest Score" },
+  { id: "status-asc" as const, label: "Status" },
+];
+
+const liveCourseSortOptions = [
+  { id: "default" as const, label: "Default" },
+  { id: "name-asc" as const, label: "Name (A-Z)" },
+  { id: "name-desc" as const, label: "Name (Z-A)" },
+  { id: "date-desc" as const, label: "Newest First" },
+  { id: "date-asc" as const, label: "Oldest First" },
+  { id: "progress-desc" as const, label: "Highest Progress" },
+  { id: "status-asc" as const, label: "Status" },
+];
+
+const liveCourseSeeds: Omit<
+  AdminLearnerLiveCourse,
+  "id" | "progressTopics" | "topicRecordings"
+>[] = [
+  {
+    title: "Foundations of User Experience (UX) Design",
+    thumbnail: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=120&h=120&fit=crop",
+    teacherName: teacherMaisha.name,
+    teacherAvatar: teacherMaisha.avatar,
+    startDate: "2024-02-10",
+    progress: 65,
+    totalScore: 87,
+    status: "ongoing",
+  },
+  {
+    title: "Materials and Processes for UX Design",
+    thumbnail: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=120&h=120&fit=crop",
+    teacherName: teacherMaisha.name,
+    teacherAvatar: teacherMaisha.avatar,
+    startDate: "2024-04-18",
+    progress: 100,
+    totalScore: 92.4,
+    status: "completed",
+  },
+  {
+    title: "Build Dynamic User Interfaces (UI)",
+    thumbnail: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=120&h=120&fit=crop",
+    teacherName: teacherMaisha.name,
+    teacherAvatar: teacherMaisha.avatar,
+    startDate: "2024-06-21",
+    progress: 35,
+    totalScore: null,
+    status: "ongoing",
+  },
+  {
+    title: "Conduct UX Research and Test Early Concepts",
+    thumbnail: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=120&h=120&fit=crop",
+    teacherName: teacherMaisha.name,
+    teacherAvatar: teacherMaisha.avatar,
+    startDate: "2024-09-01",
+    progress: 0,
+    totalScore: null,
+    status: "upcoming",
+  },
+  {
+    title: "Create High-Fidelity Designs and Prototypes",
+    thumbnail: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=120&h=120&fit=crop",
+    teacherName: teacherMaisha.name,
+    teacherAvatar: teacherMaisha.avatar,
+    startDate: "2024-10-14",
+    progress: 20,
+    totalScore: null,
+    status: "ongoing",
+  },
+  {
+    title: "Responsive Web Design Essentials",
+    thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=120&h=120&fit=crop",
+    teacherName: teacherMaisha.name,
+    teacherAvatar: teacherMaisha.avatar,
+    startDate: "2023-11-05",
+    progress: 100,
+    totalScore: 78.2,
+    status: "completed",
+  },
+];
+
+function buildFeaturedLiveProgressTopics(): AdminLearnerLiveCourseProgressTopic[] {
+  return progressTopicTitles.map((title, index) => {
+    const topicNumber = index + 1;
+
+    if (index === 0) {
+      return {
+        id: `live-topic-${topicNumber}`,
+        label: `Topic ${topicNumber}`,
+        title,
+        status: "completed",
+        attendance: 100,
+        assignment: 80,
+        quizScore: 87,
+        totalScore: 87,
+      };
+    }
+
+    if (index === 1) {
+      return {
+        id: `live-topic-${topicNumber}`,
+        label: `Topic ${topicNumber}`,
+        title,
+        status: "completed",
+        attendance: 89,
+        assignment: 76.5,
+        quizScore: 59,
+        totalScore: 59,
+      };
+    }
+
+    return {
+      id: `live-topic-${topicNumber}`,
+      label: `Topic ${topicNumber}`,
+      title,
+      status: "upcoming",
+      attendance: null,
+      assignment: null,
+      quizScore: null,
+      totalScore: null,
+    };
+  });
+}
+
+function buildLiveProgressTopics(
+  courseStatus: AdminLearnerLiveCourseStatus,
+  courseIndex: number
+): AdminLearnerLiveCourseProgressTopic[] {
+  if (courseIndex === 0) {
+    return buildFeaturedLiveProgressTopics();
+  }
+
+  const completedCount =
+    courseStatus === "completed" ? 4 : courseStatus === "ongoing" ? 2 : 0;
+
+  return progressTopicTitles.map((title, index) => {
+    const topicNumber = index + 1;
+    const isCompleted = index < completedCount;
+    const isOngoing = !isCompleted && courseStatus === "ongoing" && index === completedCount;
+
+    return {
+      id: `live-topic-${courseIndex + 1}-${topicNumber}`,
+      label: `Topic ${topicNumber}`,
+      title,
+      status: isCompleted ? "completed" : isOngoing ? "ongoing" : "upcoming",
+      attendance: isCompleted ? 85 + (index % 10) : isOngoing ? 70 : null,
+      assignment: isCompleted ? 75 + (index % 8) : isOngoing ? 60 : null,
+      quizScore: isCompleted ? 80 + (index % 15) : isOngoing ? null : null,
+      totalScore: isCompleted ? 82 + (index % 12) : isOngoing ? null : null,
+    };
+  });
+}
+
+function buildTopicRecordings(courseIndex: number): AdminLearnerLiveCourseTopicRecordings[] {
+  const topicCount = courseIndex === 0 ? 4 : 3;
+
+  return progressTopicTitles.slice(0, topicCount).map((title, index) => {
+    const topicNumber = index + 1;
+
+    return {
+      id: `live-recordings-${courseIndex + 1}-${topicNumber}`,
+      label: `Topic ${topicNumber}`,
+      title,
+      recordings: [
+        {
+          id: `live-recording-${courseIndex + 1}-${topicNumber}-1`,
+          title:
+            index === 0
+              ? "Design for good user experience"
+              : index === 1
+                ? "UX design process overview"
+                : `Live class session ${topicNumber}.1`,
+          classDate: "May 13, 2024",
+          dayTime: "Sunday, 9:00 PM",
+          duration: "2hrs 32 mins",
+          recordingHref: "/admin/courses",
+        },
+        {
+          id: `live-recording-${courseIndex + 1}-${topicNumber}-2`,
+          title:
+            index === 0
+              ? "Understanding user needs"
+              : index === 1
+                ? "Design thinking workshop"
+                : `Live class session ${topicNumber}.2`,
+          classDate: "May 15, 2024",
+          dayTime: "Tuesday, 8:00 PM",
+          duration: "1hr 48 mins",
+          recordingHref: "/admin/courses",
+        },
+      ],
+    };
+  });
+}
+
+function buildLiveCourses(): AdminLearnerLiveCourse[] {
+  return liveCourseSeeds.map((course, index) => ({
+    id: `learner-live-course-${index + 1}`,
+    ...course,
+    progressTopics: buildLiveProgressTopics(course.status, index),
+    topicRecordings: buildTopicRecordings(index),
+  }));
+}
 
 function buildFeaturedUxProgressTopics(): AdminLearnerRecordedCourseProgressTopic[] {
   return progressTopicTitles.map((title, index) => {
@@ -373,6 +576,12 @@ function buildLearnerProfileFromLearner(learner: AdminLearner): AdminLearnerProf
     recordedCourses: {
       courses: buildRecordedCourses(),
       sortOptions: recordedCourseSortOptions,
+      defaultSortId: "default",
+      pageSize: 6,
+    },
+    liveCourses: {
+      courses: buildLiveCourses(),
+      sortOptions: liveCourseSortOptions,
       defaultSortId: "default",
       pageSize: 6,
     },

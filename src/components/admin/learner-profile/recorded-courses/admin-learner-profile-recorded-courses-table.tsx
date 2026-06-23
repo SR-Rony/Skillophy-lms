@@ -1,7 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import { AdminLearnerProfileCourseStatusBadge } from "@/components/admin/learner-profile/admin-learner-profile-course-status-badge";
+import { AdminLearnerProfileCourseNameCell } from "@/components/admin/learner-profile/shared/admin-learner-profile-course-name-cell";
+import { AdminLearnerProfileCourseTeacherCell } from "@/components/admin/learner-profile/shared/admin-learner-profile-course-teacher-cell";
+import { AdminLearnerProfileStatusBadge } from "@/components/admin/learner-profile/shared/admin-learner-profile-status-badge";
+import { AdminLearnerProfileViewDetailsButton } from "@/components/admin/learner-profile/shared/admin-learner-profile-view-details-button";
 import {
   formatAdminLearnerEnrolledDate,
   formatAdminLearnerTotalScore,
@@ -49,38 +51,16 @@ export function AdminLearnerProfileRecordedCoursesTable({
               className="border-b border-[#f3f4f6] bg-white last:border-b-0 hover:bg-[#fafafa]"
             >
               <td className="px-4 py-3.5 sm:px-6">
-                <div className="flex min-w-[260px] items-center gap-3">
-                  <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-[#f3f4f6]">
-                    <Image
-                      src={course.thumbnail}
-                      alt=""
-                      fill
-                      unoptimized
-                      className="object-cover"
-                      sizes="40px"
-                    />
-                  </div>
-                  <p className="text-[13px] font-semibold text-[#1a1a1a] sm:text-[14px]">
-                    {course.title}
-                  </p>
-                </div>
+                <AdminLearnerProfileCourseNameCell
+                  thumbnail={course.thumbnail}
+                  title={course.title}
+                />
               </td>
               <td className="px-4 py-3.5 sm:px-6">
-                <div className="flex min-w-[180px] items-center gap-2.5">
-                  <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full bg-[#f3f4f6]">
-                    <Image
-                      src={course.teacherAvatar}
-                      alt=""
-                      fill
-                      unoptimized
-                      className="object-cover"
-                      sizes="32px"
-                    />
-                  </div>
-                  <p className="text-[13px] font-medium text-[#757575] sm:text-[14px]">
-                    {course.teacherName}
-                  </p>
-                </div>
+                <AdminLearnerProfileCourseTeacherCell
+                  teacherAvatar={course.teacherAvatar}
+                  teacherName={course.teacherName}
+                />
               </td>
               <td className="whitespace-nowrap px-4 py-3.5 text-[13px] font-medium text-[#757575] sm:px-6">
                 {formatAdminLearnerEnrolledDate(course.enrolledDate)}
@@ -89,16 +69,12 @@ export function AdminLearnerProfileRecordedCoursesTable({
                 {formatAdminLearnerTotalScore(course.totalScore)}
               </td>
               <td className="px-4 py-3.5 sm:px-6">
-                <AdminLearnerProfileCourseStatusBadge status={course.status} />
+                <AdminLearnerProfileStatusBadge status={course.status} />
               </td>
               <td className="px-4 py-3.5 text-right sm:px-6">
-                <button
-                  type="button"
+                <AdminLearnerProfileViewDetailsButton
                   onClick={() => onViewDetails?.(course)}
-                  className="text-[13px] font-semibold text-primary transition-opacity hover:opacity-80 sm:text-[14px]"
-                >
-                  View Details
-                </button>
+                />
               </td>
             </tr>
           ))}

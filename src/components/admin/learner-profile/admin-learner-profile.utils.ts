@@ -1,8 +1,13 @@
 import { formatAdminTeacherStatCount } from "@/components/admin/teacher-profile/admin-teacher-profile.utils";
+import { formatAdminTeacherProgress } from "@/components/admin/teacher-profile/admin-teacher-profile.utils";
 import type {
+  AdminLearnerLiveCourse,
+  AdminLearnerLiveCourseSortId,
   AdminLearnerRecordedCourse,
   AdminLearnerRecordedCourseSortId,
 } from "@/types/admin-learner-profile.types";
+
+export { formatAdminTeacherProgress };
 
 export function formatAdminLearnerProfileStatCount(value: number) {
   return formatAdminTeacherStatCount(value);
@@ -16,6 +21,18 @@ export function formatAdminLearnerEnrolledDate(isoDate: string) {
     day: "numeric",
     year: "numeric",
   });
+}
+
+export function formatAdminLearnerLiveScore(score: number | null) {
+  if (score === null) {
+    return "--";
+  }
+
+  return Number.isInteger(score) ? `${score}%` : `${score.toFixed(1)}%`;
+}
+
+export function formatAdminLearnerStartDate(isoDate: string) {
+  return formatAdminLearnerEnrolledDate(isoDate);
 }
 
 export function formatAdminLearnerTotalScore(score: number | null) {
@@ -96,6 +113,67 @@ export function paginateAdminLearnerProgressTopics<T>(
 
   return {
     items: topics.slice(start, start + pageSize),
+    totalPages,
+    currentPage: safePage,
+  };
+}
+
+const liveCourseStatusOrder = { completed: 0, ongoing: 1, upcoming: 2 } as const;
+
+export function filterAdminLearnerLiveCourses(
+  courses: AdminLearnerLiveCourse[],
+  searchQuery: string
+) {
+  const normalizedSearch = searchQuery.trim().toLowerCase();
+
+  if (!normalizedSearch) {
+    return courses;
+  }
+
+  return courses.filter(
+    (course) =>
+      course.title.toLowerCase().includes(normalizedSearch) ||
+      course.teacherName.toLowerCase().includes(normalizedSearch)
+  );
+}
+
+export function sortAdminLearnerLiveCourses(
+  courses: AdminLearnerLiveCourse[],
+  sortId: AdminLearnerLiveCourseSortId
+) {
+  const sorted = [...courses];
+
+  switch (sortId) {
+    case "name-asc":
+      return sorted.sort((a, b) => a.title.localeCompare(b.title));
+    case "name-desc":
+      return sorted.sort((a, b) => b.title.localeCompare(a.title));
+    case "date-desc":
+      return sorted.sort((a, b) => b.startDate.localeCompare(a.startDate));
+    case "date-asc":
+      return sorted.sort((a, b) => a.startDate.localeCompare(b.startDate));
+    case "progress-desc":
+      return sorted.sort((a, b) => b.progress - a.progress);
+    case "status-asc":
+      return sorted.sort(
+        (a, b) => liveCourseStatusOrder[a.status] - liveCourseStatusOrder[b.status]
+      );
+    default:
+      return sorted;
+  }
+}
+
+export function paginateAdminLearnerLiveCourses(
+  courses: AdminLearnerLiveCourse[],
+  currentPage: number,
+  pageSize: number
+) {
+  const totalPages = Math.max(1, Math.ceil(courses.length / pageSize));
+  const safePage = Math.min(Math.max(currentPage, 1), totalPages);
+  const start = (safePage - 1) * pageSize;
+
+  return {
+    items: courses.slice(start, start + pageSize),
     totalPages,
     currentPage: safePage,
   };

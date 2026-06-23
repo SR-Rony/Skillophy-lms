@@ -1,20 +1,20 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { StudentNotificationsPagination } from "@/components/student/notifications/student-notifications-pagination";
-import { AdminTeacherProfileRecordedCoursesToolbar } from "@/components/admin/teacher-profile/admin-teacher-profile-recorded-courses-toolbar";
-import { AdminLearnerProfileRecordedCourseProgressDrawer } from "@/components/admin/learner-profile/admin-learner-profile-recorded-course-progress-drawer";
-import { AdminLearnerProfileRecordedCoursesTable } from "@/components/admin/learner-profile/admin-learner-profile-recorded-courses-table";
+import { AdminLearnerProfileRecordedCourseProgressDrawer } from "@/components/admin/learner-profile/recorded-courses/progress/admin-learner-profile-recorded-course-progress-drawer";
+import { AdminLearnerProfileRecordedCoursesTable } from "@/components/admin/learner-profile/recorded-courses/admin-learner-profile-recorded-courses-table";
 import {
   filterAdminLearnerRecordedCourses,
   paginateAdminLearnerRecordedCourses,
   sortAdminLearnerRecordedCourses,
 } from "@/components/admin/learner-profile/admin-learner-profile.utils";
+import { AdminTeacherProfileRecordedCoursesToolbar } from "@/components/admin/teacher-profile/admin-teacher-profile-recorded-courses-toolbar";
+import { StudentNotificationsPagination } from "@/components/student/notifications/student-notifications-pagination";
 import type {
   AdminLearnerRecordedCourse,
   AdminLearnerRecordedCourseSortId,
   AdminLearnerRecordedCoursesData,
 } from "@/types/admin-learner-profile.types";
+import { useEffect, useMemo, useState } from "react";
 
 interface AdminLearnerProfileRecordedCoursesTabProps {
   data: AdminLearnerRecordedCoursesData;
@@ -30,11 +30,6 @@ export function AdminLearnerProfileRecordedCoursesTab({
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCourse, setSelectedCourse] = useState<AdminLearnerRecordedCourse | null>(null);
   const [isProgressDrawerOpen, setIsProgressDrawerOpen] = useState(false);
-
-  function handleViewDetails(course: AdminLearnerRecordedCourse) {
-    setSelectedCourse(course);
-    setIsProgressDrawerOpen(true);
-  }
 
   const filteredCourses = useMemo(
     () => filterAdminLearnerRecordedCourses(data.courses, searchQuery),
@@ -60,6 +55,11 @@ export function AdminLearnerProfileRecordedCoursesTab({
       setCurrentPage(totalPages);
     }
   }, [currentPage, totalPages]);
+
+  function handleViewDetails(course: AdminLearnerRecordedCourse) {
+    setSelectedCourse(course);
+    setIsProgressDrawerOpen(true);
+  }
 
   return (
     <>
