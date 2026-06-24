@@ -1,13 +1,10 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { AdminAccountSettingsPage } from "@/components/admin/account-settings";
+import { adminAccountSettingsService } from "@/services/admin";
 
-export const metadata = { title: "Settings" };
+export const metadata = { title: "Account Settings" };
 
-export default function AdminSettingsPage() {
-  return (
-    <ModulePlaceholder
-      title="Account Settings"
-      description="Global configuration and integrations."
-      feature="settings"
-    />
-  );
+export default async function AdminSettingsPage() {
+  const data = await adminAccountSettingsService.getSettings();
+
+  return <AdminAccountSettingsPage data={data} />;
 }
