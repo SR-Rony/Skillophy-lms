@@ -1,12 +1,15 @@
 import type {
-  AdminTransaction,
+  AdminLearnerTransaction,
+  AdminLearnerTransactionStatusFilterId,
+  AdminTeacherTransaction,
+  AdminTeacherTransactionStatusFilterId,
   AdminTransactionManagementTab,
   AdminTransactionSortId,
-  AdminTransactionStatusFilterId,
 } from "@/types/admin-transaction-management.types";
 import { ROUTES } from "@/constants";
 
-const statusOrder = { pending: 0, failed: 1, completed: 2 } as const;
+const learnerStatusOrder = { pending: 0, failed: 1, completed: 2 } as const;
+const teacherStatusOrder = { paid: 0, due: 1 } as const;
 
 export function parseAdminTransactionManagementTab(
   value: string | null | undefined
@@ -47,10 +50,10 @@ export function formatAdminTransactionDate(value: string) {
   });
 }
 
-export function filterAdminTransactions(
-  transactions: AdminTransaction[],
+export function filterAdminLearnerTransactions(
+  transactions: AdminLearnerTransaction[],
   searchQuery: string,
-  statusId: AdminTransactionStatusFilterId
+  statusId: AdminLearnerTransactionStatusFilterId
 ) {
   const normalizedSearch = searchQuery.trim().toLowerCase();
 
@@ -73,8 +76,33 @@ export function filterAdminTransactions(
   });
 }
 
-export function sortAdminTransactions(
-  transactions: AdminTransaction[],
+export function filterAdminTeacherTransactions(
+  transactions: AdminTeacherTransaction[],
+  searchQuery: string,
+  statusId: AdminTeacherTransactionStatusFilterId
+) {
+  const normalizedSearch = searchQuery.trim().toLowerCase();
+
+  return transactions.filter((transaction) => {
+    const matchesStatus = statusId === "all" || transaction.status === statusId;
+    if (!matchesStatus) {
+      return false;
+    }
+
+    if (!normalizedSearch) {
+      return true;
+    }
+
+    return (
+      transaction.name.toLowerCase().includes(normalizedSearch) ||
+      transaction.email.toLowerCase().includes(normalizedSearch) ||
+      transaction.courseName.toLowerCase().includes(normalizedSearch)
+    );
+  });
+}
+
+export function sortAdminLearnerTransactions(
+  transactions: AdminLearnerTransaction[],
   sortId: AdminTransactionSortId
 ) {
   const sorted = [...transactions];
@@ -89,14 +117,40 @@ export function sortAdminTransactions(
     case "amount-desc":
       return sorted.sort((a, b) => b.amount - a.amount);
     case "status-asc":
-      return sorted.sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
+      return sorted.sort(
+        (a, b) => learnerStatusOrder[a.status] - learnerStatusOrder[b.status]
+      );
     default:
       return sorted;
   }
 }
 
-export function paginateAdminTransactions(
-  transactions: AdminTransaction[],
+export function sortAdminTeacherTransactions(
+  transactions: AdminTeacherTransaction[],
+  sortId: AdminTransactionSortId
+) {
+  const sorted = [...transactions];
+
+  switch (sortId) {
+    case "name-asc":
+      return sorted.sort((a, b) => a.name.localeCompare(b.name));
+    case "name-desc":
+      return sorted.sort((a, b) => b.name.localeCompare(a.name));
+    case "date-desc":
+      return sorted.sort((a, b) => b.date.localeCompare(a.date));
+    case "amount-desc":
+      return sorted.sort((a, b) => b.amount - a.amount);
+    case "status-asc":
+      return sorted.sort(
+        (a, b) => teacherStatusOrder[a.status] - teacherStatusOrder[b.status]
+      );
+    default:
+      return sorted;
+  }
+}
+
+export function paginateAdminTransactions<T>(
+  transactions: T[],
   currentPage: number,
   pageSize: number
 ) {

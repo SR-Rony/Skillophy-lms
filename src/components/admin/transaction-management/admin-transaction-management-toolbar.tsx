@@ -16,21 +16,19 @@ import type {
   AdminTransactionExportOption,
   AdminTransactionSortId,
   AdminTransactionSortOption,
-  AdminTransactionStatusFilterId,
-  AdminTransactionStatusOption,
 } from "@/types/admin-transaction-management.types";
 import { cn } from "@/utils";
 
-interface AdminTransactionManagementToolbarProps {
+interface AdminTransactionManagementToolbarProps<TStatusId extends string> {
   searchQuery: string;
-  statusOptions: AdminTransactionStatusOption[];
+  statusOptions: { id: TStatusId; label: string }[];
   sortOptions: AdminTransactionSortOption[];
   exportOptions: AdminTransactionExportOption[];
-  selectedStatusId: AdminTransactionStatusFilterId;
+  selectedStatusId: TStatusId;
   selectedSortId: AdminTransactionSortId;
   exportLabel: string;
   onSearchChange: (value: string) => void;
-  onStatusChange: (statusId: AdminTransactionStatusFilterId) => void;
+  onStatusChange: (statusId: TStatusId) => void;
   onSortChange: (sortId: AdminTransactionSortId) => void;
   onExport: (exportId: AdminTransactionExportId) => void;
 }
@@ -100,7 +98,7 @@ function ExportOptionIcon({
   return <FileType className={className} strokeWidth={2} aria-hidden />;
 }
 
-export function AdminTransactionManagementToolbar({
+export function AdminTransactionManagementToolbar<TStatusId extends string>({
   searchQuery,
   statusOptions,
   sortOptions,
@@ -112,7 +110,7 @@ export function AdminTransactionManagementToolbar({
   onStatusChange,
   onSortChange,
   onExport,
-}: AdminTransactionManagementToolbarProps) {
+}: AdminTransactionManagementToolbarProps<TStatusId>) {
   const searchId = useId();
   const statusMenuId = useId();
   const sortMenuId = useId();

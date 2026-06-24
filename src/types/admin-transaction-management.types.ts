@@ -2,9 +2,13 @@ import type { StudentPaymentMethodId, StudentPaymentStatus } from "@/types/stude
 
 export type AdminTransactionManagementTab = "learner" | "teacher";
 
-export type AdminTransactionStatus = StudentPaymentStatus;
+export type AdminLearnerTransactionStatus = StudentPaymentStatus;
 
-export type AdminTransactionStatusFilterId = "all" | AdminTransactionStatus;
+export type AdminTeacherTransactionStatus = "paid" | "due";
+
+export type AdminLearnerTransactionStatusFilterId = "all" | AdminLearnerTransactionStatus;
+
+export type AdminTeacherTransactionStatusFilterId = "all" | AdminTeacherTransactionStatus;
 
 export type AdminTransactionSortId =
   | "default"
@@ -16,9 +20,8 @@ export type AdminTransactionSortId =
 
 export type AdminTransactionExportId = "csv" | "xsl";
 
-export interface AdminTransaction {
+export interface AdminLearnerTransaction {
   id: string;
-  tab: AdminTransactionManagementTab;
   name: string;
   email: string;
   avatar: string;
@@ -27,11 +30,27 @@ export interface AdminTransaction {
   transactionId: string;
   paymentMethod: StudentPaymentMethodId;
   amount: number;
-  status: AdminTransactionStatus;
+  status: AdminLearnerTransactionStatus;
 }
 
-export interface AdminTransactionStatusOption {
-  id: AdminTransactionStatusFilterId;
+export interface AdminTeacherTransaction {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  courseName: string;
+  date: string;
+  amount: number;
+  status: AdminTeacherTransactionStatus;
+}
+
+export interface AdminLearnerTransactionStatusOption {
+  id: AdminLearnerTransactionStatusFilterId;
+  label: string;
+}
+
+export interface AdminTeacherTransactionStatusOption {
+  id: AdminTeacherTransactionStatusFilterId;
   label: string;
 }
 
@@ -45,17 +64,23 @@ export interface AdminTransactionExportOption {
   label: string;
 }
 
-export interface AdminTransactionTabData {
-  transactions: AdminTransaction[];
+export interface AdminLearnerTransactionTabData {
+  transactions: AdminLearnerTransaction[];
+  statusOptions: AdminLearnerTransactionStatusOption[];
+  defaultStatusId: AdminLearnerTransactionStatusFilterId;
+}
+
+export interface AdminTeacherTransactionTabData {
+  transactions: AdminTeacherTransaction[];
+  statusOptions: AdminTeacherTransactionStatusOption[];
+  defaultStatusId: AdminTeacherTransactionStatusFilterId;
 }
 
 export interface AdminTransactionManagementData {
-  learner: AdminTransactionTabData;
-  teacher: AdminTransactionTabData;
-  statusOptions: AdminTransactionStatusOption[];
+  learner: AdminLearnerTransactionTabData;
+  teacher: AdminTeacherTransactionTabData;
   sortOptions: AdminTransactionSortOption[];
   exportOptions: AdminTransactionExportOption[];
-  defaultStatusId: AdminTransactionStatusFilterId;
   defaultSortId: AdminTransactionSortId;
   defaultSelectedIds: string[];
   pageSize: number;

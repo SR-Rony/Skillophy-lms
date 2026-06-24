@@ -1,31 +1,30 @@
 "use client";
 
 import Image from "next/image";
+import { AdminTransactionTeacherStatusBadge } from "@/components/admin/transaction-management/admin-transaction-teacher-status-badge";
 import {
   formatAdminTransactionAmount,
   formatAdminTransactionDate,
 } from "@/components/admin/transaction-management/admin-transaction-management.utils";
-import { PaymentHistoryPaymentMethod } from "@/components/student/payment-history/payment-history-payment-method";
-import { PaymentHistoryStatusBadge } from "@/components/student/payment-history/payment-history-status-badge";
-import type { AdminLearnerTransaction } from "@/types/admin-transaction-management.types";
+import type { AdminTeacherTransaction } from "@/types/admin-transaction-management.types";
 import { cn } from "@/utils";
 
 const checkboxClassName =
   "h-4 w-4 rounded border-[#d1d5db] text-primary accent-primary focus:ring-primary/20";
 
-interface AdminTransactionManagementTableProps {
-  transactions: AdminLearnerTransaction[];
+interface AdminTransactionManagementTeacherTableProps {
+  transactions: AdminTeacherTransaction[];
   selectedIds: Set<string>;
   onToggleRow: (transactionId: string) => void;
   onToggleAll: (transactionIds: string[]) => void;
 }
 
-function AdminTransactionManagementTableRow({
+function AdminTransactionManagementTeacherTableRow({
   transaction,
   isSelected,
   onToggle,
 }: {
-  transaction: AdminLearnerTransaction;
+  transaction: AdminTeacherTransaction;
   isSelected: boolean;
   onToggle: () => void;
 }) {
@@ -67,34 +66,28 @@ function AdminTransactionManagementTableRow({
           </div>
         </div>
       </td>
-      <td className="min-w-[240px] px-4 py-3 text-[13px] font-medium text-[#1a1a1a] sm:px-5 sm:text-[14px]">
+      <td className="min-w-[280px] px-4 py-3 text-[13px] font-medium text-[#757575] sm:px-5 sm:text-[14px]">
         {transaction.courseName}
       </td>
       <td className="whitespace-nowrap px-4 py-3 text-[13px] font-medium text-[#757575] sm:px-5">
         {formatAdminTransactionDate(transaction.date)}
       </td>
-      <td className="whitespace-nowrap px-4 py-3 text-[13px] font-medium tabular-nums text-[#757575] sm:px-5">
-        {transaction.transactionId}
-      </td>
-      <td className="px-4 py-3 sm:px-5">
-        <PaymentHistoryPaymentMethod method={transaction.paymentMethod} />
-      </td>
       <td className="whitespace-nowrap px-4 py-3 text-[13px] font-semibold tabular-nums text-[#1a1a1a] sm:px-5 sm:text-[14px]">
         {formatAdminTransactionAmount(transaction.amount)}
       </td>
       <td className="px-4 py-3 sm:px-5">
-        <PaymentHistoryStatusBadge status={transaction.status} />
+        <AdminTransactionTeacherStatusBadge status={transaction.status} />
       </td>
     </tr>
   );
 }
 
-export function AdminTransactionManagementTable({
+export function AdminTransactionManagementTeacherTable({
   transactions,
   selectedIds,
   onToggleRow,
   onToggleAll,
-}: AdminTransactionManagementTableProps) {
+}: AdminTransactionManagementTeacherTableProps) {
   const transactionIds = transactions.map((transaction) => transaction.id);
   const allSelected =
     transactionIds.length > 0 && transactionIds.every((id) => selectedIds.has(id));
@@ -102,7 +95,7 @@ export function AdminTransactionManagementTable({
 
   return (
     <div className="overflow-x-auto bg-white">
-      <table className="w-full min-w-[1240px] border-collapse text-left">
+      <table className="w-full min-w-[980px] border-collapse text-left">
         <thead>
           <tr className="border-b border-[#ebe8e6] bg-white">
             <th className="w-11 px-4 py-3.5 sm:px-5">
@@ -129,12 +122,6 @@ export function AdminTransactionManagementTable({
               Date
             </th>
             <th className="px-4 py-3.5 text-[13px] font-bold text-[#1a1a1a] sm:px-5 sm:text-[14px]">
-              Transaction ID
-            </th>
-            <th className="px-4 py-3.5 text-[13px] font-bold text-[#1a1a1a] sm:px-5 sm:text-[14px]">
-              Payment Method
-            </th>
-            <th className="px-4 py-3.5 text-[13px] font-bold text-[#1a1a1a] sm:px-5 sm:text-[14px]">
               Payment Amount
             </th>
             <th className="px-4 py-3.5 text-[13px] font-bold text-[#1a1a1a] sm:px-5 sm:text-[14px]">
@@ -144,7 +131,7 @@ export function AdminTransactionManagementTable({
         </thead>
         <tbody>
           {transactions.map((transaction) => (
-            <AdminTransactionManagementTableRow
+            <AdminTransactionManagementTeacherTableRow
               key={transaction.id}
               transaction={transaction}
               isSelected={selectedIds.has(transaction.id)}
