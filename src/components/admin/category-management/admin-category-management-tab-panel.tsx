@@ -2,6 +2,12 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { StudentNotificationsPagination } from "@/components/student/notifications/student-notifications-pagination";
+import { AdminCategoryDrawer } from "@/components/admin/category-management/admin-category-drawer";
+import { AdminDeleteCategoryModal } from "@/components/admin/category-management/admin-delete-category-modal";
+import {
+  adminCategoryFormToCategory,
+  createAdminCategoryId,
+} from "@/components/admin/category-management/admin-category-form.utils";
 import { AdminCategoryManagementTable } from "@/components/admin/category-management/admin-category-management-table";
 import { AdminCategoryManagementToolbar } from "@/components/admin/category-management/admin-category-management-toolbar";
 import {
@@ -10,6 +16,8 @@ import {
   sortAdminCategories,
 } from "@/components/admin/category-management/admin-category-management.utils";
 import type {
+  AdminCategory,
+  AdminCategoryForm,
   AdminCategorySortId,
   AdminCategorySortOption,
   AdminCategoryTabData,
@@ -30,13 +38,29 @@ export function AdminCategoryManagementTabPanel({
   pageSize,
   addNewLabel,
 }: AdminCategoryManagementTabPanelProps) {
+  const [categories, setCategories] = useState<AdminCategory[]>(tabData.categories);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSortId, setSelectedSortId] = useState<AdminCategorySortId>(defaultSortId);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isAddDrawerOpen, setIsAddDrawerOpen] = useState(false);
+  const [editingCategory, setEditingCategory] = useState<AdminCategory | null>(null);
+  const [deletingCategory, setDeletingCategory] = useState<AdminCategory | null>(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  useEffect(() => {
+    setCategories(tabData.categories);
+    setSearchQuery("");
+    setSelectedSortId(defaultSortId);
+    setCurrentPage(1);
+    setIsAddDrawerOpen(false);
+    setEditingCategory(null);
+    setDeletingCategory(null);
+    setIsDeleteModalOpen(false);
+  }, [tabData.categories, defaultSortId]);
 
   const filteredCategories = useMemo(
-    () => filterAdminCategories(tabData.categories, searchQuery),
-    [tabData.categories, searchQuery]
+    () => filterAdminCategories(categories, searchQuery),
+    [categories, searchQuery]
   );
 
   const sortedCategories = useMemo(
@@ -59,6 +83,45 @@ export function AdminCategoryManagementTabPanel({
     }
   }, [currentPage, totalPages]);
 
+  function handleSaveNewCategory(form: AdminCategoryForm) {
+    setCategories((current) => [
+      adminCategoryFormToCategory(form, createAdminCategoryId()),
+      ...current,
+    ]);
+  }
+
+  function handleDeleteClick(category: AdminCategory) {
+    setDeletingCategory(category);
+    setIsDeleteModalOpen(true);
+  }
+
+  function handleConfirmDelete(category: AdminCategory) {
+    setCategories((current) => current.filter((entry) => entry.id !== category.id));
+
+    if (editingCategory?.id === category.id) {
+      setEditingCategory(null);
+    }
+  }
+
+  function handleEdit(category: AdminCategory) {
+    setEditingCategory(category);
+  }
+
+  function handleSaveEditedCategory(form: AdminCategoryForm) {
+    if (!editingCategory) {
+      return;
+    }
+
+    setCategories((current) =>
+      current.map((category) =>
+        category.id === editingCategory.id
+          ? adminCategoryFormToCategory(form, category.id, category.itemCount)
+          : category
+      )
+    );
+    setEditingCategory(null);
+  }
+
   return (
     <>
       <AdminCategoryManagementToolbar
@@ -68,13 +131,15 @@ export function AdminCategoryManagementTabPanel({
         addNewLabel={addNewLabel}
         onSearchChange={setSearchQuery}
         onSortChange={setSelectedSortId}
-        onAddNew={() => undefined}
+        onAddNew={() => setIsAddDrawerOpen(true)}
       />
 
       {visibleCategories.length > 0 ? (
         <AdminCategoryManagementTable
           categories={visibleCategories}
           countColumnLabel={tabData.countColumnLabel}
+          onEdit={handleEdit}
+          onDelete={handleDeleteClick}
         />
       ) : (
         <div className="bg-white px-6 py-16 text-center">
@@ -91,6 +156,32 @@ export function AdminCategoryManagementTabPanel({
           />
         </div>
       )}
+
+      <AdminCategoryDrawer
+        open={isAddDrawerOpen}
+        mode="add"
+        onOpenChange={setIsAddDrawerOpen}
+        onSave={handleSaveNewCategory}
+      />
+
+      <AdminCategoryDrawer
+        open={editingCategory !== null}
+        mode="edit"
+        category={editingCategory}
+        onOpenChange={(open) => {
+          if (!open) {
+            setEditingCategory(null);
+          }
+        }}
+        onSave={handleSaveEditedCategory}
+      />
+
+      <AdminDeleteCategoryModal
+        open={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
+        category={deletingCategory}
+        onConfirm={handleConfirmDelete}
+      />
     </>
   );
 }

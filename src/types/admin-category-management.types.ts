@@ -17,6 +17,13 @@ export interface AdminCategory {
   status: AdminCategoryStatus;
 }
 
+export interface AdminCategoryForm {
+  name: string;
+  isActive: boolean;
+}
+
+export type AdminCategoryDrawerMode = "add" | "edit";
+
 export interface AdminCategorySortOption {
   id: AdminCategorySortId;
   label: string;
