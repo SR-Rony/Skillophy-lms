@@ -220,7 +220,7 @@ export function AdminCourseCreationAddQuizQuestionCard({
             <textarea
               value={question.correctAnswerDescription}
               onChange={(event) => onUpdate({ correctAnswerDescription: event.target.value })}
-              placeholder="Write the description..."
+              placeholder="Write the description of correct answer"
               className={cn(adminCourseAddLessonTextareaClassName, "min-h-[120px] sm:min-h-[140px]")}
             />
           </div>

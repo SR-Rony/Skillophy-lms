@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Plus } from "lucide-react";
+import { AdminCourseCreationAddAssignmentDrawer } from "@/components/admin/course-creation/curriculum/add-assignment/admin-course-creation-add-assignment-drawer";
+import { getAdminCourseAssignmentTitle } from "@/components/admin/course-creation/curriculum/add-assignment/admin-course-creation-add-assignment.utils";
 import { AdminCourseCreationAddLessonDrawer } from "@/components/admin/course-creation/curriculum/add-lesson/admin-course-creation-add-lesson-drawer";
 import { getAdminCourseLessonResourceLabel } from "@/components/admin/course-creation/curriculum/add-lesson/admin-course-creation-add-lesson.utils";
 import { AdminCourseCreationAddResourcesDrawer } from "@/components/admin/course-creation/curriculum/add-resources/admin-course-creation-add-resources-drawer";
@@ -13,6 +15,7 @@ import { AdminCourseCreationCurriculumNewTopicRow } from "@/components/admin/cou
 import { AdminCourseCreationCurriculumTopicCard } from "@/components/admin/course-creation/curriculum/admin-course-creation-curriculum-topic-card";
 import { ADMIN_COURSE_CURRICULUM_MAX_WIDTH_CLASS } from "@/components/admin/course-creation/curriculum/admin-course-creation-curriculum.utils";
 import type {
+  AdminCourseAddAssignmentForm,
   AdminCourseAddLessonForm,
   AdminCourseAddQuizForm,
   AdminCourseAddResourceForm,
@@ -51,6 +54,7 @@ export function AdminCourseCreationCurriculumSection({
   const [addLessonTopicId, setAddLessonTopicId] = useState<string | null>(null);
   const [addResourceTopicId, setAddResourceTopicId] = useState<string | null>(null);
   const [addQuizTopicId, setAddQuizTopicId] = useState<string | null>(null);
+  const [addAssignmentTopicId, setAddAssignmentTopicId] = useState<string | null>(null);
 
   function updateTopic(topicId: string, updater: (topic: AdminCourseCurriculumTopic) => AdminCourseCurriculumTopic) {
     setTopics((current) =>
@@ -143,8 +147,12 @@ export function AdminCourseCreationCurriculumSection({
     setAddQuizTopicId(null);
   }
 
-  function handleAddAssignment(topicId: string) {
-    updateTopic(topicId, (current) => ({
+  function handleSaveAssignment(_form: AdminCourseAddAssignmentForm) {
+    if (!addAssignmentTopicId) {
+      return;
+    }
+
+    updateTopic(addAssignmentTopicId, (current) => ({
       ...current,
       isExpanded: true,
       items: [
@@ -152,10 +160,15 @@ export function AdminCourseCreationCurriculumSection({
         {
           id: createLessonItemId(),
           type: "assignment",
-          title: `Assignment on ${current.title}`,
+          title: getAdminCourseAssignmentTitle(current.title),
         },
       ],
     }));
+    setAddAssignmentTopicId(null);
+  }
+
+  function handleAddAssignment(topicId: string) {
+    setAddAssignmentTopicId(topicId);
   }
 
   return (
@@ -301,6 +314,16 @@ export function AdminCourseCreationCurriculumSection({
           }
         }}
         onSave={handleSaveQuiz}
+      />
+
+      <AdminCourseCreationAddAssignmentDrawer
+        open={addAssignmentTopicId !== null}
+        onOpenChange={(open) => {
+          if (!open) {
+            setAddAssignmentTopicId(null);
+          }
+        }}
+        onSave={handleSaveAssignment}
       />
     </>
   );

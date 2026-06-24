@@ -17,11 +17,13 @@ import { cn } from "@/utils";
 interface AdminCourseCreationLiveClassSchedulePickerProps {
   value: string;
   onChange: (value: string) => void;
+  label?: string;
 }
 
 export function AdminCourseCreationLiveClassSchedulePicker({
   value,
   onChange,
+  label = "LIVE Class Schedule",
 }: AdminCourseCreationLiveClassSchedulePickerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const selectedDate = parseAdminCourseLiveClassScheduleDate(value) ?? new Date();
@@ -78,7 +80,7 @@ export function AdminCourseCreationLiveClassSchedulePicker({
   return (
     <div ref={containerRef} className="relative">
       <label className="mb-2 block text-[13px] font-semibold text-[#6b7280] sm:text-[14px]">
-        LIVE Class Schedule
+        {label}
       </label>
 
       <button

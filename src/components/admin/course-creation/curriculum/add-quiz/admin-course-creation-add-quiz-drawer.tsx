@@ -109,7 +109,7 @@ export function AdminCourseCreationAddQuizDrawer({
       open={open}
       onOpenChange={onOpenChange}
       title="Add Quiz"
-      description="Create and customise lesson's quiz here"
+      description="Create and customize course lesson here"
       closeAriaLabel="Close add quiz drawer"
       saveLabel="Save Quiz"
       saveDisabled={!canSave}

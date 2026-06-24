@@ -1,20 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AdminCourseCreationAddResourcesOverviewTab } from "@/components/admin/course-creation/curriculum/add-resources/admin-course-creation-add-resources-overview-tab";
 import { AdminCourseCreationAddResourcesUploadTab } from "@/components/admin/course-creation/curriculum/add-resources/admin-course-creation-add-resources-upload-tab";
-import { createEmptyAdminCourseAddResourceForm } from "@/components/admin/course-creation/curriculum/add-resources/admin-course-creation-add-resources.utils";
+import {
+  createDemoAdminCourseAddResourceForm,
+} from "@/components/admin/course-creation/curriculum/add-resources/admin-course-creation-add-resources.utils";
 import { AdminCourseCreationCurriculumDrawer } from "@/components/admin/course-creation/curriculum/shared/admin-course-creation-curriculum-drawer";
-import { AdminCourseCreationCurriculumDrawerTabs } from "@/components/admin/course-creation/curriculum/shared/admin-course-creation-curriculum-drawer-tabs";
-import type {
-  AdminCourseAddResourceForm,
-  AdminCourseAddResourceTabId,
-} from "@/types/admin-course-creation.types";
-
-const RESOURCE_TABS = [
-  { id: "overview", label: "Overview" },
-  { id: "upload", label: "Upload" },
-] as const;
+import type { AdminCourseAddResourceForm } from "@/types/admin-course-creation.types";
 
 interface AdminCourseCreationAddResourcesDrawerProps {
   open: boolean;
@@ -27,16 +19,14 @@ export function AdminCourseCreationAddResourcesDrawer({
   onOpenChange,
   onSave,
 }: AdminCourseCreationAddResourcesDrawerProps) {
-  const [activeTabId, setActiveTabId] = useState<AdminCourseAddResourceTabId>("overview");
-  const [form, setForm] = useState<AdminCourseAddResourceForm>(createEmptyAdminCourseAddResourceForm());
+  const [form, setForm] = useState<AdminCourseAddResourceForm>(createDemoAdminCourseAddResourceForm());
 
   useEffect(() => {
     if (!open) {
       return;
     }
 
-    setActiveTabId("overview");
-    setForm(createEmptyAdminCourseAddResourceForm());
+    setForm(createDemoAdminCourseAddResourceForm());
   }, [open]);
 
   function handleChange(updates: Partial<AdminCourseAddResourceForm>) {
@@ -48,13 +38,14 @@ export function AdminCourseCreationAddResourcesDrawer({
 
     const completedResources = form.resources.filter((resource) => resource.progress >= 100);
     if (completedResources.length === 0) {
-      setActiveTabId("upload");
       return;
     }
 
     onSave({ ...form, resources: completedResources });
     onOpenChange(false);
   }
+
+  const canSave = form.resources.some((resource) => resource.progress >= 100);
 
   return (
     <AdminCourseCreationCurriculumDrawer
@@ -64,22 +55,10 @@ export function AdminCourseCreationAddResourcesDrawer({
       description="Add relevant resources here to ensure comprehensive content."
       closeAriaLabel="Close add resources drawer"
       saveLabel="Save Resource"
+      saveDisabled={!canSave}
       onSubmit={handleSubmit}
-      tabs={
-        <AdminCourseCreationCurriculumDrawerTabs
-          tabs={[...RESOURCE_TABS]}
-          activeTabId={activeTabId}
-          onChange={setActiveTabId}
-        />
-      }
     >
-      {activeTabId === "overview" ? (
-        <AdminCourseCreationAddResourcesOverviewTab form={form} onChange={handleChange} />
-      ) : null}
-
-      {activeTabId === "upload" ? (
-        <AdminCourseCreationAddResourcesUploadTab form={form} onChange={handleChange} />
-      ) : null}
+      <AdminCourseCreationAddResourcesUploadTab form={form} onChange={handleChange} />
     </AdminCourseCreationCurriculumDrawer>
   );
 }

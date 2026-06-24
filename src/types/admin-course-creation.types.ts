@@ -168,6 +168,11 @@ export interface AdminCourseAddResourceForm {
   resources: AdminCourseResourceFile[];
 }
 
+export interface AdminCourseAddAssignmentForm {
+  lastSubmissionDate: string;
+  tasks: string;
+}
+
 export interface AdminCourseQuizAnswerOption {
   id: string;
   text: string;

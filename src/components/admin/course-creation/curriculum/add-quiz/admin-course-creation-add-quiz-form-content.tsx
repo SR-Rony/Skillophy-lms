@@ -39,7 +39,7 @@ export function AdminCourseCreationAddQuizFormContent({
       </div>
 
       {form.questions.length > 0 ? (
-        <div className="space-y-4">
+        <div className="space-y-4 rounded-2xl bg-[#fafafa] p-4 sm:p-5">
           {form.questions.map((question, index) => (
             <AdminCourseCreationAddQuizQuestionCard
               key={question.id}
@@ -50,17 +50,26 @@ export function AdminCourseCreationAddQuizFormContent({
               onDelete={() => onDeleteQuestion(question.id)}
             />
           ))}
-        </div>
-      ) : null}
 
-      <button
-        type="button"
-        onClick={onAddQuestion}
-        className="flex w-full items-center justify-center gap-2 rounded-2xl border border-dashed border-[#d1d5db] bg-white px-5 py-4 text-[14px] font-semibold text-primary transition-colors hover:bg-[#fafafa]"
-      >
-        <Plus className="h-4 w-4" aria-hidden />
-        Add Question
-      </button>
+          <button
+            type="button"
+            onClick={onAddQuestion}
+            className="flex w-full items-center justify-center gap-2 rounded-2xl border border-dashed border-[#d1d5db] bg-white px-5 py-4 text-[14px] font-semibold text-primary transition-colors hover:bg-[#fafafa]"
+          >
+            <Plus className="h-4 w-4" aria-hidden />
+            Add Question
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={onAddQuestion}
+          className="flex w-full items-center justify-center gap-2 rounded-2xl border border-dashed border-[#d1d5db] bg-[#fafafa] px-5 py-4 text-[14px] font-semibold text-primary transition-colors hover:bg-white"
+        >
+          <Plus className="h-4 w-4" aria-hidden />
+          Add Question
+        </button>
+      )}
     </div>
   );
 }
