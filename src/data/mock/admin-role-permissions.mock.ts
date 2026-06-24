@@ -86,10 +86,20 @@ export function getAdminRolePermissions(
     return null;
   }
 
-  const roleOptions = adminRoleManagementData.roles.slice(0, 12).map((item) => ({
-    value: item.id,
-    label: item.name,
-  }));
+  const seenRoleNames = new Set<string>();
+  const roleOptions: Array<{ value: string; label: string }> = [];
+
+  for (const item of adminRoleManagementData.roles) {
+    if (seenRoleNames.has(item.name)) {
+      continue;
+    }
+
+    seenRoleNames.add(item.name);
+    roleOptions.push({
+      value: item.id,
+      label: item.name,
+    });
+  }
 
   if (!roleOptions.some((option) => option.value === resolvedRole.id)) {
     roleOptions.unshift({
