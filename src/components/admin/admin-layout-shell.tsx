@@ -5,6 +5,7 @@ import { DashboardShell } from "@/components/dashboard";
 import { getAdminEmployeeManagementHref, parseAdminEmployeeTab } from "@/components/admin/employee-management/admin-employee-management.utils";
 import { adminFooterNav, adminNav } from "@/config";
 import { ROUTES } from "@/constants";
+import { useUIStore } from "@/store";
 
 const adminPageTitles: Record<string, string> = {
   [ROUTES.admin.root]: "Dashboard",
@@ -79,6 +80,7 @@ interface AdminLayoutShellProps {
 export function AdminLayoutShell({ children, headerBadges }: AdminLayoutShellProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const headerTitleOverride = useUIStore((state) => state.headerTitleOverride);
   const isProfileRoute = isEmployeeProfileRoute(pathname);
   const isLearnerProfile = isLearnerProfileRoute(pathname);
   const fromTab = parseAdminEmployeeTab(searchParams.get("fromTab"));
@@ -98,7 +100,7 @@ export function AdminLayoutShell({ children, headerBadges }: AdminLayoutShellPro
       navItems={adminNav}
       footerNavItems={adminFooterNav}
       roleLabel="Admin"
-      headerTitle={getAdminPageTitle(pathname)}
+      headerTitle={headerTitleOverride ?? getAdminPageTitle(pathname)}
       showHeaderBackButton={showHeaderBackButton}
       headerBackHref={headerBackHref}
       headerMessageCount={headerBadges.messages}

@@ -1,13 +1,15 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { Suspense } from "react";
+import { AdminSupportManagementPage } from "@/components/admin/support-management";
+import { adminSupportManagementService } from "@/services/admin";
 
 export const metadata = { title: "Support" };
 
-export default function AdminSupportPage() {
+export default async function AdminSupportRoute() {
+  const data = await adminSupportManagementService.getSupportTickets();
+
   return (
-    <ModulePlaceholder
-      title="Support"
-      description="Handle user support requests."
-      feature="support"
-    />
+    <Suspense fallback={<div className="min-h-[320px] rounded-2xl bg-white" />}>
+      <AdminSupportManagementPage data={data} />
+    </Suspense>
   );
 }

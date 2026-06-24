@@ -120,6 +120,7 @@ export const ROUTES = {
     analytics: "/admin/analytics",
     blog: "/admin/blog",
     support: "/admin/support",
+    supportDetail: (ticketId: string) => `/admin/support/${ticketId}`,
     settings: "/admin/settings",
   },
 } as const;
