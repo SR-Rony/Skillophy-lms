@@ -75,3 +75,7 @@ export interface AdminSupportTicketMessage {
   content: string;
   avatar: string;
 }
+
+export interface AdminSupportSendMessageInput {
+  content: string;
+}

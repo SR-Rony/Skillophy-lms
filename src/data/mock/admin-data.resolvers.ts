@@ -19,9 +19,10 @@ import { getAdminLearnerManagement } from "./admin-learner-management.mock";
 import { getAdminLearnerProfile } from "./admin-learner-profile.mock";
 import { getAdminTeacherProfile } from "./admin-teacher-profile.mock";
 import { getAdminActivityLogManagement } from "./admin-activity-log-management.mock";
-import { getAdminSupportManagement, getAdminSupportTicketDetail } from "./admin-support-management.mock";
+import { getAdminSupportManagement, getAdminSupportTicketDetail, createAdminSupportTicket, resolveAdminSupportTicket, sendAdminSupportTicketMessage } from "./admin-support-management.mock";
 import { getAdminAccountSettings } from "./admin-account-settings.mock";
 import { getAdminReportDetail, getAdminReportManagement } from "./admin-report-management.mock";
+import type { AdminSupportTicketForm } from "@/types/admin-support-management.types";
 
 export function resolveAdminSupportManagement() {
   return getAdminSupportManagement();
@@ -29,6 +30,18 @@ export function resolveAdminSupportManagement() {
 
 export function resolveAdminSupportTicketDetail(ticketId: string) {
   return getAdminSupportTicketDetail(ticketId);
+}
+
+export function resolveAdminSupportCreateTicket(form: AdminSupportTicketForm) {
+  return createAdminSupportTicket(form);
+}
+
+export function resolveAdminSupportResolveTicket(ticketId: string) {
+  return resolveAdminSupportTicket(ticketId);
+}
+
+export function resolveAdminSupportSendTicketMessage(ticketId: string, content: string) {
+  return sendAdminSupportTicketMessage(ticketId, content);
 }
 
 export function resolveAdminAccountSettings() {

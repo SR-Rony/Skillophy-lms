@@ -6,14 +6,11 @@ import { AdminAddSupportTicketDrawer } from "@/components/admin/support-manageme
 import { AdminSupportManagementTable } from "@/components/admin/support-management/admin-support-management-table";
 import { AdminSupportManagementToolbar } from "@/components/admin/support-management/admin-support-management-toolbar";
 import {
-  adminSupportTicketFormToTicket,
-  createAdminSupportTicketId,
-} from "@/components/admin/support-management/admin-support-ticket-form.utils";
-import {
   filterAdminSupportTickets,
   paginateAdminSupportTickets,
   sortAdminSupportTickets,
 } from "@/components/admin/support-management/admin-support-management.utils";
+import { adminSupportManagementService } from "@/services/admin";
 import type {
   AdminSupportManagementData,
   AdminSupportPriorityFilterId,
@@ -35,6 +32,8 @@ export function AdminSupportManagementPage({ data }: AdminSupportManagementPageP
   const [selectedSortId, setSelectedSortId] = useState<AdminSupportSortId>(data.defaultSortId);
   const [currentPage, setCurrentPage] = useState(1);
   const [isAddDrawerOpen, setIsAddDrawerOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   const filteredTickets = useMemo(
     () => filterAdminSupportTickets(tickets, searchQuery, selectedPriorityId),
@@ -61,14 +60,19 @@ export function AdminSupportManagementPage({ data }: AdminSupportManagementPageP
     }
   }, [currentPage, totalPages]);
 
-  function handleSaveNewTicket(form: AdminSupportTicketForm) {
-    const ticketNumber = `#${String(12345 + tickets.length).padStart(5, "0")}`;
-
-    setTickets((current) => [
-      adminSupportTicketFormToTicket(form, createAdminSupportTicketId(), ticketNumber),
-      ...current,
-    ]);
-    setCurrentPage(1);
+  async function handleSaveNewTicket(form: AdminSupportTicketForm) {
+    try {
+      setIsSaving(true);
+      setSaveError(null);
+      const ticket = await adminSupportManagementService.createTicket(form);
+      setTickets((current) => [ticket, ...current]);
+      setCurrentPage(1);
+      setIsAddDrawerOpen(false);
+    } catch {
+      setSaveError("Could not create ticket. Please try again.");
+    } finally {
+      setIsSaving(false);
+    }
   }
 
   return (
@@ -86,6 +90,12 @@ export function AdminSupportManagementPage({ data }: AdminSupportManagementPageP
           onSortChange={setSelectedSortId}
           onAddNewTicket={() => setIsAddDrawerOpen(true)}
         />
+
+        {saveError ? (
+          <div className="border-b border-[#f0f0f0] px-6 py-3 text-sm font-medium text-primary">
+            {saveError}
+          </div>
+        ) : null}
 
         {visibleTickets.length > 0 ? (
           <AdminSupportManagementTable tickets={visibleTickets} />
@@ -110,6 +120,7 @@ export function AdminSupportManagementPage({ data }: AdminSupportManagementPageP
         open={isAddDrawerOpen}
         onOpenChange={setIsAddDrawerOpen}
         onSave={handleSaveNewTicket}
+        isSaving={isSaving}
       />
     </>
   );

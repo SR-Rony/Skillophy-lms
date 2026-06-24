@@ -12,16 +12,18 @@ import type { AdminSupportTicketForm } from "@/types/admin-support-management.ty
 interface AdminAddSupportTicketDrawerProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSave: (form: AdminSupportTicketForm) => void;
+  onSave: (form: AdminSupportTicketForm) => void | Promise<void>;
+  isSaving?: boolean;
 }
 
 export function AdminAddSupportTicketDrawer({
   open,
   onOpenChange,
   onSave,
+  isSaving = false,
 }: AdminAddSupportTicketDrawerProps) {
   const [form, setForm] = useState<AdminSupportTicketForm>(createDefaultAdminSupportTicketForm());
-  const canSave = isAdminSupportTicketFormValid(form);
+  const canSave = isAdminSupportTicketFormValid(form) && !isSaving;
 
   useEffect(() => {
     if (!open) {
@@ -35,15 +37,14 @@ export function AdminAddSupportTicketDrawer({
     setForm((current) => ({ ...current, ...updates }));
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!canSave) {
       return;
     }
 
-    onSave(form);
-    onOpenChange(false);
+    await onSave(form);
   }
 
   return (
@@ -53,7 +54,7 @@ export function AdminAddSupportTicketDrawer({
       title="Add New Ticket"
       description="You can share your problem by creating a ticket here."
       closeAriaLabel="Close add new ticket drawer"
-      saveLabel="Submit"
+      saveLabel={isSaving ? "Submitting..." : "Submit"}
       saveDisabled={!canSave}
       onSubmit={handleSubmit}
     >

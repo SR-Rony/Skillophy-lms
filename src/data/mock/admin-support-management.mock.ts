@@ -2,6 +2,7 @@ import type {
   AdminSupportManagementData,
   AdminSupportTicket,
   AdminSupportTicketDetail,
+  AdminSupportTicketForm,
   AdminSupportTicketPriority,
   AdminSupportTicketStatus,
   AdminSupportTicketThreadItem,
@@ -114,8 +115,7 @@ function buildTickets(): AdminSupportTicket[] {
   return tickets;
 }
 
-export const adminSupportManagementData: AdminSupportManagementData = {
-  tickets: buildTickets(),
+export const adminSupportManagementData: Omit<AdminSupportManagementData, "tickets"> = {
   priorityOptions: [
     { id: "all", label: "All Priority" },
     { id: "high", label: "High" },
@@ -135,8 +135,17 @@ export const adminSupportManagementData: AdminSupportManagementData = {
   addNewTicketLabel: "Add New Ticket",
 };
 
+let supportTickets: AdminSupportTicket[] = buildTickets();
+const supportTicketThreads = new Map<string, AdminSupportTicketThreadItem[]>();
+
+const supportAgentAvatarForMessages =
+  "https://api.dicebear.com/9.x/initials/png?seed=S&backgroundColor=ff4747";
+
 export function getAdminSupportManagement(): AdminSupportManagementData {
-  return adminSupportManagementData;
+  return {
+    ...adminSupportManagementData,
+    tickets: supportTickets,
+  };
 }
 
 const featuredSupportThread: AdminSupportTicketThreadItem[] = [
@@ -221,29 +230,119 @@ function buildDefaultThread(ticket: AdminSupportTicket): AdminSupportTicketThrea
   return items;
 }
 
-function buildTicketDetail(ticket: AdminSupportTicket): AdminSupportTicketDetail {
-  if (ticket.id === "support-ticket-1") {
-    return {
-      ...ticket,
-      status: "in-progress",
-      createdTime: "9:30 PM",
-      thread: featuredSupportThread,
-      resolveTicketLabel: "Resolved",
-    };
+function getThreadForTicket(ticket: AdminSupportTicket): AdminSupportTicketThreadItem[] {
+  const existing = supportTicketThreads.get(ticket.id);
+  if (existing) {
+    return existing;
   }
 
+  const initialThread =
+    ticket.id === "support-ticket-1" ? [...featuredSupportThread] : buildDefaultThread(ticket);
+
+  supportTicketThreads.set(ticket.id, initialThread);
+  return initialThread;
+}
+
+function buildTicketDetail(ticket: AdminSupportTicket): AdminSupportTicketDetail {
+  const normalizedTicket =
+    ticket.id === "support-ticket-1"
+      ? { ...ticket, status: "in-progress" as const, createdTime: "9:30 PM" }
+      : ticket;
+
   return {
-    ...ticket,
-    thread: buildDefaultThread(ticket),
+    ...normalizedTicket,
+    thread: getThreadForTicket(normalizedTicket),
     resolveTicketLabel: "Resolved",
   };
 }
 
 export function getAdminSupportTicketDetail(ticketId: string): AdminSupportTicketDetail | null {
-  const ticket = adminSupportManagementData.tickets.find((item) => item.id === ticketId);
+  const ticket = supportTickets.find((item) => item.id === ticketId);
   if (!ticket) {
     return null;
   }
 
   return buildTicketDetail(ticket);
+}
+
+function createTicketId() {
+  return `support-ticket-${Date.now()}`;
+}
+
+function createTicketNumber() {
+  return `#${String(12345 + supportTickets.length).padStart(5, "0")}`;
+}
+
+export function createAdminSupportTicket(form: AdminSupportTicketForm): AdminSupportTicket {
+  const now = new Date();
+  const ticket: AdminSupportTicket = {
+    id: createTicketId(),
+    ticketNumber: createTicketNumber(),
+    subject: form.subject.trim(),
+    priority: form.priority,
+    createdByName: "Abdullah Mamun",
+    createdByAvatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Abdullah%20Mamun",
+    createdDate: now.toISOString().slice(0, 10),
+    createdTime: now.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    }),
+    status: "open",
+  };
+
+  supportTickets = [ticket, ...supportTickets];
+  supportTicketThreads.set(ticket.id, [
+    {
+      type: "message",
+      id: `${ticket.id}-opening`,
+      message: {
+        id: `${ticket.id}-opening`,
+        sender: "user",
+        content: form.message.trim(),
+        avatar: ticket.createdByAvatar,
+      },
+    },
+  ]);
+
+  return ticket;
+}
+
+export function resolveAdminSupportTicket(ticketId: string): AdminSupportTicketDetail | null {
+  const index = supportTickets.findIndex((item) => item.id === ticketId);
+  if (index === -1) {
+    return null;
+  }
+
+  supportTickets[index] = {
+    ...supportTickets[index],
+    status: "resolved",
+  };
+
+  return buildTicketDetail(supportTickets[index]);
+}
+
+export function sendAdminSupportTicketMessage(
+  ticketId: string,
+  content: string
+): AdminSupportTicketThreadItem | null {
+  const ticket = supportTickets.find((item) => item.id === ticketId);
+  if (!ticket || ticket.status === "resolved") {
+    return null;
+  }
+
+  const thread = getThreadForTicket(ticket);
+  const messageItem: AdminSupportTicketThreadItem = {
+    type: "message",
+    id: `msg-${Date.now()}`,
+    message: {
+      id: `msg-${Date.now()}`,
+      sender: "support",
+      content: content.trim(),
+      avatar: supportAgentAvatarForMessages,
+    },
+  };
+
+  supportTicketThreads.set(ticket.id, [...thread, messageItem]);
+  return messageItem;
 }

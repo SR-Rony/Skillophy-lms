@@ -12,14 +12,12 @@ import {
 import { AdminSupportTicketDetailThread } from "@/components/admin/support-management/admin-support-ticket-detail-thread";
 import { StudentMessagesChatComposer } from "@/components/student/student-messages/student-messages-chat-composer";
 import { MessagesScrollArea } from "@/components/student/student-messages/messages-scroll-area";
+import { adminSupportManagementService } from "@/services/admin";
 import { useUIStore } from "@/store";
 import type {
   AdminSupportTicketDetail,
   AdminSupportTicketThreadItem,
 } from "@/types/admin-support-management.types";
-
-const supportAgentAvatar =
-  "https://api.dicebear.com/9.x/initials/png?seed=S&backgroundColor=ff4747";
 
 interface AdminSupportTicketDetailPageProps {
   ticket: AdminSupportTicketDetail;
@@ -30,6 +28,9 @@ export function AdminSupportTicketDetailPage({ ticket }: AdminSupportTicketDetai
   const [status, setStatus] = useState(ticket.status);
   const [thread, setThread] = useState<AdminSupportTicketThreadItem[]>(ticket.thread);
   const [draftMessage, setDraftMessage] = useState("");
+  const [isResolving, setIsResolving] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [actionError, setActionError] = useState<string | null>(null);
   const threadScrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -50,34 +51,47 @@ export function AdminSupportTicketDetailPage({ ticket }: AdminSupportTicketDetai
     scrollArea.scrollTo({ top: scrollArea.scrollHeight, behavior: "smooth" });
   }, [thread]);
 
-  function handleResolve() {
-    if (status === "resolved") {
+  async function handleResolve() {
+    if (status === "resolved" || isResolving) {
       return;
     }
 
-    setStatus("resolved");
+    try {
+      setIsResolving(true);
+      setActionError(null);
+      const updated = await adminSupportManagementService.resolveTicket(ticket.id);
+      if (updated) {
+        setStatus(updated.status);
+      }
+    } catch {
+      setActionError("Could not resolve this ticket. Please try again.");
+    } finally {
+      setIsResolving(false);
+    }
   }
 
-  function handleSend() {
+  async function handleSend() {
     const trimmed = draftMessage.trim();
-    if (!trimmed || status === "resolved") {
+    if (!trimmed || status === "resolved" || isSending) {
       return;
     }
 
-    setThread((current) => [
-      ...current,
-      {
-        type: "message",
-        id: `msg-${Date.now()}`,
-        message: {
-          id: `msg-${Date.now()}`,
-          sender: "support",
-          content: trimmed,
-          avatar: supportAgentAvatar,
-        },
-      },
-    ]);
-    setDraftMessage("");
+    try {
+      setIsSending(true);
+      setActionError(null);
+      const messageItem = await adminSupportManagementService.sendTicketMessage(ticket.id, {
+        content: trimmed,
+      });
+
+      if (messageItem) {
+        setThread((current) => [...current, messageItem]);
+        setDraftMessage("");
+      }
+    } catch {
+      setActionError("Could not send message. Please try again.");
+    } finally {
+      setIsSending(false);
+    }
   }
 
   return (
@@ -113,12 +127,17 @@ export function AdminSupportTicketDetailPage({ ticket }: AdminSupportTicketDetai
             <button
               type="button"
               onClick={handleResolve}
-              className="inline-flex h-10 shrink-0 items-center justify-center rounded-xl bg-primary px-5 text-[13px] font-semibold text-white transition-colors hover:bg-[#e63e3e] active:bg-[#d93636] sm:px-6"
+              disabled={isResolving}
+              className="inline-flex h-10 shrink-0 items-center justify-center rounded-xl bg-primary px-5 text-[13px] font-semibold text-white transition-colors hover:bg-[#e63e3e] active:bg-[#d93636] disabled:cursor-not-allowed disabled:opacity-60 sm:px-6"
             >
-              {ticket.resolveTicketLabel}
+              {isResolving ? "Resolving..." : ticket.resolveTicketLabel}
             </button>
           ) : null}
         </div>
+
+        {actionError ? (
+          <p className="mt-4 text-sm font-medium text-primary">{actionError}</p>
+        ) : null}
       </div>
 
       <div className="flex min-h-0 flex-1 flex-col">
