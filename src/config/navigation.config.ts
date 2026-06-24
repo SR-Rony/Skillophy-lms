@@ -60,8 +60,13 @@ export const adminNav: NavItem[] = [
     title: "Others",
     iconName: "grid",
     children: [
-      { title: "Analytics", href: ROUTES.admin.analytics },
-      { title: "Blog", href: ROUTES.admin.blog },
+      { title: "Messages", href: ROUTES.admin.messages },
+      { title: "Job Opening", href: ROUTES.admin.jobOpening },
+      { title: "Query Form", href: ROUTES.admin.queryForm },
+      { title: "Role Management", href: ROUTES.admin.roleManagement },
+      { title: "Templates", href: ROUTES.admin.templates },
+      { title: "Activity Log", href: ROUTES.admin.activityLog },
+      { title: "Report", href: ROUTES.admin.report },
     ],
   },
 ];

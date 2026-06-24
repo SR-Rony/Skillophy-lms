@@ -1,3 +1,4 @@
+import { getAdminMessagesPageData } from "./admin-messages.mock";
 import { getAdminTransactionManagement } from "./admin-transaction-management.mock";
 import { getAdminWorkshopCreation, getAdminWorkshopCreationNew } from "./admin-workshop-creation.mock";
 import { getAdminCategoryManagement } from "./admin-categories.mock";
@@ -12,6 +13,10 @@ import { getAdminEmployeeProfile } from "./admin-employee-profile.mock";
 import { getAdminLearnerManagement } from "./admin-learner-management.mock";
 import { getAdminLearnerProfile } from "./admin-learner-profile.mock";
 import { getAdminTeacherProfile } from "./admin-teacher-profile.mock";
+
+export function resolveAdminMessages() {
+  return getAdminMessagesPageData();
+}
 
 export function resolveAdminTransactionManagement() {
   return getAdminTransactionManagement();

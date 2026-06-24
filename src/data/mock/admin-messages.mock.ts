@@ -1,0 +1,22 @@
+import { ROUTES } from "@/constants";
+import { sharedMessagesCourses } from "@/data/mock/messages-courses.mock";
+import type { TeacherMessagesPageData } from "@/types/teacher-messages.types";
+
+/** Demo messages — set `courses` to `[]` to preview empty state. */
+export function getAdminMessagesPageData(): TeacherMessagesPageData {
+  return {
+    totalUnreadCount: 32,
+    courses: sharedMessagesCourses,
+    coursesEmptyState: {
+      sectionLabel: "Courses",
+      heading: "No Courses",
+      message: "You don't enroll any courses yet.",
+      actionLabel: "Explore Courses",
+      actionHref: ROUTES.admin.courses,
+    },
+    emptyState: {
+      heading: "No Messages",
+      message: "You have no messages at this time.",
+    },
+  };
+}
