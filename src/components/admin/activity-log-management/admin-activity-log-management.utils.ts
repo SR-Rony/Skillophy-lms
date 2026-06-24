@@ -1,8 +1,11 @@
 import type {
+  AdminActivityLogDateRange,
   AdminActivityLogEntry,
   AdminActivityLogSortId,
   AdminActivityLogTypeFilterId,
+  AdminActivityLogTypeId,
 } from "@/types/admin-activity-log.types";
+import { isAdminActivityLogDateInRange } from "./admin-activity-log-date-range.utils";
 
 export type AdminActivityLogGroupLabel = "Today" | "Yesterday" | string;
 
@@ -91,16 +94,40 @@ export function groupAdminActivityLogEntries(entries: AdminActivityLogEntry[]): 
     );
 }
 
+export function matchesAdminActivityLogTypeFilter(
+  entryType: AdminActivityLogTypeId,
+  typeId: AdminActivityLogTypeFilterId
+) {
+  if (typeId === "all") {
+    return true;
+  }
+
+  if (typeId === "courses") {
+    return entryType === "course" || entryType === "category";
+  }
+
+  if (typeId === "users") {
+    return entryType === "user" || entryType === "role";
+  }
+
+  return entryType === "workshop";
+}
+
 export function filterAdminActivityLogEntries(
   entries: AdminActivityLogEntry[],
   searchQuery: string,
-  typeId: AdminActivityLogTypeFilterId
+  typeId: AdminActivityLogTypeFilterId,
+  dateRange: AdminActivityLogDateRange
 ) {
   const normalizedSearch = searchQuery.trim().toLowerCase();
 
   return entries.filter((entry) => {
-    const matchesType = typeId === "all" || entry.type === typeId;
+    const matchesType = matchesAdminActivityLogTypeFilter(entry.type, typeId);
     if (!matchesType) {
+      return false;
+    }
+
+    if (!isAdminActivityLogDateInRange(entry.occurredAt, dateRange)) {
       return false;
     }
 

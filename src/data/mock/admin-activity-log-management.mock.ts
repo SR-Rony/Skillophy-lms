@@ -178,15 +178,31 @@ function buildActivityLogEntries(): AdminActivityLogEntry[] {
   return entries;
 }
 
+function createMockDefaultDateRange() {
+  const end = new Date();
+  const start = new Date(end);
+  start.setDate(start.getDate() - 30);
+
+  const toValue = (date: Date) => {
+    const year = date.getFullYear();
+    const month = `${date.getMonth() + 1}`.padStart(2, "0");
+    const day = `${date.getDate()}`.padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  return {
+    start: toValue(start),
+    end: toValue(end),
+  };
+}
+
 export const adminActivityLogManagementData: AdminActivityLogManagementData = {
   entries: buildActivityLogEntries(),
   typeOptions: [
     { id: "all", label: "All Type" },
-    { id: "user", label: "User" },
-    { id: "role", label: "Role" },
+    { id: "courses", label: "Courses" },
+    { id: "users", label: "Users" },
     { id: "workshop", label: "Workshop" },
-    { id: "course", label: "Course" },
-    { id: "category", label: "Category" },
   ],
   sortOptions: [
     { id: "default", label: "Default" },
@@ -195,7 +211,7 @@ export const adminActivityLogManagementData: AdminActivityLogManagementData = {
   ],
   defaultTypeId: "all",
   defaultSortId: "default",
-  defaultDateRangeLabel: "May 8, 2024 - May 28, 2024",
+  defaultDateRange: createMockDefaultDateRange(),
   pageSize: 10,
 };
 

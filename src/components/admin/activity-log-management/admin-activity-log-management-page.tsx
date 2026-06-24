@@ -11,6 +11,7 @@ import {
   sortAdminActivityLogEntries,
 } from "@/components/admin/activity-log-management/admin-activity-log-management.utils";
 import type {
+  AdminActivityLogDateRange,
   AdminActivityLogManagementData,
   AdminActivityLogSortId,
   AdminActivityLogTypeFilterId,
@@ -27,11 +28,12 @@ export function AdminActivityLogManagementPage({ data }: AdminActivityLogManagem
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTypeId, setSelectedTypeId] = useState<AdminActivityLogTypeFilterId>(data.defaultTypeId);
   const [selectedSortId, setSelectedSortId] = useState<AdminActivityLogSortId>(data.defaultSortId);
+  const [dateRange, setDateRange] = useState<AdminActivityLogDateRange>(data.defaultDateRange);
   const [currentPage, setCurrentPage] = useState(1);
 
   const filteredEntries = useMemo(
-    () => filterAdminActivityLogEntries(data.entries, searchQuery, selectedTypeId),
-    [data.entries, searchQuery, selectedTypeId]
+    () => filterAdminActivityLogEntries(data.entries, searchQuery, selectedTypeId, dateRange),
+    [data.entries, searchQuery, selectedTypeId, dateRange]
   );
 
   const sortedEntries = useMemo(
@@ -51,7 +53,7 @@ export function AdminActivityLogManagementPage({ data }: AdminActivityLogManagem
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery, selectedTypeId, selectedSortId]);
+  }, [searchQuery, selectedTypeId, selectedSortId, dateRange]);
 
   useEffect(() => {
     if (currentPage > totalPages) {
@@ -67,11 +69,12 @@ export function AdminActivityLogManagementPage({ data }: AdminActivityLogManagem
         sortOptions={data.sortOptions}
         selectedTypeId={selectedTypeId}
         selectedSortId={selectedSortId}
-        dateRangeLabel={data.defaultDateRangeLabel}
+        dateRange={dateRange}
         resultCount={filteredEntries.length}
         onSearchChange={setSearchQuery}
         onTypeChange={setSelectedTypeId}
         onSortChange={setSelectedSortId}
+        onDateRangeChange={setDateRange}
       />
 
       {visibleEntries.length > 0 ? (

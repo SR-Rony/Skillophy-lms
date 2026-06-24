@@ -6,9 +6,14 @@ export type AdminActivityLogTypeId =
   | "category"
   | "system";
 
-export type AdminActivityLogTypeFilterId = "all" | AdminActivityLogTypeId;
+export type AdminActivityLogTypeFilterId = "all" | "courses" | "users" | "workshop";
 
 export type AdminActivityLogSortId = "default" | "newest" | "oldest";
+
+export interface AdminActivityLogDateRange {
+  start: string;
+  end: string;
+}
 
 export type AdminActivityLogMessagePart =
   | { kind: "text"; text: string }
@@ -39,6 +44,6 @@ export interface AdminActivityLogManagementData {
   sortOptions: AdminActivityLogSortOption[];
   defaultTypeId: AdminActivityLogTypeFilterId;
   defaultSortId: AdminActivityLogSortId;
-  defaultDateRangeLabel: string;
+  defaultDateRange: AdminActivityLogDateRange;
   pageSize: number;
 }

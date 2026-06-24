@@ -5,7 +5,6 @@ import {
   ArrowDownWideNarrow,
   ArrowUpDown,
   ArrowUpNarrowWide,
-  CalendarDays,
   ChevronDown,
   ListFilter,
   Search,
@@ -15,7 +14,9 @@ import type {
   AdminActivityLogSortOption,
   AdminActivityLogTypeFilterId,
   AdminActivityLogTypeOption,
+  AdminActivityLogDateRange,
 } from "@/types/admin-activity-log.types";
+import { AdminActivityLogDateRangePicker } from "@/components/admin/activity-log-management/admin-activity-log-date-range-picker";
 import { cn } from "@/utils";
 
 interface AdminActivityLogToolbarProps {
@@ -24,11 +25,12 @@ interface AdminActivityLogToolbarProps {
   sortOptions: AdminActivityLogSortOption[];
   selectedTypeId: AdminActivityLogTypeFilterId;
   selectedSortId: AdminActivityLogSortId;
-  dateRangeLabel: string;
+  dateRange: AdminActivityLogDateRange;
   resultCount: number;
   onSearchChange: (value: string) => void;
   onTypeChange: (typeId: AdminActivityLogTypeFilterId) => void;
   onSortChange: (sortId: AdminActivityLogSortId) => void;
+  onDateRangeChange: (range: AdminActivityLogDateRange) => void;
 }
 
 const controlClassName =
@@ -88,11 +90,12 @@ export function AdminActivityLogToolbar({
   sortOptions,
   selectedTypeId,
   selectedSortId,
-  dateRangeLabel,
+  dateRange,
   resultCount,
   onSearchChange,
   onTypeChange,
   onSortChange,
+  onDateRangeChange,
 }: AdminActivityLogToolbarProps) {
   const searchId = useId();
   const typeMenuId = useId();
@@ -189,14 +192,7 @@ export function AdminActivityLogToolbar({
             )}
           </div>
 
-          <button
-            type="button"
-            className={cn(controlClassName, "min-w-0 items-center gap-2 px-3.5")}
-            aria-label={`Date range: ${dateRangeLabel}`}
-          >
-            <CalendarDays className="h-4 w-4 shrink-0 text-[#6b7280]" strokeWidth={2} aria-hidden />
-            <span className="truncate text-[13px] font-medium text-[#4a4a4a]">{dateRangeLabel}</span>
-          </button>
+          <AdminActivityLogDateRangePicker value={dateRange} onChange={onDateRangeChange} />
 
           <div ref={sortDropdown.containerRef} className="relative min-w-0">
             <div className={controlClassName}>
