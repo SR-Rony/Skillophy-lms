@@ -18,6 +18,11 @@ import { getAdminEmployeeProfile } from "./admin-employee-profile.mock";
 import { getAdminLearnerManagement } from "./admin-learner-management.mock";
 import { getAdminLearnerProfile } from "./admin-learner-profile.mock";
 import { getAdminTeacherProfile } from "./admin-teacher-profile.mock";
+import { getAdminActivityLogManagement } from "./admin-activity-log-management.mock";
+
+export function resolveAdminActivityLogManagement() {
+  return getAdminActivityLogManagement();
+}
 
 export function resolveAdminTemplateManagement() {
   return getAdminTemplateManagement();
