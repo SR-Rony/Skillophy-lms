@@ -112,6 +112,7 @@ export const ROUTES = {
     businessQueryDetail: (queryId: string) => `/admin/query-form/business/${queryId}`,
     contactQueryDetail: (queryId: string) => `/admin/query-form/contact/${queryId}`,
     roleManagement: "/admin/role-management",
+    rolePermissions: (roleId: string) => `/admin/role-management/${roleId}/permissions`,
     templates: "/admin/templates",
     activityLog: "/admin/activity-log",
     report: "/admin/report",

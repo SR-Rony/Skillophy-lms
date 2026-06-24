@@ -1,3 +1,5 @@
+import { getAdminRoleManagement } from "./admin-role-management.mock";
+import { getAdminRolePermissions } from "./admin-role-permissions.mock";
 import { getAdminJobOpeningManagement } from "./admin-job-opening-management.mock";
 import { getAdminBusinessQueryDetail, getAdminContactQueryDetail, getAdminQueryFormManagement } from "./admin-query-form-management.mock";
 import { getAdminMessagesPageData } from "./admin-messages.mock";
@@ -15,6 +17,14 @@ import { getAdminEmployeeProfile } from "./admin-employee-profile.mock";
 import { getAdminLearnerManagement } from "./admin-learner-management.mock";
 import { getAdminLearnerProfile } from "./admin-learner-profile.mock";
 import { getAdminTeacherProfile } from "./admin-teacher-profile.mock";
+
+export function resolveAdminRoleManagement() {
+  return getAdminRoleManagement();
+}
+
+export function resolveAdminRolePermissions(roleId: string, roleName?: string | null) {
+  return getAdminRolePermissions(roleId, roleName);
+}
 
 export function resolveAdminJobOpeningManagement() {
   return getAdminJobOpeningManagement();

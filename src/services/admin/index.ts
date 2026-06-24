@@ -1,3 +1,4 @@
+export { adminRoleManagementService } from "./admin-role-management.service";
 export { adminJobOpeningManagementService } from "./admin-job-opening-management.service";
 export { adminQueryFormManagementService } from "./admin-query-form-management.service";
 export { adminMessagesService } from "./admin-messages.service";

@@ -1,12 +1,15 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { Suspense } from "react";
+import { AdminRoleManagementPage } from "@/components/admin/role-management";
+import { adminRoleManagementService } from "@/services/admin";
 
 export const metadata = { title: "Role Management" };
 
-export default function AdminRoleManagementPage() {
+export default async function AdminRoleManagementRoute() {
+  const data = await adminRoleManagementService.getRoles();
+
   return (
-    <ModulePlaceholder
-      title="Role Management"
-      description="Manage roles and permissions."
-    />
+    <Suspense fallback={<div className="min-h-[320px] rounded-2xl bg-white" />}>
+      <AdminRoleManagementPage data={data} />
+    </Suspense>
   );
 }
