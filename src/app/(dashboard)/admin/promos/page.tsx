@@ -1,13 +1,15 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { Suspense } from "react";
+import { AdminPromoManagementPage } from "@/components/admin/promo-management";
+import { adminPromoManagementService } from "@/services/admin";
 
 export const metadata = { title: "Promo & Discounts" };
 
-export default function AdminPromosPage() {
+export default async function AdminPromosPage() {
+  const data = await adminPromoManagementService.getPromos();
+
   return (
-    <ModulePlaceholder
-      title="Promo & Discounts"
-      description="Create and manage promo codes and discount campaigns."
-      feature="admin/promos"
-    />
+    <Suspense fallback={<div className="min-h-[320px] rounded-2xl bg-white" />}>
+      <AdminPromoManagementPage data={data} />
+    </Suspense>
   );
 }
