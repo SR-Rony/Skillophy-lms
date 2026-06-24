@@ -1,6 +1,8 @@
 import type {
   AdminWorkshopCreationData,
   AdminWorkshopCreationGeneralInfo,
+  AdminWorkshopMetaInfo,
+  AdminWorkshopSchedule,
 } from "@/types/admin-workshop-creation.types";
 
 const teachers = [
@@ -41,6 +43,48 @@ const formOptions = {
   maxTeachersPerRole: 5,
 };
 
+function createDefaultWorkshopSchedule(): AdminWorkshopSchedule {
+  return [{ id: "workshop-schedule-1", day: "sunday", time: "17:00" }];
+}
+
+const defaultWorkshopMetaInfo: AdminWorkshopMetaInfo = {
+  requirements: [
+    {
+      id: "requirement-1",
+      title: "Good Internet Connection",
+      templateId: "req-internet",
+    },
+  ],
+  benefits: [
+    {
+      id: "benefit-1",
+      title: "Life Time Access",
+      subtitle:
+        "You will get life time access typically refers to a purchasing model where a customer pays once for a product or service and can use it indefinitely.",
+      templateId: "benefit-lifetime-access",
+    },
+    {
+      id: "benefit-2",
+      title: "Money Back Guarantee",
+      subtitle:
+        "You will get life time access typically refers to a purchasing model where a customer pays once for a product or service and can use it indefinitely.",
+      templateId: "benefit-money-back",
+    },
+    {
+      id: "benefit-3",
+      title: "",
+      subtitle: "",
+    },
+  ],
+};
+
+function createEmptyWorkshopMetaInfo(): AdminWorkshopMetaInfo {
+  return {
+    requirements: [],
+    benefits: [],
+  };
+}
+
 export const adminWorkshopCreationData: AdminWorkshopCreationData = {
   steps: workshopSteps,
   generalInfo: {
@@ -52,6 +96,8 @@ export const adminWorkshopCreationData: AdminWorkshopCreationData = {
     mainTeacherIds: ["teacher-abdullah", "teacher-guy", "teacher-darrell"],
   },
   formOptions,
+  workshopSchedule: createDefaultWorkshopSchedule(),
+  metaInfo: defaultWorkshopMetaInfo,
 };
 
 function createEmptyAdminWorkshopCreationGeneralInfo(): AdminWorkshopCreationGeneralInfo {
@@ -73,6 +119,8 @@ export function getAdminWorkshopCreationNew(): AdminWorkshopCreationData {
   return {
     steps: workshopSteps,
     generalInfo: createEmptyAdminWorkshopCreationGeneralInfo(),
+    workshopSchedule: createDefaultWorkshopSchedule(),
+    metaInfo: createEmptyWorkshopMetaInfo(),
     formOptions,
   };
 }

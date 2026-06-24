@@ -3,11 +3,14 @@
 import { useMemo, useState } from "react";
 import { AdminCourseCreationStepper } from "@/components/admin/course-creation/admin-course-creation-stepper";
 import { AdminWorkshopCreationGeneralInfoSection } from "@/components/admin/workshop-creation/admin-workshop-creation-general-info-section";
+import { AdminWorkshopCreationMetaInfoSection } from "@/components/admin/workshop-creation/admin-workshop-creation-meta-info-section";
 import { AdminWorkshopCreationPageHeader } from "@/components/admin/workshop-creation/admin-workshop-creation-page-header";
+import { AdminWorkshopCreationScheduleSection } from "@/components/admin/workshop-creation/admin-workshop-creation-schedule-section";
 import type {
   AdminWorkshopCreationData,
   AdminWorkshopCreationGeneralInfo,
   AdminWorkshopCreationStepId,
+  AdminWorkshopSchedule,
 } from "@/types/admin-workshop-creation.types";
 
 interface AdminWorkshopCreationPageProps {
@@ -25,10 +28,15 @@ export function AdminWorkshopCreationPage({ data, mode = "edit" }: AdminWorkshop
   const [isEditing, setIsEditing] = useState(isCreateMode);
   const [form, setForm] = useState<AdminWorkshopCreationGeneralInfo>(data.generalInfo);
   const [savedForm, setSavedForm] = useState<AdminWorkshopCreationGeneralInfo>(data.generalInfo);
+  const [workshopSchedule, setWorkshopSchedule] = useState<AdminWorkshopSchedule>(data.workshopSchedule);
+  const [savedWorkshopSchedule, setSavedWorkshopSchedule] = useState<AdminWorkshopSchedule>(
+    data.workshopSchedule
+  );
 
   const isGeneralInfoStep = activeStepId === "general-info";
   const isWorkshopScheduleStep = activeStepId === "workshop-schedule";
   const isMetaInfoStep = activeStepId === "meta-info";
+  const showEditingActions = isEditing || isWorkshopScheduleStep;
   const showBack = !isGeneralInfoStep;
   const showNext = !isMetaInfoStep;
 
@@ -40,11 +48,19 @@ export function AdminWorkshopCreationPage({ data, mode = "edit" }: AdminWorkshop
   }
 
   function handleEdit() {
-    setForm(savedForm);
+    if (isGeneralInfoStep) {
+      setForm(savedForm);
+    }
+
     setIsEditing(true);
   }
 
   function handleSave() {
+    if (isWorkshopScheduleStep) {
+      setSavedWorkshopSchedule(workshopSchedule);
+      return;
+    }
+
     setSavedForm(form);
     if (!isMetaInfoStep) {
       setIsEditing(false);
@@ -59,7 +75,7 @@ export function AdminWorkshopCreationPage({ data, mode = "edit" }: AdminWorkshop
 
     const previousStepId = stepOrder[currentIndex - 1];
 
-    if (previousStepId === "general-info") {
+    if (previousStepId === "general-info" || previousStepId === "workshop-schedule") {
       setIsEditing(false);
     }
 
@@ -77,13 +93,17 @@ export function AdminWorkshopCreationPage({ data, mode = "edit" }: AdminWorkshop
       setIsEditing(false);
     }
 
+    if (activeStepId === "workshop-schedule") {
+      setSavedWorkshopSchedule(workshopSchedule);
+    }
+
     setActiveStepId(stepOrder[currentIndex + 1]);
   }
 
   return (
     <div className="space-y-6">
       <AdminWorkshopCreationPageHeader
-        isEditing={isEditing}
+        isEditing={showEditingActions}
         isMetaInfoStep={isMetaInfoStep}
         showBack={showBack}
         showNext={showNext}
@@ -110,17 +130,14 @@ export function AdminWorkshopCreationPage({ data, mode = "edit" }: AdminWorkshop
           ) : null}
 
           {isWorkshopScheduleStep ? (
-            <div className="rounded-xl bg-[#f9f9f9] px-6 py-12 text-center">
-              <p className="text-[14px] font-medium text-[#9ca3af]">
-                Workshop Schedule step coming soon.
-              </p>
-            </div>
+            <AdminWorkshopCreationScheduleSection
+              schedule={workshopSchedule}
+              onChange={setWorkshopSchedule}
+            />
           ) : null}
 
           {isMetaInfoStep ? (
-            <div className="rounded-xl bg-[#f9f9f9] px-6 py-12 text-center">
-              <p className="text-[14px] font-medium text-[#9ca3af]">Meta Info step coming soon.</p>
-            </div>
+            <AdminWorkshopCreationMetaInfoSection initialData={data.metaInfo} />
           ) : null}
         </div>
       </div>

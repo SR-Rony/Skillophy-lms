@@ -1,6 +1,8 @@
 import type {
   AdminCourseCreationSelectOption,
   AdminCourseCreationTeacher,
+  AdminCourseMetaBenefit,
+  AdminCourseMetaRequirement,
 } from "@/types/admin-course-creation.types";
 
 export type AdminWorkshopCreationStepId =
@@ -12,6 +14,14 @@ export interface AdminWorkshopCreationStep {
   id: AdminWorkshopCreationStepId;
   label: string;
 }
+
+export interface AdminWorkshopScheduleSlot {
+  id: string;
+  day: string;
+  time: string;
+}
+
+export type AdminWorkshopSchedule = AdminWorkshopScheduleSlot[];
 
 export interface AdminWorkshopCreationGeneralInfo {
   workshopTitle: string;
@@ -28,8 +38,15 @@ export interface AdminWorkshopCreationFormOptions {
   maxTeachersPerRole: number;
 }
 
+export interface AdminWorkshopMetaInfo {
+  requirements: AdminCourseMetaRequirement[];
+  benefits: AdminCourseMetaBenefit[];
+}
+
 export interface AdminWorkshopCreationData {
   steps: AdminWorkshopCreationStep[];
   generalInfo: AdminWorkshopCreationGeneralInfo;
+  workshopSchedule: AdminWorkshopSchedule;
+  metaInfo: AdminWorkshopMetaInfo;
   formOptions: AdminWorkshopCreationFormOptions;
 }

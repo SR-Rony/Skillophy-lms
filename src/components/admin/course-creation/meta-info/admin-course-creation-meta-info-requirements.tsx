@@ -12,10 +12,12 @@ import {
   createAdminCourseMetaId,
 } from "@/components/admin/course-creation/meta-info/admin-course-creation-meta-info.utils";
 import type { AdminCourseMetaRequirement } from "@/types/admin-course-creation.types";
+import { cn } from "@/utils";
 
 interface AdminCourseCreationMetaInfoRequirementsProps {
   requirements: AdminCourseMetaRequirement[];
   onChange: (requirements: AdminCourseMetaRequirement[]) => void;
+  withTopBorder?: boolean;
 }
 
 const REQUIREMENT_ICONS: LucideIcon[] = [Globe];
@@ -45,6 +47,7 @@ function AdminCourseCreationMetaInfoRequirementIcon({
 export function AdminCourseCreationMetaInfoRequirements({
   requirements,
   onChange,
+  withTopBorder = true,
 }: AdminCourseCreationMetaInfoRequirementsProps) {
   function handleUpdate(id: string, title: string) {
     onChange(requirements.map((item) => (item.id === id ? { ...item, title } : item)));
@@ -88,7 +91,7 @@ export function AdminCourseCreationMetaInfoRequirements({
     .filter((templateId): templateId is string => Boolean(templateId));
 
   return (
-    <section className="space-y-4 border-t border-[#f0f0f0] pt-8">
+    <section className={cn("space-y-4", withTopBorder && "border-t border-[#f0f0f0] pt-8")}>
       <AdminCourseCreationMetaInfoSectionHeader title="Requirements" />
 
       <div className="space-y-4">
