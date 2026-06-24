@@ -1,10 +1,9 @@
-import type { AdminCourseCreationStep, AdminCourseCreationStepId } from "@/types/admin-course-creation.types";
 import { Check } from "lucide-react";
 import { cn } from "@/utils";
 
 interface AdminCourseCreationStepperProps {
-  steps: AdminCourseCreationStep[];
-  activeStepId: AdminCourseCreationStepId;
+  steps: readonly { id: string; label: string }[];
+  activeStepId: string;
 }
 
 export function AdminCourseCreationStepper({ steps, activeStepId }: AdminCourseCreationStepperProps) {

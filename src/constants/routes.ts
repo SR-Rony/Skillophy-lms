@@ -103,6 +103,7 @@ export const ROUTES = {
     categories: "/admin/categories",
     promos: "/admin/promos",
     workshop: "/admin/workshop",
+    workshopCreate: "/admin/workshop/create",
     transactions: "/admin/transactions",
     quiz: "/admin/quiz",
     analytics: "/admin/analytics",

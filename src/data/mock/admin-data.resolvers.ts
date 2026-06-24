@@ -1,4 +1,6 @@
+import { getAdminWorkshopCreation, getAdminWorkshopCreationNew } from "./admin-workshop-creation.mock";
 import { getAdminCategoryManagement } from "./admin-categories.mock";
+import { getAdminWorkshopManagement } from "./admin-workshop-management.mock";
 import { getAdminPromoManagement } from "./admin-promos.mock";
 import { getAdminCourseCreation, getAdminCourseCreationNew } from "./admin-course-creation.mock";
 import { getAdminLiveCourseCreation } from "./admin-live-course-creation.mock";
@@ -9,6 +11,18 @@ import { getAdminEmployeeProfile } from "./admin-employee-profile.mock";
 import { getAdminLearnerManagement } from "./admin-learner-management.mock";
 import { getAdminLearnerProfile } from "./admin-learner-profile.mock";
 import { getAdminTeacherProfile } from "./admin-teacher-profile.mock";
+
+export function resolveAdminWorkshopManagement() {
+  return getAdminWorkshopManagement();
+}
+
+export function resolveAdminWorkshopCreation() {
+  return getAdminWorkshopCreation();
+}
+
+export function resolveAdminWorkshopCreationNew() {
+  return getAdminWorkshopCreationNew();
+}
 
 export function resolveAdminCategoryManagement() {
   return getAdminCategoryManagement();
