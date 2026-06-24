@@ -1,4 +1,5 @@
 import { getAdminJobOpeningManagement } from "./admin-job-opening-management.mock";
+import { getAdminBusinessQueryDetail, getAdminQueryFormManagement } from "./admin-query-form-management.mock";
 import { getAdminMessagesPageData } from "./admin-messages.mock";
 import { getAdminTransactionManagement } from "./admin-transaction-management.mock";
 import { getAdminWorkshopCreation, getAdminWorkshopCreationNew } from "./admin-workshop-creation.mock";
@@ -17,6 +18,14 @@ import { getAdminTeacherProfile } from "./admin-teacher-profile.mock";
 
 export function resolveAdminJobOpeningManagement() {
   return getAdminJobOpeningManagement();
+}
+
+export function resolveAdminQueryFormManagement() {
+  return getAdminQueryFormManagement();
+}
+
+export function resolveAdminBusinessQueryDetail(queryId: string) {
+  return getAdminBusinessQueryDetail(queryId);
 }
 
 export function resolveAdminMessages() {

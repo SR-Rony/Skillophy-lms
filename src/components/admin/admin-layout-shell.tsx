@@ -34,6 +34,10 @@ const adminPageTitles: Record<string, string> = {
 };
 
 function getAdminPageTitle(pathname: string) {
+  if (/^\/admin\/query-form\/business\/[^/]+$/.test(pathname)) {
+    return "Business Query Form";
+  }
+
   if (adminPageTitles[pathname]) {
     return adminPageTitles[pathname];
   }

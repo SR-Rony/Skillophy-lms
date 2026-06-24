@@ -109,6 +109,7 @@ export const ROUTES = {
     messages: "/admin/messages",
     jobOpening: "/admin/job-opening",
     queryForm: "/admin/query-form",
+    businessQueryDetail: (queryId: string) => `/admin/query-form/business/${queryId}`,
     roleManagement: "/admin/role-management",
     templates: "/admin/templates",
     activityLog: "/admin/activity-log",
