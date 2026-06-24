@@ -1,4 +1,10 @@
-export type AdminCourseCreationStepId = "general-info" | "curriculum" | "meta-info";
+export type AdminCourseCreationStepId =
+  | "general-info"
+  | "class-routine"
+  | "curriculum"
+  | "meta-info";
+
+export type AdminCourseCreationType = "recorded" | "live";
 
 export interface AdminCourseCreationStep {
   id: AdminCourseCreationStepId;
@@ -60,10 +66,24 @@ export interface AdminCourseCurriculumData {
   topics: AdminCourseCurriculumTopic[];
 }
 
+export interface AdminCourseClassRoutineSlot {
+  id: string;
+  day: string;
+  time: string;
+}
+
+export interface AdminCourseClassRoutine {
+  main: AdminCourseClassRoutineSlot[];
+  support: AdminCourseClassRoutineSlot[];
+}
+
 export interface AdminCourseCreationData {
+  courseType: AdminCourseCreationType;
+  batchNo?: string;
   steps: AdminCourseCreationStep[];
   generalInfo: AdminCourseCreationGeneralInfo;
   formOptions: AdminCourseCreationFormOptions;
+  classRoutine?: AdminCourseClassRoutine;
   curriculum: AdminCourseCurriculumData;
   metaInfo: AdminCourseMetaInfo;
 }

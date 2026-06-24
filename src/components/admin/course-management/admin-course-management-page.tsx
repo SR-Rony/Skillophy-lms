@@ -7,6 +7,7 @@ import {
   getAdminCourseManagementHref,
   parseAdminCourseManagementTab,
 } from "@/components/admin/course-management/admin-course-management.utils";
+import { AdminLiveCoursesTab } from "@/components/admin/course-management/live/admin-live-courses-tab";
 import { AdminRecordedCoursesTab } from "@/components/admin/course-management/recorded/admin-recorded-courses-tab";
 import type {
   AdminCourseManagementData,
@@ -39,11 +40,7 @@ export function AdminCourseManagementPage({ data }: AdminCourseManagementPagePro
       {activeTab === "recorded" ? (
         <AdminRecordedCoursesTab data={data.recordedCourses} />
       ) : (
-        <div className="bg-white px-6 py-16 text-center">
-          <p className="text-[14px] font-medium text-[#9ca3af]">
-            LIVE Course management will be available soon.
-          </p>
-        </div>
+        <AdminLiveCoursesTab data={data.liveCourses} />
       )}
     </div>
   );

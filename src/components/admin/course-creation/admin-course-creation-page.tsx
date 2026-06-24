@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { AdminCourseCreationClassRoutineSection } from "@/components/admin/course-creation/class-routine/admin-course-creation-class-routine-section";
 import { AdminCourseCreationCurriculumSection } from "@/components/admin/course-creation/curriculum/admin-course-creation-curriculum-section";
 import { AdminCourseCreationGeneralInfoSection } from "@/components/admin/course-creation/admin-course-creation-general-info-section";
 import { AdminCourseCreationMetaInfoSection } from "@/components/admin/course-creation/meta-info/admin-course-creation-meta-info-section";
 import { AdminCourseCreationPageHeader } from "@/components/admin/course-creation/admin-course-creation-page-header";
 import { AdminCourseCreationStepper } from "@/components/admin/course-creation/admin-course-creation-stepper";
 import type {
+  AdminCourseClassRoutine,
   AdminCourseCreationData,
   AdminCourseCreationGeneralInfo,
   AdminCourseCreationStepId,
@@ -17,21 +19,30 @@ interface AdminCourseCreationPageProps {
   mode?: "create" | "edit";
 }
 
-const STEP_ORDER: AdminCourseCreationStepId[] = ["general-info", "curriculum", "meta-info"];
-
 export function AdminCourseCreationPage({ data, mode = "edit" }: AdminCourseCreationPageProps) {
   const isCreateMode = mode === "create";
-  const [activeStepId, setActiveStepId] = useState<AdminCourseCreationStepId>("general-info");
+  const isLiveCourse = data.courseType === "live";
+  const stepOrder = useMemo(() => data.steps.map((step) => step.id), [data.steps]);
+
+  const [activeStepId, setActiveStepId] = useState<AdminCourseCreationStepId>(stepOrder[0] ?? "general-info");
   const [isEditing, setIsEditing] = useState(isCreateMode);
   const [form, setForm] = useState<AdminCourseCreationGeneralInfo>(data.generalInfo);
   const [savedForm, setSavedForm] = useState<AdminCourseCreationGeneralInfo>(data.generalInfo);
+  const [classRoutine, setClassRoutine] = useState<AdminCourseClassRoutine>(
+    data.classRoutine ?? { main: [], support: [] }
+  );
+  const [savedClassRoutine, setSavedClassRoutine] = useState<AdminCourseClassRoutine>(
+    data.classRoutine ?? { main: [], support: [] }
+  );
 
   const isGeneralInfoStep = activeStepId === "general-info";
+  const isClassRoutineStep = activeStepId === "class-routine";
   const isCurriculumStep = activeStepId === "curriculum";
   const isMetaInfoStep = activeStepId === "meta-info";
-  const showEditingActions = isEditing || isCurriculumStep;
+  const showEditingActions = isEditing || isClassRoutineStep || isCurriculumStep;
   const showBack = !isGeneralInfoStep;
   const showNext = !isMetaInfoStep;
+  const showDuplicate = isLiveCourse && isGeneralInfoStep && !isEditing;
 
   function handleChange<K extends keyof AdminCourseCreationGeneralInfo>(
     field: K,
@@ -46,6 +57,11 @@ export function AdminCourseCreationPage({ data, mode = "edit" }: AdminCourseCrea
   }
 
   function handleSave() {
+    if (isClassRoutineStep) {
+      setSavedClassRoutine(classRoutine);
+      return;
+    }
+
     setSavedForm(form);
     if (!isCurriculumStep && !isMetaInfoStep) {
       setIsEditing(false);
@@ -53,12 +69,12 @@ export function AdminCourseCreationPage({ data, mode = "edit" }: AdminCourseCrea
   }
 
   function handleBack() {
-    const currentIndex = STEP_ORDER.indexOf(activeStepId);
+    const currentIndex = stepOrder.indexOf(activeStepId);
     if (currentIndex <= 0) {
       return;
     }
 
-    const previousStepId = STEP_ORDER[currentIndex - 1];
+    const previousStepId = stepOrder[currentIndex - 1];
 
     if (previousStepId === "general-info") {
       setIsEditing(false);
@@ -68,8 +84,8 @@ export function AdminCourseCreationPage({ data, mode = "edit" }: AdminCourseCrea
   }
 
   function handleNext() {
-    const currentIndex = STEP_ORDER.indexOf(activeStepId);
-    if (currentIndex === -1 || currentIndex >= STEP_ORDER.length - 1) {
+    const currentIndex = stepOrder.indexOf(activeStepId);
+    if (currentIndex === -1 || currentIndex >= stepOrder.length - 1) {
       return;
     }
 
@@ -78,7 +94,11 @@ export function AdminCourseCreationPage({ data, mode = "edit" }: AdminCourseCrea
       setIsEditing(false);
     }
 
-    setActiveStepId(STEP_ORDER[currentIndex + 1]);
+    if (activeStepId === "class-routine") {
+      setSavedClassRoutine(classRoutine);
+    }
+
+    setActiveStepId(stepOrder[currentIndex + 1]);
   }
 
   return (
@@ -88,29 +108,40 @@ export function AdminCourseCreationPage({ data, mode = "edit" }: AdminCourseCrea
         isMetaInfoStep={isMetaInfoStep}
         showBack={showBack}
         showNext={showNext}
+        showDuplicate={showDuplicate}
         onEdit={handleEdit}
         onSave={handleSave}
         onBack={handleBack}
         onNext={handleNext}
         onPublish={() => undefined}
         onSaveDraft={() => undefined}
+        onDuplicate={() => undefined}
       />
 
       <div className="rounded-2xl border border-[#ebe8e6] bg-white p-5 shadow-[0_8px_30px_rgba(35,25,22,0.04)] sm:p-6 md:p-7">
         <AdminCourseCreationStepper steps={data.steps} activeStepId={activeStepId} />
 
         <div className="mt-8 border-t border-[#f0f0f0] pt-8">
-          {activeStepId === "general-info" ? (
+          {isGeneralInfoStep ? (
             <AdminCourseCreationGeneralInfoSection
               form={isEditing ? form : savedForm}
               formOptions={data.formOptions}
               isEditing={isEditing}
               isCreateMode={isCreateMode}
+              courseType={data.courseType}
+              batchNo={data.batchNo}
               onChange={handleChange}
             />
           ) : null}
 
-          {activeStepId === "curriculum" ? (
+          {isClassRoutineStep && data.classRoutine ? (
+            <AdminCourseCreationClassRoutineSection
+              classRoutine={classRoutine}
+              onChange={setClassRoutine}
+            />
+          ) : null}
+
+          {isCurriculumStep ? (
             <AdminCourseCreationCurriculumSection
               initialData={data.curriculum}
               teachers={data.formOptions.teachers}
@@ -118,7 +149,7 @@ export function AdminCourseCreationPage({ data, mode = "edit" }: AdminCourseCrea
             />
           ) : null}
 
-          {activeStepId === "meta-info" ? (
+          {isMetaInfoStep ? (
             <AdminCourseCreationMetaInfoSection initialData={data.metaInfo} />
           ) : null}
         </div>

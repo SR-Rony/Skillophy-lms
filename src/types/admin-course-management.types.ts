@@ -66,4 +66,9 @@ export interface AdminRecordedCoursesData {
 
 export interface AdminCourseManagementData {
   recordedCourses: AdminRecordedCoursesData;
+  liveCourses: AdminLiveCoursesData;
 }
+
+export type AdminLiveCourse = AdminRecordedCourse;
+
+export type AdminLiveCoursesData = AdminRecordedCoursesData;

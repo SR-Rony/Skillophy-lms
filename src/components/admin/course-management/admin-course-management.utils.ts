@@ -27,6 +27,10 @@ export function getAdminCourseManagementHref(tab: AdminCourseManagementTab = "re
 }
 
 export function formatAdminRecordedCoursePrice(price: number) {
+  if (price <= 0) {
+    return "Free";
+  }
+
   return `৳${price.toLocaleString("en-IN")}`;
 }
 

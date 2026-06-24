@@ -44,6 +44,7 @@ const teachers = [
 ];
 
 export const adminCourseCreationData: AdminCourseCreationData = {
+  courseType: "recorded",
   steps: [
     { id: "general-info", label: "General Info" },
     { id: "curriculum", label: "Course Curriculum" },
@@ -241,6 +242,7 @@ function createEmptyAdminCourseCreationMetaInfo(): AdminCourseMetaInfo {
 
 export function getAdminCourseCreationNew(): AdminCourseCreationData {
   return {
+    courseType: "recorded",
     steps: adminCourseCreationData.steps,
     generalInfo: createEmptyAdminCourseCreationGeneralInfo(),
     formOptions: adminCourseCreationData.formOptions,

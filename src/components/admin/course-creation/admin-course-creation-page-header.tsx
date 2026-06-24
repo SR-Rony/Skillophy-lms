@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Copy } from "lucide-react";
 import { ROUTES } from "@/constants";
 import { cn } from "@/utils";
 
@@ -10,12 +10,14 @@ interface AdminCourseCreationPageHeaderProps {
   isMetaInfoStep: boolean;
   showBack: boolean;
   showNext: boolean;
+  showDuplicate?: boolean;
   onEdit: () => void;
   onSave: () => void;
   onBack: () => void;
   onNext: () => void;
   onPublish?: () => void;
   onSaveDraft?: () => void;
+  onDuplicate?: () => void;
 }
 
 export function AdminCourseCreationPageHeader({
@@ -23,12 +25,14 @@ export function AdminCourseCreationPageHeader({
   isMetaInfoStep,
   showBack,
   showNext,
+  showDuplicate = false,
   onEdit,
   onSave,
   onBack,
   onNext,
   onPublish,
   onSaveDraft,
+  onDuplicate,
 }: AdminCourseCreationPageHeaderProps) {
   return (
     <div className="space-y-5">
@@ -106,6 +110,17 @@ export function AdminCourseCreationPageHeader({
               )}
             >
               Next
+            </button>
+          ) : null}
+
+          {showDuplicate ? (
+            <button
+              type="button"
+              onClick={onDuplicate}
+              className="inline-flex h-[42px] w-[42px] items-center justify-center rounded-xl border border-[#1a1a1a] bg-white text-[#1a1a1a] transition-colors hover:bg-[#fafafa] active:bg-[#f3f3f3]"
+              aria-label="Duplicate course"
+            >
+              <Copy className="h-4 w-4" aria-hidden />
             </button>
           ) : null}
         </div>

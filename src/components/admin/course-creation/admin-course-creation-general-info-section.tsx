@@ -3,6 +3,7 @@
 import { ChevronDown } from "lucide-react";
 import { AdminCourseCreationActiveStatus } from "@/components/admin/course-creation/admin-course-creation-active-status";
 import { AdminCourseCreationContentEditor } from "@/components/admin/course-creation/admin-course-creation-content-editor";
+import { AdminCourseCreationLiveGeneralInfoGrid } from "@/components/admin/course-creation/admin-course-creation-live-general-info-grid";
 import { AdminCourseCreationTeacherSelect } from "@/components/admin/course-creation/admin-course-creation-teacher-select";
 import { AdminCourseCreationVideoPreview } from "@/components/admin/course-creation/admin-course-creation-video-preview";
 import {
@@ -14,6 +15,7 @@ import {
 import type {
   AdminCourseCreationFormOptions,
   AdminCourseCreationGeneralInfo,
+  AdminCourseCreationType,
 } from "@/types/admin-course-creation.types";
 import { cn } from "@/utils";
 
@@ -22,6 +24,8 @@ interface AdminCourseCreationGeneralInfoSectionProps {
   formOptions: AdminCourseCreationFormOptions;
   isEditing: boolean;
   isCreateMode?: boolean;
+  courseType?: AdminCourseCreationType;
+  batchNo?: string;
   onChange: <K extends keyof AdminCourseCreationGeneralInfo>(
     field: K,
     value: AdminCourseCreationGeneralInfo[K]
@@ -40,20 +44,41 @@ export function AdminCourseCreationGeneralInfoSection({
   formOptions,
   isEditing,
   isCreateMode = false,
+  courseType = "recorded",
+  batchNo,
   onChange,
 }: AdminCourseCreationGeneralInfoSectionProps) {
   const showEmptyValue = (value: string) => isCreateMode && !value.trim();
+  const isLiveCourse = courseType === "live";
+
   return (
     <div className="space-y-8">
-      <AdminCourseCreationActiveStatus
-        isActive={form.isActive}
-        isEditing={isEditing}
-        onChange={(isActive) => onChange("isActive", isActive)}
-      />
+      <div className="flex items-center justify-between gap-4">
+        <AdminCourseCreationActiveStatus
+          isActive={form.isActive}
+          isEditing={isEditing}
+          onChange={(isActive) => onChange("isActive", isActive)}
+        />
+
+        {batchNo ? (
+          <span className="shrink-0 rounded-full border border-[#ebe8e6] bg-white px-4 py-1.5 text-[12px] font-semibold text-[#1a1a1a] shadow-[0_4px_20px_rgba(35,25,22,0.03)] sm:text-[13px]">
+            Batch No: {batchNo}
+          </span>
+        ) : null}
+      </div>
 
       <section>
         <h2 className="text-[16px] font-bold text-[#1a1a1a] sm:text-[18px]">General Info</h2>
 
+        {isLiveCourse ? (
+          <AdminCourseCreationLiveGeneralInfoGrid
+            form={form}
+            formOptions={formOptions}
+            isEditing={isEditing}
+            isCreateMode={isCreateMode}
+            onChange={onChange}
+          />
+        ) : (
         <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
           <div className="space-y-5">
             <AccountSettingsField label="Course Title">
@@ -230,6 +255,7 @@ export function AdminCourseCreationGeneralInfoSection({
             />
           </div>
         </div>
+        )}
       </section>
 
       <section>
