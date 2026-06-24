@@ -1,3 +1,4 @@
+export { adminReportManagementService } from "./admin-report-management.service";
 export { adminActivityLogManagementService } from "./admin-activity-log-management.service";
 export { adminTemplateManagementService } from "./admin-template-management.service";
 export { adminRoleManagementService } from "./admin-role-management.service";

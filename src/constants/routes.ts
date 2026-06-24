@@ -116,6 +116,7 @@ export const ROUTES = {
     templates: "/admin/templates",
     activityLog: "/admin/activity-log",
     report: "/admin/report",
+    reportDetail: (reportId: string) => `/admin/report/${reportId}`,
     analytics: "/admin/analytics",
     blog: "/admin/blog",
     support: "/admin/support",

@@ -19,6 +19,15 @@ import { getAdminLearnerManagement } from "./admin-learner-management.mock";
 import { getAdminLearnerProfile } from "./admin-learner-profile.mock";
 import { getAdminTeacherProfile } from "./admin-teacher-profile.mock";
 import { getAdminActivityLogManagement } from "./admin-activity-log-management.mock";
+import { getAdminReportDetail, getAdminReportManagement } from "./admin-report-management.mock";
+
+export function resolveAdminReportDetail(reportId: string) {
+  return getAdminReportDetail(reportId);
+}
+
+export function resolveAdminReportManagement() {
+  return getAdminReportManagement();
+}
 
 export function resolveAdminActivityLogManagement() {
   return getAdminActivityLogManagement();
