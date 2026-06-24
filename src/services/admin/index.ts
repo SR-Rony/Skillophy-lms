@@ -1,3 +1,4 @@
+export { adminCategoryManagementService } from "./admin-category-management.service";
 export { adminCourseCreationService } from "./admin-course-creation.service";
 export { adminCourseManagementService } from "./admin-course-management.service";
 export { adminDashboardService } from "./admin-dashboard.service";

@@ -1,3 +1,4 @@
+import { getAdminCategoryManagement } from "./admin-categories.mock";
 import { getAdminCourseCreation, getAdminCourseCreationNew } from "./admin-course-creation.mock";
 import { getAdminLiveCourseCreation } from "./admin-live-course-creation.mock";
 import { getAdminCourseManagement } from "./admin-course-management.mock";
@@ -7,6 +8,10 @@ import { getAdminEmployeeProfile } from "./admin-employee-profile.mock";
 import { getAdminLearnerManagement } from "./admin-learner-management.mock";
 import { getAdminLearnerProfile } from "./admin-learner-profile.mock";
 import { getAdminTeacherProfile } from "./admin-teacher-profile.mock";
+
+export function resolveAdminCategoryManagement() {
+  return getAdminCategoryManagement();
+}
 
 export function resolveAdminCourseCreation() {
   return getAdminCourseCreation();

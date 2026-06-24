@@ -1,13 +1,15 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { Suspense } from "react";
+import { AdminCategoryManagementPage } from "@/components/admin/category-management";
+import { adminCategoryManagementService } from "@/services/admin";
 
 export const metadata = { title: "Categories" };
 
-export default function AdminCategoriesPage() {
+export default async function AdminCategoriesPage() {
+  const data = await adminCategoryManagementService.getCategories();
+
   return (
-    <ModulePlaceholder
-      title="Categories"
-      description="Organize courses with categories and subcategories."
-      feature="admin/categories"
-    />
+    <Suspense fallback={<div className="min-h-[320px] rounded-2xl bg-white" />}>
+      <AdminCategoryManagementPage data={data} />
+    </Suspense>
   );
 }
