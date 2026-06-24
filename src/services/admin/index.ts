@@ -1,3 +1,4 @@
+export { adminTransactionManagementService } from "./admin-transaction-management.service";
 export { adminWorkshopCreationService } from "./admin-workshop-creation.service";
 export { adminWorkshopManagementService } from "./admin-workshop-management.service";
 export { adminCategoryManagementService } from "./admin-category-management.service";

@@ -1,13 +1,15 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { Suspense } from "react";
+import { AdminTransactionManagementPage } from "@/components/admin/transaction-management";
+import { adminTransactionManagementService } from "@/services/admin";
 
 export const metadata = { title: "Transaction" };
 
-export default function AdminTransactionsPage() {
+export default async function AdminTransactionsPage() {
+  const data = await adminTransactionManagementService.getTransactions();
+
   return (
-    <ModulePlaceholder
-      title="Transaction"
-      description="View and manage platform transactions and payouts."
-      feature="admin/transactions"
-    />
+    <Suspense fallback={<div className="min-h-[320px] rounded-2xl bg-white" />}>
+      <AdminTransactionManagementPage data={data} />
+    </Suspense>
   );
 }
