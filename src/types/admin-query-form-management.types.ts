@@ -30,6 +30,8 @@ export interface AdminContactQuery {
   email: string;
   subject: string;
   submittedDate: string;
+  submittedAt: string;
+  description: string;
 }
 
 export interface AdminBusinessQueryTabData {
@@ -54,6 +56,7 @@ export interface AdminQueryFormManagementData {
   business: AdminBusinessQueryTabData;
   contact: AdminContactQueryTabData;
   sortOptions: AdminQueryFormSortOption[];
+  contactSortOptions: AdminQueryFormSortOption[];
   exportOptions: AdminQueryFormExportOption[];
   defaultSortId: AdminQueryFormSortId;
   defaultSelectedIds: string[];

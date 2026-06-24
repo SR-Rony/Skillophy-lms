@@ -47,7 +47,15 @@ export function AdminQueryFormManagementPage({ data }: AdminQueryFormManagementP
       <AdminQueryFormManagementTabs activeTab={activeTab} onTabChange={handleTabChange} />
 
       {activeTab === "contact" ? (
-        <AdminQueryFormContactTabPanel />
+        <AdminQueryFormContactTabPanel
+          tabData={data.contact}
+          sortOptions={data.contactSortOptions}
+          exportOptions={data.exportOptions}
+          defaultSortId={data.defaultSortId}
+          pageSize={data.pageSize}
+          exportLabel={data.exportLabel}
+          defaultSelectedIds={data.defaultSelectedIds}
+        />
       ) : (
         <AdminQueryFormBusinessTabPanel tabData={data.business} {...sharedPanelProps} />
       )}

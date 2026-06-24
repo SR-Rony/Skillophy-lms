@@ -1,5 +1,6 @@
 import type {
   AdminBusinessQuery,
+  AdminContactQuery,
   AdminQueryFormCompanySize,
   AdminQueryFormManagementTab,
   AdminQueryFormSortId,
@@ -32,6 +33,10 @@ export function getAdminQueryFormManagementHref(tab: AdminQueryFormManagementTab
 
 export function getAdminBusinessQueryDetailHref(queryId: string) {
   return ROUTES.admin.businessQueryDetail(queryId);
+}
+
+export function getAdminContactQueryDetailHref(queryId: string) {
+  return ROUTES.admin.contactQueryDetail(queryId);
 }
 
 export function formatAdminQueryFormCompanySize(size: AdminQueryFormCompanySize) {
@@ -117,18 +122,56 @@ export function sortAdminBusinessQueries(
   }
 }
 
+export function paginateAdminQueryFormList<T>(
+  items: T[],
+  currentPage: number,
+  pageSize: number
+) {
+  const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
+  const safePage = Math.min(Math.max(currentPage, 1), totalPages);
+  const start = (safePage - 1) * pageSize;
+
+  return {
+    items: items.slice(start, start + pageSize),
+    totalPages,
+    currentPage: safePage,
+  };
+}
+
 export function paginateAdminQueryForms(
   queries: AdminBusinessQuery[],
   currentPage: number,
   pageSize: number
 ) {
-  const totalPages = Math.max(1, Math.ceil(queries.length / pageSize));
-  const safePage = Math.min(Math.max(currentPage, 1), totalPages);
-  const start = (safePage - 1) * pageSize;
+  return paginateAdminQueryFormList(queries, currentPage, pageSize);
+}
 
-  return {
-    items: queries.slice(start, start + pageSize),
-    totalPages,
-    currentPage: safePage,
-  };
+export function filterAdminContactQueries(queries: AdminContactQuery[], searchQuery: string) {
+  const normalizedSearch = searchQuery.trim().toLowerCase();
+
+  if (!normalizedSearch) {
+    return queries;
+  }
+
+  return queries.filter(
+    (query) =>
+      query.name.toLowerCase().includes(normalizedSearch) ||
+      query.email.toLowerCase().includes(normalizedSearch) ||
+      query.subject.toLowerCase().includes(normalizedSearch)
+  );
+}
+
+export function sortAdminContactQueries(queries: AdminContactQuery[], sortId: AdminQueryFormSortId) {
+  const sorted = [...queries];
+
+  switch (sortId) {
+    case "name-asc":
+      return sorted.sort((a, b) => a.name.localeCompare(b.name));
+    case "name-desc":
+      return sorted.sort((a, b) => b.name.localeCompare(a.name));
+    case "date-desc":
+      return sorted.sort((a, b) => b.submittedDate.localeCompare(a.submittedDate));
+    default:
+      return sorted;
+  }
 }

@@ -38,6 +38,10 @@ function getAdminPageTitle(pathname: string) {
     return "Business Query Form";
   }
 
+  if (/^\/admin\/query-form\/contact\/[^/]+$/.test(pathname)) {
+    return "Contact Query Form";
+  }
+
   if (adminPageTitles[pathname]) {
     return adminPageTitles[pathname];
   }

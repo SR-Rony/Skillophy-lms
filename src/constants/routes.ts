@@ -110,6 +110,7 @@ export const ROUTES = {
     jobOpening: "/admin/job-opening",
     queryForm: "/admin/query-form",
     businessQueryDetail: (queryId: string) => `/admin/query-form/business/${queryId}`,
+    contactQueryDetail: (queryId: string) => `/admin/query-form/contact/${queryId}`,
     roleManagement: "/admin/role-management",
     templates: "/admin/templates",
     activityLog: "/admin/activity-log",
