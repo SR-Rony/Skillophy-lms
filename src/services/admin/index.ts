@@ -1,3 +1,4 @@
+export { adminJobOpeningManagementService } from "./admin-job-opening-management.service";
 export { adminMessagesService } from "./admin-messages.service";
 export { adminTransactionManagementService } from "./admin-transaction-management.service";
 export { adminWorkshopCreationService } from "./admin-workshop-creation.service";

@@ -1,12 +1,15 @@
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { Suspense } from "react";
+import { AdminJobOpeningManagementPage } from "@/components/admin/job-opening-management";
+import { adminJobOpeningManagementService } from "@/services/admin";
 
 export const metadata = { title: "Job Opening" };
 
-export default function AdminJobOpeningPage() {
+export default async function AdminJobOpeningPage() {
+  const data = await adminJobOpeningManagementService.getJobOpenings();
+
   return (
-    <ModulePlaceholder
-      title="Job Opening"
-      description="Manage job openings and applications."
-    />
+    <Suspense fallback={<div className="min-h-[320px] rounded-2xl bg-white" />}>
+      <AdminJobOpeningManagementPage data={data} />
+    </Suspense>
   );
 }
