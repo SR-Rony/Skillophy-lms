@@ -14,13 +14,15 @@ import type {
 
 interface AdminCourseCreationPageProps {
   data: AdminCourseCreationData;
+  mode?: "create" | "edit";
 }
 
 const STEP_ORDER: AdminCourseCreationStepId[] = ["general-info", "curriculum", "meta-info"];
 
-export function AdminCourseCreationPage({ data }: AdminCourseCreationPageProps) {
+export function AdminCourseCreationPage({ data, mode = "edit" }: AdminCourseCreationPageProps) {
+  const isCreateMode = mode === "create";
   const [activeStepId, setActiveStepId] = useState<AdminCourseCreationStepId>("general-info");
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(isCreateMode);
   const [form, setForm] = useState<AdminCourseCreationGeneralInfo>(data.generalInfo);
   const [savedForm, setSavedForm] = useState<AdminCourseCreationGeneralInfo>(data.generalInfo);
 
@@ -103,6 +105,7 @@ export function AdminCourseCreationPage({ data }: AdminCourseCreationPageProps) 
               form={isEditing ? form : savedForm}
               formOptions={data.formOptions}
               isEditing={isEditing}
+              isCreateMode={isCreateMode}
               onChange={handleChange}
             />
           ) : null}

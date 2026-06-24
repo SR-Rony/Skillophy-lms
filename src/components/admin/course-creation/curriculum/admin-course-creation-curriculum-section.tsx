@@ -8,6 +8,7 @@ import { AdminCourseCreationAddResourcesDrawer } from "@/components/admin/course
 import { AdminCourseCreationAddQuizDrawer } from "@/components/admin/course-creation/curriculum/add-quiz/admin-course-creation-add-quiz-drawer";
 import { getAdminCourseQuizTitle } from "@/components/admin/course-creation/curriculum/add-quiz/admin-course-creation-add-quiz.utils";
 import { getAdminCourseResourceTitleFromFileName } from "@/components/admin/course-creation/curriculum/shared/admin-course-creation-resource-file.utils";
+import { AdminCourseCreationCurriculumEmptyState } from "@/components/admin/course-creation/curriculum/admin-course-creation-curriculum-empty-state";
 import { AdminCourseCreationCurriculumNewTopicRow } from "@/components/admin/course-creation/curriculum/admin-course-creation-curriculum-new-topic-row";
 import { AdminCourseCreationCurriculumTopicCard } from "@/components/admin/course-creation/curriculum/admin-course-creation-curriculum-topic-card";
 import { ADMIN_COURSE_CURRICULUM_MAX_WIDTH_CLASS } from "@/components/admin/course-creation/curriculum/admin-course-creation-curriculum.utils";
@@ -141,105 +142,111 @@ export function AdminCourseCreationCurriculumSection({
   return (
     <>
       <section className={cn("mx-auto w-full space-y-4", ADMIN_COURSE_CURRICULUM_MAX_WIDTH_CLASS)}>
-        <div className="space-y-4">
-          {topics.map((topic, index) => (
-            <AdminCourseCreationCurriculumTopicCard
-              key={topic.id}
-              topic={topic}
-              topicIndex={index}
-              onToggleExpanded={() =>
-                updateTopic(topic.id, (current) => ({
-                  ...current,
-                  isExpanded: !current.isExpanded,
-                }))
-              }
-              onRenameTopic={(title) =>
-                updateTopic(topic.id, (current) => ({ ...current, title }))
-              }
-              onCopyTopic={() => {
-                setTopics((current) => {
-                  const source = current.find((entry) => entry.id === topic.id);
-                  if (!source) {
-                    return current;
+        {topics.length === 0 && !isAddingTopic ? (
+          <AdminCourseCreationCurriculumEmptyState onAddTopic={() => setIsAddingTopic(true)} />
+        ) : (
+          <>
+            <div className="space-y-4">
+              {topics.map((topic, index) => (
+                <AdminCourseCreationCurriculumTopicCard
+                  key={topic.id}
+                  topic={topic}
+                  topicIndex={index}
+                  onToggleExpanded={() =>
+                    updateTopic(topic.id, (current) => ({
+                      ...current,
+                      isExpanded: !current.isExpanded,
+                    }))
                   }
-
-                  const copiedTopic: AdminCourseCurriculumTopic = {
-                    ...source,
-                    id: createTopicId(),
-                    title: `${source.title} (Copy)`,
-                    items: source.items.map((item) => ({
-                      ...item,
-                      id: createLessonItemId(),
-                    })),
-                  };
-
-                  const sourceIndex = current.findIndex((entry) => entry.id === topic.id);
-                  const next = [...current];
-                  next.splice(sourceIndex + 1, 0, copiedTopic);
-                  return next;
-                });
-              }}
-              onDeleteTopic={() =>
-                setTopics((current) => current.filter((entry) => entry.id !== topic.id))
-              }
-              onAddLesson={() => setAddLessonTopicId(topic.id)}
-              onAddResource={() => setAddResourceTopicId(topic.id)}
-              onAddQuiz={() => setAddQuizTopicId(topic.id)}
-              onRenameItem={(itemId, title) =>
-                updateTopic(topic.id, (current) => ({
-                  ...current,
-                  items: current.items.map((item) =>
-                    item.id === itemId ? { ...item, title } : item
-                  ),
-                }))
-              }
-              onCopyItem={(itemId) =>
-                updateTopic(topic.id, (current) => {
-                  const sourceIndex = current.items.findIndex((item) => item.id === itemId);
-                  if (sourceIndex === -1) {
-                    return current;
+                  onRenameTopic={(title) =>
+                    updateTopic(topic.id, (current) => ({ ...current, title }))
                   }
+                  onCopyTopic={() => {
+                    setTopics((current) => {
+                      const source = current.find((entry) => entry.id === topic.id);
+                      if (!source) {
+                        return current;
+                      }
 
-                  const source = current.items[sourceIndex];
-                  const copiedItem = {
-                    ...source,
-                    id: createLessonItemId(),
-                    title: `${source.title} (Copy)`,
-                  };
-                  const nextItems = [...current.items];
-                  nextItems.splice(sourceIndex + 1, 0, copiedItem);
+                      const copiedTopic: AdminCourseCurriculumTopic = {
+                        ...source,
+                        id: createTopicId(),
+                        title: `${source.title} (Copy)`,
+                        items: source.items.map((item) => ({
+                          ...item,
+                          id: createLessonItemId(),
+                        })),
+                      };
 
-                  return { ...current, items: nextItems };
-                })
-              }
-              onDeleteItem={(itemId) =>
-                updateTopic(topic.id, (current) => ({
-                  ...current,
-                  items: current.items.filter((item) => item.id !== itemId),
-                }))
-              }
-            />
-          ))}
+                      const sourceIndex = current.findIndex((entry) => entry.id === topic.id);
+                      const next = [...current];
+                      next.splice(sourceIndex + 1, 0, copiedTopic);
+                      return next;
+                    });
+                  }}
+                  onDeleteTopic={() =>
+                    setTopics((current) => current.filter((entry) => entry.id !== topic.id))
+                  }
+                  onAddLesson={() => setAddLessonTopicId(topic.id)}
+                  onAddResource={() => setAddResourceTopicId(topic.id)}
+                  onAddQuiz={() => setAddQuizTopicId(topic.id)}
+                  onRenameItem={(itemId, title) =>
+                    updateTopic(topic.id, (current) => ({
+                      ...current,
+                      items: current.items.map((item) =>
+                        item.id === itemId ? { ...item, title } : item
+                      ),
+                    }))
+                  }
+                  onCopyItem={(itemId) =>
+                    updateTopic(topic.id, (current) => {
+                      const sourceIndex = current.items.findIndex((item) => item.id === itemId);
+                      if (sourceIndex === -1) {
+                        return current;
+                      }
 
-          {isAddingTopic ? (
-            <AdminCourseCreationCurriculumNewTopicRow
-              topicIndex={topics.length}
-              value={newTopicTitle}
-              onChange={setNewTopicTitle}
-              onConfirm={handleConfirmNewTopic}
-              onCancel={handleCancelNewTopic}
-            />
-          ) : null}
-        </div>
+                      const source = current.items[sourceIndex];
+                      const copiedItem = {
+                        ...source,
+                        id: createLessonItemId(),
+                        title: `${source.title} (Copy)`,
+                      };
+                      const nextItems = [...current.items];
+                      nextItems.splice(sourceIndex + 1, 0, copiedItem);
 
-        <button
-          type="button"
-          onClick={() => setIsAddingTopic(true)}
-          className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[#ebe8e6] bg-white px-5 py-4 text-[14px] font-semibold text-primary shadow-[0_8px_30px_rgba(35,25,22,0.04)] transition-colors hover:bg-[#fafafa]"
-        >
-          <Plus className="h-4 w-4" aria-hidden />
-          Add New Topic
-        </button>
+                      return { ...current, items: nextItems };
+                    })
+                  }
+                  onDeleteItem={(itemId) =>
+                    updateTopic(topic.id, (current) => ({
+                      ...current,
+                      items: current.items.filter((item) => item.id !== itemId),
+                    }))
+                  }
+                />
+              ))}
+
+              {isAddingTopic ? (
+                <AdminCourseCreationCurriculumNewTopicRow
+                  topicIndex={topics.length}
+                  value={newTopicTitle}
+                  onChange={setNewTopicTitle}
+                  onConfirm={handleConfirmNewTopic}
+                  onCancel={handleCancelNewTopic}
+                />
+              ) : null}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setIsAddingTopic(true)}
+              className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[#ebe8e6] bg-white px-5 py-4 text-[14px] font-semibold text-primary shadow-[0_8px_30px_rgba(35,25,22,0.04)] transition-colors hover:bg-[#fafafa]"
+            >
+              <Plus className="h-4 w-4" aria-hidden />
+              Add New Topic
+            </button>
+          </>
+        )}
       </section>
 
       <AdminCourseCreationAddLessonDrawer

@@ -21,6 +21,7 @@ interface AdminCourseCreationGeneralInfoSectionProps {
   form: AdminCourseCreationGeneralInfo;
   formOptions: AdminCourseCreationFormOptions;
   isEditing: boolean;
+  isCreateMode?: boolean;
   onChange: <K extends keyof AdminCourseCreationGeneralInfo>(
     field: K,
     value: AdminCourseCreationGeneralInfo[K]
@@ -38,8 +39,10 @@ export function AdminCourseCreationGeneralInfoSection({
   form,
   formOptions,
   isEditing,
+  isCreateMode = false,
   onChange,
 }: AdminCourseCreationGeneralInfoSectionProps) {
+  const showEmptyValue = (value: string) => isCreateMode && !value.trim();
   return (
     <div className="space-y-8">
       <AdminCourseCreationActiveStatus
@@ -59,6 +62,7 @@ export function AdminCourseCreationGeneralInfoSection({
                   type="text"
                   value={form.courseTitle}
                   onChange={(event) => onChange("courseTitle", event.target.value)}
+                  placeholder="Enter course title"
                   className={accountSettingsInputClassName}
                 />
               ) : (
@@ -77,6 +81,9 @@ export function AdminCourseCreationGeneralInfoSection({
                       onChange={(event) => onChange("courseLevel", event.target.value)}
                       className={accountSettingsSelectClassName}
                     >
+                      <option value="" disabled hidden>
+                        Select course level
+                      </option>
                       {formOptions.courseLevels.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
@@ -90,7 +97,9 @@ export function AdminCourseCreationGeneralInfoSection({
                   </div>
                 ) : (
                   <p className={cn(accountSettingsInputClassName, "flex items-center")}>
-                    {getOptionLabel(formOptions.courseLevels, form.courseLevel)}
+                    {showEmptyValue(form.courseLevel)
+                      ? "Select course level"
+                      : getOptionLabel(formOptions.courseLevels, form.courseLevel)}
                   </p>
                 )}
               </AccountSettingsField>
@@ -103,6 +112,9 @@ export function AdminCourseCreationGeneralInfoSection({
                       onChange={(event) => onChange("courseCategory", event.target.value)}
                       className={accountSettingsSelectClassName}
                     >
+                      <option value="" disabled hidden>
+                        Select course category
+                      </option>
                       {formOptions.courseCategories.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
@@ -116,7 +128,9 @@ export function AdminCourseCreationGeneralInfoSection({
                   </div>
                 ) : (
                   <p className={cn(accountSettingsInputClassName, "flex items-center")}>
-                    {getOptionLabel(formOptions.courseCategories, form.courseCategory)}
+                    {showEmptyValue(form.courseCategory)
+                      ? "Select course category"
+                      : getOptionLabel(formOptions.courseCategories, form.courseCategory)}
                   </p>
                 )}
               </AccountSettingsField>
@@ -131,6 +145,9 @@ export function AdminCourseCreationGeneralInfoSection({
                       onChange={(event) => onChange("courseDuration", event.target.value)}
                       className={accountSettingsSelectClassName}
                     >
+                      <option value="" disabled hidden>
+                        ex. 40 hours
+                      </option>
                       {formOptions.courseDurations.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
@@ -144,7 +161,9 @@ export function AdminCourseCreationGeneralInfoSection({
                   </div>
                 ) : (
                   <p className={cn(accountSettingsInputClassName, "flex items-center")}>
-                    {getOptionLabel(formOptions.courseDurations, form.courseDuration)}
+                    {showEmptyValue(form.courseDuration)
+                      ? "ex. 40 hours"
+                      : getOptionLabel(formOptions.courseDurations, form.courseDuration)}
                   </p>
                 )}
               </AccountSettingsField>
@@ -156,11 +175,12 @@ export function AdminCourseCreationGeneralInfoSection({
                     inputMode="numeric"
                     value={form.coursePrice}
                     onChange={(event) => onChange("coursePrice", event.target.value)}
+                    placeholder="ex. 4100"
                     className={accountSettingsInputClassName}
                   />
                 ) : (
                   <p className={cn(accountSettingsInputClassName, "flex items-center")}>
-                    {form.coursePrice}
+                    {form.coursePrice || (isCreateMode ? "ex. 4100" : form.coursePrice)}
                   </p>
                 )}
               </AccountSettingsField>
@@ -244,6 +264,7 @@ export function AdminCourseCreationGeneralInfoSection({
         <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
           <AdminCourseCreationTeacherSelect
             label="Select Main Teacher"
+            placeholder="Select course main teacher.."
             teachers={formOptions.teachers}
             selectedIds={form.mainTeacherIds}
             maxTeachers={formOptions.maxTeachersPerRole}
@@ -252,6 +273,7 @@ export function AdminCourseCreationGeneralInfoSection({
           />
           <AdminCourseCreationTeacherSelect
             label="Select Support Teacher"
+            placeholder="Select course support teacher.."
             teachers={formOptions.teachers}
             selectedIds={form.supportTeacherIds}
             maxTeachers={formOptions.maxTeachersPerRole}

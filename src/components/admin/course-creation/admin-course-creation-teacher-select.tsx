@@ -10,6 +10,7 @@ import { cn } from "@/utils";
 
 interface AdminCourseCreationTeacherSelectProps {
   label: string;
+  placeholder?: string;
   teachers: AdminCourseCreationTeacher[];
   selectedIds: string[];
   maxTeachers: number;
@@ -39,6 +40,7 @@ function TeacherCheckbox({ checked }: { checked: boolean }) {
 
 export function AdminCourseCreationTeacherSelect({
   label,
+  placeholder = "Type to search teachers...",
   teachers,
   selectedIds,
   maxTeachers,
@@ -320,7 +322,7 @@ export function AdminCourseCreationTeacherSelect({
                 }}
                 onFocus={() => openDropdown("inline")}
                 onClick={(event) => event.stopPropagation()}
-                placeholder={selectedTeachers.length === 0 ? "Type to search teachers..." : "Type here..."}
+                placeholder={selectedTeachers.length === 0 ? placeholder : "Type here..."}
                 className="min-w-[120px] flex-1 border-0 bg-transparent px-1 py-2 text-[14px] text-[#1a1a1a] outline-none placeholder:text-[#9ca3af]"
               />
             ) : null}

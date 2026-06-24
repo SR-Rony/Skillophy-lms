@@ -1,4 +1,8 @@
-import type { AdminCourseCreationData } from "@/types/admin-course-creation.types";
+import type {
+  AdminCourseCreationData,
+  AdminCourseCreationGeneralInfo,
+  AdminCourseMetaInfo,
+} from "@/types/admin-course-creation.types";
 
 const teachers = [
   {
@@ -200,4 +204,47 @@ export const adminCourseCreationData: AdminCourseCreationData = {
 
 export function getAdminCourseCreation(): AdminCourseCreationData {
   return adminCourseCreationData;
+}
+
+export function createEmptyAdminCourseCreationGeneralInfo(): AdminCourseCreationGeneralInfo {
+  return {
+    isActive: true,
+    courseTitle: "",
+    courseLevel: "",
+    courseCategory: "",
+    courseDuration: "",
+    coursePrice: "",
+    courseSummary: "",
+    introVideoUrl: "",
+    courseOverview: "",
+    whatYouWillLearn: "",
+    mainTeacherIds: [],
+    supportTeacherIds: [],
+  };
+}
+
+function createEmptyAdminCourseCreationMetaInfo(): AdminCourseMetaInfo {
+  return {
+    jobStats: {
+      jobOpening: "",
+      remoteJobs: "",
+      hiringInBd: "",
+    },
+    skillBooks: [],
+    academicGuides: [],
+    skills: [],
+    requirements: [],
+    benefits: [],
+    faqs: [],
+  };
+}
+
+export function getAdminCourseCreationNew(): AdminCourseCreationData {
+  return {
+    steps: adminCourseCreationData.steps,
+    generalInfo: createEmptyAdminCourseCreationGeneralInfo(),
+    formOptions: adminCourseCreationData.formOptions,
+    curriculum: { topics: [] },
+    metaInfo: createEmptyAdminCourseCreationMetaInfo(),
+  };
 }

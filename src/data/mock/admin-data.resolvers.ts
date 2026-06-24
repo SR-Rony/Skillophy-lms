@@ -1,4 +1,4 @@
-import { getAdminCourseCreation } from "./admin-course-creation.mock";
+import { getAdminCourseCreation, getAdminCourseCreationNew } from "./admin-course-creation.mock";
 import { getAdminCourseManagement } from "./admin-course-management.mock";
 import { getAdminDashboard } from "./admin-dashboard.mock";
 import { getAdminEmployeeManagement } from "./admin-employee-management.mock";
@@ -9,6 +9,10 @@ import { getAdminTeacherProfile } from "./admin-teacher-profile.mock";
 
 export function resolveAdminCourseCreation() {
   return getAdminCourseCreation();
+}
+
+export function resolveAdminCourseCreationNew() {
+  return getAdminCourseCreationNew();
 }
 
 export function resolveAdminCourseManagement() {
