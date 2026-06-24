@@ -24,6 +24,7 @@ interface AdminCourseCreationAddLessonDrawerProps {
   onOpenChange: (open: boolean) => void;
   teachers: AdminCourseCreationTeacher[];
   maxTeachers: number;
+  isLiveCourse?: boolean;
   onSave: (form: AdminCourseAddLessonForm) => void;
 }
 
@@ -32,6 +33,7 @@ export function AdminCourseCreationAddLessonDrawer({
   onOpenChange,
   teachers,
   maxTeachers,
+  isLiveCourse = false,
   onSave,
 }: AdminCourseCreationAddLessonDrawerProps) {
   const [activeTabId, setActiveTabId] = useState<AdminCourseAddLessonTabId>("overview");
@@ -43,8 +45,8 @@ export function AdminCourseCreationAddLessonDrawer({
     }
 
     setActiveTabId("overview");
-    setForm(createEmptyAdminCourseAddLessonForm());
-  }, [open]);
+    setForm(createEmptyAdminCourseAddLessonForm(isLiveCourse));
+  }, [open, isLiveCourse]);
 
   function handleChange(updates: Partial<AdminCourseAddLessonForm>) {
     setForm((current) => ({ ...current, ...updates }));
@@ -68,7 +70,11 @@ export function AdminCourseCreationAddLessonDrawer({
       open={open}
       onOpenChange={onOpenChange}
       title="Add Lesson"
-      description="Create and customize course topic here"
+      description={
+        isLiveCourse
+          ? "Create and customize course lesson here"
+          : "Create and customize course topic here"
+      }
       closeAriaLabel="Close add lesson drawer"
       saveLabel="Save Lesson"
       onSubmit={handleSubmit}
@@ -85,6 +91,7 @@ export function AdminCourseCreationAddLessonDrawer({
           form={form}
           teachers={teachers}
           maxTeachers={maxTeachers}
+          isLiveCourse={isLiveCourse}
           onChange={handleChange}
         />
       ) : null}

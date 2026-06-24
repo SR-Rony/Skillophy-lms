@@ -5,6 +5,7 @@ import {
   BookOpen,
   ChevronDown,
   ChevronUp,
+  ClipboardList,
   GripVertical,
   MessageCircleQuestion,
   MoreVertical,
@@ -26,12 +27,14 @@ import { cn } from "@/utils";
 interface AdminCourseCreationCurriculumTopicCardProps {
   topic: AdminCourseCurriculumTopic;
   topicIndex: number;
+  isLiveCourse?: boolean;
   onToggleExpanded: () => void;
   onRenameTopic: (title: string) => void;
   onCopyTopic: () => void;
   onDeleteTopic: () => void;
   onAddLesson: () => void;
   onAddResource: () => void;
+  onAddAssignment?: () => void;
   onAddQuiz: () => void;
   onRenameItem: (itemId: string, title: string) => void;
   onCopyItem: (itemId: string) => void;
@@ -45,18 +48,23 @@ function createDefaultItemTitle(type: AdminCourseCurriculumItemType, topicTitle:
   if (type === "resource") {
     return `Hand note of the ${topicTitle}`;
   }
+  if (type === "assignment") {
+    return `Assignment on ${topicTitle}`;
+  }
   return `Quiz on ${topicTitle}`;
 }
 
 export function AdminCourseCreationCurriculumTopicCard({
   topic,
   topicIndex,
+  isLiveCourse = false,
   onToggleExpanded,
   onRenameTopic,
   onCopyTopic,
   onDeleteTopic,
   onAddLesson,
   onAddResource,
+  onAddAssignment,
   onAddQuiz,
   onRenameItem,
   onCopyItem,
@@ -112,7 +120,7 @@ export function AdminCourseCreationCurriculumTopicCard({
                 {formatAdminCourseCurriculumTopicLabel(topicIndex, topic.title)}
               </h3>
               <p className="mt-1 text-[12px] text-[#757575] sm:text-[13px]">
-                {getAdminCourseCurriculumTopicSummary(topic)}
+                {getAdminCourseCurriculumTopicSummary(topic, isLiveCourse)}
               </p>
             </>
           )}
@@ -192,6 +200,16 @@ export function AdminCourseCreationCurriculumTopicCard({
           <BookOpen className="h-3.5 w-3.5" aria-hidden />
           + Add Resources
         </button>
+        {isLiveCourse ? (
+          <button
+            type="button"
+            onClick={onAddAssignment}
+            className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-primary transition-colors hover:text-[#e63e3e]"
+          >
+            <ClipboardList className="h-3.5 w-3.5" aria-hidden />
+            + Add Assignment
+          </button>
+        ) : null}
         <button
           type="button"
           onClick={onAddQuiz}

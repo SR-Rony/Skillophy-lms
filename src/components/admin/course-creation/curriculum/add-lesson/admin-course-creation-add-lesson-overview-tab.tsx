@@ -1,6 +1,7 @@
 "use client";
 
 import { AdminCourseCreationTeacherSelect } from "@/components/admin/course-creation/admin-course-creation-teacher-select";
+import { AdminCourseCreationLiveClassSchedulePicker } from "@/components/admin/course-creation/curriculum/add-lesson/admin-course-creation-live-class-schedule-picker";
 import {
   adminCourseAddLessonInputClassName,
   adminCourseAddLessonTextareaClassName,
@@ -14,6 +15,7 @@ interface AdminCourseCreationAddLessonOverviewTabProps {
   form: AdminCourseAddLessonForm;
   teachers: AdminCourseCreationTeacher[];
   maxTeachers: number;
+  isLiveCourse?: boolean;
   onChange: (updates: Partial<AdminCourseAddLessonForm>) => void;
 }
 
@@ -21,6 +23,7 @@ export function AdminCourseCreationAddLessonOverviewTab({
   form,
   teachers,
   maxTeachers,
+  isLiveCourse = false,
   onChange,
 }: AdminCourseCreationAddLessonOverviewTabProps) {
   return (
@@ -57,6 +60,13 @@ export function AdminCourseCreationAddLessonOverviewTab({
         isEditing
         onChange={(teacherIds) => onChange({ teacherIds })}
       />
+
+      {isLiveCourse ? (
+        <AdminCourseCreationLiveClassSchedulePicker
+          value={form.liveClassSchedule ?? ""}
+          onChange={(liveClassSchedule) => onChange({ liveClassSchedule })}
+        />
+      ) : null}
     </div>
   );
 }

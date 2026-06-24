@@ -16,6 +16,7 @@ import type {
   AdminCourseAddLessonForm,
   AdminCourseAddQuizForm,
   AdminCourseAddResourceForm,
+  AdminCourseCreationType,
   AdminCourseCurriculumData,
   AdminCourseCurriculumTopic,
   AdminCourseCreationTeacher,
@@ -26,6 +27,7 @@ interface AdminCourseCreationCurriculumSectionProps {
   initialData: AdminCourseCurriculumData;
   teachers: AdminCourseCreationTeacher[];
   maxTeachersPerRole: number;
+  courseType?: AdminCourseCreationType;
 }
 
 function createTopicId() {
@@ -40,7 +42,9 @@ export function AdminCourseCreationCurriculumSection({
   initialData,
   teachers,
   maxTeachersPerRole,
+  courseType = "recorded",
 }: AdminCourseCreationCurriculumSectionProps) {
+  const isLiveCourse = courseType === "live";
   const [topics, setTopics] = useState<AdminCourseCurriculumTopic[]>(initialData.topics);
   const [isAddingTopic, setIsAddingTopic] = useState(false);
   const [newTopicTitle, setNewTopicTitle] = useState("");
@@ -139,6 +143,21 @@ export function AdminCourseCreationCurriculumSection({
     setAddQuizTopicId(null);
   }
 
+  function handleAddAssignment(topicId: string) {
+    updateTopic(topicId, (current) => ({
+      ...current,
+      isExpanded: true,
+      items: [
+        ...current.items,
+        {
+          id: createLessonItemId(),
+          type: "assignment",
+          title: `Assignment on ${current.title}`,
+        },
+      ],
+    }));
+  }
+
   return (
     <>
       <section className={cn("mx-auto w-full space-y-4", ADMIN_COURSE_CURRICULUM_MAX_WIDTH_CLASS)}>
@@ -152,6 +171,7 @@ export function AdminCourseCreationCurriculumSection({
                   key={topic.id}
                   topic={topic}
                   topicIndex={index}
+                  isLiveCourse={isLiveCourse}
                   onToggleExpanded={() =>
                     updateTopic(topic.id, (current) => ({
                       ...current,
@@ -189,6 +209,7 @@ export function AdminCourseCreationCurriculumSection({
                   }
                   onAddLesson={() => setAddLessonTopicId(topic.id)}
                   onAddResource={() => setAddResourceTopicId(topic.id)}
+                  onAddAssignment={() => handleAddAssignment(topic.id)}
                   onAddQuiz={() => setAddQuizTopicId(topic.id)}
                   onRenameItem={(itemId, title) =>
                     updateTopic(topic.id, (current) => ({
@@ -258,6 +279,7 @@ export function AdminCourseCreationCurriculumSection({
         }}
         teachers={teachers}
         maxTeachers={maxTeachersPerRole}
+        isLiveCourse={isLiveCourse}
         onSave={handleSaveLesson}
       />
 

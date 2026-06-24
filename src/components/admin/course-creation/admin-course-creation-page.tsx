@@ -146,6 +146,7 @@ export function AdminCourseCreationPage({ data, mode = "edit" }: AdminCourseCrea
               initialData={data.curriculum}
               teachers={data.formOptions.teachers}
               maxTeachersPerRole={data.formOptions.maxTeachersPerRole}
+              courseType={data.courseType}
             />
           ) : null}
 

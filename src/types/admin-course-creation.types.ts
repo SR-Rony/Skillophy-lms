@@ -46,7 +46,7 @@ export interface AdminCourseCreationFormOptions {
   maxTeachersPerRole: number;
 }
 
-export type AdminCourseCurriculumItemType = "lesson" | "resource" | "quiz";
+export type AdminCourseCurriculumItemType = "lesson" | "resource" | "quiz" | "assignment";
 
 export interface AdminCourseCurriculumItem {
   id: string;
@@ -150,6 +150,7 @@ export interface AdminCourseAddLessonForm {
   videoUrl: string;
   isFree: boolean;
   resources: AdminCourseLessonResourceFile[];
+  liveClassSchedule?: string;
 }
 
 export type AdminCourseAddResourceTabId = "overview" | "upload";

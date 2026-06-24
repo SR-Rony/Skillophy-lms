@@ -6,14 +6,15 @@ export const adminCourseAddLessonInputClassName =
 export const adminCourseAddLessonTextareaClassName =
   "min-h-[180px] w-full resize-none rounded-xl border border-[#ebe8e6] bg-white px-4 py-3 text-[14px] leading-relaxed text-[#1a1a1a] outline-none transition-colors placeholder:text-[#c4c4c4] focus:border-primary sm:min-h-[200px] sm:text-[15px]";
 
-export function createEmptyAdminCourseAddLessonForm(): AdminCourseAddLessonForm {
+export function createEmptyAdminCourseAddLessonForm(isLiveCourse = false): AdminCourseAddLessonForm {
   return {
     title: "",
     description: "",
-    teacherIds: [],
+    teacherIds: isLiveCourse ? ["teacher-abdullah"] : [],
     videoUrl: "",
     isFree: false,
     resources: [],
+    ...(isLiveCourse ? { liveClassSchedule: "2024-05-08" } : {}),
   };
 }
 

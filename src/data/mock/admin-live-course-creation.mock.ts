@@ -34,6 +34,6 @@ export function getAdminLiveCourseCreation(): AdminCourseCreationData {
       whatYouWillLearn: "",
     },
     classRoutine: createDefaultLiveClassRoutine(),
-    curriculum: { topics: [] },
+    curriculum: recorded.curriculum,
   };
 }
