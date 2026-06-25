@@ -1,6 +1,7 @@
 # API Integration Plan
 
 > **What is API-ready today:** [PROJECT_STATUS.md](PROJECT_STATUS.md#service-layer--api-readiness)
+> **Building the backend?** Full endpoint blueprint (A→Z): [BACKEND_API_SPEC.md](BACKEND_API_SPEC.md)
 
 ## Current state
 
