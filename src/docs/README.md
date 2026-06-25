@@ -18,6 +18,7 @@ Architecture docs live at the project root: [`/docs`](../../docs/).
 | [COMPONENT_GUIDE.md](../../docs/COMPONENT_GUIDE.md) | UI layers, admin modules, forms, drawers |
 | [STATE_MANAGEMENT.md](../../docs/STATE_MANAGEMENT.md) | Zustand + TanStack Query patterns |
 | [API_INTEGRATION_PLAN.md](../../docs/API_INTEGRATION_PLAN.md) | Mock → API migration, Support reference |
+| [BACKEND_API_SPEC.md](../../docs/BACKEND_API_SPEC.md) | ★ Full backend blueprint — folder structure + every GET/POST/PATCH/DELETE endpoint A→Z |
 | [DEVELOPMENT_LOG.md](../../docs/DEVELOPMENT_LOG.md) | Changelog & roadmap |
 
 ## Quick reference
