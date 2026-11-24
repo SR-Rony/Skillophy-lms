@@ -27,7 +27,7 @@ export const registerPageSchema = z
     fullName: z.string().min(2, "Full name must be at least 2 characters"),
     mobileNumber: mobileNumberField,
     gender: z.enum(["male", "female", "other"], {
-      required_error: "Select your gender",
+      errorMap: () => ({ message: "Select your gender" }),
     }),
     age: z
       .string()

@@ -10,13 +10,17 @@ import { Input } from "@/components/ui/input";
 import { FormField } from "@/components/forms/form-field";
 import { PasswordInput } from "@/components/forms/password-input";
 import { AuthSocialLoginSection } from "@/components/auth/auth-social-login-section";
+import {
+  authCardClassName,
+  authFieldClassName,
+  authGoBackClassName,
+  authSelectClassName,
+  authSubtextClassName,
+} from "@/components/auth/auth-form-styles";
 import { ROUTES } from "@/constants";
 import { registerPageSchema, type RegisterPageFormValues } from "@/validations/auth.schema";
 import { cn } from "@/utils";
 import { Heading } from "@/components/shared/heading";
-
-const authFieldClassName =
-  "h-[52px] rounded-lg border-[#ece6e3] bg-white px-4 text-[14px] font-medium text-[#24201f] shadow-none placeholder:text-[#b8b0ad] focus-visible:ring-primary/20";
 
 function AuthFormField({
   label,
@@ -49,18 +53,21 @@ export function RegisterForm() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<RegisterPageFormValues>({
     resolver: zodResolver(registerPageSchema),
     defaultValues: {
       fullName: "",
       mobileNumber: "",
-      gender: "male",
+      gender: "" as unknown as RegisterPageFormValues["gender"],
       age: "",
       password: "",
       confirmPassword: "",
     },
   });
+
+  const selectedGender = watch("gender");
 
   const onSubmit = async (data: RegisterPageFormValues) => {
     await new Promise((resolve) => setTimeout(resolve, 600));
@@ -99,12 +106,24 @@ export function RegisterForm() {
           <div className="relative">
             <select
               id="gender"
-              className={cn(authFieldClassName, "appearance-none pr-10")}
+              className={cn(
+                authSelectClassName,
+                !selectedGender && "text-[#b8b0ad]"
+              )}
               {...register("gender")}
             >
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
+              <option value="" disabled hidden className="text-[#b8b0ad]">
+                Select gender
+              </option>
+              <option value="male" className="text-[#24201f]">
+                Male
+              </option>
+              <option value="female" className="text-[#24201f]">
+                Female
+              </option>
+              <option value="other" className="text-[#24201f]">
+                Other
+              </option>
             </select>
             <ChevronDown
               className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#6f6562]"
@@ -168,10 +187,10 @@ export function RegisterForm() {
 
 export function RegisterPageContent() {
   return (
-    <div className="w-full max-w-[560px] rounded-[28px] border border-[#f3e8e4] bg-[#fff9f8] p-6 shadow-[0_24px_60px_rgba(80,37,31,0.12)] sm:p-8">
+    <div className={authCardClassName}>
       <Link
         href={ROUTES.home}
-        className="inline-flex items-center gap-2 text-[14px] font-semibold text-[#6f6562] transition hover:text-primary"
+        className={authGoBackClassName}
       >
         <ArrowLeft className="h-4 w-4" aria-hidden />
         Go Back
@@ -179,7 +198,7 @@ export function RegisterPageContent() {
 
       <div className="mt-6">
         <Heading as="h1" variant="auth">Create Account in Skillophy</Heading>
-        <p className="mt-3 text-[14px] leading-[1.65] text-[#6f6562] sm:text-[15px]">
+        <p className={cn("mt-3", authSubtextClassName)}>
           Let&apos;s begin setting up your Skillophy account. It all starts with creating one!
         </p>
       </div>
