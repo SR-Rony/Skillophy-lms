@@ -6,7 +6,6 @@ import {
   resolveAdminSupportTicketDetail,
 } from "@/data/mock/admin-data.resolvers";
 import { ADMIN_API_ROUTES } from "@/constants/admin-api-routes";
-import { apiClient } from "@/services/api-client";
 import type {
   AdminSupportManagementData,
   AdminSupportSendMessageInput,
@@ -15,46 +14,35 @@ import type {
   AdminSupportTicketForm,
   AdminSupportTicketThreadItem,
 } from "@/types/admin-support-management.types";
+import { adminApiGet, adminApiPatch, adminApiPost } from "./admin-api.helpers";
 import { fetchAdminData, mutateAdminData } from "./create-admin-service";
 
 export const adminSupportManagementService = {
   async getSupportTickets(): Promise<AdminSupportManagementData> {
     return fetchAdminData(
       () => resolveAdminSupportManagement(),
-      () =>
-        apiClient
-          .get<AdminSupportManagementData>(ADMIN_API_ROUTES.support.tickets)
-          .then((response) => response.data)
+      () => adminApiGet<AdminSupportManagementData>(ADMIN_API_ROUTES.support.tickets)
     );
   },
 
   async getTicketDetail(ticketId: string): Promise<AdminSupportTicketDetail | null> {
     return fetchAdminData(
       () => resolveAdminSupportTicketDetail(ticketId),
-      () =>
-        apiClient
-          .get<AdminSupportTicketDetail>(ADMIN_API_ROUTES.support.ticket(ticketId))
-          .then((response) => response.data)
+      () => adminApiGet<AdminSupportTicketDetail>(ADMIN_API_ROUTES.support.ticket(ticketId))
     );
   },
 
   async createTicket(form: AdminSupportTicketForm): Promise<AdminSupportTicket> {
     return mutateAdminData(
       () => resolveAdminSupportCreateTicket(form),
-      () =>
-        apiClient
-          .post<AdminSupportTicket>(ADMIN_API_ROUTES.support.tickets, form)
-          .then((response) => response.data)
+      () => adminApiPost<AdminSupportTicket>(ADMIN_API_ROUTES.support.tickets, form)
     );
   },
 
   async resolveTicket(ticketId: string): Promise<AdminSupportTicketDetail | null> {
     return mutateAdminData(
       () => resolveAdminSupportResolveTicket(ticketId),
-      () =>
-        apiClient
-          .patch<AdminSupportTicketDetail>(ADMIN_API_ROUTES.support.resolve(ticketId))
-          .then((response) => response.data)
+      () => adminApiPatch<AdminSupportTicketDetail>(ADMIN_API_ROUTES.support.resolve(ticketId))
     );
   },
 
@@ -65,12 +53,10 @@ export const adminSupportManagementService = {
     return mutateAdminData(
       () => resolveAdminSupportSendTicketMessage(ticketId, input.content),
       () =>
-        apiClient
-          .post<AdminSupportTicketThreadItem>(
-            ADMIN_API_ROUTES.support.messages(ticketId),
-            input
-          )
-          .then((response) => response.data)
+        adminApiPost<AdminSupportTicketThreadItem>(
+          ADMIN_API_ROUTES.support.messages(ticketId),
+          input
+        )
     );
   },
 };

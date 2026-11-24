@@ -27,7 +27,7 @@ import { ROUTES } from "@/constants";
 
 export function LoginForm() {
   const router = useRouter();
-  const setUser = useAuthStore((s) => s.setUser);
+  const setSession = useAuthStore((s) => s.setSession);
 
   const {
     register,
@@ -39,8 +39,8 @@ export function LoginForm() {
   });
 
   const onSubmit = async (data: LoginFormValues) => {
-    const user = await authService.login(data);
-    setUser(user);
+    const { user, accessToken } = await authService.login(data);
+    setSession(user, accessToken);
     router.push(roleHomeRoutes[user.role]);
   };
 

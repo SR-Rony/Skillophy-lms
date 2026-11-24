@@ -1,4 +1,5 @@
 import { env } from "@/config";
+import { getClientAccessToken, getServerAccessToken } from "@/lib/auth-session";
 import type { ApiError, ApiResponse } from "@/types";
 
 /**
@@ -12,21 +13,39 @@ class ApiClient {
     this.baseUrl = baseUrl;
   }
 
+  private async buildHeaders(options: RequestInit = {}): Promise<HeadersInit> {
+    const token =
+      typeof window !== "undefined" ? getClientAccessToken() : await getServerAccessToken();
+
+    return {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...options.headers,
+    };
+  }
+
   private async request<T>(
     endpoint: string,
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
     const url = `${this.baseUrl}${endpoint}`;
-    const headers: HeadersInit = {
-      "Content-Type": "application/json",
-      ...options.headers,
-    };
-
+    const headers = await this.buildHeaders(options);
     const response = await fetch(url, { ...options, headers });
 
     if (!response.ok) {
+      let message = response.statusText || "Request failed";
+
+      try {
+        const body = (await response.json()) as { message?: string; code?: string };
+        if (body.message) {
+          message = body.message;
+        }
+      } catch {
+        // ignore parse errors
+      }
+
       const error: ApiError = {
-        message: response.statusText || "Request failed",
+        message,
         status: response.status,
       };
       throw error;

@@ -4,6 +4,7 @@ import {
   resolveAdminLiveCourseCreation,
 } from "@/data/mock/admin-data.resolvers";
 import type { AdminCourseCreationData } from "@/types/admin-course-creation.types";
+import { fetchAdminCourseCreationForm } from "./admin-course-creation.adapter";
 import { fetchAdminData } from "./create-admin-service";
 
 export const adminCourseCreationService = {
@@ -12,10 +13,16 @@ export const adminCourseCreationService = {
   },
 
   async getNewCourseCreation(): Promise<AdminCourseCreationData> {
-    return fetchAdminData(() => resolveAdminCourseCreationNew());
+    return fetchAdminData(
+      () => resolveAdminCourseCreationNew(),
+      () => fetchAdminCourseCreationForm("recorded")
+    );
   },
 
   async getLiveCourseCreation(): Promise<AdminCourseCreationData> {
-    return fetchAdminData(() => resolveAdminLiveCourseCreation());
+    return fetchAdminData(
+      () => resolveAdminLiveCourseCreation(),
+      () => fetchAdminCourseCreationForm("live")
+    );
   },
 };

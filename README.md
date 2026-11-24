@@ -50,6 +50,7 @@ Full details → [docs/PROJECT_STATUS.md](docs/PROJECT_STATUS.md)
 
 | Document | Description |
 |----------|-------------|
+| **[BACKEND_ROADMAP.md](docs/BACKEND_ROADMAP.md)** | **Backend step-by-step build guide — daily reference for API work** |
 | **[PROJECT_STATUS.md](docs/PROJECT_STATUS.md)** | **Full project overview — start here** |
 | [PROJECT_OVERVIEW.md](docs/PROJECT_OVERVIEW.md) | Vision, roles, principles |
 | [FRONTEND_STRUCTURE.md](docs/FRONTEND_STRUCTURE.md) | Folder structure & conventions |

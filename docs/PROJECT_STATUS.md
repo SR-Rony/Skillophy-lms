@@ -291,6 +291,7 @@ Skillophy/
 
 | Document | Purpose |
 |----------|---------|
+| **[BACKEND_ROADMAP.md](BACKEND_ROADMAP.md)** | **Backend build guide — step-by-step (start here for API work)** |
 | **[PROJECT_STATUS.md](PROJECT_STATUS.md)** | **This file — full project overview** |
 | [PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md) | Vision & design principles |
 | [FRONTEND_STRUCTURE.md](FRONTEND_STRUCTURE.md) | Folder conventions & naming |
